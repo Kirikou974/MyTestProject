@@ -8,7 +8,7 @@ namespace VTOLVRControlsMapper
 {
     public class VRControlLeverWithCover: VRControlLever
     {
-        private VRControlCover _cover;
+        private readonly VRControlCover _cover;
         public VRControlLeverWithCover(Control lever, Control cover) : base(lever)
         {
             _cover = new VRControlCover(cover);

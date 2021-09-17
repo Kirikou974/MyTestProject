@@ -5,18 +5,14 @@ namespace VTOLVRControlsMapper
 {
     public class VRControlSwitchKnob : VRControlKnobBase<VRTwistKnobInt>, IVRControlToggle
     {
-        private VRControlInteractable _temp;
-        private bool _isOff
+        public bool IsOff
         {
             get
             {
                 return UnityControl.currentState == 0;
             }
         }
-        public VRControlSwitchKnob(Control control) : base(VRControlHelper.GetVRControl<VRTwistKnobInt>(control))
-        {
-            _temp = new VRControlInteractable(control);
-        }
+        public VRControlSwitchKnob(Control control) : base(VRControlHelper.GetVRControl<VRTwistKnobInt>(control)) { }
         public override void Increase()
         {
             int newState = UnityControl.currentState + 1;
@@ -29,7 +25,7 @@ namespace VTOLVRControlsMapper
         }
         public void Toggle()
         {
-            if (_isOff)
+            if (IsOff)
             {
                 On();
             }

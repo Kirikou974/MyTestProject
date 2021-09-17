@@ -8,7 +8,7 @@ namespace VTOLVRControlsMapper
 {
     public class VRControlCover : VRControlToggleBase<VRSwitchCover>
     {
-        private VRControlLever _lever;
+        private readonly VRControlLever _lever;
         public VRControlLever Level
         {
             get
