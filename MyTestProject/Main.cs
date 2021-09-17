@@ -5,7 +5,7 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace MyTestProject
+namespace VTOLVRControlsMapper
 {
     public class Main : VTOLMOD
     {
@@ -49,109 +49,104 @@ namespace MyTestProject
         /// </summary>
         public void Update()
         {
-            if(VRControl.ControlsLoaded)
+            if(VRControlHelper.ControlsLoaded)
             {
                 //TODO : read mapping from file
                 if (Input.GetKeyDown("a"))
                 {
-                    VRControl.Get(Control.altitudeAPButton).Invoke();
+                    VRControlHelper.InvokeControl(Control.altitudeAPButton);
                 }
                 if (Input.GetKeyDown("h"))
                 {
-                    VRControl.Get(Control.headingAPButton).Invoke();
+                    VRControlHelper.InvokeControl(Control.headingAPButton);
                 }
                 if (Input.GetKeyDown("q"))
                 {
-                    VRControl.Get(Control.NavLightInteractable).Invoke();
+                    VRControlHelper.InvokeControl(Control.HookInteractable);
                 }
                 if (Input.GetKeyDown("z"))
                 {
-                    VRControl.Get(Control.StrobLightInteractable).Invoke();
+                    VRControlHelper.InvokeControl(Control.CatHookInteractable);
                 }
                 if (Input.GetKeyDown("e"))
                 {
-                    VRControl.Get(Control.LandingLightInteractable).Invoke();
+                    VRControlHelper.InvokeControl(Control.coverSwitchInteractable_rightEngine);
                 }
                 if (Input.GetKeyDown("r"))
                 {
-                    VRControl.Get(Control.InsturmentLightInteractable).Invoke();
+                    VRControlHelper.InvokeControl(Control.rightEngineSwitchInteractable);
                 }
                 if (Input.GetKeyDown("t"))
                 {
-                    VRControl.Get(Control.PitchSASInteractable).Invoke();
+                    VRControlHelper.InvokeControl(Control.coverSwitchInteractable_leftEngine);
                 }
                 if (Input.GetKeyDown("y"))
                 {
-                    VRControl.Get(Control.AssistMasterInteractable).Invoke();
+                    VRControlHelper.InvokeControl(Control.leftEngineSwitchInteractable);
                 }
                 if (Input.GetKeyDown("u"))
                 {
-                    VRControl.Get(Control.FlareInteractable).Invoke();
+                    VRControlHelper.InvokeControl(Control.mainBattSwitchInteractable);
                 }
                 if (Input.GetKeyDown("i"))
                 {
-                    VRControl.Get(Control.ChaffInteractable).Invoke();
+                    VRControlHelper.InvokeControl(Control.CanopyInteractable);
                 }
                 if (Input.GetKeyDown("o"))
                 {
-                    VRControl.Get(Control.BrakeLockInteractable).Invoke();
+                    VRControlHelper.InvokeControl(Control.hmcsPowerInteractable);
                 }
                 if (Input.GetKeyDown("p"))
                 {
-                    VRControl.Get(Control.WingSwitchInteractable).Invoke();
+                    VRControlHelper.InvokeControl(Control.hudPowerInteractable);
                 }
-
-                //if (Input.GetKeyDown("g"))
-                //{
-                //    VRControl.Get(Control.GearInteractable).Invoke();
-                //}
-                //if (Input.GetKeyDown("b"))
-                //{
-                //    VRControl.Get(Control.helmVisorInteractable).Invoke();
-                //}
-                //if (Input.GetKeyDown("n"))
-                //{
-                //    VRControl.Get(Control.helmNVGInteractable).Invoke();
-                //}
-                //if (Input.GetKeyDown("s"))
-                //{
-                //    VRControl.Get(Control.speedAPButton).Invoke();
-                //}
-                //if (Input.GetKeyDown("o"))
-                //{
-                //    VRControl.Get(Control.offAPButton).Invoke();
-                //}
-                //if (Input.GetKeyDown("v"))
-                //{
-                //    VRControl.Get(Control.navAPButton).Invoke();
-                //}
-                //if (Input.GetKeyDown("c"))
-                //{
-                //    VRControl.Get(Control.ClrWptButton).Invoke();
-                //}
-                //if (Input.GetKeyDown("z"))
-                //{
-                //    VRControl.Get(Control.AltitudeModeInteractable).Invoke();
-                //}
-                //if (Input.GetKeyDown("m"))
-                //{
-                //    VRControl.Get(Control.MasterCautionInteractable).Invoke();
-                //}
-                //if (Input.GetKeyDown("w"))
-                //{
-                //    VRControl.Get(Control.mfdSwapButton).Invoke();
-                //}
-                //if (Input.GetKeyDown("k"))
-                //{
-                //    VRControl.Get(Control.FuelPort).Invoke();
-                //}
+                if (Input.GetKeyDown("s"))
+                {
+                    VRControlHelper.InvokeControl(Control.coverSwitchInteractable_masterArm);
+                }
+                if (Input.GetKeyDown("d"))
+                {
+                    VRControlHelper.InvokeControl(Control.masterArmSwitchInteractable);
+                }
+                if (Input.GetKeyDown("f"))
+                {
+                    VRControlHelper.InvokeControl(Control.apuSwitchInteractable);
+                }
+                if (Input.GetKeyDown("g"))
+                {
+                    VRControlHelper.InvokeControl(Control.coverSwitchInteractable_fuelDump);
+                }
+                if (Input.GetKeyDown("j"))
+                {
+                    VRControlHelper.InvokeControl(Control.fuelDumpSwitchInteractable);
+                }
+                if (Input.GetKeyDown("k"))
+                {
+                    VRControlHelper.InvokeControl(Control.ClearJettisonInteractable);
+                }
+                if (Input.GetKeyDown("l"))
+                {
+                    VRControlHelper.InvokeControl(Control.JettisonEmptyInteractable);
+                }
+                if (Input.GetKeyDown("m"))
+                {
+                    VRControlHelper.InvokeControl(Control.JettisonAllInteractable);
+                }
+                if (Input.GetKeyDown("w"))
+                {
+                    VRControlHelper.InvokeControl(Control.MasterJettisonButtonInteractable);
+                }
+                if (Input.GetKeyDown("x"))
+                {
+                    VRControlHelper.InvokeControl(Control.coverSwitchInteractable_jettisonButton);
+                }
             }
         }
 
         private IEnumerator LoadControls()
         {
             VTOLVehicles currentVehicle = VTOLAPI.GetPlayersVehicleEnum();
-            VRControl.LoadControls(this, currentVehicle);
+            VRControlHelper.LoadControls(this, currentVehicle);
             yield return new WaitForSeconds(2);
         }
 

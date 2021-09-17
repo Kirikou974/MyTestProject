@@ -7,8 +7,8 @@
     <ProjectGuid>{7BB21F11-6675-4E25-AB78-E420A6B129C2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MyTestProject</RootNamespace>
-    <AssemblyName>MyTestProject</AssemblyName>
+    <RootNamespace>VTOLVRControlsMapper</RootNamespace>
+    <AssemblyName>VTOLVRControlsMapper</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -58,7 +58,12 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VRControl.cs" />
+    <Compile Include="VRControlBase.cs" />
+    <Compile Include="VRControlInteractable.cs" />
+    <Compile Include="VRControlCover.cs" />
+    <Compile Include="VRControlHelpercs.cs" />
+    <Compile Include="VRControlLever.cs" />
+    <Compile Include="VRControlLeverWithCover.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="buttons.txt" />
@@ -71,7 +76,6 @@
   <PropertyGroup>
     <PostBuildEvent>IF EXIST "F:\Steam\steamapps\common\VTOL VR\VTOLVR-ModLoader.exe" (
 copy "$(TargetPath)" "$(SolutionDir)\Builds\$(ProjectName).dll"
-copy "$(TargetDir)\MyTestProject.pdb" "$(SolutionDir)\Builds\$(ProjectName).pdb"
 )</PostBuildEvent>
   </PropertyGroup>
 </Project>
