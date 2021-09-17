@@ -54,91 +54,95 @@ namespace VTOLVRControlsMapper
                 //TODO : read mapping from file
                 if (Input.GetKeyDown("a"))
                 {
-                    VRControlHelper.InvokeControl(Control.altitudeAPButton);
+                    VRControlHelper.GetVRControl<VRControlButton>(Control.altitudeAPButton).Click();
                 }
                 if (Input.GetKeyDown("h"))
                 {
-                    VRControlHelper.InvokeControl(Control.headingAPButton);
+                    VRControlHelper.GetVRControl<VRControlButton>(Control.headingAPButton).Click();
                 }
                 if (Input.GetKeyDown("q"))
                 {
-                    VRControlHelper.InvokeControl(Control.HookInteractable);
+                    VRControlHelper.GetVRControl<IVRControlToggle>(Control.HookInteractable).Toggle();
                 }
                 if (Input.GetKeyDown("z"))
                 {
-                    VRControlHelper.InvokeControl(Control.CatHookInteractable);
+                    VRControlHelper.GetVRControl<IVRControlToggle>(Control.CatHookInteractable).Toggle();
                 }
                 if (Input.GetKeyDown("e"))
                 {
-                    VRControlHelper.InvokeControl(Control.coverSwitchInteractable_rightEngine);
+                    VRControlHelper.GetVRControl<IVRControlToggle>(Control.coverSwitchInteractable_rightEngine).Toggle();
                 }
                 if (Input.GetKeyDown("r"))
                 {
-                    VRControlHelper.InvokeControl(Control.rightEngineSwitchInteractable);
+                    VRControlHelper.GetVRControl<IVRControlToggle>(Control.rightEngineSwitchInteractable).Toggle();
                 }
                 if (Input.GetKeyDown("t"))
                 {
-                    VRControlHelper.InvokeControl(Control.coverSwitchInteractable_leftEngine);
+                    VRControlHelper.GetVRControl<IVRControlToggle>(Control.coverSwitchInteractable_leftEngine).Toggle();
                 }
                 if (Input.GetKeyDown("y"))
                 {
-                    VRControlHelper.InvokeControl(Control.leftEngineSwitchInteractable);
+                    VRControlHelper.GetVRControl<IVRControlToggle>(Control.leftEngineSwitchInteractable).Toggle();
                 }
                 if (Input.GetKeyDown("u"))
                 {
-                    VRControlHelper.InvokeControl(Control.mainBattSwitchInteractable);
+                    VRControlHelper.GetVRControl<IVRControlToggle>(Control.mainBattSwitchInteractable).Toggle();
                 }
                 if (Input.GetKeyDown("i"))
                 {
-                    VRControlHelper.InvokeControl(Control.CanopyInteractable);
+                    VRControlHelper.GetVRControl<IVRControlToggle>(Control.CanopyInteractable).Toggle();
                 }
                 if (Input.GetKeyDown("o"))
                 {
-                    VRControlHelper.InvokeControl(Control.hmcsPowerInteractable);
+                    VRControlHelper.GetVRControl<VRControlInteractable>(Control.hmcsPowerInteractable).Invoke();
                 }
                 if (Input.GetKeyDown("p"))
                 {
-                    VRControlHelper.InvokeControl(Control.hudPowerInteractable);
+                    VRControlHelper.GetVRControl<VRControlInteractable>(Control.hudPowerInteractable).Invoke();
                 }
                 if (Input.GetKeyDown("s"))
                 {
-                    VRControlHelper.InvokeControl(Control.coverSwitchInteractable_masterArm);
+                    VRControlHelper.GetVRControl<IVRControlToggle>(Control.coverSwitchInteractable_masterArm).Toggle();
                 }
                 if (Input.GetKeyDown("d"))
                 {
-                    VRControlHelper.InvokeControl(Control.masterArmSwitchInteractable);
+                    VRControlHelper.GetVRControl<IVRControlToggle>(Control.masterArmSwitchInteractable).Toggle();
                 }
                 if (Input.GetKeyDown("f"))
                 {
-                    VRControlHelper.InvokeControl(Control.apuSwitchInteractable);
+                    VRControlHelper.GetVRControl<IVRControlToggle>(Control.apuSwitchInteractable).Toggle();
                 }
                 if (Input.GetKeyDown("g"))
                 {
-                    VRControlHelper.InvokeControl(Control.coverSwitchInteractable_fuelDump);
+                    VRControlHelper.GetVRControl<IVRControlToggle>(Control.coverSwitchInteractable_fuelDump).Toggle();
                 }
                 if (Input.GetKeyDown("j"))
                 {
-                    VRControlHelper.InvokeControl(Control.fuelDumpSwitchInteractable);
+                    VRControlHelper.GetVRControl<IVRControlToggle>(Control.fuelDumpSwitchInteractable).Toggle();
                 }
                 if (Input.GetKeyDown("k"))
                 {
-                    VRControlHelper.InvokeControl(Control.ClearJettisonInteractable);
+                    VRControlHelper.GetVRControl<VRControlButton>(Control.ClearJettisonInteractable).Click();
                 }
                 if (Input.GetKeyDown("l"))
                 {
-                    VRControlHelper.InvokeControl(Control.JettisonEmptyInteractable);
+                    VRControlHelper.GetVRControl<VRControlButton>(Control.JettisonEmptyInteractable).Click();
                 }
                 if (Input.GetKeyDown("m"))
                 {
-                    VRControlHelper.InvokeControl(Control.JettisonAllInteractable);
+                    VRControlHelper.GetVRControl<VRControlButton>(Control.JettisonAllInteractable).Click();
                 }
                 if (Input.GetKeyDown("w"))
                 {
-                    VRControlHelper.InvokeControl(Control.MasterJettisonButtonInteractable);
+                    VRControlHelper.GetVRControl<VRControlButton>(Control.MasterJettisonButtonInteractable).Click();
                 }
                 if (Input.GetKeyDown("x"))
                 {
-                    VRControlHelper.InvokeControl(Control.coverSwitchInteractable_jettisonButton);
+                    VRControlHelper.GetVRControl<IVRControlToggle>(Control.coverSwitchInteractable_jettisonButton).Toggle();
+                }
+                if (Input.GetKeyDown("c"))
+                {
+                    VRControlHelper.GetVRControl<VRControlLever>(Control.GearInteractable).Toggle();
                 }
             }
         }

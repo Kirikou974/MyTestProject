@@ -9,20 +9,21 @@ namespace VTOLVRControlsMapper
     public class VRControlLeverWithCover: VRControlLever
     {
         private VRControlCover _cover;
-
-        public VRControlLeverWithCover(VRLever lever, VRControlCover cover) : base(lever)
+        public VRControlLeverWithCover(Control lever, Control cover) : base(lever)
         {
-            _cover = cover;
+            _cover = new VRControlCover(cover);
         }
 
-        public override void Invoke()
+        public override void Toggle()
         {
-            VRControlHelper.Mod.Log("covered : " + _cover.UnityControl.covered);
-            VRControlHelper.Mod.Log("setOffOnClosed : " + _cover.UnityControl.setOffOnClosed);
+            VRControlHelper.Mod.Log(string.Format("Trying to toggle {0} of type {1}", Control, this.GetType().Name));
+            VRControlHelper.Mod.Log("- covered : " + _cover.UnityControl.covered);
+            VRControlHelper.Mod.Log("- setOffOnClosed : " + _cover.UnityControl.setOffOnClosed);
+            VRControlHelper.Mod.Log("- isActiveAndEnabled : " + _cover.UnityControl.isActiveAndEnabled);
 
             if (!_cover.UnityControl.covered)
             {
-                base.Invoke();
+                base.Toggle();
             }
         }
     }

@@ -65,8 +65,6 @@ namespace VTOLVRControlsMapper
     }
     public interface IVRControl
     {
-        void Toggle();
-        void Invoke();
         Control Control { get; }
     }
     public interface IVRControl<T1> : IVRControl
@@ -95,19 +93,13 @@ namespace VTOLVRControlsMapper
             }
         }
 
-        private Control _control;
+        private readonly Control _control;
         public Control Control
         {
             get
             {
                 return _control;
             }
-        }
-        public abstract void Invoke();
-        public virtual void Toggle()
-        {
-            VRControlHelper.Mod.Log("Toggle control : " + Control);
-            Invoke();
         }
     }
 }

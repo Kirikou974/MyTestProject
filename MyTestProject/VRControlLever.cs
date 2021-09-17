@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace VTOLVRControlsMapper
 {
-    public class VRControlLever : VRControlBase<VRLever>
+    public class VRControlLever : VRControlToggle<VRLever>
     {
-        public VRControlLever(VRLever lever) : base(lever) { }
+        public VRControlLever(Control control): base(VRControlHelper.GetVRControl<VRLever>(control)) { }
 
-        public override void Invoke()
+        public override void Toggle()
         {
+            VRControlHelper.Mod.Log(string.Format("Trying to toggle {0} of type {1}", Control, this.GetType().Name));
             int newState = 0;
             if (UnityControl.currentState == newState) { newState = 1; }
             UnityControl.SetState(newState);

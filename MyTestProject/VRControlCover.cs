@@ -6,17 +6,23 @@ using System.Threading.Tasks;
 
 namespace VTOLVRControlsMapper
 {
-    public class VRControlCover : VRControlBase<VRSwitchCover>
+    public class VRControlCover : VRControlToggle<VRSwitchCover>
     {
         private VRControlLever _lever;
-        public VRControlCover(VRSwitchCover cover, VRControlLever lever) : base(cover)
+        public VRControlLever Level
         {
-            _lever = lever;
+            get
+            {
+                return _lever;
+            }
         }
-
-        public override void Invoke()
+        public VRControlCover(Control cover) : base(VRControlHelper.GetVRControl<VRSwitchCover>(cover))
         {
-            //UnityControl.OnSetState((UnityControl.covered ? 0 : 1));
+            _lever = new VRControlLever(cover);
+        }
+        public override void Toggle()
+        {
+            VRControlHelper.Mod.Log(string.Format("Trying to toggle {0} of type {1}", Control, this.GetType().Name));
             _lever.Toggle();
         }
     }

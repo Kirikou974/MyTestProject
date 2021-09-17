@@ -59,7 +59,9 @@
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VRControlBase.cs" />
+    <Compile Include="VRControlToggle.cs" />
     <Compile Include="VRControlInteractable.cs" />
+    <Compile Include="VRControlButton.cs" />
     <Compile Include="VRControlCover.cs" />
     <Compile Include="VRControlHelpercs.cs" />
     <Compile Include="VRControlLever.cs" />
