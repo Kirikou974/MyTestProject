@@ -54,11 +54,11 @@ namespace VTOLVRControlsMapper
                 //TODO : read mapping from file
                 if (Input.GetKeyDown("a"))
                 {
-                    VRControlHelper.GetVRControl<VRControlButton>(Control.altitudeAPButton).Click();
+                    VRControlHelper.GetVRControl<VRControlInteractable>(Control.altitudeAPButton).Invoke();
                 }
                 if (Input.GetKeyDown("h"))
                 {
-                    VRControlHelper.GetVRControl<VRControlButton>(Control.headingAPButton).Click();
+                    VRControlHelper.GetVRControl<VRControlInteractable>(Control.headingAPButton).Invoke();
                 }
                 if (Input.GetKeyDown("q"))
                 {
@@ -122,19 +122,19 @@ namespace VTOLVRControlsMapper
                 }
                 if (Input.GetKeyDown("k"))
                 {
-                    VRControlHelper.GetVRControl<VRControlButton>(Control.ClearJettisonInteractable).Click();
+                    VRControlHelper.GetVRControl<VRControlInteractable>(Control.ClearJettisonInteractable).Invoke();
                 }
                 if (Input.GetKeyDown("l"))
                 {
-                    VRControlHelper.GetVRControl<VRControlButton>(Control.JettisonEmptyInteractable).Click();
+                    VRControlHelper.GetVRControl<VRControlInteractable>(Control.JettisonEmptyInteractable).Invoke();
                 }
                 if (Input.GetKeyDown("m"))
                 {
-                    VRControlHelper.GetVRControl<VRControlButton>(Control.JettisonAllInteractable).Click();
+                    VRControlHelper.GetVRControl<VRControlInteractable>(Control.JettisonAllInteractable).Invoke();
                 }
                 if (Input.GetKeyDown("w"))
                 {
-                    VRControlHelper.GetVRControl<VRControlButton>(Control.MasterJettisonButtonInteractable).Click();
+                    VRControlHelper.GetVRControl<VRControlInteractable>(Control.MasterJettisonButtonInteractable).Invoke();
                 }
                 if (Input.GetKeyDown("x"))
                 {
@@ -142,7 +142,7 @@ namespace VTOLVRControlsMapper
                 }
                 if (Input.GetKeyDown("c"))
                 {
-                    VRControlHelper.GetVRControl<VRControlLever>(Control.GearInteractable).Toggle();
+                    VRControlHelper.GetVRControl<IVRControlToggle>(Control.GearInteractable).Toggle();
                 }
             }
         }

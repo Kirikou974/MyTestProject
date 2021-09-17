@@ -19,6 +19,7 @@ namespace VTOLVRControlsMapper
         public VRControlCover(Control cover) : base(VRControlHelper.GetVRControl<VRSwitchCover>(cover))
         {
             _lever = new VRControlLever(cover);
+            //Do a toggle when class is instanciated, either way the switch cover is initialized to false and the covered lever can be activated without visually lifting the cover
             Toggle();
         }
         public override void Toggle()

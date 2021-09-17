@@ -128,23 +128,23 @@ namespace VTOLVRControlsMapper
                         _vrControlCache.Add(new VRControlLeverWithCover(Control.fuelDumpSwitchInteractable, Control.coverSwitchInteractable_fuelDump));
 
                         _vrControlCache.Add(new VRControlCover(Control.coverSwitchInteractable_jettisonButton));
-                        _vrControlCache.Add(new VRControlButton(Control.ClearJettisonInteractable));
-                        _vrControlCache.Add(new VRControlButton(Control.JettisonEmptyInteractable));
-                        _vrControlCache.Add(new VRControlButton(Control.JettisonAllInteractable));
-                        _vrControlCache.Add(new VRControlButton(Control.MasterJettisonButtonInteractable));
+                        _vrControlCache.Add(new VRControlInteractable(Control.ClearJettisonInteractable));
+                        _vrControlCache.Add(new VRControlInteractable(Control.JettisonEmptyInteractable));
+                        _vrControlCache.Add(new VRControlInteractable(Control.JettisonAllInteractable));
+                        _vrControlCache.Add(new VRControlInteractable(Control.MasterJettisonButtonInteractable));
 
                         _vrControlCache.Add(new VRControlInteractable(Control.helmVisorInteractable));
                         _vrControlCache.Add(new VRControlInteractable(Control.helmNVGInteractable));
 
-                        _vrControlCache.Add(new VRControlButton(Control.offAPButton));
-                        _vrControlCache.Add(new VRControlButton(Control.ClrWptButton));
-                        _vrControlCache.Add(new VRControlButton(Control.MasterCautionInteractable));
-                        _vrControlCache.Add(new VRControlButton(Control.mfdSwapButton));
-                        _vrControlCache.Add(new VRControlButton(Control.AltitudeModeInteractable));
-                        _vrControlCache.Add(new VRControlButton(Control.altitudeAPButton));
-                        _vrControlCache.Add(new VRControlButton(Control.headingAPButton));
-                        _vrControlCache.Add(new VRControlButton(Control.navAPButton));
-                        _vrControlCache.Add(new VRControlButton(Control.speedAPButton));
+                        _vrControlCache.Add(new VRControlInteractable(Control.offAPButton));
+                        _vrControlCache.Add(new VRControlInteractable(Control.ClrWptButton));
+                        _vrControlCache.Add(new VRControlInteractable(Control.MasterCautionInteractable));
+                        _vrControlCache.Add(new VRControlInteractable(Control.mfdSwapButton));
+                        _vrControlCache.Add(new VRControlInteractable(Control.AltitudeModeInteractable));
+                        _vrControlCache.Add(new VRControlInteractable(Control.altitudeAPButton));
+                        _vrControlCache.Add(new VRControlInteractable(Control.headingAPButton));
+                        _vrControlCache.Add(new VRControlInteractable(Control.navAPButton));
+                        _vrControlCache.Add(new VRControlInteractable(Control.speedAPButton));
 
                         _vrControlCache.Add(new VRControlLever(Control.mainBattSwitchInteractable));
                         _vrControlCache.Add(new VRControlLever(Control.apuSwitchInteractable));

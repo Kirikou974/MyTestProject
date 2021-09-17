@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace VTOLVRControlsMapper
-{
-    public class VRControlInteractable: VRControlBase<VRInteractable>
+{    public class VRControlInteractable: VRControlBase<VRInteractable>
     {
         public VRControlInteractable(Control interactable) : base(VRControlHelper.GetVRControl<VRInteractable>(interactable)) { }
         public void Invoke()
