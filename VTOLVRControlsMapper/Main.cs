@@ -64,7 +64,6 @@ namespace VTOLVRControlsMapper
                 {
                     VRControlHelper.GetVRControl<IVRControlToggle>(Control.GearInteractable).Toggle();
                 }
-
                 if (Input.GetKeyDown("z"))
                 {
                     VRControlHelper.GetVRControl<VRControlInteractable>(Control.raiseSeatInter).StartInteract();
