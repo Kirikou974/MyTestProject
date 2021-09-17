@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VTOLVRControlsMapper
 {
-    public class VRControlLever : VRControlToggle<VRLever>
+    public class VRControlLever : VRControlToggleBase<VRLever>
     {
         public VRControlLever(Control control): base(VRControlHelper.GetVRControl<VRLever>(control)) { }
 

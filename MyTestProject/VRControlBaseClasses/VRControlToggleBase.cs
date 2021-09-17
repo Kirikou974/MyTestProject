@@ -10,10 +10,10 @@ namespace VTOLVRControlsMapper
     {
         void Toggle();
     }
-    public abstract class VRControlToggle<T> : VRControlBase<T>, IVRControlToggle
+    public abstract class VRControlToggleBase<T> : VRControlBase<T>, IVRControlToggle
         where T: UnityEngine.Object
     {
-        protected VRControlToggle(T unityControl) : base(unityControl) { }
+        protected VRControlToggleBase(T unityControl) : base(unityControl) { }
 
         public abstract void Toggle();
     }

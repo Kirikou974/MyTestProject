@@ -59,9 +59,11 @@
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VRControlBaseClasses\VRControlBase.cs" />
-    <Compile Include="VRControlBaseClasses\VRControlToggle.cs" />
+    <Compile Include="VRControlBaseClasses\VRControlToggleBase.cs" />
     <Compile Include="VRControlClasses\VRControlInteractable.cs" />
     <Compile Include="VRControlClasses\VRControlCover.cs" />
+    <Compile Include="VRControlBaseClasses\VRControlKnobBase.cs" />
+    <Compile Include="VRControlClasses\VRControlSwitchKnob.cs" />
     <Compile Include="VRControlHelpercs.cs" />
     <Compile Include="VRControlClasses\VRControlLever.cs" />
     <Compile Include="VRControlClasses\VRControlLeverWithCover.cs" />

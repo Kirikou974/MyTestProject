@@ -54,7 +54,16 @@ namespace VTOLVRControlsMapper
         ClearJettisonInteractable,
         JettisonEmptyInteractable,
         JettisonAllInteractable,
-        MasterJettisonButtonInteractable
+        MasterJettisonButtonInteractable,
+        powButtonMMFDLeft,
+        powButtonMMFDRight,
+        RWRButton,
+        fuelButton,
+        fuelDrainButton,
+        MFD1PowerInteractable,
+        MFD2PowerInteractable,
+        RadarPowerInteractable,
+        RWRModeInteractable
     }
 
     public enum Plane

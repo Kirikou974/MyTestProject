@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VTOLVRControlsMapper
 {
-    public class VRControlCover : VRControlToggle<VRSwitchCover>
+    public class VRControlCover : VRControlToggleBase<VRSwitchCover>
     {
         private VRControlLever _lever;
         public VRControlLever Level
@@ -20,11 +20,14 @@ namespace VTOLVRControlsMapper
         {
             _lever = new VRControlLever(cover);
             //Do a toggle when class is instanciated, either way the switch cover is initialized to false and the covered lever can be activated without visually lifting the cover
-            Toggle();
+            //Not sure why this is necessary except for coverSwitchInteractable_jettisonButton
+            if (cover != Control.coverSwitchInteractable_jettisonButton)
+            {
+                Toggle();
+            }
         }
         public override void Toggle()
         {
-            VRControlHelper.Mod.Log(string.Format("Trying to toggle {0} of type {1}", Control, this.GetType().Name));
             _lever.Toggle();
         }
     }

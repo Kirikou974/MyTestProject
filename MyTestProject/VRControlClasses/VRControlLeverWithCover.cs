@@ -16,9 +16,6 @@ namespace VTOLVRControlsMapper
 
         public override void Toggle()
         {
-            VRControlHelper.Mod.Log(string.Format("Trying to toggle {0} of type {1}", Control, this.GetType().Name));
-            VRControlHelper.Mod.Log("- covered : " + _cover.UnityControl.covered);
-
             if (!_cover.UnityControl.covered)
             {
                 base.Toggle();
