@@ -16,12 +16,12 @@ namespace VTOLVRControlsMapper
                 return _lever;
             }
         }
-        public VRControlCover(Control cover) : base(VRControlHelper.GetVRControl<VRSwitchCover>(cover))
+        public VRControlCover(string coverName) : base(VRControlHelper.GetVRControl<VRSwitchCover>(coverName))
         {
-            _lever = new VRControlLever(cover);
+            _lever = new VRControlLever(coverName);
             //Do a toggle when class is instanciated, either way the switch cover is initialized to false and the covered lever can be activated without visually lifting the cover
             //Not sure why this is necessary except for coverSwitchInteractable_jettisonButton
-            if (cover != Control.coverSwitchInteractable_jettisonButton)
+            if (coverName != VRControlNames.Cover_Jettison)
             {
                 Toggle();
             }

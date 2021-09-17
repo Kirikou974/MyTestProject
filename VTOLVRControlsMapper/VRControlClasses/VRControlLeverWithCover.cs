@@ -9,9 +9,9 @@ namespace VTOLVRControlsMapper
     public class VRControlLeverWithCover: VRControlLever
     {
         private readonly VRControlCover _cover;
-        public VRControlLeverWithCover(Control lever, Control cover) : base(lever)
+        public VRControlLeverWithCover(string leverName, string coverName) : base(leverName)
         {
-            _cover = new VRControlCover(cover);
+            _cover = new VRControlCover(coverName);
         }
 
         public override void Toggle()

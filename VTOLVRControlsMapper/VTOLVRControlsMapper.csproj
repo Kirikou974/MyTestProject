@@ -63,6 +63,7 @@
     <Compile Include="VRControlClasses\VRControlInteractable.cs" />
     <Compile Include="VRControlClasses\VRControlCover.cs" />
     <Compile Include="VRControlBaseClasses\VRControlKnobBase.cs" />
+    <Compile Include="VRControlClasses\VRControlNames.cs" />
     <Compile Include="VRControlClasses\VRControlSwitchKnob.cs" />
     <Compile Include="VRControlHelpercs.cs" />
     <Compile Include="VRControlClasses\VRControlLever.cs" />

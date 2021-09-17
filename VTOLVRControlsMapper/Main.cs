@@ -25,14 +25,12 @@ namespace VTOLVRControlsMapper
 
         private void Sceneloaded(VTOLScenes scene)
         {
-            Log("Scene Loaded");
             switch (scene)
             {
                 case VTOLScenes.ReadyRoom:
                     break;
                 case VTOLScenes.Akutan:
                 case VTOLScenes.CustomMapBase:
-                    Log("Map Loaded");
                     StartCoroutine(LoadControls());
                     break;
                 case VTOLScenes.LoadingScene:
@@ -41,7 +39,6 @@ namespace VTOLVRControlsMapper
         }
         private void MissionReloaded()
         {
-            Log("MissionReloaded");
             StartCoroutine(LoadControls());
         }
         /// <summary>
@@ -51,42 +48,45 @@ namespace VTOLVRControlsMapper
         {
             if(VRControlHelper.ControlsLoaded)
             {
-                //TODO : read mapping from file
                 if (Input.GetKeyDown("a"))
                 {
-                    VRControlHelper.GetVRControl<VRControlInteractable>(Control.altitudeAPButton).Invoke();
+                    VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_AP_Altitude).Invoke();
                 }
                 if (Input.GetKeyDown("q"))
                 {
-                    VRControlHelper.GetVRControl<VRControlInteractable>(Control.headingAPButton).Invoke();
+                    VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_AP_Heading).Invoke();
                 }
                 if (Input.GetKeyDown("w"))
                 {
-                    VRControlHelper.GetVRControl<IVRControlToggle>(Control.GearInteractable).Toggle();
+                    VRControlHelper.GetVRControl<IVRControlToggle>(VRControlNames.Lever_LandingGear).Toggle();
                 }
                 if (Input.GetKeyDown("z"))
                 {
-                    VRControlHelper.GetVRControl<VRControlInteractable>(Control.raiseSeatInter).StartInteract();
+                    VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_Seat_Higher).StartInteract();
                 }
                 if (Input.GetKeyUp("z"))
                 {
-                    VRControlHelper.GetVRControl<VRControlInteractable>(Control.raiseSeatInter).StopInteract();
+                    VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_Seat_Higher).StopInteract();
                 }
                 if (Input.GetKeyDown("s"))
                 {
-                    VRControlHelper.GetVRControl<VRControlInteractable>(Control.lowerSeatInter).StartInteract();
+                    VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_Seat_Lower).StartInteract();
                 }
                 if (Input.GetKeyUp("s"))
                 {
-                    VRControlHelper.GetVRControl<VRControlInteractable>(Control.lowerSeatInter).StopInteract();
+                    VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_Seat_Lower).StopInteract();
                 }
                 if (Input.GetKeyDown("e"))
                 {
-                    VRControlHelper.GetVRControl<VRControlInteractable>(Control.rightSideEjectInteractable).Invoke();
+                    VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Lever_Eject_Right).Invoke();
                 }
                 if (Input.GetKeyDown("d"))
                 {
-                    VRControlHelper.GetVRControl<VRControlInteractable>(Control.sideEjectInteractable).Invoke();
+                    VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Lever_Eject_Left).Invoke();
+                }
+                if (Input.GetKeyDown("v"))
+                {
+                    VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.CanopyFrame003).Invoke();
                 }
             }
         }

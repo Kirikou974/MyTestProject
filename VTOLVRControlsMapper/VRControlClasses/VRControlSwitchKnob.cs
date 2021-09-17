@@ -12,7 +12,7 @@ namespace VTOLVRControlsMapper
                 return UnityControl.currentState == 0;
             }
         }
-        public VRControlSwitchKnob(Control control) : base(VRControlHelper.GetVRControl<VRTwistKnobInt>(control)) { }
+        public VRControlSwitchKnob(string controlName) : base(VRControlHelper.GetVRControl<VRTwistKnobInt>(controlName)) { }
         public override void Increase()
         {
             int newState = UnityControl.currentState + 1;

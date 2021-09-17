@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 namespace VTOLVRControlsMapper
 {    public class VRControlInteractable: VRControlBase<VRInteractable>
     {
-        public VRControlInteractable(Control interactable) : base(VRControlHelper.GetVRControl<VRInteractable>(interactable)) { }
+        public VRControlInteractable(string interactableName) : base(VRControlHelper.GetVRControl<VRInteractable>(interactableName)) { }
         public void Invoke()
         {
-            VRControlHelper.Mod.Log("Interacting on " + Control);
             StartInteract();
             StopInteract();
         }
