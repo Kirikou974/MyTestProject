@@ -159,6 +159,11 @@ namespace VTOLVRControlsMapper
                         _vrControlCache.Add(new VRControlInteractable(Control.fuelButton));
                         _vrControlCache.Add(new VRControlInteractable(Control.fuelDrainButton));
 
+                        _vrControlCache.Add(new VRControlInteractable(Control.rightSideEjectInteractable));
+                        _vrControlCache.Add(new VRControlInteractable(Control.sideEjectInteractable));
+                        _vrControlCache.Add(new VRControlInteractable(Control.lowerSeatInter));
+                        _vrControlCache.Add(new VRControlInteractable(Control.raiseSeatInter));
+
                         _vrControlCache.Add(new VRControlLever(Control.mainBattSwitchInteractable));
                         _vrControlCache.Add(new VRControlLever(Control.apuSwitchInteractable));
                         _vrControlCache.Add(new VRControlLever(Control.CanopyInteractable));

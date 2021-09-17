@@ -63,7 +63,11 @@ namespace VTOLVRControlsMapper
         MFD1PowerInteractable,
         MFD2PowerInteractable,
         RadarPowerInteractable,
-        RWRModeInteractable
+        RWRModeInteractable,
+        rightSideEjectInteractable,
+        sideEjectInteractable,
+        lowerSeatInter,
+        raiseSeatInter
     }
 
     public enum Plane

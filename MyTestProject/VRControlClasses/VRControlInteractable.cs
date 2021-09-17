@@ -10,7 +10,16 @@ namespace VTOLVRControlsMapper
         public VRControlInteractable(Control interactable) : base(VRControlHelper.GetVRControl<VRInteractable>(interactable)) { }
         public void Invoke()
         {
+            StartInteract();
+            StopInteract();
+        }
+        public void StartInteract()
+        {
             UnityControl.OnInteract.Invoke();
+        }
+        public void StopInteract()
+        {
+            UnityControl.OnStopInteract.Invoke();
         }
     }
 }
