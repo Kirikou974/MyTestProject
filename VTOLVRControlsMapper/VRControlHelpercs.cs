@@ -40,17 +40,10 @@ namespace VTOLVRControlsMapper
         public static T GetVRControl<T>(string controlName)
             where T : class
         {
-            if (!ControlsLoaded)
-            {
-                throw new Exception("Controls not loaded");
-            }
             T returnValue = null;
 
             switch (typeof(T).Name)
             {
-                //case "VRButton":
-                //    returnValue = _vrButtons.Find(x => x.name == control.ToString()) as T;
-                //    break;
                 case "VRLever":
                     returnValue = _vrLevers.Find(x => x.name == controlName) as T;
                     break;
@@ -70,19 +63,18 @@ namespace VTOLVRControlsMapper
                     returnValue = _vrControlCache.Find(x => x.ControlName == controlName && x is T) as T;
                     break;
             }
-            if(returnValue is null)
+            if (returnValue is null)
             {
                 throw new NullReferenceException("GetVRControl failed to get a returnValue for " + controlName);
             }
             return returnValue;
         }
 
-        public static bool ControlsLoaded
+        public static bool ControlsLoaded_FA26B
         {
             get
             {
                 return
-                    //_vrButtons != null && _vrButtons.Count() > 0 &&
                     _vrInteractables != null && _vrInteractables.Count() > 0 &&
                     _vrTwistKnobs != null && _vrTwistKnobs.Count() > 0 &&
                     _vrTwistKnobsInt != null && _vrTwistKnobsInt.Count() > 0 &&
@@ -90,21 +82,18 @@ namespace VTOLVRControlsMapper
                     _vrLevers != null && _vrLevers.Count() > 0;
             }
         }
-        public static void LoadControls(VTOLMOD mod, VTOLVehicles vehicle)
+        public static void LoadFA26BControls(VTOLMOD mod)
         {
             _mod = mod;
-            Mod.Log("Start LoadControls for " + vehicle);
 
-            //_vrButtons = UnityEngine.Object.FindObjectsOfType<VRButton>().ToList();
             _vrInteractables = UnityEngine.Object.FindObjectsOfType<VRInteractable>().ToList();
             _vrTwistKnobs = UnityEngine.Object.FindObjectsOfType<VRTwistKnob>().ToList();
             _vrTwistKnobsInt = UnityEngine.Object.FindObjectsOfType<VRTwistKnobInt>().ToList();
             _vrSwitchCovers = UnityEngine.Object.FindObjectsOfType<VRSwitchCover>().ToList();
             _vrLevers = UnityEngine.Object.FindObjectsOfType<VRLever>().ToList();
 
-            if (ControlsLoaded)
+            if (ControlsLoaded_FA26B)
             {
-                //Mod.Log(" - _vrButtons count : " + _vrButtons.Count());
                 Mod.Log(" - _vrInteractables count : " + _vrInteractables.Count());
                 Mod.Log(" - _vrTwistKnobs count : " + _vrTwistKnobs.Count());
                 Mod.Log(" - _vrTwistKnobsInt count : " + _vrTwistKnobsInt.Count());
@@ -112,90 +101,80 @@ namespace VTOLVRControlsMapper
                 Mod.Log(" - _vrLevers count : " + _vrLevers.Count());
 
                 _vrControlCache = new List<IVRControl>();
-                switch (vehicle)
-                {
-                    case VTOLVehicles.FA26B:
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Lever_LandingGear));
-                        _vrControlCache.Add(new VRControlCover(VRControlNames.Cover_MasterArm));
-                        _vrControlCache.Add(new VRControlLeverWithCover(VRControlNames.Switch_MasterArm, VRControlNames.Cover_MasterArm));
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_Fuel_Port));
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_Hook));
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_Hook_Cat));
 
-                        _vrControlCache.Add(new VRControlCover(VRControlNames.Cover_Engine_Right));
-                        _vrControlCache.Add(new VRControlLeverWithCover(VRControlNames.Switch_Engine_Right, VRControlNames.Cover_Engine_Right));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Lever_LandingGear));
+                _vrControlCache.Add(new VRControlCover(VRControlNames.Cover_MasterArm));
+                _vrControlCache.Add(new VRControlLeverWithCover(VRControlNames.Switch_MasterArm, VRControlNames.Cover_MasterArm));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_Fuel_Port));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_Hook));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_Hook_Cat));
 
-                        _vrControlCache.Add(new VRControlCover(VRControlNames.Cover_Engine_Left));
-                        _vrControlCache.Add(new VRControlLeverWithCover(VRControlNames.Switch_Engine_Left, VRControlNames.Cover_Engine_Left));
+                _vrControlCache.Add(new VRControlCover(VRControlNames.Cover_Engine_Right));
+                _vrControlCache.Add(new VRControlLeverWithCover(VRControlNames.Switch_Engine_Right, VRControlNames.Cover_Engine_Right));
 
-                        _vrControlCache.Add(new VRControlCover(VRControlNames.Cover_Fuel_Dump));
-                        _vrControlCache.Add(new VRControlLeverWithCover(VRControlNames.Switch_Fuel_Dump, VRControlNames.Cover_Fuel_Dump));
+                _vrControlCache.Add(new VRControlCover(VRControlNames.Cover_Engine_Left));
+                _vrControlCache.Add(new VRControlLeverWithCover(VRControlNames.Switch_Engine_Left, VRControlNames.Cover_Engine_Left));
 
-                        _vrControlCache.Add(new VRControlCover(VRControlNames.Cover_Jettison));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Jettison_Clear));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Jettison_Empty));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Jettison_All));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Jettison_Master));
+                _vrControlCache.Add(new VRControlCover(VRControlNames.Cover_Fuel_Dump));
+                _vrControlCache.Add(new VRControlLeverWithCover(VRControlNames.Switch_Fuel_Dump, VRControlNames.Cover_Fuel_Dump));
 
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Helm_Visor));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Helm_NightVision));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Helm_Visor2));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Visor));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Rear_View_Mirror));
+                _vrControlCache.Add(new VRControlCover(VRControlNames.Cover_Jettison));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Jettison_Clear));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Jettison_Empty));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Jettison_All));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Jettison_Master));
 
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_AP_Off));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Clear_Waypoint));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Master_Caution));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_MFD_Swap));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Altitude_Mode));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_AP_Altitude));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_AP_Heading));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_AP_Nav));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_AP_Speed));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Helm_Visor));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Helm_NightVision));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Helm_Visor2));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Visor));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Rear_View_Mirror));
 
-                        _vrControlCache.Add(new VRControlSwitchKnob(VRControlNames.Knob_Power_MFD1));
-                        _vrControlCache.Add(new VRControlSwitchKnob(VRControlNames.Knob_Power_MFD2));
-                        _vrControlCache.Add(new VRControlSwitchKnob(VRControlNames.Knob_Power_Radar));
-                        _vrControlCache.Add(new VRControlSwitchKnob(VRControlNames.Knob_RWR));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_AP_Off));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Clear_Waypoint));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Master_Caution));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_MFD_Swap));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Altitude_Mode));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_AP_Altitude));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_AP_Heading));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_AP_Nav));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_AP_Speed));
 
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_MMFD_Right_Power));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_MMFD_Left_Power));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_MMFD_Left_RWR));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_MMFD_Right_Fuel));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_MMFD_Right_Fuel_Drain));
+                _vrControlCache.Add(new VRControlSwitchKnob(VRControlNames.Knob_Power_MFD1));
+                _vrControlCache.Add(new VRControlSwitchKnob(VRControlNames.Knob_Power_MFD2));
+                _vrControlCache.Add(new VRControlSwitchKnob(VRControlNames.Knob_Power_Radar));
+                _vrControlCache.Add(new VRControlSwitchKnob(VRControlNames.Knob_RWR));
 
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Lever_Eject_Right));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Lever_Eject_Left));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Seat_Higher));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Seat_Lower  ));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_MMFD_Right_Power));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_MMFD_Left_Power));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_MMFD_Left_RWR));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_MMFD_Right_Fuel));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_MMFD_Right_Fuel_Drain));
 
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_Battery));
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_APU));
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Lever_Canopy));
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_CATOTrim));
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_Glimit));
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_SAS_Roll));
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_SAS_Yaw));
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_SAS_Pitch));
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_SAS_Master));
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Swtich_Flare));
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Swtich_Chaff));
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_Brake_Lock));
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_Wing));
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Ligth_Nav));
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Ligth_Strobe));
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Ligth_Landing));
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Ligth_Instrument));
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_Power_HUD));
-                        _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_Power_HMCS));
-                        break;
-                    case VTOLVehicles.F45A:
-                    case VTOLVehicles.AV42C:
-                    case VTOLVehicles.None:
-                    default:
-                        //Not implemented yet
-                        break;
-                }
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Lever_Eject_Right));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Lever_Eject_Left));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Seat_Higher));
+                _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Seat_Lower));
+
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_Battery));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_APU));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Lever_Canopy));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_CATOTrim));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_Glimit));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_SAS_Roll));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_SAS_Yaw));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_SAS_Pitch));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_SAS_Master));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Swtich_Flare));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Swtich_Chaff));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_Brake_Lock));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_Wing));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Ligth_Nav));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Ligth_Strobe));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Ligth_Landing));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Ligth_Instrument));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_Power_HUD));
+                _vrControlCache.Add(new VRControlLever(VRControlNames.Switch_Power_HMCS));
             }
         }
     }
