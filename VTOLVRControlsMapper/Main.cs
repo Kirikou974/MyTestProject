@@ -86,7 +86,7 @@ namespace VTOLVRControlsMapper
                 }
                 if (Input.GetKeyDown("v"))
                 {
-                    VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.CanopyFrame003).Invoke();
+                    VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Rear_View_Mirror).Invoke();
                 }
             }
         }

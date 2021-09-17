@@ -13,7 +13,7 @@ namespace VTOLVRControlsMapper
         public const string Helm_Visor = "helmVisorInteractable";
         public const string Helm_Visor2 = "helmVisorInteractable2";
         public const string Button_Visor = "visorButtonInteractable";
-        public const string CanopyFrame003 = "canopyFrame__003";
+        public const string Rear_View_Mirror = "canopyFrame.003";
         public const string Button_AP_Altitude = "altitudeAPButton";
         public const string Button_AP_Speed = "speedAPButton";
         public const string Button_AP_Heading = "headingAPButton";

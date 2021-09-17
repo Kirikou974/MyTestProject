@@ -70,6 +70,10 @@ namespace VTOLVRControlsMapper
                     returnValue = _vrControlCache.Find(x => x.ControlName == controlName && x is T) as T;
                     break;
             }
+            if(returnValue is null)
+            {
+                throw new NullReferenceException("GetVRControl failed to get a returnValue for " + controlName);
+            }
             return returnValue;
         }
 
@@ -137,7 +141,7 @@ namespace VTOLVRControlsMapper
                         _vrControlCache.Add(new VRControlInteractable(VRControlNames.Helm_NightVision));
                         _vrControlCache.Add(new VRControlInteractable(VRControlNames.Helm_Visor2));
                         _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Visor));
-                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.CanopyFrame003));
+                        _vrControlCache.Add(new VRControlInteractable(VRControlNames.Rear_View_Mirror));
 
                         _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_AP_Off));
                         _vrControlCache.Add(new VRControlInteractable(VRControlNames.Button_Clear_Waypoint));
