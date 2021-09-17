@@ -19,6 +19,7 @@ namespace VTOLVRControlsMapper
         public VRControlCover(Control cover) : base(VRControlHelper.GetVRControl<VRSwitchCover>(cover))
         {
             _lever = new VRControlLever(cover);
+            Toggle();
         }
         public override void Toggle()
         {

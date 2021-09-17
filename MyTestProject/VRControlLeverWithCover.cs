@@ -18,8 +18,6 @@ namespace VTOLVRControlsMapper
         {
             VRControlHelper.Mod.Log(string.Format("Trying to toggle {0} of type {1}", Control, this.GetType().Name));
             VRControlHelper.Mod.Log("- covered : " + _cover.UnityControl.covered);
-            VRControlHelper.Mod.Log("- setOffOnClosed : " + _cover.UnityControl.setOffOnClosed);
-            VRControlHelper.Mod.Log("- isActiveAndEnabled : " + _cover.UnityControl.isActiveAndEnabled);
 
             if (!_cover.UnityControl.covered)
             {
