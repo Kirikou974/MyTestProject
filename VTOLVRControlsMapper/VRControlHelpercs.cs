@@ -12,6 +12,9 @@ namespace VTOLVRControlsMapper
         private static List<VRTwistKnobInt> _vrTwistKnobsInt;
         private static List<VRSwitchCover> _vrSwitchCovers;
         private static List<VRLever> _vrLevers;
+        private static VRJoystick _vrJoystick;
+        private static VRThrottle _vrThrottle;
+
         private static VTOLMOD _mod;
         private static List<IVRControl> _vrControlCache;
         public static VTOLMOD Mod
@@ -75,6 +78,7 @@ namespace VTOLVRControlsMapper
             get
             {
                 return
+                    _vrJoystick != null && _vrThrottle != null &&
                     _vrInteractables != null && _vrInteractables.Count() > 0 &&
                     _vrTwistKnobs != null && _vrTwistKnobs.Count() > 0 &&
                     _vrTwistKnobsInt != null && _vrTwistKnobsInt.Count() > 0 &&
@@ -82,10 +86,12 @@ namespace VTOLVRControlsMapper
                     _vrLevers != null && _vrLevers.Count() > 0;
             }
         }
-        public static void LoadFA26BControls(VTOLMOD mod)
+        public static void LoadControls_FA26B(VTOLMOD mod)
         {
             _mod = mod;
 
+            _vrJoystick = UnityEngine.Object.FindObjectOfType<VRJoystick>();
+            _vrThrottle = UnityEngine.Object.FindObjectOfType<VRThrottle>();
             _vrInteractables = UnityEngine.Object.FindObjectsOfType<VRInteractable>().ToList();
             _vrTwistKnobs = UnityEngine.Object.FindObjectsOfType<VRTwistKnob>().ToList();
             _vrTwistKnobsInt = UnityEngine.Object.FindObjectsOfType<VRTwistKnobInt>().ToList();

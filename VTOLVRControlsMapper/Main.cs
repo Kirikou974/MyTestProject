@@ -66,6 +66,10 @@ namespace VTOLVRControlsMapper
 
         public void FA26B_ControlMapping()
         {
+            if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+                VRControlHelper.LoadControls_FA26B(this);
+            }
             if (Input.GetKeyDown("a"))
             {
                 VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_AP_Altitude).Invoke();
@@ -115,7 +119,7 @@ namespace VTOLVRControlsMapper
             {
                 case VTOLVehicles.FA26B:
                     Log("Loading controls for " + currentVehicle);
-                    VRControlHelper.LoadFA26BControls(this);
+                    VRControlHelper.LoadControls_FA26B(this);
                     break;
                 case VTOLVehicles.None:
                 case VTOLVehicles.AV42C:
