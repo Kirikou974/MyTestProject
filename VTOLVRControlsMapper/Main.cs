@@ -51,6 +51,10 @@ namespace VTOLVRControlsMapper
             switch (currentVehicle)
             {
                 case VTOLVehicles.FA26B:
+                    if (Input.GetKeyDown(KeyCode.Backspace))
+                    {
+                        VRControlHelper.LoadControls_FA26B(this);
+                    }
                     if (VRControlHelper.ControlsLoaded_FA26B)
                     {
                         FA26B_ControlMapping();
@@ -66,60 +70,56 @@ namespace VTOLVRControlsMapper
 
         public void FA26B_ControlMapping()
         {
-            if (Input.GetKeyDown(KeyCode.Backspace))
-            {
-                VRControlHelper.LoadControls_FA26B(this);
-            }
-            if (Input.GetKeyDown("a"))
+            if (Input.GetKeyDown("w"))
             {
                 VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_AP_Altitude).Invoke();
             }
-            if (Input.GetKeyDown("q"))
+            if (Input.GetKeyDown("x"))
             {
                 VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_AP_Heading).Invoke();
             }
-            if (Input.GetKeyDown("w"))
+            if (Input.GetKeyDown("c"))
             {
                 VRControlHelper.GetVRControl<IVRControlToggle>(VRControlNames.Lever_LandingGear).Toggle();
             }
-            if (Input.GetKeyDown("z"))
-            {
-                VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_Seat_Higher).StartInteract();
-            }
-            if (Input.GetKeyUp("z"))
-            {
-                VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_Seat_Higher).StopInteract();
-            }
-            if (Input.GetKeyDown("s"))
-            {
-                VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_Seat_Lower).StartInteract();
-            }
-            if (Input.GetKeyUp("s"))
-            {
-                VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_Seat_Lower).StopInteract();
-            }
-            if (Input.GetKeyDown("e"))
-            {
-                VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Lever_Eject_Right).Invoke();
-            }
-            if (Input.GetKeyDown("d"))
-            {
-                VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Lever_Eject_Left).Invoke();
-            }
-            if (Input.GetKeyDown("v"))
-            {
-                VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Rear_View_Mirror).Invoke();
-            }
+            if (Input.GetKeyDown("a")) { VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_MFD2_L1).Invoke(); }
+            if (Input.GetKeyDown("z")) { VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_MFD2_L2).Invoke(); }
+            if (Input.GetKeyDown("e")) { VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_MFD2_L3).Invoke(); }
+            if (Input.GetKeyDown("r")) { VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_MFD2_L4).Invoke(); }
+            if (Input.GetKeyDown("t")) { VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_MFD2_L5).Invoke(); }
+
+            if (Input.GetKeyDown("y")) { VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_MFD2_R1).Invoke(); }
+            if (Input.GetKeyDown("u")) { VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_MFD2_R2).Invoke(); }
+            if (Input.GetKeyDown("i")) { VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_MFD2_R3).Invoke(); }
+            if (Input.GetKeyDown("o")) { VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_MFD2_R4).Invoke(); }
+            if (Input.GetKeyDown("p")) { VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_MFD2_R5).Invoke(); }
+
+            if (Input.GetKeyDown("q")) { VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_MFD2_T1).Invoke(); }
+            if (Input.GetKeyDown("s")) { VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_MFD2_T2).Invoke(); }
+            if (Input.GetKeyDown("d")) { VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_MFD2_T3).Invoke(); }
+            if (Input.GetKeyDown("f")) { VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_MFD2_T4).Invoke(); }
+            if (Input.GetKeyDown("g")) { VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_MFD2_T5).Invoke(); }
+
+            if (Input.GetKeyDown("h")) { VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_MFD2_B1).Invoke(); }
+            if (Input.GetKeyDown("j")) { VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_MFD2_B2).Invoke(); }
+            if (Input.GetKeyDown("k")) { VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_MFD2_B3).Invoke(); }
+            if (Input.GetKeyDown("l")) { VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_MFD2_B4).Invoke(); }
+            if (Input.GetKeyDown("m")) { VRControlHelper.GetVRControl<VRControlInteractable>(VRControlNames.Button_MFD2_B5).Invoke(); }
         }
 
         private IEnumerator LoadControls()
         {
             VTOLVehicles currentVehicle = VTOLAPI.GetPlayersVehicleEnum();
+            Log("Loading controls for " + currentVehicle);
+
             switch (currentVehicle)
             {
                 case VTOLVehicles.FA26B:
-                    Log("Loading controls for " + currentVehicle);
-                    VRControlHelper.LoadControls_FA26B(this);
+                    while (!VRControlHelper.ControlsLoaded_FA26B)
+                    {
+                        VRControlHelper.LoadControls_FA26B(this);
+                        yield return new WaitForSeconds(2);
+                    }
                     break;
                 case VTOLVehicles.None:
                 case VTOLVehicles.AV42C:
@@ -127,7 +127,6 @@ namespace VTOLVRControlsMapper
                 default:
                     break;
             }
-            yield return new WaitForSeconds(2);
         }
 
         //This method is like update but it's framerate independent. This means it gets called at a set time interval instead of every frame. This is useful for physics calculations
