@@ -4,6 +4,8 @@ VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VTOLVRControlsMapper", "VTOLVRControlsMapper\VTOLVRControlsMapper.csproj", "{7BB21F11-6675-4E25-AB78-E420A6B129C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{B072451F-6E70-4FEC-9C78-4C5029301947}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,6 +16,10 @@ Global
 		{7BB21F11-6675-4E25-AB78-E420A6B129C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BB21F11-6675-4E25-AB78-E420A6B129C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BB21F11-6675-4E25-AB78-E420A6B129C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B072451F-6E70-4FEC-9C78-4C5029301947}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B072451F-6E70-4FEC-9C78-4C5029301947}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B072451F-6E70-4FEC-9C78-4C5029301947}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B072451F-6E70-4FEC-9C78-4C5029301947}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

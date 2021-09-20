@@ -1,9 +1,6 @@
-﻿using System;
-using UnityEngine.Events;
-
-namespace VTOLVRControlsMapper
+﻿namespace VTOLVRControlsMapper
 {
-    public class VRControlSwitchKnob : VRControlKnobBase<VRTwistKnobInt>, IVRControlToggle
+    public class SwitchKnob : ControlKnobBase<VRTwistKnobInt>, IControlToggle
     {
         public bool IsOff
         {
@@ -12,7 +9,7 @@ namespace VTOLVRControlsMapper
                 return UnityControl.currentState == 0;
             }
         }
-        public VRControlSwitchKnob(string controlName) : base(VRControlHelper.GetVRControl<VRTwistKnobInt>(controlName)) { }
+        public SwitchKnob(string controlName) : base(ControlsHelper.GetGameControl<VRTwistKnobInt>(controlName)) { }
         public override void Increase()
         {
             int newState = UnityControl.currentState + 1;

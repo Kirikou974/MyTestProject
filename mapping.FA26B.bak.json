@@ -1,0 +1,2013 @@
+[
+  {
+    "ControlName": "NavLightInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "StrobLightInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "LandingLightInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "LabelBrightnessKnob",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRTwistKnob, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "InsturmentLightInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "InteriorLightInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "coverSwitchInteractable_fuelDump",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRSwitchCover, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "fuelDumpSwitchInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "radioPlayPauseInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "NextButton",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "PrevButton",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "RadioVolumeKnob",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRTwistKnob, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "FuelPort",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "CATOTrimInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "GLimitInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "RollSASInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "YawSASInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "PitchSASInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "AssistMasterInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "FlareInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "ChaffInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MicPowerInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRTwistKnobInt, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "CommsVolumeKnob",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRTwistKnob, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "BrakeLockInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "WingSwitchInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "RadarPowerInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRTwistKnobInt, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "APAltKnobInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRTwistKnob, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "APSpeedAdjustInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRTwistKnob, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "APHeadingKnobInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRTwistKnob, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "CrsKnobInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRTwistKnob, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "RWRModeInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRTwistKnobInt, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "coverSwitchInteractable_masterArm",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRSwitchCover, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "masterArmSwitchInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD2PowerInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRTwistKnobInt, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD2-Button-R5",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD2-Button-R4",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD2-Button-R3",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD2-Button-R2",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD2-Button-R1",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD2-Button-L5",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD2-Button-L4",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD2-Button-L3",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD2-Button-L2",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD2-Button-L1",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD2-Button-B5",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD2-Button-B4",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD2-Button-B3",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD2-Button-B2",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD2-Button-B1",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD2-Button-T5",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD2-Button-T4",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD2-Button-T3",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD2-Button-T2",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD2-Button-T1",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD1PowerInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRTwistKnobInt, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD1-Button-R5",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD1-Button-R4",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD1-Button-R3",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD1-Button-R2",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD1-Button-R1",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD1-Button-L5",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD1-Button-L4",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD1-Button-L3",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD1-Button-L2",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD1-Button-L1",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD1-Button-B5",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD1-Button-B4",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD1-Button-B3",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD1-Button-B2",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD1-Button-B1",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD1-Button-T5",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD1-Button-T4",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD1-Button-T3",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD1-Button-T2",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFD1-Button-T1",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "fuelDrainButton",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "fuelButton",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "powButtonMMFDRight",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "powButtonMMFDLeft",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "RWRButton",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "lowerSeatInter",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "raiseSeatInter",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "JettTanksInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "ClearJettisonInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "JettisonEmptyInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "JettisonAllInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "coverSwitchInteractable_jettisonButton",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRSwitchCover, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MasterJettisonButtonInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "CatHookInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "HookInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "FlapsInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "GearInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "CanopyInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "mainBattSwitchInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "apuSwitchInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "coverSwitchInteractable_rightEngine",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRSwitchCover, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "rightEngineSwitchInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "coverSwitchInteractable_leftEngine",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRSwitchCover, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "leftEngineSwitchInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "mfdSwapButton",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MFDBrightnessKnob",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRTwistKnob, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "DeclutterKnob",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRTwistKnobInt, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "HUDBrightKnob",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRTwistKnob, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "hmcsPowerInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "hudPowerInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "navAPButton",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "offAPButton",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "speedAPButton",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "altitudeAPButton",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "headingAPButton",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "ClrWptButton",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "AltitudeModeInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "MasterCautionInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "HUDTintKnob",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRTwistKnob, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "nvgButtonInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "visorButtonInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "helmNVGInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "helmVisorInteractable2",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "helmVisorInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "rightSideEjectInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "sideEjectInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "throttleInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "centerJoyInteractable",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "TempHandle (1)",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "TempHandle",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "ControlName": "canopyFrame.003",
+    "KeyboardActions": [
+      {
+        "ActionName": "Invoke",
+        "ControllerActionName": "a",
+        "ControllerActionType": 0,
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  }
+]
