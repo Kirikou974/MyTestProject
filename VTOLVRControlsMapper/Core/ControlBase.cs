@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VTOLVRControlsMapper
+namespace VTOLVRControlsMapper.Core
 {
     public interface IControl
     {

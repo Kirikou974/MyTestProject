@@ -1,6 +1,6 @@
 [
   {
-    "ControlName": "NavLightInteractable",
+    "GameControlName": "NavLightInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -9,7 +9,7 @@
     ]
   },
   {
-    "ControlName": "StrobLightInteractable",
+    "GameControlName": "StrobLightInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -18,7 +18,7 @@
     ]
   },
   {
-    "ControlName": "LandingLightInteractable",
+    "GameControlName": "LandingLightInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -27,7 +27,7 @@
     ]
   },
   {
-    "ControlName": "LabelBrightnessKnob",
+    "GameControlName": "LabelBrightnessKnob",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -36,7 +36,7 @@
     ]
   },
   {
-    "ControlName": "InsturmentLightInteractable",
+    "GameControlName": "InsturmentLightInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -45,7 +45,7 @@
     ]
   },
   {
-    "ControlName": "InteriorLightInteractable",
+    "GameControlName": "InteriorLightInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -54,7 +54,7 @@
     ]
   },
   {
-    "ControlName": "coverSwitchInteractable_fuelDump",
+    "GameControlName": "coverSwitchInteractable_fuelDump",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -64,7 +64,7 @@
     ]
   },
   {
-    "ControlName": "fuelDumpSwitchInteractable",
+    "GameControlName": "fuelDumpSwitchInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -73,7 +73,7 @@
     ]
   },
   {
-    "ControlName": "radioPlayPauseInteractable",
+    "GameControlName": "radioPlayPauseInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -82,7 +82,7 @@
     ]
   },
   {
-    "ControlName": "NextButton",
+    "GameControlName": "NextButton",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -91,7 +91,7 @@
     ]
   },
   {
-    "ControlName": "PrevButton",
+    "GameControlName": "PrevButton",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -100,7 +100,7 @@
     ]
   },
   {
-    "ControlName": "RadioVolumeKnob",
+    "GameControlName": "RadioVolumeKnob",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -109,7 +109,7 @@
     ]
   },
   {
-    "ControlName": "FuelPort",
+    "GameControlName": "FuelPort",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -118,7 +118,7 @@
     ]
   },
   {
-    "ControlName": "CATOTrimInteractable",
+    "GameControlName": "CATOTrimInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -127,7 +127,7 @@
     ]
   },
   {
-    "ControlName": "GLimitInteractable",
+    "GameControlName": "GLimitInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -136,7 +136,7 @@
     ]
   },
   {
-    "ControlName": "RollSASInteractable",
+    "GameControlName": "RollSASInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -145,7 +145,7 @@
     ]
   },
   {
-    "ControlName": "YawSASInteractable",
+    "GameControlName": "YawSASInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -154,7 +154,7 @@
     ]
   },
   {
-    "ControlName": "PitchSASInteractable",
+    "GameControlName": "PitchSASInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -163,7 +163,7 @@
     ]
   },
   {
-    "ControlName": "AssistMasterInteractable",
+    "GameControlName": "AssistMasterInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -172,7 +172,7 @@
     ]
   },
   {
-    "ControlName": "FlareInteractable",
+    "GameControlName": "FlareInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -181,7 +181,7 @@
     ]
   },
   {
-    "ControlName": "ChaffInteractable",
+    "GameControlName": "ChaffInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -190,7 +190,7 @@
     ]
   },
   {
-    "ControlName": "MicPowerInteractable",
+    "GameControlName": "MicPowerInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -199,7 +199,7 @@
     ]
   },
   {
-    "ControlName": "CommsVolumeKnob",
+    "GameControlName": "CommsVolumeKnob",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -208,7 +208,7 @@
     ]
   },
   {
-    "ControlName": "BrakeLockInteractable",
+    "GameControlName": "BrakeLockInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -217,7 +217,7 @@
     ]
   },
   {
-    "ControlName": "WingSwitchInteractable",
+    "GameControlName": "WingSwitchInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -226,7 +226,7 @@
     ]
   },
   {
-    "ControlName": "RadarPowerInteractable",
+    "GameControlName": "RadarPowerInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -235,7 +235,7 @@
     ]
   },
   {
-    "ControlName": "APAltKnobInteractable",
+    "GameControlName": "APAltKnobInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -244,7 +244,7 @@
     ]
   },
   {
-    "ControlName": "APSpeedAdjustInteractable",
+    "GameControlName": "APSpeedAdjustInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -253,7 +253,7 @@
     ]
   },
   {
-    "ControlName": "APHeadingKnobInteractable",
+    "GameControlName": "APHeadingKnobInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -262,7 +262,7 @@
     ]
   },
   {
-    "ControlName": "CrsKnobInteractable",
+    "GameControlName": "CrsKnobInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -271,7 +271,7 @@
     ]
   },
   {
-    "ControlName": "RWRModeInteractable",
+    "GameControlName": "RWRModeInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -280,7 +280,7 @@
     ]
   },
   {
-    "ControlName": "coverSwitchInteractable_masterArm",
+    "GameControlName": "coverSwitchInteractable_masterArm",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -290,7 +290,7 @@
     ]
   },
   {
-    "ControlName": "masterArmSwitchInteractable",
+    "GameControlName": "masterArmSwitchInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -299,7 +299,7 @@
     ]
   },
   {
-    "ControlName": "MFD2PowerInteractable",
+    "GameControlName": "MFD2PowerInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -308,7 +308,7 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-R5",
+    "GameControlName": "MFD2-Button-R5",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -317,7 +317,7 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-R4",
+    "GameControlName": "MFD2-Button-R4",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -326,7 +326,7 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-R3",
+    "GameControlName": "MFD2-Button-R3",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -335,7 +335,7 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-R2",
+    "GameControlName": "MFD2-Button-R2",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -344,7 +344,7 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-R1",
+    "GameControlName": "MFD2-Button-R1",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -353,7 +353,7 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-L5",
+    "GameControlName": "MFD2-Button-L5",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -362,7 +362,7 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-L4",
+    "GameControlName": "MFD2-Button-L4",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -371,7 +371,7 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-L3",
+    "GameControlName": "MFD2-Button-L3",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -380,7 +380,7 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-L2",
+    "GameControlName": "MFD2-Button-L2",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -389,7 +389,7 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-L1",
+    "GameControlName": "MFD2-Button-L1",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -398,7 +398,7 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-B5",
+    "GameControlName": "MFD2-Button-B5",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -407,7 +407,7 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-B4",
+    "GameControlName": "MFD2-Button-B4",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -416,7 +416,7 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-B3",
+    "GameControlName": "MFD2-Button-B3",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -425,7 +425,7 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-B2",
+    "GameControlName": "MFD2-Button-B2",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -434,7 +434,7 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-B1",
+    "GameControlName": "MFD2-Button-B1",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -443,7 +443,7 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-T5",
+    "GameControlName": "MFD2-Button-T5",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -452,540 +452,14 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-T4",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD2-Button-T3",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD2-Button-T2",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD2-Button-T1",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD1PowerInteractable",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRTwistKnobInt, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD1-Button-R5",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD1-Button-R4",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD1-Button-R3",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD1-Button-R2",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD1-Button-R1",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD1-Button-L5",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD1-Button-L4",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD1-Button-L3",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD1-Button-L2",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD1-Button-L1",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD1-Button-B5",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD1-Button-B4",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD1-Button-B3",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD1-Button-B2",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD1-Button-B1",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD1-Button-T5",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD1-Button-T4",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD1-Button-T3",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD1-Button-T2",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFD1-Button-T1",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "fuelDrainButton",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "fuelButton",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "powButtonMMFDRight",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "powButtonMMFDLeft",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "RWRButton",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "lowerSeatInter",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "raiseSeatInter",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "JettTanksInteractable",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "ClearJettisonInteractable",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "JettisonEmptyInteractable",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "JettisonAllInteractable",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "coverSwitchInteractable_jettisonButton",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRSwitchCover, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MasterJettisonButtonInteractable",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "CatHookInteractable",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "HookInteractable",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "FlapsInteractable",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "GearInteractable",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "CanopyInteractable",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "mainBattSwitchInteractable",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "apuSwitchInteractable",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "coverSwitchInteractable_rightEngine",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRSwitchCover, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "rightEngineSwitchInteractable",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "coverSwitchInteractable_leftEngine",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRSwitchCover, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "leftEngineSwitchInteractable",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "mfdSwapButton",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "MFDBrightnessKnob",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRTwistKnob, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "DeclutterKnob",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRTwistKnobInt, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "HUDBrightKnob",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRTwistKnob, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "hmcsPowerInteractable",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "hudPowerInteractable",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "navAPButton",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "offAPButton",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "speedAPButton",
-    "KeyboardActions": null,
-    "JoystickActions": null,
-    "Types": [
-      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    ]
-  },
-  {
-    "ControlName": "altitudeAPButton",
+    "GameControlName": "MFD2-Button-T4",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
-        "ControllerActionName": "Q",
-        "ControllerActionType": 0,
+        "ControllerActionBehavior": 2,
+        "ControllerActionName": "I",
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
-	],
+    ],
     "JoystickActions": null,
     "Types": [
       "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -993,15 +467,569 @@
     ]
   },
   {
-    "ControlName": "headingAPButton",
+    "GameControlName": "MFD2-Button-T3",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD2-Button-T2",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD2-Button-T1",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
+        "ControllerActionName": "U",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD1PowerInteractable",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRTwistKnobInt, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD1-Button-R5",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD1-Button-R4",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD1-Button-R3",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD1-Button-R2",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD1-Button-R1",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD1-Button-L5",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD1-Button-L4",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD1-Button-L3",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD1-Button-L2",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD1-Button-L1",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD1-Button-B5",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD1-Button-B4",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD1-Button-B3",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD1-Button-B2",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD1-Button-B1",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD1-Button-T5",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD1-Button-T4",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD1-Button-T3",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD1-Button-T2",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFD1-Button-T1",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "fuelDrainButton",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "fuelButton",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "powButtonMMFDRight",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "powButtonMMFDLeft",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "RWRButton",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "lowerSeatInter",
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 1,
+        "ControllerActionName": "D",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "raiseSeatInter",
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 1,
+        "ControllerActionName": "E",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "JettTanksInteractable",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "ClearJettisonInteractable",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "JettisonEmptyInteractable",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "JettisonAllInteractable",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "coverSwitchInteractable_jettisonButton",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRSwitchCover, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MasterJettisonButtonInteractable",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "CatHookInteractable",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "HookInteractable",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "FlapsInteractable",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "GearInteractable",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "CanopyInteractable",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "mainBattSwitchInteractable",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "apuSwitchInteractable",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "coverSwitchInteractable_rightEngine",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRSwitchCover, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "rightEngineSwitchInteractable",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "coverSwitchInteractable_leftEngine",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRSwitchCover, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "leftEngineSwitchInteractable",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "mfdSwapButton",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "MFDBrightnessKnob",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRTwistKnob, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "DeclutterKnob",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRTwistKnobInt, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "HUDBrightKnob",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRTwistKnob, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "hmcsPowerInteractable",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "hudPowerInteractable",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "navAPButton",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "offAPButton",
+    "KeyboardActions": null,
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "speedAPButton",
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 2,
+        "ControllerActionName": "S",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "altitudeAPButton",
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 2,
+        "ControllerActionName": "A",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
+    "JoystickActions": null,
+    "Types": [
+      "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    ]
+  },
+  {
+    "GameControlName": "headingAPButton",
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "H",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
-	],
+    ],
     "JoystickActions": null,
     "Types": [
       "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -1009,7 +1037,7 @@
     ]
   },
   {
-    "ControlName": "ClrWptButton",
+    "GameControlName": "ClrWptButton",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -1018,7 +1046,7 @@
     ]
   },
   {
-    "ControlName": "AltitudeModeInteractable",
+    "GameControlName": "AltitudeModeInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -1027,7 +1055,7 @@
     ]
   },
   {
-    "ControlName": "MasterCautionInteractable",
+    "GameControlName": "MasterCautionInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -1036,7 +1064,7 @@
     ]
   },
   {
-    "ControlName": "HUDTintKnob",
+    "GameControlName": "HUDTintKnob",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -1045,7 +1073,7 @@
     ]
   },
   {
-    "ControlName": "nvgButtonInteractable",
+    "GameControlName": "nvgButtonInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -1054,7 +1082,7 @@
     ]
   },
   {
-    "ControlName": "visorButtonInteractable",
+    "GameControlName": "visorButtonInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -1063,7 +1091,7 @@
     ]
   },
   {
-    "ControlName": "helmNVGInteractable",
+    "GameControlName": "helmNVGInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -1071,7 +1099,7 @@
     ]
   },
   {
-    "ControlName": "helmVisorInteractable2",
+    "GameControlName": "helmVisorInteractable2",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -1079,7 +1107,7 @@
     ]
   },
   {
-    "ControlName": "helmVisorInteractable",
+    "GameControlName": "helmVisorInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -1087,7 +1115,7 @@
     ]
   },
   {
-    "ControlName": "rightSideEjectInteractable",
+    "GameControlName": "rightSideEjectInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -1095,7 +1123,7 @@
     ]
   },
   {
-    "ControlName": "sideEjectInteractable",
+    "GameControlName": "sideEjectInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -1103,7 +1131,7 @@
     ]
   },
   {
-    "ControlName": "throttleInteractable",
+    "GameControlName": "throttleInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -1111,7 +1139,7 @@
     ]
   },
   {
-    "ControlName": "centerJoyInteractable",
+    "GameControlName": "centerJoyInteractable",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -1119,7 +1147,7 @@
     ]
   },
   {
-    "ControlName": "TempHandle (1)",
+    "GameControlName": "TempHandle (1)",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -1127,7 +1155,7 @@
     ]
   },
   {
-    "ControlName": "TempHandle",
+    "GameControlName": "TempHandle",
     "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
@@ -1135,8 +1163,14 @@
     ]
   },
   {
-    "ControlName": "canopyFrame.003",
-    "KeyboardActions": null,
+    "GameControlName": "canopyFrame.003",
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 2,
+        "ControllerActionName": "R",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
     "JoystickActions": null,
     "Types": [
       "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"

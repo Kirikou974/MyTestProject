@@ -1,9 +1,11 @@
-﻿namespace VTOLVRControlsMapper
+﻿using VTOLVRControlsMapper.Core;
+
+namespace VTOLVRControlsMapper.Controls
 {
     public class Lever : ControlToggleBase<VRLever>
     {
         public Lever(string controlName) : base(ControlsHelper.GetGameControl<VRLever>(controlName)) { }
-
+        [Control(SupportedBehavior = ControllerActionBehavior.Toggle)]
         public override void Toggle()
         {
             int newState = 0;

@@ -1,11 +1,10 @@
 [
   {
-    "ControlName": "NavLightInteractable",
+    "GameControlName": "NavLightInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -16,12 +15,11 @@
     ]
   },
   {
-    "ControlName": "StrobLightInteractable",
+    "GameControlName": "StrobLightInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -32,12 +30,11 @@
     ]
   },
   {
-    "ControlName": "LandingLightInteractable",
+    "GameControlName": "LandingLightInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -48,12 +45,11 @@
     ]
   },
   {
-    "ControlName": "LabelBrightnessKnob",
+    "GameControlName": "LabelBrightnessKnob",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -64,12 +60,11 @@
     ]
   },
   {
-    "ControlName": "InsturmentLightInteractable",
+    "GameControlName": "InsturmentLightInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -80,12 +75,11 @@
     ]
   },
   {
-    "ControlName": "InteriorLightInteractable",
+    "GameControlName": "InteriorLightInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -96,12 +90,11 @@
     ]
   },
   {
-    "ControlName": "coverSwitchInteractable_fuelDump",
+    "GameControlName": "coverSwitchInteractable_fuelDump",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -113,12 +106,11 @@
     ]
   },
   {
-    "ControlName": "fuelDumpSwitchInteractable",
+    "GameControlName": "fuelDumpSwitchInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -129,12 +121,11 @@
     ]
   },
   {
-    "ControlName": "radioPlayPauseInteractable",
+    "GameControlName": "radioPlayPauseInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -145,12 +136,11 @@
     ]
   },
   {
-    "ControlName": "NextButton",
+    "GameControlName": "NextButton",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -161,12 +151,11 @@
     ]
   },
   {
-    "ControlName": "PrevButton",
+    "GameControlName": "PrevButton",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -177,12 +166,11 @@
     ]
   },
   {
-    "ControlName": "RadioVolumeKnob",
+    "GameControlName": "RadioVolumeKnob",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -193,12 +181,11 @@
     ]
   },
   {
-    "ControlName": "FuelPort",
+    "GameControlName": "FuelPort",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -209,12 +196,11 @@
     ]
   },
   {
-    "ControlName": "CATOTrimInteractable",
+    "GameControlName": "CATOTrimInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -225,12 +211,11 @@
     ]
   },
   {
-    "ControlName": "GLimitInteractable",
+    "GameControlName": "GLimitInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -241,12 +226,11 @@
     ]
   },
   {
-    "ControlName": "RollSASInteractable",
+    "GameControlName": "RollSASInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -257,12 +241,11 @@
     ]
   },
   {
-    "ControlName": "YawSASInteractable",
+    "GameControlName": "YawSASInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -273,12 +256,11 @@
     ]
   },
   {
-    "ControlName": "PitchSASInteractable",
+    "GameControlName": "PitchSASInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -289,12 +271,11 @@
     ]
   },
   {
-    "ControlName": "AssistMasterInteractable",
+    "GameControlName": "AssistMasterInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -305,12 +286,11 @@
     ]
   },
   {
-    "ControlName": "FlareInteractable",
+    "GameControlName": "FlareInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -321,12 +301,11 @@
     ]
   },
   {
-    "ControlName": "ChaffInteractable",
+    "GameControlName": "ChaffInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -337,12 +316,11 @@
     ]
   },
   {
-    "ControlName": "MicPowerInteractable",
+    "GameControlName": "MicPowerInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -353,12 +331,11 @@
     ]
   },
   {
-    "ControlName": "CommsVolumeKnob",
+    "GameControlName": "CommsVolumeKnob",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -369,12 +346,11 @@
     ]
   },
   {
-    "ControlName": "BrakeLockInteractable",
+    "GameControlName": "BrakeLockInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -385,12 +361,11 @@
     ]
   },
   {
-    "ControlName": "WingSwitchInteractable",
+    "GameControlName": "WingSwitchInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -401,12 +376,11 @@
     ]
   },
   {
-    "ControlName": "RadarPowerInteractable",
+    "GameControlName": "RadarPowerInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -417,12 +391,11 @@
     ]
   },
   {
-    "ControlName": "APAltKnobInteractable",
+    "GameControlName": "APAltKnobInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -433,12 +406,11 @@
     ]
   },
   {
-    "ControlName": "APSpeedAdjustInteractable",
+    "GameControlName": "APSpeedAdjustInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -449,12 +421,11 @@
     ]
   },
   {
-    "ControlName": "APHeadingKnobInteractable",
+    "GameControlName": "APHeadingKnobInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -465,12 +436,11 @@
     ]
   },
   {
-    "ControlName": "CrsKnobInteractable",
+    "GameControlName": "CrsKnobInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -481,12 +451,11 @@
     ]
   },
   {
-    "ControlName": "RWRModeInteractable",
+    "GameControlName": "RWRModeInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -497,12 +466,11 @@
     ]
   },
   {
-    "ControlName": "coverSwitchInteractable_masterArm",
+    "GameControlName": "coverSwitchInteractable_masterArm",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -514,12 +482,11 @@
     ]
   },
   {
-    "ControlName": "masterArmSwitchInteractable",
+    "GameControlName": "masterArmSwitchInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -530,12 +497,11 @@
     ]
   },
   {
-    "ControlName": "MFD2PowerInteractable",
+    "GameControlName": "MFD2PowerInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -546,12 +512,11 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-R5",
+    "GameControlName": "MFD2-Button-R5",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -562,12 +527,11 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-R4",
+    "GameControlName": "MFD2-Button-R4",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -578,12 +542,11 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-R3",
+    "GameControlName": "MFD2-Button-R3",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -594,12 +557,11 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-R2",
+    "GameControlName": "MFD2-Button-R2",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -610,12 +572,11 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-R1",
+    "GameControlName": "MFD2-Button-R1",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -626,12 +587,11 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-L5",
+    "GameControlName": "MFD2-Button-L5",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -642,12 +602,11 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-L4",
+    "GameControlName": "MFD2-Button-L4",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -658,12 +617,11 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-L3",
+    "GameControlName": "MFD2-Button-L3",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -674,12 +632,11 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-L2",
+    "GameControlName": "MFD2-Button-L2",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -690,12 +647,11 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-L1",
+    "GameControlName": "MFD2-Button-L1",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -706,12 +662,11 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-B5",
+    "GameControlName": "MFD2-Button-B5",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -722,12 +677,11 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-B4",
+    "GameControlName": "MFD2-Button-B4",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -738,12 +692,11 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-B3",
+    "GameControlName": "MFD2-Button-B3",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -754,12 +707,11 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-B2",
+    "GameControlName": "MFD2-Button-B2",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -770,12 +722,11 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-B1",
+    "GameControlName": "MFD2-Button-B1",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -786,12 +737,11 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-T5",
+    "GameControlName": "MFD2-Button-T5",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -802,12 +752,11 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-T4",
+    "GameControlName": "MFD2-Button-T4",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -818,12 +767,11 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-T3",
+    "GameControlName": "MFD2-Button-T3",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -834,12 +782,11 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-T2",
+    "GameControlName": "MFD2-Button-T2",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -850,12 +797,11 @@
     ]
   },
   {
-    "ControlName": "MFD2-Button-T1",
+    "GameControlName": "MFD2-Button-T1",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -866,12 +812,11 @@
     ]
   },
   {
-    "ControlName": "MFD1PowerInteractable",
+    "GameControlName": "MFD1PowerInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -882,12 +827,11 @@
     ]
   },
   {
-    "ControlName": "MFD1-Button-R5",
+    "GameControlName": "MFD1-Button-R5",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -898,12 +842,11 @@
     ]
   },
   {
-    "ControlName": "MFD1-Button-R4",
+    "GameControlName": "MFD1-Button-R4",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -914,12 +857,11 @@
     ]
   },
   {
-    "ControlName": "MFD1-Button-R3",
+    "GameControlName": "MFD1-Button-R3",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -930,12 +872,11 @@
     ]
   },
   {
-    "ControlName": "MFD1-Button-R2",
+    "GameControlName": "MFD1-Button-R2",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -946,12 +887,11 @@
     ]
   },
   {
-    "ControlName": "MFD1-Button-R1",
+    "GameControlName": "MFD1-Button-R1",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -962,12 +902,11 @@
     ]
   },
   {
-    "ControlName": "MFD1-Button-L5",
+    "GameControlName": "MFD1-Button-L5",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -978,12 +917,11 @@
     ]
   },
   {
-    "ControlName": "MFD1-Button-L4",
+    "GameControlName": "MFD1-Button-L4",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -994,12 +932,11 @@
     ]
   },
   {
-    "ControlName": "MFD1-Button-L3",
+    "GameControlName": "MFD1-Button-L3",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1010,12 +947,11 @@
     ]
   },
   {
-    "ControlName": "MFD1-Button-L2",
+    "GameControlName": "MFD1-Button-L2",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1026,12 +962,11 @@
     ]
   },
   {
-    "ControlName": "MFD1-Button-L1",
+    "GameControlName": "MFD1-Button-L1",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1042,12 +977,11 @@
     ]
   },
   {
-    "ControlName": "MFD1-Button-B5",
+    "GameControlName": "MFD1-Button-B5",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1058,12 +992,11 @@
     ]
   },
   {
-    "ControlName": "MFD1-Button-B4",
+    "GameControlName": "MFD1-Button-B4",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1074,12 +1007,11 @@
     ]
   },
   {
-    "ControlName": "MFD1-Button-B3",
+    "GameControlName": "MFD1-Button-B3",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1090,12 +1022,11 @@
     ]
   },
   {
-    "ControlName": "MFD1-Button-B2",
+    "GameControlName": "MFD1-Button-B2",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1106,12 +1037,11 @@
     ]
   },
   {
-    "ControlName": "MFD1-Button-B1",
+    "GameControlName": "MFD1-Button-B1",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1122,12 +1052,11 @@
     ]
   },
   {
-    "ControlName": "MFD1-Button-T5",
+    "GameControlName": "MFD1-Button-T5",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1138,12 +1067,11 @@
     ]
   },
   {
-    "ControlName": "MFD1-Button-T4",
+    "GameControlName": "MFD1-Button-T4",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1154,12 +1082,11 @@
     ]
   },
   {
-    "ControlName": "MFD1-Button-T3",
+    "GameControlName": "MFD1-Button-T3",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1170,12 +1097,11 @@
     ]
   },
   {
-    "ControlName": "MFD1-Button-T2",
+    "GameControlName": "MFD1-Button-T2",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1186,12 +1112,11 @@
     ]
   },
   {
-    "ControlName": "MFD1-Button-T1",
+    "GameControlName": "MFD1-Button-T1",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1202,12 +1127,11 @@
     ]
   },
   {
-    "ControlName": "fuelDrainButton",
+    "GameControlName": "fuelDrainButton",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1218,12 +1142,11 @@
     ]
   },
   {
-    "ControlName": "fuelButton",
+    "GameControlName": "fuelButton",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1234,12 +1157,11 @@
     ]
   },
   {
-    "ControlName": "powButtonMMFDRight",
+    "GameControlName": "powButtonMMFDRight",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1250,12 +1172,11 @@
     ]
   },
   {
-    "ControlName": "powButtonMMFDLeft",
+    "GameControlName": "powButtonMMFDLeft",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1266,12 +1187,11 @@
     ]
   },
   {
-    "ControlName": "RWRButton",
+    "GameControlName": "RWRButton",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1282,12 +1202,11 @@
     ]
   },
   {
-    "ControlName": "lowerSeatInter",
+    "GameControlName": "lowerSeatInter",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1298,12 +1217,11 @@
     ]
   },
   {
-    "ControlName": "raiseSeatInter",
+    "GameControlName": "raiseSeatInter",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1314,12 +1232,11 @@
     ]
   },
   {
-    "ControlName": "JettTanksInteractable",
+    "GameControlName": "JettTanksInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1330,12 +1247,11 @@
     ]
   },
   {
-    "ControlName": "ClearJettisonInteractable",
+    "GameControlName": "ClearJettisonInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1346,12 +1262,11 @@
     ]
   },
   {
-    "ControlName": "JettisonEmptyInteractable",
+    "GameControlName": "JettisonEmptyInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1362,12 +1277,11 @@
     ]
   },
   {
-    "ControlName": "JettisonAllInteractable",
+    "GameControlName": "JettisonAllInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1378,12 +1292,11 @@
     ]
   },
   {
-    "ControlName": "coverSwitchInteractable_jettisonButton",
+    "GameControlName": "coverSwitchInteractable_jettisonButton",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1395,12 +1308,11 @@
     ]
   },
   {
-    "ControlName": "MasterJettisonButtonInteractable",
+    "GameControlName": "MasterJettisonButtonInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1411,12 +1323,11 @@
     ]
   },
   {
-    "ControlName": "CatHookInteractable",
+    "GameControlName": "CatHookInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1427,12 +1338,11 @@
     ]
   },
   {
-    "ControlName": "HookInteractable",
+    "GameControlName": "HookInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1443,12 +1353,11 @@
     ]
   },
   {
-    "ControlName": "FlapsInteractable",
+    "GameControlName": "FlapsInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1459,12 +1368,11 @@
     ]
   },
   {
-    "ControlName": "GearInteractable",
+    "GameControlName": "GearInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1475,12 +1383,11 @@
     ]
   },
   {
-    "ControlName": "CanopyInteractable",
+    "GameControlName": "CanopyInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1491,12 +1398,11 @@
     ]
   },
   {
-    "ControlName": "mainBattSwitchInteractable",
+    "GameControlName": "mainBattSwitchInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1507,12 +1413,11 @@
     ]
   },
   {
-    "ControlName": "apuSwitchInteractable",
+    "GameControlName": "apuSwitchInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1523,12 +1428,11 @@
     ]
   },
   {
-    "ControlName": "coverSwitchInteractable_rightEngine",
+    "GameControlName": "coverSwitchInteractable_rightEngine",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1540,12 +1444,11 @@
     ]
   },
   {
-    "ControlName": "rightEngineSwitchInteractable",
+    "GameControlName": "rightEngineSwitchInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1556,12 +1459,11 @@
     ]
   },
   {
-    "ControlName": "coverSwitchInteractable_leftEngine",
+    "GameControlName": "coverSwitchInteractable_leftEngine",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1573,12 +1475,11 @@
     ]
   },
   {
-    "ControlName": "leftEngineSwitchInteractable",
+    "GameControlName": "leftEngineSwitchInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1589,12 +1490,11 @@
     ]
   },
   {
-    "ControlName": "mfdSwapButton",
+    "GameControlName": "mfdSwapButton",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1605,12 +1505,11 @@
     ]
   },
   {
-    "ControlName": "MFDBrightnessKnob",
+    "GameControlName": "MFDBrightnessKnob",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1621,12 +1520,11 @@
     ]
   },
   {
-    "ControlName": "DeclutterKnob",
+    "GameControlName": "DeclutterKnob",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1637,12 +1535,11 @@
     ]
   },
   {
-    "ControlName": "HUDBrightKnob",
+    "GameControlName": "HUDBrightKnob",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1653,12 +1550,11 @@
     ]
   },
   {
-    "ControlName": "hmcsPowerInteractable",
+    "GameControlName": "hmcsPowerInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1669,12 +1565,11 @@
     ]
   },
   {
-    "ControlName": "hudPowerInteractable",
+    "GameControlName": "hudPowerInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1685,12 +1580,11 @@
     ]
   },
   {
-    "ControlName": "navAPButton",
+    "GameControlName": "navAPButton",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1701,12 +1595,11 @@
     ]
   },
   {
-    "ControlName": "offAPButton",
+    "GameControlName": "offAPButton",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1717,12 +1610,11 @@
     ]
   },
   {
-    "ControlName": "speedAPButton",
+    "GameControlName": "speedAPButton",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1733,12 +1625,11 @@
     ]
   },
   {
-    "ControlName": "altitudeAPButton",
+    "GameControlName": "altitudeAPButton",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1749,12 +1640,11 @@
     ]
   },
   {
-    "ControlName": "headingAPButton",
+    "GameControlName": "headingAPButton",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1765,12 +1655,11 @@
     ]
   },
   {
-    "ControlName": "ClrWptButton",
+    "GameControlName": "ClrWptButton",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1781,12 +1670,11 @@
     ]
   },
   {
-    "ControlName": "AltitudeModeInteractable",
+    "GameControlName": "AltitudeModeInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1797,12 +1685,11 @@
     ]
   },
   {
-    "ControlName": "MasterCautionInteractable",
+    "GameControlName": "MasterCautionInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1813,12 +1700,11 @@
     ]
   },
   {
-    "ControlName": "HUDTintKnob",
+    "GameControlName": "HUDTintKnob",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1829,12 +1715,11 @@
     ]
   },
   {
-    "ControlName": "nvgButtonInteractable",
+    "GameControlName": "nvgButtonInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1845,12 +1730,11 @@
     ]
   },
   {
-    "ControlName": "visorButtonInteractable",
+    "GameControlName": "visorButtonInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1861,12 +1745,11 @@
     ]
   },
   {
-    "ControlName": "helmNVGInteractable",
+    "GameControlName": "helmNVGInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1876,12 +1759,11 @@
     ]
   },
   {
-    "ControlName": "helmVisorInteractable2",
+    "GameControlName": "helmVisorInteractable2",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1891,12 +1773,11 @@
     ]
   },
   {
-    "ControlName": "helmVisorInteractable",
+    "GameControlName": "helmVisorInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1906,12 +1787,11 @@
     ]
   },
   {
-    "ControlName": "rightSideEjectInteractable",
+    "GameControlName": "rightSideEjectInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1921,12 +1801,11 @@
     ]
   },
   {
-    "ControlName": "sideEjectInteractable",
+    "GameControlName": "sideEjectInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1936,12 +1815,11 @@
     ]
   },
   {
-    "ControlName": "throttleInteractable",
+    "GameControlName": "throttleInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1951,12 +1829,11 @@
     ]
   },
   {
-    "ControlName": "centerJoyInteractable",
+    "GameControlName": "centerJoyInteractable",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1966,12 +1843,11 @@
     ]
   },
   {
-    "ControlName": "TempHandle (1)",
+    "GameControlName": "TempHandle (1)",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1981,12 +1857,11 @@
     ]
   },
   {
-    "ControlName": "TempHandle",
+    "GameControlName": "TempHandle",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -1996,12 +1871,11 @@
     ]
   },
   {
-    "ControlName": "canopyFrame.003",
+    "GameControlName": "canopyFrame.003",
     "KeyboardActions": [
       {
-        "ActionName": "Invoke",
+        "ControllerActionBehavior": 2,
         "ControllerActionName": "a",
-        "ControllerActionType": 0,
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],

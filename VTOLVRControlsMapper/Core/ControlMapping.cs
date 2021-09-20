@@ -1,8 +1,7 @@
-﻿using SharpDX.DirectInput;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace VTOLVRControlsMapper
+namespace VTOLVRControlsMapper.Core
 {
     public enum ControllerActionType
     {
@@ -12,32 +11,31 @@ namespace VTOLVRControlsMapper
     }
     public class GameAction
     {
-        public string ActionName { get; set; }
+
+        public ControllerActionBehavior ControllerActionBehavior { get; set; }
         public string ControllerActionName { get; set; }
-        public ControllerActionType ControllerActionType { get; set; }
         public Guid ControllerInstanceGuid { get; set; }
-        public GameAction(Guid controllerInstanceGuid, string actionName, string controllerActionName, ControllerActionType controllerActionType)
+        public GameAction(Guid controllerInstanceGuid, string controllerActionName, ControllerActionBehavior controllerActionBehavior)
         {
             ControllerInstanceGuid = controllerInstanceGuid;
-            ActionName = actionName;
+            ControllerActionBehavior = controllerActionBehavior;
             ControllerActionName = controllerActionName;
-            ControllerActionType = controllerActionType;
         }
     }
     public class ControlMapping
     {
-        public string ControlName { get; set; }
+        public string GameControlName { get; set; }
         public List<GameAction> KeyboardActions { get; set; }
         public List<GameAction> JoystickActions { get; set; }
         public List<Type> Types { get; set; }
-        public ControlMapping(string controlName, List<Type> types)
+        public ControlMapping(string gameControlName, List<Type> types)
         {
-            ControlName = controlName;
+            GameControlName = gameControlName;
             Types = types;
             //KeyboardActions = new List<GameAction>();
             //DirectInput di = new DirectInput();
             //Keyboard kb = new Keyboard(di);
-            //KeyboardActions.Add(new GameAction(kb.Information.InstanceGuid, "Invoke", "a", ControllerActionType.Button));
+            //KeyboardActions.Add(new GameAction(kb.Information.InstanceGuid, "a", ControllerActionBehavior.Toggle));
         }
     }
 }

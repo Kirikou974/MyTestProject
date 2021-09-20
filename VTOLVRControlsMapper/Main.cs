@@ -25,7 +25,6 @@ namespace VTOLVRControlsMapper
             }
             base.ModLoaded();
         }
-
         private void Sceneloaded(VTOLScenes scene)
         {
             switch (scene)
@@ -65,7 +64,6 @@ namespace VTOLVRControlsMapper
             if (ControlsHelper.MappingsLoaded)
                 ControlsHelper.Update();
         }
-
         private IEnumerator LoadControlsMapping()
         {
             VTOLVehicles vehicle = VTOLAPI.GetPlayersVehicleEnum();

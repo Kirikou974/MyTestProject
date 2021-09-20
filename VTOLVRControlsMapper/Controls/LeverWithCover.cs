@@ -1,4 +1,4 @@
-﻿namespace VTOLVRControlsMapper
+﻿namespace VTOLVRControlsMapper.Controls
 {
     public class LeverWithCover : Lever
     {
@@ -7,7 +7,6 @@
         {
             _cover = new Cover(coverName);
         }
-
         public override void Toggle()
         {
             if (!_cover.UnityControl.covered)

@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Valve.Newtonsoft.Json;
+using VTOLVRControlsMapper.Controls;
+using VTOLVRControlsMapper.Core;
 
 namespace VTOLVRControlsMapper
 {
@@ -32,9 +34,7 @@ namespace VTOLVRControlsMapper
         private static DirectInput _directInput;
         private static KeyboardUpdate[] _keyboardUpdates;
         private static JoystickUpdate[] _joystickUpdates;
-        
         private static readonly List<Device> _devices = new List<Device>();
-
         public static List<ControlMapping> Mappings
         {
             get;
@@ -49,14 +49,22 @@ namespace VTOLVRControlsMapper
         }
         public static Type GetCustomControlType(List<Type> types)
         {
-            if (types.Contains(typeof(VRButton)))
+            if (types.Contains(typeof(VRButton)) || types.Contains(typeof(VRInteractable)))
+            { 
                 return typeof(Interactable);
+            }
             if (types.Contains(typeof(VRSwitchCover)))
+            { 
                 return typeof(Cover);
+            }
             if (types.Contains(typeof(VRLever)))
+            {
                 return typeof(Lever);
+            }
             if (types.Contains(typeof(VRTwistKnob)) || types.Contains(typeof(VRTwistKnobInt)))
+            {
                 return typeof(SwitchKnob);
+            }
             throw new Exception("Cannot determine control type");
         }
         public static T GetGameControl<T>(string controlName)
@@ -119,18 +127,27 @@ namespace VTOLVRControlsMapper
             foreach (Device device in _devices)
             {
                 if (device is Keyboard)
+                {
                     _keyboardUpdates = (device as Keyboard).GetBufferedData();
+                }
                 if (device is Joystick)
+                {
                     _joystickUpdates = (device as Joystick).GetBufferedData();
+                }
             }
 
             //Send controller data to game control
             foreach (ControlMapping controlMapping in Mappings)
             {
                 if (controlMapping != null && controlMapping.KeyboardActions != null)
+                {
                     Update(controlMapping, controlMapping.KeyboardActions);
-                if (controlMapping != null && controlMapping.JoystickActions != null) 
+                }
+
+                if (controlMapping != null && controlMapping.JoystickActions != null)
+                {
                     Update(controlMapping, controlMapping.JoystickActions);
+                }
             }
         }
         private static void Update(ControlMapping mapping, List<GameAction> actions)
@@ -143,12 +160,16 @@ namespace VTOLVRControlsMapper
                     if (device is Keyboard)
                     {
                         foreach (KeyboardUpdate keyboardUpdate in _keyboardUpdates)
+                        { 
                             ExecuteControl(keyboardUpdate, mapping, action);
+                        }
                     }
                     if (device is Joystick)
                     {
                         foreach (JoystickUpdate joystickUpdate in _joystickUpdates)
+                        { 
                             ExecuteControl(joystickUpdate, mapping, action);
+                        }
                     }
                 }
             }
@@ -159,12 +180,28 @@ namespace VTOLVRControlsMapper
         }
         public static void ExecuteControl(KeyboardUpdate update, ControlMapping mapping, GameAction action)
         {
-            if (update.Key.ToString() == action.ControllerActionName && update.IsPressed)
+            //Create custom control instance
+            Type customControlType = GetCustomControlType(mapping.Types);
+            object instance = Activator.CreateInstance(customControlType, mapping.GameControlName);
+
+            //Get methods for related behavior
+            List<MethodInfo> methodsInfo = customControlType.GetMethods(BindingFlags.Public | BindingFlags.Instance).ToList();
+            MethodInfo methodInfo = methodsInfo.Find(m =>
+                m.GetCustomAttribute<ControlAttribute>().SupportedBehavior == action.ControllerActionBehavior
+            );
+            if (update.Key.ToString() == action.ControllerActionName)
             {
-                Type customType = GetCustomControlType(mapping.Types);
-                MethodInfo methodInfo = customType.GetMethod(action.ActionName);
-                object instance = Activator.CreateInstance(customType, mapping.ControlName);
-                methodInfo.Invoke(instance, null);
+                if (update.IsPressed)
+                {
+                    methodInfo.Invoke(instance, null);
+                }
+                else if (action.ControllerActionBehavior == ControllerActionBehavior.HoldOn)
+                {
+                    MethodInfo offMethodInfo = methodsInfo.Find(m =>
+                        m.GetCustomAttribute<ControlAttribute>().SupportedBehavior == ControllerActionBehavior.HoldOff
+                    );
+                    offMethodInfo.Invoke(instance, null);
+                }
             }
         }
         public static void LoadControls()
@@ -221,7 +258,9 @@ namespace VTOLVRControlsMapper
                     {
                         Guid instanceGuid = action.ControllerInstanceGuid;
                         if (_devices.Find(d => d.Information.InstanceGuid == instanceGuid) == null)
+                        {
                             LoadJoystick(instanceGuid);
+                        }
                     }
                 }
                 if (mapping.KeyboardActions != null)
@@ -230,7 +269,9 @@ namespace VTOLVRControlsMapper
                     {
                         Guid instanceGuid = action.ControllerInstanceGuid;
                         if (_devices.Find(d => d.Information.InstanceGuid == action.ControllerInstanceGuid) == null)
+                        {
                             LoadKeyboard(instanceGuid);
+                        }
                     }
                 }
             }
@@ -240,21 +281,22 @@ namespace VTOLVRControlsMapper
             //string mappingFilePath = Path.Combine(Directory.GetCurrentDirectory(), string.Format(@"VTOLVR_ModLoader\Mods\{0}\mapping.{1}.json", modName, vehicleName));
             string mappingFilePath = Path.Combine(Directory.GetCurrentDirectory(), string.Format(@"VTOLVR_ModLoader\dev\My Mods\{0}\mapping.{1}.json", modName, vehicleName));
             if (!string.IsNullOrEmpty(forceMappingFilePath))
+            {
                 mappingFilePath = forceMappingFilePath;
+            }
             return mappingFilePath;
         }
         private static List<ControlMapping> GetMappingsFromFile(string mappingFilePath)
         {
-            List<ControlMapping> mappings = new List<ControlMapping>();
             string jsonContent;
             using (FileStream fs = File.OpenRead(mappingFilePath))
             {
-                using (StreamReader sr = new StreamReader(fs))
+                using (var sr = new StreamReader(fs))
                 {
                     jsonContent = sr.ReadToEnd();
                 }
             }
-            mappings = JsonConvert.DeserializeObject<List<ControlMapping>>(jsonContent);
+            List<ControlMapping> mappings = JsonConvert.DeserializeObject<List<ControlMapping>>(jsonContent);
             return mappings;
         }
         public static void CreateMappingFile(string mappingFilePath)
@@ -285,7 +327,9 @@ namespace VTOLVRControlsMapper
                 foreach (UnityEngine.Object unityObject in unityObjectsArray)
                 {
                     if (unityObject.name == vrInteractableName)
+                    {
                         types.Add(unityObject.GetType());
+                    }
                 }
             }
             return new ControlMapping(vrInteractableName, types);
