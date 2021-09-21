@@ -27,9 +27,11 @@ namespace VTOLVRControlsMapper.Core
         public List<GameAction> KeyboardActions { get; set; }
         public List<GameAction> JoystickActions { get; set; }
         public List<Type> Types { get; set; }
-        public ControlMapping(string gameControlName, List<Type> types)
+        public bool HasCover { get; set; }
+        public ControlMapping(string gameControlName, List<Type> types, bool hasCover)
         {
             GameControlName = gameControlName;
+            HasCover = hasCover;
             Types = types;
             //KeyboardActions = new List<GameAction>();
             //DirectInput di = new DirectInput();

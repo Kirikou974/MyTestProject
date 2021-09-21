@@ -48,6 +48,7 @@ namespace VTOLVRControlsMapper
         public static VRButton[] _vrButtons;
         public static VRSwitchCover[] _vrSwitchCovers;
         public static VRLever[] _vrLevers;
+        public static VRLever[] _vrLeversWithCover;
         public static VRJoystick _vrJoystick;
         public static VRThrottle _vrThrottle;
         public override void ModLoaded()
@@ -199,7 +200,7 @@ namespace VTOLVRControlsMapper
                 if (update.IsPressed)
                 {
                     //Create custom control instance
-                    Type customControlType = GetCustomControlType(mapping.Types);
+                    Type customControlType = GetCustomControlType(mapping);
                     object instance = Activator.CreateInstance(customControlType, mapping.GameControlName);
 
                     //Get methods for related behavior
@@ -273,14 +274,19 @@ namespace VTOLVRControlsMapper
             Log("Mapping loaded for " + vehicle);
             yield return null;
         }
-        public Type GetCustomControlType(List<Type> types)
+        public Type GetCustomControlType(ControlMapping mapping)
         {
+            List<Type> types = mapping.Types;
             if (types.Contains(typeof(VRSwitchCover)))
             {
                 return typeof(Cover);
             }
             if (types.Contains(typeof(VRLever)))
             {
+                if (mapping.HasCover)
+                {
+                    return typeof(LeverWithCover);
+                }
                 return typeof(Lever);
             }
             if (types.Contains(typeof(VRTwistKnob)) || types.Contains(typeof(VRTwistKnobInt)))
@@ -360,7 +366,7 @@ namespace VTOLVRControlsMapper
                         List<ControlMapping> mappings = new List<ControlMapping>();
                         foreach (VRInteractable vrInteractable in _vrInteractables)
                         {
-                            ControlMapping controlMapping = GetControlMapping(vrInteractable.name, _vrButtons, _vrLevers, _vrSwitchCovers, _vrTwistKnobs, _vrTwistKnobsInt);
+                            ControlMapping controlMapping = BuildControlMapping(vrInteractable.name, _vrButtons, _vrLevers, _vrSwitchCovers, _vrTwistKnobs, _vrTwistKnobsInt);
                             controlMapping.Types.Add(vrInteractable.GetType());
                             mappings.Add(controlMapping);
                         }
@@ -369,7 +375,7 @@ namespace VTOLVRControlsMapper
                 }
             }
         }
-        private ControlMapping GetControlMapping(string vrInteractableName, params UnityEngine.Object[][] lists)
+        private ControlMapping BuildControlMapping(string vrInteractableName, params UnityEngine.Object[][] lists)
         {
             List<Type> types = new List<Type>();
             foreach (UnityEngine.Object[] unityObjectsArray in lists)
@@ -382,7 +388,12 @@ namespace VTOLVRControlsMapper
                     }
                 }
             }
-            return new ControlMapping(vrInteractableName, types);
+            bool hasCover = false;
+            if(_vrLeversWithCover.ToList().Find(l => l.name == vrInteractableName))
+            {
+                hasCover = true;
+            }
+            return new ControlMapping(vrInteractableName, types, hasCover);
         }
         public static T GetGameControl<T>(string controlName)
             where T : UnityEngine.Object
@@ -436,7 +447,8 @@ namespace VTOLVRControlsMapper
                 _vrTwistKnobs != null && _vrTwistKnobs.Count() > 0 &&
                 _vrTwistKnobsInt != null && _vrTwistKnobsInt.Count() > 0 &&
                 _vrSwitchCovers != null && _vrSwitchCovers.Count() > 0 &&
-                _vrLevers != null && _vrLevers.Count() > 0;
+                _vrLevers != null && _vrLevers.Count() > 0 &&
+                _vrLeversWithCover != null && _vrLeversWithCover.Count() > 0;
         }
         public static void LoadControls()
         {
@@ -448,6 +460,7 @@ namespace VTOLVRControlsMapper
             _vrTwistKnobsInt = FindObjectsOfType<VRTwistKnobInt>();
             _vrSwitchCovers = FindObjectsOfType<VRSwitchCover>();
             _vrLevers = FindObjectsOfType<VRLever>();
+            _vrLeversWithCover = _vrLevers.Where(l => _vrSwitchCovers.Any(c => c.coveredSwitch.name == l.name)).ToArray();
         }
     }
 }
