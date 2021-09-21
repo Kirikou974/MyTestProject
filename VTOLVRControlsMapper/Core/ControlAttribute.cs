@@ -8,7 +8,7 @@ namespace VTOLVRControlsMapper.Core
         HoldOff,
         Toggle,
         Increase,
-        Decrese,
+        Decrease,
         On,
         Off,
         Continuous

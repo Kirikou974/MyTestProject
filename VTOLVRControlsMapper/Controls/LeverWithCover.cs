@@ -9,7 +9,6 @@ namespace VTOLVRControlsMapper.Controls
         {
             _cover = new Cover(coverName);
         }
-        [Control(SupportedBehavior = ControllerActionBehavior.Toggle)]
         public override void Toggle()
         {
             if (!_cover.UnityControl.covered)

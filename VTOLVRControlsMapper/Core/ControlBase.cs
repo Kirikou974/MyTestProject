@@ -11,7 +11,6 @@ namespace VTOLVRControlsMapper.Core
     {
         T1 UnityControl { get; }
     }
-
     public abstract class ControlBase<T> : IControl<T>
         where T : UnityEngine.Object
     {
