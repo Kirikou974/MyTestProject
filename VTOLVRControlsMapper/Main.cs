@@ -478,10 +478,9 @@ namespace VTOLVRControlsMapper
                 {
                     if (cover.coveredSwitch.name == lever.name)
                     {
-                        //Fix for a weird behavior with covers and their repective levers
-                        //Cover customCover = new Cover(cover.name);
                         LeverWithCover customLever = new LeverWithCover(lever.name, cover.name);
-                        customLever.Cover.Lever.SetState(0);
+                        //Fix for cover not being recognized as closed when initializing the vars
+                        customLever.Cover.UnityControl.OnSetState(1);
                         _vrLeversWithCover.Add(lever.name, cover.name);
                     }
                 }
