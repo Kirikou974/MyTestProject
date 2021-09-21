@@ -98,7 +98,7 @@
       "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     ],
     "HasCover": true,
-    "CoverName": "fuelDumpSwitchInteractable"
+    "CoverName": "coverSwitchInteractable_fuelDump"
   },
   {
     "GameControlName": "radioPlayPauseInteractable",
@@ -374,7 +374,7 @@
       "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     ],
     "HasCover": true,
-    "CoverName": "masterArmSwitchInteractable"
+    "CoverName": "coverSwitchInteractable_masterArm"
   },
   {
     "GameControlName": "MFD2PowerInteractable",
@@ -1080,7 +1080,7 @@
       "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     ],
     "HasCover": true,
-    "CoverName": "rightEngineSwitchInteractable"
+    "CoverName": "coverSwitchInteractable_rightEngine"
   },
   {
     "GameControlName": "coverSwitchInteractable_leftEngine",
@@ -1103,7 +1103,7 @@
       "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     ],
     "HasCover": true,
-    "CoverName": "leftEngineSwitchInteractable"
+    "CoverName": "coverSwitchInteractable_leftEngine"
   },
   {
     "GameControlName": "mfdSwapButton",

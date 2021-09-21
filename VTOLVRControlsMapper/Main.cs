@@ -48,7 +48,7 @@ namespace VTOLVRControlsMapper
         public static VRButton[] _vrButtons;
         public static VRSwitchCover[] _vrSwitchCovers;
         public static VRLever[] _vrLevers;
-        public static VRLever[] _vrLeversWithCover;
+        public static Dictionary<string, string> _vrLeversWithCover;
         public static VRJoystick _vrJoystick;
         public static VRThrottle _vrThrottle;
         public override void ModLoaded()
@@ -90,7 +90,7 @@ namespace VTOLVRControlsMapper
             foreach (Device device in _devices)
             {
                 //Unacquire keyboard when not focusing game
-                if(device is Keyboard)
+                if (device is Keyboard)
                 {
                     if (hasFocus)
                     {
@@ -201,7 +201,15 @@ namespace VTOLVRControlsMapper
                 {
                     //Create custom control instance
                     Type customControlType = GetCustomControlType(mapping);
-                    object instance = Activator.CreateInstance(customControlType, mapping.GameControlName);
+                    object instance;
+                    if (mapping.HasCover)
+                    {
+                        instance = Activator.CreateInstance(customControlType, mapping.GameControlName, mapping.CoverName);
+                    }
+                    else
+                    {
+                        instance = Activator.CreateInstance(customControlType, mapping.GameControlName);
+                    }
 
                     //Get methods for related behavior
                     List<MethodInfo> methodsInfo = customControlType.GetMethods(BindingFlags.Public | BindingFlags.Instance).ToList();
@@ -388,12 +396,15 @@ namespace VTOLVRControlsMapper
                     }
                 }
             }
-            bool hasCover = false;
-            if(_vrLeversWithCover.ToList().Find(l => l.name == vrInteractableName))
+            KeyValuePair<string, string> leverWithCover = _vrLeversWithCover.ToList().Find(l => l.Key == vrInteractableName);
+            if (leverWithCover.Equals(default(KeyValuePair<string, string>)))
             {
-                hasCover = true;
+                return new ControlMapping(vrInteractableName, types);
             }
-            return new ControlMapping(vrInteractableName, types, hasCover);
+            else
+            {
+                return new ControlMapping(vrInteractableName, types, leverWithCover.Value);
+            }
         }
         public static T GetGameControl<T>(string controlName)
             where T : UnityEngine.Object
@@ -460,7 +471,21 @@ namespace VTOLVRControlsMapper
             _vrTwistKnobsInt = FindObjectsOfType<VRTwistKnobInt>();
             _vrSwitchCovers = FindObjectsOfType<VRSwitchCover>();
             _vrLevers = FindObjectsOfType<VRLever>();
-            _vrLeversWithCover = _vrLevers.Where(l => _vrSwitchCovers.Any(c => c.coveredSwitch.name == l.name)).ToArray();
+            _vrLeversWithCover = new Dictionary<string, string>();
+            foreach (VRLever lever in _vrLevers)
+            {
+                foreach (VRSwitchCover cover in _vrSwitchCovers)
+                {
+                    if (cover.coveredSwitch.name == lever.name)
+                    {
+                        //Fix for a weird behavior with covers and their repective levers
+                        //Cover customCover = new Cover(cover.name);
+                        LeverWithCover customLever = new LeverWithCover(lever.name, cover.name);
+                        customLever.Cover.Lever.SetState(0);
+                        _vrLeversWithCover.Add(lever.name, cover.name);
+                    }
+                }
+            }
         }
     }
 }
