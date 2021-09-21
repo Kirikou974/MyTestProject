@@ -7,7 +7,7 @@
     public abstract class ControlToggleBase<T> : ControlBase<T>, IControlToggle
         where T : UnityEngine.Object
     {
-        protected ControlToggleBase(T unityControl) : base(unityControl) { }
+        protected ControlToggleBase(string unityControlName) : base(unityControlName) { }
         public abstract void Toggle();
     }
 }

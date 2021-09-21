@@ -1,4 +1,6 @@
-﻿namespace VTOLVRControlsMapper.Controls
+﻿using VTOLVRControlsMapper.Core;
+
+namespace VTOLVRControlsMapper.Controls
 {
     public class LeverWithCover : Lever
     {
@@ -7,6 +9,7 @@
         {
             _cover = new Cover(coverName);
         }
+        [Control(SupportedBehavior = ControllerActionBehavior.Toggle)]
         public override void Toggle()
         {
             if (!_cover.UnityControl.covered)

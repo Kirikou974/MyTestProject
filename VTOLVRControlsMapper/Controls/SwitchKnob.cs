@@ -5,7 +5,7 @@ namespace VTOLVRControlsMapper.Controls
     public class SwitchKnob : ControlKnobBase<VRTwistKnobInt>, IControlToggle
     {
         public bool IsOff => UnityControl.currentState == 0;
-        public SwitchKnob(string controlName) : base(ControlsHelper.GetGameControl<VRTwistKnobInt>(controlName)) { }
+        public SwitchKnob(string twistKnobIntName) : base(twistKnobIntName) { }
         [Control(SupportedBehavior = ControllerActionBehavior.Increase)]
         public override void Increase()
         {

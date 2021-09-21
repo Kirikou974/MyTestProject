@@ -74,9 +74,7 @@
     <Compile Include="Controls\Interactable.cs" />
     <Compile Include="Controls\Cover.cs" />
     <Compile Include="Core\ControlKnobBase.cs" />
-    <Compile Include="Controls\VRControlNames.cs" />
     <Compile Include="Controls\SwitchKnob.cs" />
-    <Compile Include="ControlsHelper.cs" />
     <Compile Include="Controls\Lever.cs" />
     <Compile Include="Controls\LeverWithCover.cs" />
   </ItemGroup>

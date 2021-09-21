@@ -9,7 +9,7 @@
     public abstract class ControlKnobBase<T> : ControlBase<T>, IControlKnob
         where T : UnityEngine.Object
     {
-        protected ControlKnobBase(T unityControl) : base(unityControl) { }
+        protected ControlKnobBase(string unityControlName) : base(unityControlName) { }
         public abstract void Increase();
         public abstract void Decrease();
         public abstract void SetState(int state);

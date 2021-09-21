@@ -11,7 +11,6 @@ namespace VTOLVRControlsMapper.Core
     }
     public class GameAction
     {
-
         public ControllerActionBehavior ControllerActionBehavior { get; set; }
         public string ControllerActionName { get; set; }
         public Guid ControllerInstanceGuid { get; set; }

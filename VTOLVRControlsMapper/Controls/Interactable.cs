@@ -4,7 +4,7 @@ namespace VTOLVRControlsMapper.Controls
 {
     public class Interactable : ControlBase<VRInteractable>
     {
-        public Interactable(string interactableName) : base(ControlsHelper.GetGameControl<VRInteractable>(interactableName)) { }
+        public Interactable(string interactableName) : base(interactableName) { }
         [Control(SupportedBehavior = ControllerActionBehavior.Toggle)]
         public void Invoke()
         {
