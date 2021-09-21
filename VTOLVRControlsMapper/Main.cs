@@ -88,13 +88,17 @@ namespace VTOLVRControlsMapper
             Log("Game focus is : " + hasFocus);
             foreach (Device device in _devices)
             {
-                if (hasFocus)
+                //Unacquire keyboard when not focusing game
+                if(device is Keyboard)
                 {
-                    LoadController(device);
-                }
-                else
-                {
-                    UnloadController(device);
+                    if (hasFocus)
+                    {
+                        LoadController(device);
+                    }
+                    else
+                    {
+                        UnloadController(device);
+                    }
                 }
             }
             _devicesAcquired = hasFocus;
@@ -107,7 +111,6 @@ namespace VTOLVRControlsMapper
             VTOLVehicles currentVehicle = VTOLAPI.GetPlayersVehicleEnum();
             if (Input.GetKeyDown(KeyCode.F8))
             {
-
                 Log("Recreating mappings file");
                 string filePath = GetMappingFilePath(name, currentVehicle.ToString());
                 CreateMappingFile(filePath);
@@ -117,7 +120,6 @@ namespace VTOLVRControlsMapper
                 Log("Reloading mappings");
                 _ = StartCoroutine(LoadControlsMapping());
             }
-
             if (MappingsLoaded)
             {
                 StartCoroutine(UpdateControllers());
@@ -149,7 +151,6 @@ namespace VTOLVRControlsMapper
                     {
                         yield return UpdateKeyboard(controlMapping, controlMapping.KeyboardActions);
                     }
-
                     if (controlMapping != null && controlMapping.JoystickActions != null)
                     {
                         UpdateJoystick(controlMapping, controlMapping.JoystickActions);
@@ -165,9 +166,10 @@ namespace VTOLVRControlsMapper
                 if (!(action is null))
                 {
                     Keyboard device = _devices.Find(d => d.Information.InstanceGuid == action.ControllerInstanceGuid) as Keyboard;
-                    foreach (KeyboardUpdate keyboardUpdate in _keyboardUpdates)
+                    KeyboardUpdate update = _keyboardUpdates.ToList().Find(k => k.Key.ToString() == action.ControllerActionName);
+                    if (update.Key != Key.Unknown)
                     {
-                        yield return ExecuteKeyboard(keyboardUpdate, mapping, action);
+                        yield return ExecuteKeyboard(update, mapping, action);
                     }
                 }
             }
@@ -192,19 +194,20 @@ namespace VTOLVRControlsMapper
         }
         public IEnumerator ExecuteKeyboard(KeyboardUpdate update, ControlMapping mapping, GameAction action)
         {
-            //Create custom control instance
-            Type customControlType = GetCustomControlType(mapping.Types);
-            object instance = Activator.CreateInstance(customControlType, mapping.GameControlName);
-
-            //Get methods for related behavior
-            List<MethodInfo> methodsInfo = customControlType.GetMethods(BindingFlags.Public | BindingFlags.Instance).ToList();
-            MethodInfo methodInfo = methodsInfo.Find(m =>
-                m.GetCustomAttribute<ControlAttribute>().SupportedBehavior == action.ControllerActionBehavior
-            );
             if (update.Key.ToString() == action.ControllerActionName)
             {
                 if (update.IsPressed)
                 {
+                    //Create custom control instance
+                    Type customControlType = GetCustomControlType(mapping.Types);
+                    object instance = Activator.CreateInstance(customControlType, mapping.GameControlName);
+
+                    //Get methods for related behavior
+                    List<MethodInfo> methodsInfo = customControlType.GetMethods(BindingFlags.Public | BindingFlags.Instance).ToList();
+                    MethodInfo methodInfo = methodsInfo.Find(m =>
+                        m.GetCustomAttribute<ControlAttribute>() != null &&
+                        m.GetCustomAttribute<ControlAttribute>().SupportedBehavior == action.ControllerActionBehavior
+                    );
                     methodInfo.Invoke(instance, null);
                     if (action.ControllerActionBehavior == ControllerActionBehavior.HoldOn)
                     {
@@ -216,6 +219,7 @@ namespace VTOLVRControlsMapper
                     }
                 }
             }
+            yield return null;
         }
         public IEnumerator LoadDeviceInstances()
         {
@@ -271,10 +275,6 @@ namespace VTOLVRControlsMapper
         }
         public Type GetCustomControlType(List<Type> types)
         {
-            if (types.Contains(typeof(VRButton)) || types.Contains(typeof(VRInteractable)))
-            {
-                return typeof(Interactable);
-            }
             if (types.Contains(typeof(VRSwitchCover)))
             {
                 return typeof(Cover);
@@ -286,6 +286,10 @@ namespace VTOLVRControlsMapper
             if (types.Contains(typeof(VRTwistKnob)) || types.Contains(typeof(VRTwistKnobInt)))
             {
                 return typeof(SwitchKnob);
+            }
+            if (types.Contains(typeof(VRButton)) || types.Contains(typeof(VRInteractable)))
+            {
+                return typeof(Interactable);
             }
             throw new Exception("Cannot determine control type");
         }

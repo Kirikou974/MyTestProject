@@ -55,7 +55,13 @@
   },
   {
     "GameControlName": "coverSwitchInteractable_fuelDump",
-    "KeyboardActions": null,
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 2,
+        "ControllerActionName": "C",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
     "JoystickActions": null,
     "Types": [
       "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -65,7 +71,13 @@
   },
   {
     "GameControlName": "fuelDumpSwitchInteractable",
-    "KeyboardActions": null,
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 2,
+        "ControllerActionName": "F",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
     "JoystickActions": null,
     "Types": [
       "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -74,7 +86,13 @@
   },
   {
     "GameControlName": "radioPlayPauseInteractable",
-    "KeyboardActions": null,
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 2,
+        "ControllerActionName": "P",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
     "JoystickActions": null,
     "Types": [
       "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -209,7 +227,13 @@
   },
   {
     "GameControlName": "BrakeLockInteractable",
-    "KeyboardActions": null,
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 2,
+        "ControllerActionName": "B",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
     "JoystickActions": null,
     "Types": [
       "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -486,13 +510,7 @@
   },
   {
     "GameControlName": "MFD2-Button-T1",
-    "KeyboardActions": [
-      {
-        "ControllerActionBehavior": 2,
-        "ControllerActionName": "U",
-        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
-      }
-    ],
+    "KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
       "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -726,7 +744,7 @@
   },
   {
     "GameControlName": "RWRButton",
-    "KeyboardActions": null,
+	"KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
       "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -838,7 +856,7 @@
   },
   {
     "GameControlName": "FlapsInteractable",
-    "KeyboardActions": null,
+	"KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
       "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -847,7 +865,7 @@
   },
   {
     "GameControlName": "GearInteractable",
-    "KeyboardActions": null,
+	"KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
       "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -856,7 +874,7 @@
   },
   {
     "GameControlName": "CanopyInteractable",
-    "KeyboardActions": null,
+	"KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
       "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -957,7 +975,7 @@
   },
   {
     "GameControlName": "hmcsPowerInteractable",
-    "KeyboardActions": null,
+	"KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
       "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -966,7 +984,7 @@
   },
   {
     "GameControlName": "hudPowerInteractable",
-    "KeyboardActions": null,
+	"KeyboardActions": null,
     "JoystickActions": null,
     "Types": [
       "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -1167,7 +1185,7 @@
     "KeyboardActions": [
       {
         "ControllerActionBehavior": 2,
-        "ControllerActionName": "R",
+        "ControllerActionName": "V",
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],

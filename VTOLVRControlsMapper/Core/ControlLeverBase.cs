@@ -10,20 +10,17 @@
         [Control(SupportedBehavior = ControllerActionBehavior.Increase)]
         public void Increase()
         {
-            int newState = UnityControlCurrentState + 1;
-            SetState(newState);
+            SetState(UnityControlCurrentState + 1);
         }
         [Control(SupportedBehavior = ControllerActionBehavior.Decrease)]
         public void Decrease()
         {
-            int newState = UnityControlCurrentState - 1;
-            SetState(newState);
+            SetState(UnityControlCurrentState - 1);
         }
         [Control(SupportedBehavior = ControllerActionBehavior.On)]
         public void On()
         {
-            int newState = UnityControlStates - 1;
-            SetState(newState);
+            SetState(UnityControlStates - 1);
         }
         [Control(SupportedBehavior = ControllerActionBehavior.Off)]
         public void Off()
