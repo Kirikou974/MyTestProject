@@ -67,7 +67,6 @@
   <ItemGroup>
     <Compile Include="Controls\ContinuousKnob.cs" />
     <Compile Include="Core\ControlAttribute.cs" />
-    <Compile Include="Core\ControlKnobBase.cs" />
     <Compile Include="Core\ControlLeverBase.cs" />
     <Compile Include="Core\ControlMapping.cs" />
     <Compile Include="Main.cs" />

@@ -3,7 +3,7 @@ using VTOLVRControlsMapper.Core;
 
 namespace VTOLVRControlsMapper.Controls
 {
-    public class BasicKnob : ControlKnobBase<VRTwistKnobInt>
+    public class BasicKnob : ControlLeverBase<VRTwistKnobInt>
     {
         public override int UnityControlCurrentState => UnityControl.currentState;
         public override int UnityControlStates => UnityControl.states;
