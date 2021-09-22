@@ -80,9 +80,6 @@
     <Compile Include="Controls\Lever.cs" />
     <Compile Include="Controls\LeverWithCover.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="buttons.txt" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>IF EXIST "F:\Steam\steamapps\common\VTOL VR\VTOLVR-ModLoader.exe" (
