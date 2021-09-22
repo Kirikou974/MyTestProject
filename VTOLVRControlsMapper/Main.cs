@@ -49,6 +49,7 @@ namespace VTOLVRControlsMapper
         public static VRSwitchCover[] _vrSwitchCovers;
         public static VRLever[] _vrLevers;
         public static Dictionary<string, string> _vrLeversWithCover;
+        public static Dictionary<string, object> _customControlCache;
         public static VRJoystick _vrJoystick;
         public static VRThrottle _vrThrottle;
         public override void ModLoaded()
@@ -94,11 +95,11 @@ namespace VTOLVRControlsMapper
                 {
                     if (hasFocus)
                     {
-                        LoadController(device);
+                        AcquireController(device);
                     }
                     else
                     {
-                        UnloadController(device);
+                        UnacquireController(device);
                     }
                 }
             }
@@ -199,20 +200,11 @@ namespace VTOLVRControlsMapper
             {
                 if (update.IsPressed)
                 {
-                    //Create custom control instance
-                    Type customControlType = GetCustomControlType(mapping);
-                    object instance;
-                    if (mapping.HasCover)
-                    {
-                        instance = Activator.CreateInstance(customControlType, mapping.GameControlName, mapping.CoverName);
-                    }
-                    else
-                    {
-                        instance = Activator.CreateInstance(customControlType, mapping.GameControlName);
-                    }
+                    //Get custom control instance
+                    object instance = GetMappingInstance(mapping);
 
                     //Get methods for related behavior
-                    List<MethodInfo> methodsInfo = customControlType.GetMethods(BindingFlags.Public | BindingFlags.Instance).ToList();
+                    List<MethodInfo> methodsInfo = instance.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance).ToList();
                     MethodInfo methodInfo = methodsInfo.Find(m =>
                         m.GetCustomAttribute<ControlAttribute>() != null &&
                         m.GetCustomAttribute<ControlAttribute>().SupportedBehavior == action.ControllerActionBehavior
@@ -247,25 +239,48 @@ namespace VTOLVRControlsMapper
             Log("Devices list loaded");
             yield return null;
         }
-        private void LoadJoystick(Guid joystickGuid)
+        private void LoadControllers<T>(ControlMapping mapping)
         {
-            DeviceInstance instance = _deviceInstances.Find(d => d.InstanceGuid == joystickGuid);
-            Joystick joystick = new Joystick(_directInput, joystickGuid);
-            LoadController(joystick);
-            _devices.Add(joystick);
+            List<GameAction> actions = new List<GameAction>();
+            bool isKeyboard = false;
+            if (typeof(T) == typeof(Joystick))
+            {
+                actions = mapping.JoystickActions;
+            }
+            else if (typeof(Keyboard) == typeof(Keyboard))
+            {
+                actions = mapping.KeyboardActions;
+                isKeyboard = true;
+            }
+            if (actions != null)
+            {
+                foreach (GameAction action in actions)
+                {
+                    Guid instanceGuid = action.ControllerInstanceGuid;
+                    if (_devices.Find(d => d.Information.InstanceGuid == instanceGuid) == null)
+                    {
+                        DeviceInstance instance = _deviceInstances.Find(d => d.InstanceGuid == instanceGuid);
+                        Device device = null;
+                        if (isKeyboard)
+                        {
+                            device = new Keyboard(_directInput);
+                        }
+                        else
+                        {
+                            device = new Joystick(_directInput, instanceGuid);
+                        }
+                        AcquireController(device);
+                        _devices.Add(device);
+                    }
+                }
+            }
         }
-        private void LoadKeyboard(Guid joystickGuid)
-        {
-            Keyboard keyboard = new Keyboard(_directInput);
-            LoadController(keyboard);
-            _devices.Add(keyboard);
-        }
-        private void LoadController(Device device)
+        private void AcquireController(Device device)
         {
             device.Properties.BufferSize = 128;
             device.Acquire();
         }
-        private void UnloadController(Device device)
+        private void UnacquireController(Device device)
         {
             device.Unacquire();
         }
@@ -297,9 +312,13 @@ namespace VTOLVRControlsMapper
                 }
                 return typeof(Lever);
             }
-            if (types.Contains(typeof(VRTwistKnob)) || types.Contains(typeof(VRTwistKnobInt)))
+            if (types.Contains(typeof(VRTwistKnob)))
             {
-                return typeof(SwitchKnob);
+                    return typeof(ContinuousKnob);
+            }
+            if (types.Contains(typeof(VRTwistKnobInt)))
+            {
+                    return typeof(BasicKnob);
             }
             if (types.Contains(typeof(VRButton)) || types.Contains(typeof(VRInteractable)))
             {
@@ -311,35 +330,38 @@ namespace VTOLVRControlsMapper
         {
             string mappingFilePath = GetMappingFilePath(modName, vehicleName, forceMappingFilePath);
             if (!File.Exists(mappingFilePath))
+            {
                 CreateMappingFile(mappingFilePath);
+            }
             Mappings = GetMappingsFromFile(mappingFilePath);
             _devices = new List<Device>();
+            _customControlCache = new Dictionary<string, object>();
             foreach (ControlMapping mapping in Mappings)
             {
-                if (mapping.JoystickActions != null)
-                {
-                    foreach (GameAction action in mapping.JoystickActions)
-                    {
-                        Guid instanceGuid = action.ControllerInstanceGuid;
-                        if (_devices.Find(d => d.Information.InstanceGuid == instanceGuid) == null)
-                        {
-                            LoadJoystick(instanceGuid);
-                        }
-                    }
-                }
-                if (mapping.KeyboardActions != null)
-                {
-                    foreach (GameAction action in mapping.KeyboardActions)
-                    {
-                        Guid instanceGuid = action.ControllerInstanceGuid;
-                        if (_devices.Find(d => d.Information.InstanceGuid == action.ControllerInstanceGuid) == null)
-                        {
-                            LoadKeyboard(instanceGuid);
-                        }
-                    }
-                }
+                CreateMappingInstances(mapping);
+                LoadControllers<Joystick>(mapping);
+                LoadControllers<Keyboard>(mapping);
             }
             _devicesAcquired = true;
+        }
+        public void CreateMappingInstances(ControlMapping mapping)
+        {
+            //Create custom control instance
+            Type customControlType = GetCustomControlType(mapping);
+            object instance = null;
+            if (mapping.HasCover)
+            {
+                instance = Activator.CreateInstance(customControlType, mapping.GameControlName, mapping.CoverName);
+            }
+            else
+            {
+                instance = Activator.CreateInstance(customControlType, mapping.GameControlName);
+            }
+            _customControlCache.Add(mapping.GameControlName, instance);
+        }
+        public object GetMappingInstance(ControlMapping mapping)
+        {
+            return _customControlCache[mapping.GameControlName];
         }
         public string GetMappingFilePath(string modName, string vehicleName, string forceMappingFilePath = "")
         {

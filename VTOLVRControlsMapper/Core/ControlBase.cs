@@ -24,11 +24,10 @@ namespace VTOLVRControlsMapper.Core
             UnityControl = Main.GetGameControl<T>(unityControlName);
             if (UnityControl is null)
             {
-                throw new NullReferenceException(string.Format("Unity control not found ({0})", typeof(T).Name));
+                throw new NullReferenceException(string.Format("Unity control {0} of type {1} not found", unityControlName, typeof(T).Name));
             }
             _controlName = UnityControl.name;
         }
-
         private readonly string _controlName;
         public string ControlName
         {

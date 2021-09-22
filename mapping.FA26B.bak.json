@@ -1195,7 +1195,13 @@
   },
   {
     "GameControlName": "speedAPButton",
-    "KeyboardActions": null,
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 2,
+        "ControllerActionName": "S",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
     "JoystickActions": null,
     "Types": [
       "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -1206,7 +1212,13 @@
   },
   {
     "GameControlName": "altitudeAPButton",
-    "KeyboardActions": null,
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 2,
+        "ControllerActionName": "A",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
     "JoystickActions": null,
     "Types": [
       "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -1217,7 +1229,13 @@
   },
   {
     "GameControlName": "headingAPButton",
-    "KeyboardActions": null,
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 2,
+        "ControllerActionName": "H",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
     "JoystickActions": null,
     "Types": [
       "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
