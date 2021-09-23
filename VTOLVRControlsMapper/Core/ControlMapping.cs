@@ -28,25 +28,15 @@ namespace VTOLVRControlsMapper.Core
         public List<GameAction> KeyboardActions { get; set; }
         public List<GameAction> JoystickActions { get; set; }
         public List<Type> Types { get; set; }
-        public bool HasCover
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(CoverName);
-            }
-        }
-        public string CoverName { get; set; }
         [JsonConstructor]
-        public ControlMapping(string gameControlName, List<Type> types, string coverName)
+        public ControlMapping(string gameControlName, List<Type> types)
         {
             GameControlName = gameControlName;
             Types = types;
-            CoverName = coverName;
             //KeyboardActions = new List<GameAction>();
             //DirectInput di = new DirectInput();
             //Keyboard kb = new Keyboard(di);
             //KeyboardActions.Add(new GameAction(kb.Information.InstanceGuid, "a", ControllerActionBehavior.Toggle));
         }
-        public ControlMapping(string gameControlName, List<Type> types) : this(gameControlName, types, string.Empty) { }
     }
 }

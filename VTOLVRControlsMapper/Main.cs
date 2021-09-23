@@ -16,16 +16,6 @@ namespace VTOLVRControlsMapper
     {
         //string settingsFileFolder = @"VTOLVR_ModLoader\Mods\";
         string settingsFileFolder = @"VTOLVR_ModLoader\dev\My Mods\";
-        public enum ControlType
-        {
-            VRInteractable,
-            VRLever,
-            VRSwitchCover,
-            VRTwistKnob,
-            VRTwistKnobInt,
-            VRButton,
-            None
-        }
         public bool MappingsLoaded
         {
             get
@@ -42,16 +32,12 @@ namespace VTOLVRControlsMapper
         JoystickUpdate[] _joystickUpdates;
         JoystickState _joystickState;
         List<ControlMapping> Mappings;
-        public static VRInteractable[] _vrInteractables;
-        public static VRTwistKnob[] _vrTwistKnobs;
-        public static VRTwistKnobInt[] _vrTwistKnobsInt;
-        public static VRButton[] _vrButtons;
-        public static VRSwitchCover[] _vrSwitchCovers;
-        public static VRLever[] _vrLevers;
+        public static List<UnityEngine.Object> _unityObjects;
+
         public static Dictionary<string, string> _vrLeversWithCover;
         public static Dictionary<string, object> _customControlCache;
-        public static VRJoystick _vrJoystick;
-        public static VRThrottle _vrThrottle;
+        //public static VRJoystick _vrJoystick;
+        //public static VRThrottle _vrThrottle;
         public override void ModLoaded()
         {
             Log("Mod Loaded");
@@ -209,6 +195,8 @@ namespace VTOLVRControlsMapper
                         m.GetCustomAttribute<ControlAttribute>() != null &&
                         m.GetCustomAttribute<ControlAttribute>().SupportedBehavior == action.ControllerActionBehavior
                     );
+                    Log(string.Format("Interaction with {0} of type {1} with behavior {2} using method {3}",
+                        mapping.GameControlName, GetMappingType(mapping.Types).Name, action.ControllerActionBehavior, methodInfo.Name));
                     methodInfo.Invoke(instance, null);
                     if (action.ControllerActionBehavior == ControllerActionBehavior.HoldOn)
                     {
@@ -290,41 +278,37 @@ namespace VTOLVRControlsMapper
             while (!ControlsLoaded(vehicle))
             {
                 LoadControls();
-                yield return new WaitForSeconds(2);
+                yield return new WaitForSeconds(1);
             }
             Log("Controls loaded for " + vehicle);
             LoadMappings(name, vehicle.ToString());
             Log("Mapping loaded for " + vehicle);
             yield return null;
         }
-        public Type GetCustomControlType(ControlMapping mapping)
+        public static Type GetMappingType(List<Type> types)
         {
-            List<Type> types = mapping.Types;
-            if (types.Contains(typeof(VRSwitchCover)))
+            IEnumerable<Type> controlTypes = FindAllDerivedTypes<IControl>();
+            Type returnType = null;
+            foreach (Type type in controlTypes)
             {
-                return typeof(Cover);
-            }
-            if (types.Contains(typeof(VRLever)))
-            {
-                if (mapping.HasCover)
+                Type genericType = GetBaseTypeGeneric(type.BaseType);
+                if (types.Contains(genericType))
                 {
-                    return typeof(LeverWithCover);
+                    returnType = type;
                 }
-                return typeof(Lever);
             }
-            if (types.Contains(typeof(VRTwistKnob)))
+            return returnType;
+        }
+        public static Type GetBaseTypeGeneric(Type baseType)
+        {
+            if (!baseType.IsGenericType)
             {
-                    return typeof(ContinuousKnob);
+                return GetBaseTypeGeneric(baseType.BaseType);
             }
-            if (types.Contains(typeof(VRTwistKnobInt)))
+            else
             {
-                    return typeof(BasicKnob);
+                return baseType.GenericTypeArguments[0];
             }
-            if (types.Contains(typeof(VRButton)) || types.Contains(typeof(VRInteractable)))
-            {
-                return typeof(Interactable);
-            }
-            throw new Exception("Cannot determine control type");
         }
         public void LoadMappings(string modName, string vehicleName, string forceMappingFilePath = "")
         {
@@ -347,16 +331,9 @@ namespace VTOLVRControlsMapper
         public void CreateMappingInstances(ControlMapping mapping)
         {
             //Create custom control instance
-            Type customControlType = GetCustomControlType(mapping);
-            object instance = null;
-            if (mapping.HasCover)
-            {
-                instance = Activator.CreateInstance(customControlType, mapping.GameControlName, mapping.CoverName);
-            }
-            else
-            {
-                instance = Activator.CreateInstance(customControlType, mapping.GameControlName);
-            }
+            Type customControlType = GetMappingType(mapping.Types);
+            object instance;
+            instance = Activator.CreateInstance(customControlType, mapping.GameControlName);
             _customControlCache.Add(mapping.GameControlName, instance);
         }
         public object GetMappingInstance(ControlMapping mapping)
@@ -394,10 +371,11 @@ namespace VTOLVRControlsMapper
                     using (JsonTextWriter writer = new JsonTextWriter(sw))
                     {
                         List<ControlMapping> mappings = new List<ControlMapping>();
-                        foreach (VRInteractable vrInteractable in _vrInteractables)
+                        VRInteractable[] vrInteractables = GetGameControls<VRInteractable>();
+                        foreach (VRInteractable vrInteractable in vrInteractables)
                         {
-                            ControlMapping controlMapping = BuildControlMapping(vrInteractable.name, _vrButtons, _vrLevers, _vrSwitchCovers, _vrTwistKnobs, _vrTwistKnobsInt);
-                            controlMapping.Types.Add(vrInteractable.GetType());
+                            IEnumerable<UnityEngine.Object> linkedObjects = _unityObjects.Where(o => o.name == vrInteractable.name);
+                            ControlMapping controlMapping = BuildControlMapping(vrInteractable.name, linkedObjects);
                             mappings.Add(controlMapping);
                         }
                         writer.WriteRaw(JsonConvert.SerializeObject(mappings.ToArray(), Formatting.Indented));
@@ -405,108 +383,57 @@ namespace VTOLVRControlsMapper
                 }
             }
         }
-        private ControlMapping BuildControlMapping(string vrInteractableName, params UnityEngine.Object[][] lists)
+        private ControlMapping BuildControlMapping(string vrInteractableName, IEnumerable<UnityEngine.Object> linkedObjects)
         {
             List<Type> types = new List<Type>();
-            foreach (UnityEngine.Object[] unityObjectsArray in lists)
+            foreach (UnityEngine.Object unityObject in linkedObjects)
             {
-                foreach (UnityEngine.Object unityObject in unityObjectsArray)
-                {
-                    if (unityObject.name == vrInteractableName)
-                    {
-                        types.Add(unityObject.GetType());
-                    }
-                }
+                types.Add(unityObject.GetType());
             }
-            KeyValuePair<string, string> leverWithCover = _vrLeversWithCover.ToList().Find(l => l.Key == vrInteractableName);
-            if (leverWithCover.Equals(default(KeyValuePair<string, string>)))
-            {
-                return new ControlMapping(vrInteractableName, types);
-            }
-            else
-            {
-                return new ControlMapping(vrInteractableName, types, leverWithCover.Value);
-            }
+            return new ControlMapping(vrInteractableName, types);
+        }
+        public static T[] GetGameControls<T>()
+            where T : UnityEngine.Object
+        {
+            return _unityObjects.Where(o => o is T) as T[];
         }
         public static T GetGameControl<T>(string controlName)
             where T : UnityEngine.Object
         {
-            T returnValue = null;
-            ControlType controlType = ControlType.None;
-            Enum.TryParse(typeof(T).Name, out controlType);
-            switch (controlType)
-            {
-                case ControlType.VRInteractable:
-                    returnValue = _vrInteractables.ToList().Find(x => x.name == controlName) as T;
-                    break;
-                case ControlType.VRLever:
-                    returnValue = _vrLevers.ToList().Find(x => x.name == controlName) as T;
-                    break;
-                case ControlType.VRSwitchCover:
-                    returnValue = _vrSwitchCovers.ToList().Find(x => x.name == controlName) as T;
-                    break;
-                case ControlType.VRTwistKnob:
-                    returnValue = _vrTwistKnobs.ToList().Find(x => x.name == controlName) as T;
-                    break;
-                case ControlType.VRTwistKnobInt:
-                    returnValue = _vrTwistKnobsInt.ToList().Find(x => x.name == controlName) as T;
-                    break;
-                case ControlType.VRButton:
-                    returnValue = _vrButtons.ToList().Find(x => x.name == controlName) as T;
-                    break;
-                case ControlType.None:
-                default:
-                    throw new NullReferenceException("GetControl failed to get a returnValue for " + controlName);
-            }
-            return returnValue;
+            return _unityObjects.Find(o => o is T && o.name == controlName) as T;
         }
-        public static bool ControlsLoaded(VTOLVehicles vehicle)
+        public bool ControlsLoaded(VTOLVehicles vehicle)
         {
-            int interactableCount;
             switch (vehicle)
             {
                 case VTOLVehicles.FA26B:
-                    interactableCount = 126;
-                    break;
+                    return GetGameControls<VRInteractable>().Count() > 126;
                 case VTOLVehicles.None:
                 case VTOLVehicles.AV42C:
                 case VTOLVehicles.F45A:
                 default:
                     throw new NotImplementedException("Controls not implemented for plane : " + vehicle);
             }
-            return
-                _vrJoystick != null && _vrThrottle != null &&
-                _vrInteractables != null && _vrInteractables.Count() >= interactableCount &&
-                _vrTwistKnobs != null && _vrTwistKnobs.Count() > 0 &&
-                _vrTwistKnobsInt != null && _vrTwistKnobsInt.Count() > 0 &&
-                _vrSwitchCovers != null && _vrSwitchCovers.Count() > 0 &&
-                _vrLevers != null && _vrLevers.Count() > 0 &&
-                _vrLeversWithCover != null && _vrLeversWithCover.Count() > 0;
         }
-        public static void LoadControls()
+        public void LoadControls()
         {
-            _vrInteractables = FindObjectsOfType<VRInteractable>();
-            _vrJoystick = FindObjectOfType<VRJoystick>();
-            _vrThrottle = FindObjectOfType<VRThrottle>();
-            _vrButtons = FindObjectsOfType<VRButton>();
-            _vrTwistKnobs = FindObjectsOfType<VRTwistKnob>();
-            _vrTwistKnobsInt = FindObjectsOfType<VRTwistKnobInt>();
-            _vrSwitchCovers = FindObjectsOfType<VRSwitchCover>();
-            _vrLevers = FindObjectsOfType<VRLever>();
-            _vrLeversWithCover = new Dictionary<string, string>();
-            foreach (VRLever lever in _vrLevers)
-            {
-                foreach (VRSwitchCover cover in _vrSwitchCovers)
-                {
-                    if (cover.coveredSwitch.name == lever.name)
-                    {
-                        LeverWithCover customLever = new LeverWithCover(lever.name, cover.name);
-                        //Fix for cover not being recognized as closed when initializing the vars
-                        customLever.Cover.UnityControl.OnSetState(1);
-                        _vrLeversWithCover.Add(lever.name, cover.name);
-                    }
-                }
-            }
+            _unityObjects = FindObjectsOfType<UnityEngine.Object>().ToList();
+        }
+        public static List<Type> FindAllDerivedTypes<T>()
+        {
+            return FindAllDerivedTypes<T>(Assembly.GetAssembly(typeof(T)));
+        }
+        public static List<Type> FindAllDerivedTypes<T>(Assembly assembly)
+        {
+            var derivedType = typeof(T);
+            return assembly
+                .GetTypes()
+                .Where(t =>
+                    t != derivedType &&
+                    t.IsClass &&
+                    !t.IsAbstract &&
+                    derivedType.IsAssignableFrom(t)
+                    ).ToList();
         }
     }
 }

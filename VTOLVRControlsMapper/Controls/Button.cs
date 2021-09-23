@@ -2,9 +2,10 @@
 
 namespace VTOLVRControlsMapper.Controls
 {
-    public class Interactable : ControlBase<VRInteractable>
+    public class Button : ControlBase<VRButton>
     {
-        public Interactable(string interactableName) : base(interactableName) { }
+        public VRInteractable InteractableControl => Main.GetGameControl<VRInteractable>(ControlName);
+        public Button(string interactableName) : base(interactableName) { }
         [Control(SupportedBehavior = ControllerActionBehavior.Toggle)]
         public void Invoke()
         {
@@ -14,12 +15,12 @@ namespace VTOLVRControlsMapper.Controls
         [Control(SupportedBehavior = ControllerActionBehavior.HoldOn)]
         public void StartInteract()
         {
-            UnityControl.OnInteract.Invoke();
+            InteractableControl.OnInteract.Invoke();
         }
         [Control(SupportedBehavior = ControllerActionBehavior.HoldOff)]
         public void StopInteract()
         {
-            UnityControl.OnStopInteract.Invoke();
+            InteractableControl.OnStopInteract.Invoke();
         }
     }
 }

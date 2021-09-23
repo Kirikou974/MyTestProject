@@ -32,7 +32,7 @@ namespace VTOLVRControlsMapper.Core
         {
             SetState(0);
         }
-        public void SetState(int state)
+        public virtual void SetState(int state)
         {
             if (state != UnityControlCurrentState && state >= 0 && state < UnityControlStates)
             {

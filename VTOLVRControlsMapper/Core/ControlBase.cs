@@ -14,26 +14,20 @@ namespace VTOLVRControlsMapper.Core
     public abstract class ControlBase<T> : IControl<T>
         where T : UnityEngine.Object
     {
+        public VRHandController LeftHand => Main.GetGameControls<VRHandController>()[1];
+        public VRHandController RightHand => Main.GetGameControls<VRHandController>()[0];
         public T UnityControl
         {
             get;
             internal set;
         }
+        public string ControlName => UnityControl.name;
         public ControlBase(string unityControlName)
         {
             UnityControl = Main.GetGameControl<T>(unityControlName);
             if (UnityControl is null)
             {
                 throw new NullReferenceException(string.Format("Unity control {0} of type {1} not found", unityControlName, typeof(T).Name));
-            }
-            _controlName = UnityControl.name;
-        }
-        private readonly string _controlName;
-        public string ControlName
-        {
-            get
-            {
-                return _controlName;
             }
         }
     }

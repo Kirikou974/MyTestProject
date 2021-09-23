@@ -70,7 +70,7 @@
     "KeyboardActions": [
       {
         "ControllerActionBehavior": 2,
-        "ControllerActionName": "C",
+        "ControllerActionName": "R",
         "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
       }
     ],
@@ -98,7 +98,7 @@
       "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     ],
     "HasCover": true,
-    "CoverName": "fuelDumpSwitchInteractable"
+    "CoverName": "coverSwitchInteractable_fuelDump"
   },
   {
     "GameControlName": "radioPlayPauseInteractable",
@@ -234,7 +234,13 @@
   },
   {
     "GameControlName": "ChaffInteractable",
-    "KeyboardActions": null,
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 2,
+        "ControllerActionName": "C",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
     "JoystickActions": null,
     "Types": [
       "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -344,7 +350,18 @@
   },
   {
     "GameControlName": "RWRModeInteractable",
-    "KeyboardActions": null,
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 3,
+        "ControllerActionName": "U",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      },
+      {
+        "ControllerActionBehavior": 4,
+        "ControllerActionName": "J",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
     "JoystickActions": null,
     "Types": [
       "VRTwistKnobInt, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -374,7 +391,7 @@
       "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     ],
     "HasCover": true,
-    "CoverName": "masterArmSwitchInteractable"
+    "CoverName": "coverSwitchInteractable_masterArm"
   },
   {
     "GameControlName": "MFD2PowerInteractable",
@@ -895,7 +912,13 @@
   },
   {
     "GameControlName": "lowerSeatInter",
-    "KeyboardActions": null,
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 0,
+        "ControllerActionName": "D",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+	],
     "JoystickActions": null,
     "Types": [
       "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -906,7 +929,13 @@
   },
   {
     "GameControlName": "raiseSeatInter",
-    "KeyboardActions": null,
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 0,
+        "ControllerActionName": "E",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+	],
     "JoystickActions": null,
     "Types": [
       "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -1006,7 +1035,18 @@
   },
   {
     "GameControlName": "FlapsInteractable",
-    "KeyboardActions": null,
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 3,
+        "ControllerActionName": "O",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      },
+      {
+        "ControllerActionBehavior": 4,
+        "ControllerActionName": "L",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
     "JoystickActions": null,
     "Types": [
       "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -1017,7 +1057,13 @@
   },
   {
     "GameControlName": "GearInteractable",
-    "KeyboardActions": null,
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 2,
+        "ControllerActionName": "G",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
     "JoystickActions": null,
     "Types": [
       "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -1039,7 +1085,13 @@
   },
   {
     "GameControlName": "mainBattSwitchInteractable",
-    "KeyboardActions": null,
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 2,
+        "ControllerActionName": "B",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
     "JoystickActions": null,
     "Types": [
       "VRLever, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -1080,7 +1132,7 @@
       "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     ],
     "HasCover": true,
-    "CoverName": "rightEngineSwitchInteractable"
+    "CoverName": "coverSwitchInteractable_rightEngine"
   },
   {
     "GameControlName": "coverSwitchInteractable_leftEngine",
@@ -1103,7 +1155,7 @@
       "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     ],
     "HasCover": true,
-    "CoverName": "leftEngineSwitchInteractable"
+    "CoverName": "coverSwitchInteractable_leftEngine"
   },
   {
     "GameControlName": "mfdSwapButton",
@@ -1268,7 +1320,13 @@
   },
   {
     "GameControlName": "MasterCautionInteractable",
-    "KeyboardActions": null,
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 2,
+        "ControllerActionName": "M",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
     "JoystickActions": null,
     "Types": [
       "VRButton, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -1342,7 +1400,18 @@
   },
   {
     "GameControlName": "rightSideEjectInteractable",
-    "KeyboardActions": null,
+    "KeyboardActions": [
+      {
+        "ControllerActionBehavior": 0,
+        "ControllerActionName": "X",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      },
+	  {
+        "ControllerActionBehavior": 2,
+        "ControllerActionName": "V",
+        "ControllerInstanceGuid": "6f1d2b61-d5a0-11cf-bfc7-444553540000"
+      }
+    ],
     "JoystickActions": null,
     "Types": [
       "VRInteractable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"

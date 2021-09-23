@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ContinuousKnob.cs" />
+    <Compile Include="Controls\Handle.cs" />
     <Compile Include="Core\ControlAttribute.cs" />
     <Compile Include="Core\ControlLeverBase.cs" />
     <Compile Include="Core\ControlMapping.cs" />
@@ -73,11 +74,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\ControlBase.cs" />
     <Compile Include="Core\ControlToggleBase.cs" />
-    <Compile Include="Controls\Interactable.cs" />
+    <Compile Include="Controls\Button.cs" />
     <Compile Include="Controls\Cover.cs" />
     <Compile Include="Controls\BasicKnob.cs" />
     <Compile Include="Controls\Lever.cs" />
-    <Compile Include="Controls\LeverWithCover.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

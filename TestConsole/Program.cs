@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using VTOLVRControlsMapper;
 using VTOLVRControlsMapper.Controls;
 using VTOLVRControlsMapper.Core;
 
@@ -14,30 +15,37 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            List<MethodInfo> methodsInfo = typeof(Interactable).GetMethods().ToList();
-            DirectInput di = new DirectInput();
-            Keyboard kb = new Keyboard(di);
+            Console.WriteLine("____");
+            Type type = VTOLVRControlsMapper.Main.GetMappingType(new List<Type>() { typeof(VRLever) });
+            Console.WriteLine(type.Name);
+            //IEnumerable<Type> types = VTOLVRControlsMapper.Main.FindAllDerivedTypes<IControl>();
+            //foreach (var item in types)
+            //{
 
-            kb.Properties.BufferSize = 128;
-            kb.Acquire();
-            bool keepGoing = true;
-            while(keepGoing)
+                //Console.WriteLine(item.Name);
+                //if (item.BaseType != null && item.BaseType.GenericTypeArguments != null)
+                //{
+                //    foreach (var subitem in item.BaseType.GenericTypeArguments)
+                //    {
+                //        Console.WriteLine(subitem.Name);
+                //    }
+                //}
+            //}
+            //foreach (var item in p)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            Console.ReadLine();
+        }
+        static void CheckBaseType(Type baseType)
+        {
+            if(!baseType.IsGenericType) { 
+               CheckBaseType(baseType.BaseType);
+            }
+            else
             {
-                var kbUpdates = kb.GetBufferedData();
-                foreach (var kbUpdate in kbUpdates)
-                {
-                    Console.WriteLine(kbUpdate.Key);
-                    KeyboardState kbState = kb.GetCurrentState();
-                    foreach (var item in kbState.PressedKeys)
-                    {
-                        Console.WriteLine(item);
-                    }
-                    if (kbUpdate.Key == Key.Escape)
-                    {
-                        keepGoing = false;
-                    }
-
-                }
+                Console.WriteLine(baseType.Name);
+                Console.WriteLine(baseType.GenericTypeArguments[0].Name);
             }
         }
     }
