@@ -10,7 +10,6 @@ namespace VTOLVRControlsMapper.Core
         public bool IsOff { get => UnityControlCurrentState == 0; }
         public abstract Action<int> UnityControlSetState { get; }
         public abstract Action UnityControlSetStateAfterSetState { get; }
-
         protected ControlLeverBase(string unityControlName) : base(unityControlName) { }
         [Control(SupportedBehavior = ControllerActionBehavior.Increase)]
         public void Increase()

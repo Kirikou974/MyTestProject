@@ -33,8 +33,6 @@ namespace VTOLVRControlsMapper
         JoystickState _joystickState;
         List<ControlMapping> Mappings;
         public static List<UnityEngine.Object> _unityObjects;
-
-        public static Dictionary<string, string> _vrLeversWithCover;
         public static Dictionary<string, object> _customControlCache;
         //public static VRJoystick _vrJoystick;
         //public static VRThrottle _vrThrottle;
