@@ -2,7 +2,7 @@
   "name": "VTOLVRControlsMapper",
   "description": "VTOLVRControlsMapper",
   "dll_file": "VTOLVRControlsMapper.dll",
-  "last_edit": 637673397864819431,
+  "last_edit": 637680405517215397,
   "pub_id": "",
   "json_version": "",
   "version": "1.0.0",
@@ -12,7 +12,9 @@
   "unlisted": true,
   "preview_image": "",
   "web_preview_image": "",
-  "dependencies": [],
+  "dependencies": [
+    "System.Text.Json.dll"
+  ],
   "mod_dependencies": null,
-  "ContentType": 0
+  "ContentType": 3
 }

@@ -22,10 +22,9 @@ namespace VTOLVRControlsMapper.Core
         public string ControlName => UnityControl.name;
         public ControlBase(string unityControlName)
         {
-            UnityControl = Main.GetGameControl<T>(unityControlName);
-            LeftHand = Main.GetGameControls<VRHandController>()[1];
-            RightHand = Main.GetGameControls<VRHandController>()[0];
-
+            UnityControl = ControlsHelper.GetGameControl<T>(unityControlName);
+            LeftHand = ControlsHelper.GetGameControls<VRHandController>()[1];
+            RightHand = ControlsHelper.GetGameControls<VRHandController>()[0];
             if (UnityControl is null)
             {
                 throw new NullReferenceException(string.Format("Unity control {0} of type {1} not found", unityControlName, typeof(T).Name));
