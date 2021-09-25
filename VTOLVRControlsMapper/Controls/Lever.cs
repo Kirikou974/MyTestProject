@@ -18,8 +18,8 @@ namespace VTOLVRControlsMapper.Controls
             {
                 if(_cover is null)
                 {
-                    List<VRSwitchCover> covers = ControlsHelper.GetGameControls<VRSwitchCover>().ToList();
-                    VRSwitchCover cover = covers.Find(c => c.name == ControlName);
+                    IEnumerable<VRSwitchCover> covers = ControlsHelper.GetGameControls<VRSwitchCover>();
+                    VRSwitchCover cover = covers.First(c => c.name == ControlName);
                     _cover = new Cover(cover.name);
                 }
                 return _cover;

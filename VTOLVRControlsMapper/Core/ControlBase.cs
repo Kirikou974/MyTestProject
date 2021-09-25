@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace VTOLVRControlsMapper.Core
 {
@@ -23,12 +25,17 @@ namespace VTOLVRControlsMapper.Core
         public ControlBase(string unityControlName)
         {
             UnityControl = ControlsHelper.GetGameControl<T>(unityControlName);
-            LeftHand = ControlsHelper.GetGameControls<VRHandController>()[1];
-            RightHand = ControlsHelper.GetGameControls<VRHandController>()[0];
             if (UnityControl is null)
             {
                 throw new NullReferenceException(string.Format("Unity control {0} of type {1} not found", unityControlName, typeof(T).Name));
             }
+            //IEnumerable<VRHandController> hands = ControlsHelper.GetGameControls<VRHandController>();
+            //if (hands is null || hands.Count() > 0)
+            //{
+            //    throw new NullReferenceException("Hand controllers not found");
+            //}
+            //LeftHand = hands.ElementAt(1);
+            //RightHand = hands.ElementAt(0);
         }
     }
 }
