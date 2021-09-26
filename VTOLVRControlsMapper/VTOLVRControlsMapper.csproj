@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="ControlsHelper.cs" />
     <Compile Include="Controls\ContinuousKnob.cs" />
+    <Compile Include="Controls\Hands.cs" />
     <Compile Include="Controls\Interactable.cs" />
     <Compile Include="Controls\Handle.cs" />
     <Compile Include="Core\ControlButtonBase.cs" />

@@ -4,18 +4,11 @@ using System.Linq;
 
 namespace VTOLVRControlsMapper.Core
 {
-    public interface IControl
-    {
-        string ControlName { get; }
-        VRHandController LeftHand { get; set; }
-        VRHandController RightHand { get; set; }
-    }
+    public interface IControl { }
     public interface IControl<T> : IControl where T : UnityEngine.Object { }
     public abstract class ControlBase<T> : IControl<T>
         where T : UnityEngine.Object
     {
-        public VRHandController LeftHand { get; set; }
-        public VRHandController RightHand { get; set; }
         public T UnityControl { get; protected set; }
         public string ControlName => UnityControl.name;
         public ControlBase(string unityControlName)
