@@ -7,29 +7,24 @@ namespace VTOLVRControlsMapper.Controls
 {
     public class Lever : ControlLeverBase<VRLever>
     {
-        public Lever(string leverName) : base(leverName) { }
+        public Lever(string leverName) : base(leverName)
+        {
+            IEnumerable<VRSwitchCover> covers = ControlsHelper.GetGameControls<VRSwitchCover>();
+            Cover = covers.SingleOrDefault(c => c.name == ControlName);
+        }
         public override int UnityControlCurrentState { get => UnityControl.currentState; }
         public override int UnityControlStates { get => UnityControl.states; }
         public bool HasCover { get => Cover != null; }
-        private Cover _cover;
-        public Cover Cover
+        public VRSwitchCover Cover
         {
-            get
-            {
-                if(_cover is null)
-                {
-                    IEnumerable<VRSwitchCover> covers = ControlsHelper.GetGameControls<VRSwitchCover>();
-                    VRSwitchCover cover = covers.First(c => c.name == ControlName);
-                    _cover = new Cover(cover.name);
-                }
-                return _cover;
-            }
+            get;
+            protected set;
         }
         public override Action<int> UnityControlSetState { get => UnityControl.SetState; }
         public override Action UnityControlSetStateAfterSetState { get => UnityControl.ReturnSpring; }
         public override void SetState(int state)
         {
-            if (!HasCover || (HasCover && !Cover.UnityControl.covered))
+            if (!HasCover || (HasCover && !Cover.covered))
             {
                 base.SetState(state);
             }

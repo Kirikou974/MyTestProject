@@ -10,11 +10,7 @@ namespace VTOLVRControlsMapper.Core
         VRHandController LeftHand { get; set; }
         VRHandController RightHand { get; set; }
     }
-    public interface IControl<T> : IControl
-        where T : UnityEngine.Object
-    {
-        T UnityControl { get; }
-    }
+    public interface IControl<T> : IControl where T : UnityEngine.Object { }
     public abstract class ControlBase<T> : IControl<T>
         where T : UnityEngine.Object
     {

@@ -51,18 +51,16 @@ namespace VTOLVRControlsMapper
             {
                 Type unityObjectType = controlType.BaseType.GenericTypeArguments[0];
                 MethodInfo[] vtolModMethods = typeof(UnityEngine.Object).GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy);
-                MethodInfo findObjectsOfTypeMethod = vtolModMethods.First(m => m.IsGenericMethod && m.Name == nameof(UnityEngine.Object.FindObjectsOfType));
+                MethodInfo findObjectsOfTypeMethod = vtolModMethods.Single(m => m.IsGenericMethod && m.Name == nameof(UnityEngine.Object.FindObjectsOfType));
                 MethodInfo findObjectsOfTypeMethodGeneric = findObjectsOfTypeMethod.MakeGenericMethod(new Type[] { unityObjectType });
                 UnityEngine.Object[] objects = findObjectsOfTypeMethodGeneric.Invoke(typeof(UnityEngine.Object), null) as UnityEngine.Object[];
                 _unityObjects.AddRange(objects);
             }
-            VRInteractable[] interactables = UnityEngine.Object.FindObjectsOfType<VRInteractable>();
-            _unityObjects.AddRange(interactables);
         }
         public static T GetGameControl<T>(string controlName) where T : UnityEngine.Object
         {
             IEnumerable<T> results = GetGameControls<T>();
-            return results.First(o => o.name == controlName);
+            return results.Single(o => o.name == controlName);
         }
         public static IEnumerable<T> GetGameControls<T>() where T : UnityEngine.Object
         {
@@ -150,8 +148,7 @@ namespace VTOLVRControlsMapper
         {
             //Create custom control instance
             Type customControlType = GetMappingType(mapping.Types);
-            object instance;
-            instance = Activator.CreateInstance(customControlType, mapping.GameControlName);
+            object instance = Activator.CreateInstance(customControlType, mapping.GameControlName);
             _customControlCache.Add(mapping.GameControlName, instance);
         }
         private static Type GetMappingType(List<Type> types)
@@ -212,7 +209,7 @@ namespace VTOLVRControlsMapper
                 if (!(action is null))
                 {
                     Keyboard device = _devices.Find(d => d.Information.InstanceGuid == action.ControllerInstanceGuid) as Keyboard;
-                    KeyboardUpdate update = _keyboardUpdates.First(k => k.Key.ToString() == action.ControllerActionName);
+                    KeyboardUpdate update = _keyboardUpdates.Single(k => k.Key.ToString() == action.ControllerActionName);
                     if (update.Key != Key.Unknown)
                     {
                         yield return ExecuteKeyboard(update, mapping, action);
@@ -326,7 +323,7 @@ namespace VTOLVRControlsMapper
             device.Acquire();
         }
         #endregion
-        private static Type GetBaseTypeGeneric(Type baseType)
+        public static Type GetBaseTypeGeneric(Type baseType)
         {
             if (!baseType.IsGenericType)
             {
