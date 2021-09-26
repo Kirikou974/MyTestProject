@@ -6,8 +6,7 @@ namespace VTOLVRControlsMapper.Core
 {
     public interface IControl { }
     public interface IControl<T> : IControl where T : UnityEngine.Object { }
-    public abstract class ControlBase<T> : IControl<T>
-        where T : UnityEngine.Object
+    public abstract class ControlBase<T> : IControl<T> where T : UnityEngine.Object
     {
         public T UnityControl { get; protected set; }
         public string ControlName => UnityControl.name;

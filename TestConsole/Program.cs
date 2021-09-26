@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VTOLVRControlsMapper;
 using VTOLVRControlsMapper.Core;
+using Rewired;
 
 namespace TestConsole
 {
@@ -14,26 +15,6 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            IEnumerable<Type> controlTypes = ControlsHelper.GetDerivedTypes<IControl>();
-            Type type = controlTypes.SingleOrDefault(t => t.Name == "toto");
-            Console.WriteLine(type.Name);
-            //Type vtolMod = typeof(VTOLMOD);
-            //MethodInfo[] methodInfos = vtolMod.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy);
-            //MethodInfo findObjectsOfType = methodInfos.First(m => m.IsGenericMethod && m.Name == nameof(VTOLMOD.FindObjectsOfType));
-            //Console.WriteLine(findObjectsOfType.Name);
-            //MethodInfo info = vtolMod.Getge(nameof(VTOLMOD.FindObjectsOfType), BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy, null, new Type[] { typeof(UnityEngine.Object) }, null);
-            //Console.WriteLine(info.Name);
-            //foreach (var item in controlTypes)
-            //{
-            //    Type baseType = ControlsHelper.GetBaseTypeGeneric(item);
-            //    Console.WriteLine("-----------------------");
-            //    Console.WriteLine(baseType.Name);
-            //    //Console.WriteLine(item.BaseType.GenericTypeArguments[0].Name);
-            //    //foreach (var subitem in item.BaseType.GenericTypeArguments)
-            //    //{
-            //    //    Console.WriteLine(subitem.Name);
-            //    //} 
-            //}
             Console.ReadLine();
         }
     }

@@ -7,8 +7,7 @@ namespace VTOLVRControlsMapper.Core
     public enum ControllerActionType
     {
         Button,
-        Axis,
-        Touchpad
+        Axis
     }
     public class GameAction
     {

@@ -82,7 +82,7 @@ namespace VTOLVRControlsMapper
             Log("Controls loaded for " + vehicle);
 
             Log("Mapping loading for " + vehicle);
-            ControlsHelper.LoadMappings(_settingsFileFolder, name, vehicle.ToString()); ;
+            ControlsHelper.LoadMappings(_settingsFileFolder, name, vehicle.ToString());
             Log("Mapping loaded for " + vehicle);
 
             Log("Loading keyboard");
