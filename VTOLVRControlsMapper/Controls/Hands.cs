@@ -5,8 +5,8 @@ namespace VTOLVRControlsMapper.Controls
 {
     public class Hands : IControl<VRHandController>
     {
-        VRHandController LeftHand { get; set; }
-        VRHandController RightHand { get; set; }
+        public VRHandController LeftHand { get; set; }
+        public VRHandController RightHand { get; set; }
         public Hands()
         {
             RightHand = ControlsHelper.GetGameControls<VRHandController>().ElementAt(0);
