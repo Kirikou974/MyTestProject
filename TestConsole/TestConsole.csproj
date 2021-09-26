@@ -69,5 +69,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VTOLVRControlsMapper\VTOLVRControlsMapper.csproj">
+      <Project>{7bb21f11-6675-4e25-ab78-e420a6b129c2}</Project>
+      <Name>VTOLVRControlsMapper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -76,7 +76,7 @@ namespace VTOLVRControlsMapper
             Log("Controls loading for " + vehicle);
             while (!ControlsHelper.UnityObjectsLoaded(vehicle))
             {
-                ControlsHelper.LoadUnityObjects(FindObjectsOfType<Object>());
+                ControlsHelper.LoadUnityObjects();
                 yield return new WaitForSeconds(2);
             }
             Log("Controls loaded for " + vehicle);

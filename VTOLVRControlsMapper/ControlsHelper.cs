@@ -43,13 +43,21 @@ namespace VTOLVRControlsMapper
                     throw new NotImplementedException("Controls not implemented for plane : " + vehicle);
             }
         }
-        public static void LoadUnityObjects(UnityEngine.Object[] objects)
+        public static void LoadUnityObjects()
         {
-            if (!(objects is null))
+            _unityObjects = new List<UnityEngine.Object>();
+            List<Type> controlTypes = GetDerivedTypes<IControl>();
+            foreach (Type controlType in controlTypes)
             {
-                _unityObjects = new List<UnityEngine.Object>();
-                _unityObjects = objects.ToList();
+                Type unityObjectType = controlType.BaseType.GenericTypeArguments[0];
+                MethodInfo[] vtolModMethods = typeof(UnityEngine.Object).GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy);
+                MethodInfo findObjectsOfTypeMethod = vtolModMethods.First(m => m.IsGenericMethod && m.Name == nameof(UnityEngine.Object.FindObjectsOfType));
+                MethodInfo findObjectsOfTypeMethodGeneric = findObjectsOfTypeMethod.MakeGenericMethod(new Type[] { unityObjectType });
+                UnityEngine.Object[] objects = findObjectsOfTypeMethodGeneric.Invoke(typeof(UnityEngine.Object), null) as UnityEngine.Object[];
+                _unityObjects.AddRange(objects);
             }
+            VRInteractable[] interactables = UnityEngine.Object.FindObjectsOfType<VRInteractable>();
+            _unityObjects.AddRange(interactables);
         }
         public static T GetGameControl<T>(string controlName) where T : UnityEngine.Object
         {
@@ -148,7 +156,7 @@ namespace VTOLVRControlsMapper
         }
         private static Type GetMappingType(List<Type> types)
         {
-            IEnumerable<Type> controlTypes = FindAllDerivedTypes<IControl>();
+            IEnumerable<Type> controlTypes = GetDerivedTypes<IControl>();
             Type returnType = null;
             foreach (Type type in controlTypes)
             {
@@ -329,11 +337,11 @@ namespace VTOLVRControlsMapper
                 return baseType.GenericTypeArguments[0];
             }
         }
-        private static List<Type> FindAllDerivedTypes<T>()
+        public static List<Type> GetDerivedTypes<T>()
         {
-            return FindAllDerivedTypes<T>(Assembly.GetAssembly(typeof(T)));
+            return GetDerivedTypes<T>(Assembly.GetAssembly(typeof(T)));
         }
-        private static List<Type> FindAllDerivedTypes<T>(Assembly assembly)
+        private static List<Type> GetDerivedTypes<T>(Assembly assembly)
         {
             var derivedType = typeof(T);
             return assembly
