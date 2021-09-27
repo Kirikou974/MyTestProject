@@ -15,11 +15,12 @@ namespace VTOLVRControlsMapper.Core
         public string ControllerActionName { get; set; }
         public bool LeftHand { get; set; }
         public Guid ControllerInstanceGuid { get; set; }
-        public GameAction(Guid controllerInstanceGuid, string controllerActionName, ControllerActionBehavior controllerActionBehavior)
+        public GameAction(Guid controllerInstanceGuid, string controllerActionName, ControllerActionBehavior controllerActionBehavior, bool isLeftHand)
         {
             ControllerInstanceGuid = controllerInstanceGuid;
             ControllerActionBehavior = controllerActionBehavior;
             ControllerActionName = controllerActionName;
+            LeftHand = isLeftHand;
         }
     }
     public class ControlMapping
@@ -34,9 +35,9 @@ namespace VTOLVRControlsMapper.Core
             GameControlName = gameControlName;
             Types = types;
             //KeyboardActions = new List<GameAction>();
-            //DirectInput di = new DirectInput();
-            //Keyboard kb = new Keyboard(di);
-            //KeyboardActions.Add(new GameAction(kb.Information.InstanceGuid, "a", ControllerActionBehavior.Toggle));
+            //SharpDX.DirectInput.DirectInput di = new SharpDX.DirectInput.DirectInput();
+            //SharpDX.DirectInput.Keyboard kb = new SharpDX.DirectInput.Keyboard(di);
+            //KeyboardActions.Add(new GameAction(kb.Information.InstanceGuid, "a", ControllerActionBehavior.Toggle, true));
         }
     }
 }

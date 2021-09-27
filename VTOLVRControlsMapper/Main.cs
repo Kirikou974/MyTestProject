@@ -1,7 +1,7 @@
 using SharpDX.DirectInput;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace VTOLVRControlsMapper
@@ -33,7 +33,7 @@ namespace VTOLVRControlsMapper
                 case VTOLScenes.Akutan:
                 case VTOLScenes.CustomMapBase:
                     Log("Scene Loaded");
-                    StartCoroutine(LoadControlsMapping());
+                    StartCoroutine(LoadModObjects());
                     break;
                 case VTOLScenes.LoadingScene:
                     break;
@@ -41,7 +41,7 @@ namespace VTOLVRControlsMapper
         }
         private void MissionReloaded()
         {
-            StartCoroutine(LoadControlsMapping());
+            StartCoroutine(LoadModObjects());
         }
         public void OnApplicationFocus(bool hasFocus)
         {
@@ -63,14 +63,14 @@ namespace VTOLVRControlsMapper
             if (Input.GetKeyDown(KeyCode.F5))
             {
                 Log("Reloading mappings");
-                StartCoroutine(LoadControlsMapping());
+                StartCoroutine(LoadModObjects());
             }
             if (ControlsHelper.MappingsLoaded && _updateControllers)
             {
                 StartCoroutine(ControlsHelper.UpdateControllers());
             }
         }
-        private IEnumerator LoadControlsMapping()
+        private IEnumerator LoadModObjects()
         {
             VTOLVehicles vehicle = VTOLAPI.GetPlayersVehicleEnum();
             Log("Controls loading for " + vehicle);
@@ -90,6 +90,14 @@ namespace VTOLVRControlsMapper
             Log("Loading joysticks");
             ControlsHelper.LoadControllers<Joystick>();
             Log("Controllers loaded");
+            
+            Log("Loading hands");
+            while (!ControlsHelper.HandsLoaded)
+            {
+                ControlsHelper.LoadHands();
+                yield return new WaitForSeconds(2);
+            }
+            Log("Hands loaded");
 
             yield return null;
         }

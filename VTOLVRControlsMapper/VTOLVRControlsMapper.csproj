@@ -34,8 +34,9 @@
     <Reference Include="0Harmony">
       <HintPath>C:\Users\Thierry\source\repos\VTOLVRPhysicalInput\VTOLVRPhysicalInput\bin\Debug\0Harmony.dll</HintPath>
     </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>..\Dependencies\Assembly-CSharp.dll</HintPath>
+    <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>F:\Steam\SteamApps\common\VTOL VR\VTOLVR_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="ModLoader">
       <HintPath>..\Dependencies\ModLoader.dll</HintPath>
@@ -67,7 +68,6 @@
   <ItemGroup>
     <Compile Include="ControlsHelper.cs" />
     <Compile Include="Controls\ContinuousKnob.cs" />
-    <Compile Include="Controls\Hands.cs" />
     <Compile Include="Controls\Interactable.cs" />
     <Compile Include="Controls\Handle.cs" />
     <Compile Include="Core\ControlButtonBase.cs" />

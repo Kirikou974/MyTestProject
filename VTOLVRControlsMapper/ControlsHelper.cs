@@ -24,13 +24,20 @@ namespace VTOLVRControlsMapper
         static Dictionary<string, object> _customControlCache;
         static List<ControlMapping> _mappings;
         static List<UnityEngine.Object> _unityObjects = new List<UnityEngine.Object>();
-        //public static VRJoystick _vrJoystick;
-        //public static VRThrottle _vrThrottle;
+        static VRJoystick _vrJoystick;
+        static VRThrottle _vrThrottle;
+        static List<VRHandController> _vrHands;
+
         public static List<Device> Devices { get => _devices; }
         public static bool MappingsLoaded { get => _mappings != null && _mappings.Count > 0; }
+        public static bool HandsLoaded { get => _vrHands != null && _vrHands.Count == 2; }
         #region Unity objects
         public static bool UnityObjectsLoaded(VTOLVehicles vehicle)
         {
+            if(_vrJoystick is null && _vrThrottle is null)
+            {
+                return false;
+            }
             IEnumerable<VRInteractable> controls = GetGameControls<VRInteractable>();
             switch (vehicle)
             {
@@ -46,6 +53,9 @@ namespace VTOLVRControlsMapper
         public static void LoadUnityObjects()
         {
             _unityObjects = new List<UnityEngine.Object>();
+            _vrJoystick = UnityEngine.Object.FindObjectOfType<VRJoystick>();
+            _vrThrottle = UnityEngine.Object.FindObjectOfType<VRThrottle>();
+
             List<Type> controlTypes = GetDerivedTypes<IControl>();
             foreach (Type controlType in controlTypes)
             {
@@ -66,6 +76,12 @@ namespace VTOLVRControlsMapper
         {
             return _unityObjects.OfType<T>();
         }
+
+        internal static void LoadHands()
+        {
+            _vrHands = VRHandController.controllers;
+        }
+
         private static IEnumerable<T> GetGameControls<T>(string controlName) where T : UnityEngine.Object
         {
             return GetGameControls<T>().Where(g => g.name == controlName);
