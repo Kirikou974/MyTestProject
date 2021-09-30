@@ -1,13 +1,47 @@
 ﻿using System;
+using System.Collections;
+using UnityEngine;
 
 namespace VTOLVRControlsMapper.Core
 {
     public interface IControl { }
-    public interface IControl<T> : IControl where T : UnityEngine.Object { }
-    public abstract class ControlBase<T> : IControl<T> where T : UnityEngine.Object
+    public interface IControl<T> : IControl where T : MonoBehaviour
     {
+        T UnityControl { get; }
+        string ControlName { get; }
+        VRHandController ClosestHand { get; }
+    }
+    public abstract class ControlBase<T> : IControl<T> where T : MonoBehaviour
+    {
+        protected float WaitTime { get => 0.25f; }
+        public VRHandController ClosestHand
+        {
+            get
+            {
+                if (VRHandController.controllers.Count != 2)
+                {
+                    throw new Exception("Hands not found. Pas de bras, pas de chocolat.");
+                }
+                VRHandController leftHand = VRHandController.controllers[1];
+                VRHandController rightHand = VRHandController.controllers[0];
+
+                Vector3 controlPosition = UnityControl.transform.position;
+                float distanceFromLeftHand = Vector3.Distance(controlPosition, leftHand.transform.position);
+                float distanceFromRightHand = Vector3.Distance(controlPosition, rightHand.transform.position);
+                if (distanceFromLeftHand < distanceFromRightHand)
+                {
+                    return leftHand;
+                }
+                else
+                {
+                    return rightHand;
+                }
+            }
+        }
         public T UnityControl { get; protected set; }
-        public string ControlName => UnityControl.name;
+        public string ControlName { get => UnityControl.name; }
+        public abstract void StartControlInteraction();
+        public abstract void StopControlInteraction();
         public ControlBase(string unityControlName)
         {
             UnityControl = ControlsHelper.GetGameControl<T>(unityControlName);
@@ -15,13 +49,14 @@ namespace VTOLVRControlsMapper.Core
             {
                 throw new NullReferenceException(string.Format("Unity control {0} of type {1} not found", unityControlName, typeof(T).Name));
             }
-            //IEnumerable<VRHandController> hands = ControlsHelper.GetGameControls<VRHandController>();
-            //if (hands is null || hands.Count() > 0)
-            //{
-            //    throw new NullReferenceException("Hand controllers not found");
-            //}
-            //LeftHand = hands.ElementAt(1);
-            //RightHand = hands.ElementAt(0);
+        }
+        public IEnumerator WaitForDefaultTime()
+        {
+            yield return WaitFor(WaitTime);
+        }
+        public IEnumerator WaitFor(float seconds)
+        {
+            yield return new WaitForSeconds(seconds);
         }
     }
 }

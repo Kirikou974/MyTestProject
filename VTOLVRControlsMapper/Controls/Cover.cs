@@ -1,4 +1,5 @@
-﻿using VTOLVRControlsMapper.Core;
+﻿using System.Collections;
+using VTOLVRControlsMapper.Core;
 
 namespace VTOLVRControlsMapper.Controls
 {
@@ -12,9 +13,17 @@ namespace VTOLVRControlsMapper.Controls
         public Cover(string coverName) : base(coverName) {
             Lever = new Lever(ControlName);
         }
-        public override void Toggle()
+        public override IEnumerator Toggle()
         {
-            Lever.Toggle();
+            yield return Lever.Toggle();
+        }
+        public override void StartControlInteraction()
+        {
+            throw new System.NotImplementedException();
+        }
+        public override void StopControlInteraction()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

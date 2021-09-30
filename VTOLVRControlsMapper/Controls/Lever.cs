@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using VTOLVRControlsMapper.Core;
+using UnityEngine;
 
 namespace VTOLVRControlsMapper.Controls
 {
@@ -21,13 +23,28 @@ namespace VTOLVRControlsMapper.Controls
             protected set;
         }
         public override Action<int> UnityControlSetState { get => UnityControl.SetState; }
-        public override Action UnityControlSetStateAfterSetState { get => UnityControl.ReturnSpring; }
-        public override void SetState(int state)
+        public override Action UnityControlSetPositionFromState { get => UnityControl.ReturnSpring; }
+        public override IEnumerator SetState(int state)
         {
             if (!HasCover || (HasCover && !Cover.covered))
             {
-                base.SetState(state);
+                yield return base.SetState(state);
             }
+            else
+            {
+                yield return null;
+            }
+        }
+        public override void StartControlInteraction()
+        {
+            ClosestHand.gloveAnimation.SetLeverTransform(UnityControl.transform);
+            ClosestHand.gloveAnimation.SetPoseInteractable(GloveAnimation.Poses.Pinch);
+            UnityControl.GrabbedRoutine();
+        }
+        public override void StopControlInteraction()
+        {
+            ClosestHand.gloveAnimation.ClearInteractPose();
+            UnityControl.Vrint_OnStopInteraction(ClosestHand);
         }
     }
 }

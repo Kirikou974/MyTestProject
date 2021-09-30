@@ -16,7 +16,7 @@ namespace VTOLVRControlsMapper
     {
         static DirectInput _directInput;
         static List<DeviceInstance> _deviceInstances;
-        static List<Device> _devices;
+        static List<Device> _devices = new List<Device>();
         static KeyboardUpdate[] _keyboardUpdates;
         static KeyboardState _keyboardState;
         static JoystickUpdate[] _joystickUpdates;
@@ -26,15 +26,19 @@ namespace VTOLVRControlsMapper
         static List<UnityEngine.Object> _unityObjects = new List<UnityEngine.Object>();
         static VRJoystick _vrJoystick;
         static VRThrottle _vrThrottle;
-        static List<VRHandController> _vrHands;
-
         public static List<Device> Devices { get => _devices; }
-        public static bool MappingsLoaded { get => _mappings != null && _mappings.Count > 0; }
-        public static bool HandsLoaded { get => _vrHands != null && _vrHands.Count == 2; }
+        public static bool MappingsLoaded
+        {
+            get
+            {
+                return _mappings != null && _mappings.Count > 0 &&
+                    _customControlCache != null && _customControlCache.Count > 0;
+            }
+        }
         #region Unity objects
         public static bool UnityObjectsLoaded(VTOLVehicles vehicle)
         {
-            if(_vrJoystick is null && _vrThrottle is null)
+            if (_vrJoystick is null && _vrThrottle is null)
             {
                 return false;
             }
@@ -56,9 +60,11 @@ namespace VTOLVRControlsMapper
             _vrJoystick = UnityEngine.Object.FindObjectOfType<VRJoystick>();
             _vrThrottle = UnityEngine.Object.FindObjectOfType<VRThrottle>();
 
+            //Get IControl derived class to deduce which unity control to go fetch
             List<Type> controlTypes = GetDerivedTypes<IControl>();
             foreach (Type controlType in controlTypes)
             {
+                //FindObjectsOfType<T> where T is the type deduced from the classes that implement IControl interface
                 Type unityObjectType = controlType.BaseType.GenericTypeArguments[0];
                 MethodInfo[] vtolModMethods = typeof(UnityEngine.Object).GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy);
                 MethodInfo findObjectsOfTypeMethod = vtolModMethods.Single(m => m.IsGenericMethod && m.Name == nameof(UnityEngine.Object.FindObjectsOfType));
@@ -76,12 +82,6 @@ namespace VTOLVRControlsMapper
         {
             return _unityObjects.OfType<T>();
         }
-
-        internal static void LoadHands()
-        {
-            _vrHands = VRHandController.controllers;
-        }
-
         private static IEnumerable<T> GetGameControls<T>(string controlName) where T : UnityEngine.Object
         {
             return GetGameControls<T>().Where(g => g.name == controlName);
@@ -147,13 +147,17 @@ namespace VTOLVRControlsMapper
         }
         public static void LoadMappings(string settingsFileFolder, string modName, string vehicleName, string forceMappingFilePath = "")
         {
+            //Create JSON file if it does not exist
             string mappingFilePath = GetMappingFilePath(settingsFileFolder, modName, vehicleName, forceMappingFilePath);
             if (!File.Exists(mappingFilePath))
             {
                 CreateMappingFile(mappingFilePath);
             }
+            //Generate mappings from JSON file parsing
             _mappings = GetMappingsFromFile(mappingFilePath);
-            _devices = new List<Device>();
+        }
+        public static void LoadMappingInstances()
+        {
             _customControlCache = new Dictionary<string, object>();
             foreach (ControlMapping mapping in _mappings)
             {
@@ -225,7 +229,7 @@ namespace VTOLVRControlsMapper
                 if (!(action is null))
                 {
                     Keyboard device = _devices.Find(d => d.Information.InstanceGuid == action.ControllerInstanceGuid) as Keyboard;
-                    KeyboardUpdate update = _keyboardUpdates.Single(k => k.Key.ToString() == action.ControllerActionName);
+                    KeyboardUpdate update = _keyboardUpdates.FirstOrDefault(k => k.Key.ToString() == action.ControllerActionName);
                     if (update.Key != Key.Unknown)
                     {
                         yield return ExecuteKeyboard(update, mapping, action);
@@ -266,7 +270,7 @@ namespace VTOLVRControlsMapper
                         m.GetCustomAttribute<ControlAttribute>() != null &&
                         m.GetCustomAttribute<ControlAttribute>().SupportedBehavior == action.ControllerActionBehavior
                     );
-                    methodInfo.Invoke(instance, null);
+                    yield return methodInfo.Invoke(instance, null);
                     if (action.ControllerActionBehavior == ControllerActionBehavior.HoldOn)
                     {
                         MethodInfo offMethodInfo = methodsInfo.Find(m =>

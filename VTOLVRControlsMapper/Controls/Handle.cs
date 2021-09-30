@@ -1,4 +1,5 @@
-﻿using VTOLVRControlsMapper.Core;
+﻿using System.Collections;
+using VTOLVRControlsMapper.Core;
 
 namespace VTOLVRControlsMapper.Controls
 {
@@ -6,9 +7,20 @@ namespace VTOLVRControlsMapper.Controls
     {
         public Handle(string ejectHandleName) : base(ejectHandleName) { }
         [Control(SupportedBehavior = ControllerActionBehavior.Toggle)]
-        public void Pull()
+        public IEnumerator Pull()
         {
-            UnityControl.OnHandlePull.Invoke();
+            ClosestHand.gloveAnimation.SetLockTransform(UnityControl.handleTransform);
+            ClosestHand.gloveAnimation.SetPoseInteractable(GloveAnimation.Poses.Eject);
+            //UnityControl.OnHandlePull.Invoke();
+            yield return null;
+        }
+        public override void StartControlInteraction()
+        {
+            throw new System.NotImplementedException();
+        }
+        public override void StopControlInteraction()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -6,5 +6,13 @@ namespace VTOLVRControlsMapper.Controls
     {
         //TODO moar tests
         public ContinuousKnob(string twistKnobName) : base(twistKnobName) { }
+        public override void StartControlInteraction()
+        {
+            throw new System.NotImplementedException();
+        }
+        public override void StopControlInteraction()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

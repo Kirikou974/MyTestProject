@@ -1,53 +1,57 @@
 ﻿using System;
+using System.Collections;
+using UnityEngine;
 
 namespace VTOLVRControlsMapper.Core
 {
-    public abstract class ControlLeverBase<T> : ControlToggleBase<T>
-        where T : UnityEngine.Object
+    public abstract class ControlLeverBase<T> : ControlToggleBase<T> where T : MonoBehaviour
     {
         public abstract int UnityControlCurrentState { get; }
         public abstract int UnityControlStates { get; }
         public bool IsOff { get => UnityControlCurrentState == 0; }
         public abstract Action<int> UnityControlSetState { get; }
-        public abstract Action UnityControlSetStateAfterSetState { get; }
+        public abstract Action UnityControlSetPositionFromState { get; }
         protected ControlLeverBase(string unityControlName) : base(unityControlName) { }
         [Control(SupportedBehavior = ControllerActionBehavior.Increase)]
-        public void Increase()
+        public IEnumerator Increase()
         {
-            SetState(UnityControlCurrentState + 1);
+            yield return SetState(UnityControlCurrentState + 1);
         }
         [Control(SupportedBehavior = ControllerActionBehavior.Decrease)]
-        public void Decrease()
+        public IEnumerator Decrease()
         {
-            SetState(UnityControlCurrentState - 1);
+            yield return SetState(UnityControlCurrentState - 1);
         }
         [Control(SupportedBehavior = ControllerActionBehavior.On)]
-        public void On()
+        public IEnumerator On()
         {
-            SetState(UnityControlStates - 1);
+            yield return SetState(UnityControlStates - 1);
         }
         [Control(SupportedBehavior = ControllerActionBehavior.Off)]
-        public void Off()
+        public IEnumerator Off()
         {
-            SetState(0);
+            yield return SetState(0);
         }
-        public virtual void SetState(int state)
+        public virtual IEnumerator SetState(int state)
         {
             if (state != UnityControlCurrentState && state >= 0 && state < UnityControlStates)
             {
-                UnityControlSetState(state);
-                UnityControlSetStateAfterSetState();
+                StartControlInteraction();
+                UnityControlSetState.Invoke(state);
+                UnityControlSetPositionFromState();
+                yield return WaitForDefaultTime();
+                StopControlInteraction();
             }
         }
-        public override void Toggle()
+        public override IEnumerator Toggle()
         {
             if (IsOff)
             {
-                On();
+                yield return On();
             }
             else
             {
-                Off();
+                yield return Off();
             }
         }
     }

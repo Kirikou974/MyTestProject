@@ -1,7 +1,5 @@
 using SharpDX.DirectInput;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace VTOLVRControlsMapper
@@ -9,7 +7,7 @@ namespace VTOLVRControlsMapper
     public class Main : VTOLMOD
     {
         static readonly string _settingsFileFolder = @"VTOLVR_ModLoader\Mods\";
-        static bool _updateControllers;
+        static bool _updateControllers = true;
         public override void ModLoaded()
         {
             Log("Mod Loaded");
@@ -76,29 +74,35 @@ namespace VTOLVRControlsMapper
             Log("Controls loading for " + vehicle);
             while (!ControlsHelper.UnityObjectsLoaded(vehicle))
             {
+                //Load unity objects (buttons, levers, covers...) to access later
                 ControlsHelper.LoadUnityObjects();
                 yield return new WaitForSeconds(2);
             }
             Log("Controls loaded for " + vehicle);
 
+            //Load mappings from json file
             Log("Mapping loading for " + vehicle);
             ControlsHelper.LoadMappings(_settingsFileFolder, name, vehicle.ToString());
             Log("Mapping loaded for " + vehicle);
 
+            //Load controllers
             Log("Loading keyboard");
             ControlsHelper.LoadControllers<Keyboard>();
             Log("Loading joysticks");
             ControlsHelper.LoadControllers<Joystick>();
             Log("Controllers loaded");
-            
-            Log("Loading hands");
-            while (!ControlsHelper.HandsLoaded)
+
+            //Load VRHands to have interactions
+            while (VRHandController.controllers.Count != 2)
             {
-                ControlsHelper.LoadHands();
+                Log("Waiting for hands...");
                 yield return new WaitForSeconds(2);
             }
-            Log("Hands loaded");
 
+            //Load custom control instances
+            Log("Loading custom control instances");
+            ControlsHelper.LoadMappingInstances();
+            Log("Custom control instances loaded");
             yield return null;
         }
     }

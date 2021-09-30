@@ -1,4 +1,7 @@
-﻿using VTOLVRControlsMapper.Core;
+﻿using System;
+using System.Collections;
+using UnityEngine;
+using VTOLVRControlsMapper.Core;
 
 namespace VTOLVRControlsMapper.Controls
 {
@@ -9,13 +12,18 @@ namespace VTOLVRControlsMapper.Controls
         {
             InteractableControl = new Interactable(ControlName);
         }
-        public override void StartInteract()
+        [Control(SupportedBehavior = ControllerActionBehavior.HoldOn)]
+        public override void StartControlInteraction()
         {
-            InteractableControl.StartInteract();
+            MonoBehaviour behaviour = UnityControl;
+            ClosestHand.gloveAnimation.PressButton(behaviour.transform, true);
+            InteractableControl.StartControlInteraction();
         }
-        public override void StopInteract()
+        [Control(SupportedBehavior = ControllerActionBehavior.HoldOff)]
+        public override void StopControlInteraction()
         {
-            InteractableControl.StopInteract();
+            InteractableControl.StopControlInteraction();
+            ClosestHand.gloveAnimation.UnPressButton();
         }
     }
 }
