@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 using VTOLVRControlsMapper.Core;
-using UnityEngine;
 
 namespace VTOLVRControlsMapper.Controls
 {

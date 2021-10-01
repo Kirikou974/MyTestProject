@@ -264,13 +264,6 @@ namespace VTOLVRControlsMapper
                         m.GetCustomAttribute<ControlMethodAttribute>() != null &&
                         m.GetCustomAttribute<ControlMethodAttribute>().SupportedBehavior == action.ControllerActionBehavior
                     );
-                    //Main.LogFunction("instance.GetType().Name : " + instance.GetType().Name);
-
-                    //if (instance is Controls.Cover)
-                    //{
-                    //    Main.LogFunction(string.Format("action.ControllerActionName : {0}, update.Key : {1}", action.ControllerActionName, update.Key));
-                    //    Main.LogFunction("(instance as Controls.Cover).Lever.IsOff : " + (instance as Controls.Cover).Lever.IsOff);
-                    //}
                     yield return methodInfo.Invoke(instance, null);
                     if (action.ControllerActionBehavior == ControllerActionBehavior.HoldOn)
                     {
