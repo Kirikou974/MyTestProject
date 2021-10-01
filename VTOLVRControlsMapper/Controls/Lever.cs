@@ -7,12 +7,13 @@ using UnityEngine;
 
 namespace VTOLVRControlsMapper.Controls
 {
+    [ControlClass(UnityTypes = new Type[] { typeof(VRInteractable), typeof(VRLever) })]
     public class Lever : ControlLeverBase<VRLever>
     {
         public Lever(string leverName) : base(leverName)
         {
             IEnumerable<VRSwitchCover> covers = ControlsHelper.GetGameControls<VRSwitchCover>();
-            Cover = covers.SingleOrDefault(c => c.name == ControlName);
+            Cover = covers.SingleOrDefault(c => c.coveredSwitch.name == ControlName);
         }
         public override int UnityControlCurrentState { get => UnityControl.currentState; }
         public override int UnityControlStates { get => UnityControl.states; }

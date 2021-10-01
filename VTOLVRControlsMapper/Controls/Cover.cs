@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using VTOLVRControlsMapper.Core;
 
 namespace VTOLVRControlsMapper.Controls
 {
+    [ControlClass(UnityTypes = new Type[] { typeof(VRInteractable), typeof(VRSwitchCover), typeof(VRLever) })]
     public class Cover : ControlToggleBase<VRSwitchCover>
     {
         public Lever Lever
@@ -19,11 +21,11 @@ namespace VTOLVRControlsMapper.Controls
         }
         public override void StartControlInteraction()
         {
-            throw new System.NotImplementedException();
+            Lever.StartControlInteraction();
         }
         public override void StopControlInteraction()
         {
-            throw new System.NotImplementedException();
+            Lever.StopControlInteraction();
         }
     }
 }

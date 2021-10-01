@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace VTOLVRControlsMapper.Core
@@ -6,7 +7,7 @@ namespace VTOLVRControlsMapper.Core
     public abstract class ControlButtonBase<T> : ControlBase<T> where T : MonoBehaviour
     {
         public ControlButtonBase(string interactableName) : base(interactableName) { }
-        [Control(SupportedBehavior = ControllerActionBehavior.Toggle)]
+        [ControlMethod(SupportedBehavior = ControllerActionBehavior.Toggle)]
         public IEnumerator InteractWithControl()
         {
             StartControlInteraction();

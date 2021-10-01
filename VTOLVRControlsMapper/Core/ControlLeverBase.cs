@@ -12,28 +12,29 @@ namespace VTOLVRControlsMapper.Core
         public abstract Action<int> UnityControlSetState { get; }
         public abstract Action UnityControlSetPositionFromState { get; }
         protected ControlLeverBase(string unityControlName) : base(unityControlName) { }
-        [Control(SupportedBehavior = ControllerActionBehavior.Increase)]
+        [ControlMethod(SupportedBehavior = ControllerActionBehavior.Increase)]
         public IEnumerator Increase()
         {
             yield return SetState(UnityControlCurrentState + 1);
         }
-        [Control(SupportedBehavior = ControllerActionBehavior.Decrease)]
+        [ControlMethod(SupportedBehavior = ControllerActionBehavior.Decrease)]
         public IEnumerator Decrease()
         {
             yield return SetState(UnityControlCurrentState - 1);
         }
-        [Control(SupportedBehavior = ControllerActionBehavior.On)]
+        [ControlMethod(SupportedBehavior = ControllerActionBehavior.On)]
         public IEnumerator On()
         {
             yield return SetState(UnityControlStates - 1);
         }
-        [Control(SupportedBehavior = ControllerActionBehavior.Off)]
+        [ControlMethod(SupportedBehavior = ControllerActionBehavior.Off)]
         public IEnumerator Off()
         {
             yield return SetState(0);
         }
         public virtual IEnumerator SetState(int state)
         {
+            //Check if selected control state is within boundaries of supported states
             if (state != UnityControlCurrentState && state >= 0 && state < UnityControlStates)
             {
                 StartControlInteraction();

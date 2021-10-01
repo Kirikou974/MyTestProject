@@ -1,12 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using VTOLVRControlsMapper.Core;
 
 namespace VTOLVRControlsMapper.Controls
 {
+    [ControlClass(UnityTypes = new Type[] { typeof(VRInteractable), typeof(EjectHandle) })]
     public class Handle : ControlBase<EjectHandle>
     {
         public Handle(string ejectHandleName) : base(ejectHandleName) { }
-        [Control(SupportedBehavior = ControllerActionBehavior.Toggle)]
+        [ControlMethod(SupportedBehavior = ControllerActionBehavior.Toggle)]
         public IEnumerator Pull()
         {
             ClosestHand.gloveAnimation.SetLockTransform(UnityControl.handleTransform);

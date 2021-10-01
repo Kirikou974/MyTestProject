@@ -3,6 +3,7 @@ using VTOLVRControlsMapper.Core;
 
 namespace VTOLVRControlsMapper.Controls
 {
+    [ControlClass(UnityTypes = new Type[] { typeof(VRInteractable), typeof(VRTwistKnobInt) })]
     public class BasicKnob : ControlLeverBase<VRTwistKnobInt>
     {
         public override int UnityControlCurrentState { get => UnityControl.currentState; }

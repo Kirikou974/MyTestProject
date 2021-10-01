@@ -5,6 +5,7 @@ using VTOLVRControlsMapper.Core;
 
 namespace VTOLVRControlsMapper.Controls
 {
+    [ControlClass(UnityTypes = new Type[] { typeof(VRInteractable), typeof(VRButton) })]
     public class Button : ControlButtonBase<VRButton>
     {
         public Interactable InteractableControl { get; protected set; }
@@ -12,14 +13,13 @@ namespace VTOLVRControlsMapper.Controls
         {
             InteractableControl = new Interactable(ControlName);
         }
-        [Control(SupportedBehavior = ControllerActionBehavior.HoldOn)]
+        [ControlMethod(SupportedBehavior = ControllerActionBehavior.HoldOn)]
         public override void StartControlInteraction()
         {
-            MonoBehaviour behaviour = UnityControl;
-            ClosestHand.gloveAnimation.PressButton(behaviour.transform, true);
+            ClosestHand.gloveAnimation.PressButton(UnityControl.transform, true);
             InteractableControl.StartControlInteraction();
         }
-        [Control(SupportedBehavior = ControllerActionBehavior.HoldOff)]
+        [ControlMethod(SupportedBehavior = ControllerActionBehavior.HoldOff)]
         public override void StopControlInteraction()
         {
             InteractableControl.StopControlInteraction();

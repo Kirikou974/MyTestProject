@@ -161,29 +161,23 @@ namespace VTOLVRControlsMapper
             _customControlCache = new Dictionary<string, object>();
             foreach (ControlMapping mapping in _mappings)
             {
-                CreateMappingInstances(mapping);
-            }
-        }
-        private static void CreateMappingInstances(ControlMapping mapping)
-        {
-            //Create custom control instance
-            Type customControlType = GetMappingType(mapping.Types);
-            object instance = Activator.CreateInstance(customControlType, mapping.GameControlName);
-            _customControlCache.Add(mapping.GameControlName, instance);
-        }
-        private static Type GetMappingType(List<Type> types)
-        {
-            IEnumerable<Type> controlTypes = GetDerivedTypes<IControl>();
-            Type returnType = null;
-            foreach (Type type in controlTypes)
-            {
-                Type genericType = GetBaseTypeGeneric(type.BaseType);
-                if (types.Contains(genericType))
+                //Determine custom control type from class attributes
+                IEnumerable<Type> controlTypes = GetDerivedTypes<IControl>();
+                Type customControlType = controlTypes.FirstOrDefault(t =>
+                    t.GetCustomAttribute<ControlClassAttribute>() != null &&
+                    t.GetCustomAttribute<ControlClassAttribute>().UnityTypes.SequenceEqual(mapping.Types)
+                );
+                //Create custom control instance
+                if(customControlType != null)
                 {
-                    returnType = type;
+                    object instance = Activator.CreateInstance(customControlType, mapping.GameControlName);
+                    _customControlCache.Add(mapping.GameControlName, instance);
+                }
+                else
+                {
+                    Main.LogFunction("Cannot create a custom control isntance for : " + mapping.GameControlName);
                 }
             }
-            return returnType;
         }
         private static object GetMappingInstance(ControlMapping mapping)
         {
@@ -267,14 +261,21 @@ namespace VTOLVRControlsMapper
                     //Get methods for related behavior
                     List<MethodInfo> methodsInfo = instance.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance).ToList();
                     MethodInfo methodInfo = methodsInfo.Find(m =>
-                        m.GetCustomAttribute<ControlAttribute>() != null &&
-                        m.GetCustomAttribute<ControlAttribute>().SupportedBehavior == action.ControllerActionBehavior
+                        m.GetCustomAttribute<ControlMethodAttribute>() != null &&
+                        m.GetCustomAttribute<ControlMethodAttribute>().SupportedBehavior == action.ControllerActionBehavior
                     );
+                    //Main.LogFunction("instance.GetType().Name : " + instance.GetType().Name);
+
+                    //if (instance is Controls.Cover)
+                    //{
+                    //    Main.LogFunction(string.Format("action.ControllerActionName : {0}, update.Key : {1}", action.ControllerActionName, update.Key));
+                    //    Main.LogFunction("(instance as Controls.Cover).Lever.IsOff : " + (instance as Controls.Cover).Lever.IsOff);
+                    //}
                     yield return methodInfo.Invoke(instance, null);
                     if (action.ControllerActionBehavior == ControllerActionBehavior.HoldOn)
                     {
                         MethodInfo offMethodInfo = methodsInfo.Find(m =>
-                            m.GetCustomAttribute<ControlAttribute>().SupportedBehavior == ControllerActionBehavior.HoldOff
+                            m.GetCustomAttribute<ControlMethodAttribute>().SupportedBehavior == ControllerActionBehavior.HoldOff
                         );
                         yield return new WaitUntil(() => _keyboardState.PressedKeys.Where(k => k == update.Key).Count() == 0);
                         offMethodInfo.Invoke(instance, null);
@@ -343,23 +344,9 @@ namespace VTOLVRControlsMapper
             device.Acquire();
         }
         #endregion
-        public static Type GetBaseTypeGeneric(Type baseType)
-        {
-            if (!baseType.IsGenericType)
-            {
-                return GetBaseTypeGeneric(baseType.BaseType);
-            }
-            else
-            {
-                return baseType.GenericTypeArguments[0];
-            }
-        }
         public static List<Type> GetDerivedTypes<T>()
         {
-            return GetDerivedTypes<T>(Assembly.GetAssembly(typeof(T)));
-        }
-        private static List<Type> GetDerivedTypes<T>(Assembly assembly)
-        {
+            Assembly assembly = Assembly.GetAssembly(typeof(T));
             var derivedType = typeof(T);
             return assembly
                 .GetTypes()

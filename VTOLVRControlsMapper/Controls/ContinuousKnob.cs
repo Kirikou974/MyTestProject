@@ -1,4 +1,5 @@
-﻿using VTOLVRControlsMapper.Core;
+﻿using System;
+using VTOLVRControlsMapper.Core;
 
 namespace VTOLVRControlsMapper.Controls
 {

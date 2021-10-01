@@ -13,9 +13,14 @@ namespace VTOLVRControlsMapper.Core
         Off = 6,
         Continuous = 7
     }
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = true)]
-    public class ControlAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Method, Inherited = true)]
+    public class ControlMethodAttribute : Attribute
     {
         public ControllerActionBehavior SupportedBehavior { get; set; }
+    }
+    [AttributeUsage(AttributeTargets.Class, Inherited = true)]
+    public class ControlClassAttribute : Attribute
+    {
+        public Type[] UnityTypes { get; set; }
     }
 }

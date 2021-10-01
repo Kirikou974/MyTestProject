@@ -1,4 +1,5 @@
 using SharpDX.DirectInput;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,9 +9,12 @@ namespace VTOLVRControlsMapper
     {
         static readonly string _settingsFileFolder = @"VTOLVR_ModLoader\Mods\";
         static bool _updateControllers = true;
+        public static Action<string> LogFunction { get => _logFunction; }
+        private static Action<string> _logFunction;
         public override void ModLoaded()
         {
             Log("Mod Loaded");
+            _logFunction = Log;
             StartCoroutine(ControlsHelper.LoadDeviceInstances());
             if (VTOLAPI.SceneLoaded == null)
             {
