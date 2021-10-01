@@ -11,18 +11,22 @@ namespace VTOLVRControlsMapper.Controls
         [ControlMethod(SupportedBehavior = ControllerActionBehavior.Toggle)]
         public IEnumerator Pull()
         {
-            ClosestHand.gloveAnimation.SetLockTransform(UnityControl.handleTransform);
-            ClosestHand.gloveAnimation.SetPoseInteractable(GloveAnimation.Poses.Eject);
+            StartControlInteraction();
             //UnityControl.OnHandlePull.Invoke();
-            yield return null;
+            yield return WaitForDefaultTime();
+            StopControlInteraction();
         }
         public override void StartControlInteraction()
         {
-            throw new System.NotImplementedException();
+            //Interactable interactable = new Interactable(ControlName);
+            ClosestHand.gloveAnimation.SetLeverTransform(UnityControl.transform);
+            ClosestHand.gloveAnimation.SetPoseInteractable(GloveAnimation.Poses.Eject);
+            //UnityControl.Interactable_OnStartInteraction(ClosestHand);
         }
         public override void StopControlInteraction()
         {
-            throw new System.NotImplementedException();
+            //ClosestHand.gloveAnimation.ClearInteractPose();
+            //UnityControl.Interactable_OnStopInteraction(ClosestHand);
         }
     }
 }

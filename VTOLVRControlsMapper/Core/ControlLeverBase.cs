@@ -44,6 +44,7 @@ namespace VTOLVRControlsMapper.Core
                 StopControlInteraction();
             }
         }
+
         public override IEnumerator Toggle()
         {
             if (IsOff)

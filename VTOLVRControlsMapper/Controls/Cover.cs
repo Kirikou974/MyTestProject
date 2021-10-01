@@ -14,6 +14,8 @@ namespace VTOLVRControlsMapper.Controls
         }
         public Cover(string coverName) : base(coverName) {
             Lever = new Lever(ControlName);
+            //This is a fix because covers are considered as opened by default when the game loads
+            UnityControl.OnSetState(1);
         }
         public override IEnumerator Toggle()
         {
