@@ -9,9 +9,11 @@ namespace VTOLVRControlsMapper.Core
         [ControlMethod(SupportedBehavior = ControllerActionBehavior.Toggle)]
         public IEnumerator InteractWithControl()
         {
-            StartControlInteraction();
+            VRHandController hand = ClosestHand;
+            hand.gloveAnimation.ClearInteractPose();
+            yield return StartControlInteraction(hand);
             yield return WaitForDefaultTime();
-            StopControlInteraction();
+            StopControlInteraction(hand);
         }
     }
 }

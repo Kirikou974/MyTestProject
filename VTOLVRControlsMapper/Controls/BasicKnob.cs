@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Reflection;
+using UnityEngine;
 using VTOLVRControlsMapper.Core;
 
 namespace VTOLVRControlsMapper.Controls
@@ -11,13 +14,20 @@ namespace VTOLVRControlsMapper.Controls
         public override Action<int> UnityControlSetState { get => UnityControl.SetState; }
         public override Action UnityControlSetPositionFromState { get => UnityControl.SetRotationFromState; }
         public BasicKnob(string twistKnobIntName) : base(twistKnobIntName) { }
-        public override void StartControlInteraction()
+        public override IEnumerator StartControlInteraction(VRHandController hand)
         {
-            throw new NotImplementedException();
+            //Getting protected property value
+            FieldInfo fieldInfo = UnityControl.GetType().GetField("lockTransform", BindingFlags.NonPublic | BindingFlags.Instance);
+            Transform lockTransform = fieldInfo.GetValue(UnityControl) as Transform;
+
+            hand.gloveAnimation.SetKnobTransform(UnityControl.knobTransform, lockTransform, UnityControl.smallKnob);
+            hand.gloveAnimation.SetPoseInteractable(GloveAnimation.Poses.Knob);
+            yield return WaitForDefaultTime();
+            UnityControl.GrabbedRoutine();
         }
-        public override void StopControlInteraction()
+        public override void StopControlInteraction(VRHandController hand)
         {
-            throw new NotImplementedException();
+            UnityControl.Vrint_OnStopInteraction(hand);
         }
     }
 }

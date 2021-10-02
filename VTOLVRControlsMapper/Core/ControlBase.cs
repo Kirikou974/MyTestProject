@@ -40,8 +40,8 @@ namespace VTOLVRControlsMapper.Core
         }
         public T UnityControl { get; protected set; }
         public string ControlName { get => UnityControl.name; }
-        public abstract void StartControlInteraction();
-        public abstract void StopControlInteraction();
+        public abstract IEnumerator StartControlInteraction(VRHandController hand);
+        public abstract void StopControlInteraction(VRHandController hand);
         public ControlBase(string unityControlName)
         {
             UnityControl = ControlsHelper.GetGameControl<T>(unityControlName);

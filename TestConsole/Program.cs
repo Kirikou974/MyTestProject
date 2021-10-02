@@ -16,8 +16,14 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            ControlsHelper.LoadMappings("F:\\Steam\\SteamApps\\common\\VTOL VR\\VTOLVR_ModLoader\\mods\\", "VTOLVRControlsMapper", "FA26B");
-            ControlsHelper.LoadMappingInstances();
+            Test test = new Test();
+            FieldInfo testProp = test.GetType().GetField("Toto", BindingFlags.NonPublic | BindingFlags.Instance);
+            Console.WriteLine(testProp.GetValue(test));
+            Console.ReadLine();
         }
+    }
+    class Test
+    {
+        protected string Toto = "OK";
     }
 }

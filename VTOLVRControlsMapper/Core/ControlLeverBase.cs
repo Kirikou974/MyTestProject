@@ -37,11 +37,13 @@ namespace VTOLVRControlsMapper.Core
             //Check if selected control state is within boundaries of supported states
             if (state != UnityControlCurrentState && state >= 0 && state < UnityControlStates)
             {
-                StartControlInteraction();
+                VRHandController hand = ClosestHand;
+                hand.gloveAnimation.ClearInteractPose();
+                yield return StartControlInteraction(hand);
                 UnityControlSetState.Invoke(state);
                 UnityControlSetPositionFromState();
                 yield return WaitForDefaultTime();
-                StopControlInteraction();
+                StopControlInteraction(hand);
             }
         }
 

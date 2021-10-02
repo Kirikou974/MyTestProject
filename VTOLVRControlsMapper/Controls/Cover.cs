@@ -21,13 +21,14 @@ namespace VTOLVRControlsMapper.Controls
         {
             yield return Lever.Toggle();
         }
-        public override void StartControlInteraction()
+        public override IEnumerator StartControlInteraction(VRHandController hand)
         {
-            Lever.StartControlInteraction();
+            Lever.StartControlInteraction(hand);
+            yield return null;
         }
-        public override void StopControlInteraction()
+        public override void StopControlInteraction(VRHandController hand)
         {
-            Lever.StopControlInteraction();
+            Lever.StopControlInteraction(hand);
         }
     }
 }

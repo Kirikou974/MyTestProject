@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using VTOLVRControlsMapper.Core;
 
 namespace VTOLVRControlsMapper.Controls
@@ -12,15 +13,15 @@ namespace VTOLVRControlsMapper.Controls
             InteractableControl = new Interactable(ControlName);
         }
         [ControlMethod(SupportedBehavior = ControllerActionBehavior.HoldOn)]
-        public override void StartControlInteraction()
+        public override IEnumerator StartControlInteraction(VRHandController hand)
         {
-            ClosestHand.gloveAnimation.PressButton(UnityControl.transform, true);
-            InteractableControl.StartControlInteraction();
+            hand.gloveAnimation.PressButton(UnityControl.transform, true);
+            yield return InteractableControl.StartControlInteraction(hand);
         }
         [ControlMethod(SupportedBehavior = ControllerActionBehavior.HoldOff)]
-        public override void StopControlInteraction()
+        public override void StopControlInteraction(VRHandController hand)
         {
-            InteractableControl.StopControlInteraction();
+            InteractableControl.StopControlInteraction(hand);
             ClosestHand.gloveAnimation.UnPressButton();
         }
     }

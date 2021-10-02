@@ -1,4 +1,5 @@
-﻿using VTOLVRControlsMapper.Core;
+﻿using System.Collections;
+using VTOLVRControlsMapper.Core;
 
 namespace VTOLVRControlsMapper.Controls
 {
@@ -6,11 +7,11 @@ namespace VTOLVRControlsMapper.Controls
     {
         //TODO moar tests
         public ContinuousKnob(string twistKnobName) : base(twistKnobName) { }
-        public override void StartControlInteraction()
+        public override IEnumerator StartControlInteraction(VRHandController hand)
         {
             throw new System.NotImplementedException();
         }
-        public override void StopControlInteraction()
+        public override void StopControlInteraction(VRHandController hand)
         {
             throw new System.NotImplementedException();
         }
