@@ -11,7 +11,6 @@ namespace VTOLVRControlsMapper.Controls
         public override IEnumerator Update(float value)
         {
             StartControlInteraction(ClosestHand);
-            //UnityControl.OnSetThrottle.Invoke(value);
             UnityControl.UpdateThrottle(value);
             UnityControl.UpdateThrottleAnim(value);
             StopControlInteraction(ClosestHand);
@@ -20,11 +19,8 @@ namespace VTOLVRControlsMapper.Controls
         public override void StartControlInteraction(VRHandController hand)
         {
             hand.gloveAnimation.SetLeverTransform(UnityControl.transform);
-            hand.gloveAnimation.SetPoseInteractable(GloveAnimation.Poses.Throttle);
+            hand.gloveAnimation.SetPoseHover(GloveAnimation.Poses.JetThrottle);
         }
-        public override void StopControlInteraction(VRHandController hand)
-        {
-            //UnityControl.I_OnStopInteraction(hand);
-        }
+        public override void StopControlInteraction(VRHandController hand) { }
     }
 }
