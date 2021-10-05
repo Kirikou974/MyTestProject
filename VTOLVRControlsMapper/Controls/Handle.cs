@@ -15,7 +15,7 @@ namespace VTOLVRControlsMapper.Controls
             UnityControl.OnHandlePull.Invoke();
             yield return null;
         }
-        public override IEnumerator StartControlInteraction(VRHandController hand)
+        public override void StartControlInteraction(VRHandController hand)
         {
             throw new NotImplementedException();
         }

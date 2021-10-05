@@ -11,7 +11,7 @@ namespace VTOLVRControlsMapper.Core
         {
             VRHandController hand = ClosestHand;
             hand.gloveAnimation.ClearInteractPose();
-            yield return StartControlInteraction(hand);
+            StartControlInteraction(hand);
             yield return WaitForDefaultTime();
             StopControlInteraction(hand);
         }

@@ -32,6 +32,10 @@ namespace VTOLVRControlsMapper.Core
         {
             yield return SetState(0);
         }
+        public virtual IEnumerator StartSecondaryControlInteraction()
+        {
+            yield return null;
+        }
         public virtual IEnumerator SetState(int state)
         {
             //Check if selected control state is within boundaries of supported states
@@ -39,7 +43,8 @@ namespace VTOLVRControlsMapper.Core
             {
                 VRHandController hand = ClosestHand;
                 hand.gloveAnimation.ClearInteractPose();
-                yield return StartControlInteraction(hand);
+                StartControlInteraction(hand);
+                yield return StartSecondaryControlInteraction();
                 UnityControlSetState.Invoke(state);
                 UnityControlSetPositionFromState();
                 yield return WaitForDefaultTime();

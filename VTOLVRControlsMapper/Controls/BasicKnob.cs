@@ -14,7 +14,7 @@ namespace VTOLVRControlsMapper.Controls
         public override Action<int> UnityControlSetState { get => UnityControl.SetState; }
         public override Action UnityControlSetPositionFromState { get => UnityControl.SetRotationFromState; }
         public BasicKnob(string twistKnobIntName) : base(twistKnobIntName) { }
-        public override IEnumerator StartControlInteraction(VRHandController hand)
+        public override void StartControlInteraction(VRHandController hand)
         {
             //Getting protected property value
             FieldInfo fieldInfo = UnityControl.GetType().GetField("lockTransform", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -22,9 +22,13 @@ namespace VTOLVRControlsMapper.Controls
 
             hand.gloveAnimation.SetKnobTransform(UnityControl.knobTransform, lockTransform, UnityControl.smallKnob);
             hand.gloveAnimation.SetPoseInteractable(GloveAnimation.Poses.Knob);
-            yield return WaitForDefaultTime();
-            UnityControl.GrabbedRoutine();
+
         }
+        public override IEnumerator StartSecondaryControlInteraction()
+        {
+            yield return WaitFor(0.15f);
+            yield return UnityControl.GrabbedRoutine();
+        } 
         public override void StopControlInteraction(VRHandController hand)
         {
             UnityControl.Vrint_OnStopInteraction(hand);

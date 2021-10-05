@@ -4,38 +4,60 @@ using Valve.Newtonsoft.Json;
 
 namespace VTOLVRControlsMapper.Core
 {
-    public enum ControllerActionType
+    public enum MappingRange
     {
-        Button,
-        Axis
+        Low = 0,
+        High = 1,
+        Full = 2
     }
-    public class GameAction
+    public abstract class GameAction
     {
         public ControllerActionBehavior ControllerActionBehavior { get; set; }
-        public string ControllerActionName { get; set; }
+        public string ControllerButtonName { get; set; }
         public Guid ControllerInstanceGuid { get; set; }
-        public GameAction(Guid controllerInstanceGuid, string controllerActionName, ControllerActionBehavior controllerActionBehavior, bool isLeftHand)
-        {
-            ControllerInstanceGuid = controllerInstanceGuid;
-            ControllerActionBehavior = controllerActionBehavior;
-            ControllerActionName = controllerActionName;
-        }
+    }
+    public class JoystickAxis
+    {
+        public string Name { get; set; }
+        public bool Invert { get; set; }
+        public MappingRange MappingRange { get; set; }
+    }
+    public class KeyboardAction : GameAction { }
+    public class JoystickAction : GameAction
+    {
+        public List<JoystickAxis> ControllerAxis { get; set; }
     }
     public class ControlMapping
     {
         public string GameControlName { get; set; }
-        public List<GameAction> KeyboardActions { get; set; }
-        public List<GameAction> JoystickActions { get; set; }
+        public List<KeyboardAction> KeyboardActions { get; set; }
+        public List<JoystickAction> JoystickActions { get; set; }
         public List<Type> Types { get; set; }
         [JsonConstructor]
         public ControlMapping(string gameControlName, List<Type> types)
         {
             GameControlName = gameControlName;
             Types = types;
-            //KeyboardActions = new List<GameAction>();
+            //List<JoystickAction> actions = new List<JoystickAction>();
             //SharpDX.DirectInput.DirectInput di = new SharpDX.DirectInput.DirectInput();
-            //SharpDX.DirectInput.Keyboard kb = new SharpDX.DirectInput.Keyboard(di);
-            //KeyboardActions.Add(new GameAction(kb.Information.InstanceGuid, "a", ControllerActionBehavior.Toggle, true));
+            //SharpDX.DirectInput.Joystick kb = new SharpDX.DirectInput.Joystick(di, new Guid("8e0fdc40-f559-11ea-8002-444553540000"));
+            //actions.Add(new JoystickAction()
+            //{
+            //    Axis = new List<JoystickAxis>()
+            //    {
+            //        new JoystickAxis()
+            //        {
+            //            ControllerAxisName="Y",
+            //            Invert=true,
+            //            MappingRange=MappingRange.Full
+            //        }
+            //    },
+            //    ControllerActionBehavior = ControllerActionBehavior.Axis,
+            //    //ControllerButtonName = "",
+            //    ControllerInstanceGuid = new Guid("8e0fdc40-f559-11ea-8002-444553540000")
+            //});
+            //JoystickActions = actions;
+            //}
         }
     }
 }

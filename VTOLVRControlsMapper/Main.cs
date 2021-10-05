@@ -9,12 +9,11 @@ namespace VTOLVRControlsMapper
     {
         static readonly string _settingsFileFolder = @"VTOLVR_ModLoader\Mods\";
         static bool _updateControllers = true;
-        public static Action<string> LogFunction { get => _logFunction; }
-        private static Action<string> _logFunction;
+        public static Action<string> LogFunction { get; protected set; }
         public override void ModLoaded()
         {
             Log("Mod Loaded");
-            _logFunction = Log;
+            LogFunction = Log;
             StartCoroutine(ControlsHelper.LoadDeviceInstances());
             if (VTOLAPI.SceneLoaded == null)
             {
@@ -47,8 +46,8 @@ namespace VTOLVRControlsMapper
         }
         public void OnApplicationFocus(bool hasFocus)
         {
-            Log("Game focus is : " + hasFocus);
-            _updateControllers = hasFocus;
+            //Log("Game focus is : " + hasFocus);
+            //_updateControllers = hasFocus;
         }
         /// <summary>
         /// Called by Unity each frame
@@ -69,7 +68,7 @@ namespace VTOLVRControlsMapper
             }
             if (ControlsHelper.MappingsLoaded && _updateControllers)
             {
-                StartCoroutine(ControlsHelper.UpdateControllers());
+                StartCoroutine(ControlsHelper.UpdateGameControls());
             }
         }
         private IEnumerator LoadModObjects()

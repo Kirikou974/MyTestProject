@@ -7,7 +7,7 @@ namespace VTOLVRControlsMapper.Controls
     {
         //TODO moar tests
         public ContinuousKnob(string twistKnobName) : base(twistKnobName) { }
-        public override IEnumerator StartControlInteraction(VRHandController hand)
+        public override void StartControlInteraction(VRHandController hand)
         {
             throw new System.NotImplementedException();
         }

@@ -35,13 +35,12 @@ namespace VTOLVRControlsMapper.Controls
                 yield return null;
             }
         }
-        public override IEnumerator StartControlInteraction(VRHandController hand)
+        public override void StartControlInteraction(VRHandController hand)
         {
             hand.gloveAnimation.ClearInteractPose();
             hand.gloveAnimation.SetLeverTransform(UnityControl.transform);
             hand.gloveAnimation.SetPoseInteractable(GloveAnimation.Poses.Pinch);
             UnityControl.GrabbedRoutine();
-            yield return null;
         }
         public override void StopControlInteraction(VRHandController hand)
         {
