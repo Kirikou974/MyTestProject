@@ -1,6 +1,7 @@
 using SharpDX.DirectInput;
 using System;
 using System.Collections;
+using System.Reflection;
 using UnityEngine;
 
 namespace VTOLVRControlsMapper
