@@ -11,7 +11,6 @@ namespace VTOLVRControlsMapper.Controls
         [ControlMethod(SupportedBehavior = ControllerActionBehavior.Toggle)]
         public IEnumerator Pull()
         {
-            VRHandController hand = ClosestHand;
             UnityControl.OnHandlePull.Invoke();
             yield return null;
         }

@@ -238,7 +238,7 @@ namespace VTOLVRControlsMapper
                                 {
                                     object instance = _customControlCache[mapping.GameControlName];
                                     MethodInfo methodInfo = GetExecuteMethod(instance, mapping.GameControlName, action.ControllerActionBehavior);
-                                    float axisValue = ConvertAxisValue(joystickUpdate.Value, axis.Invert, axis.MappingRange.ToString());
+                                    float axisValue = ConvertAxisValue(joystickUpdate.Value, axis.Invert, axis.MappingRange);
                                     yield return methodInfo.Invoke(instance, new object[] { axisValue });
                                 }
                             }
@@ -340,23 +340,36 @@ namespace VTOLVRControlsMapper
                     derivedType.IsAssignableFrom(t)
                     ).ToList();
         }
-        public static float ConvertAxisValue(int value, bool invert, string mappingRange = "Full")
+        public static float ConvertAxisValue(int value, bool invert, MappingRange mappingRange = MappingRange.Full)
         {
             float retVal;
-            if (value == 65535) retVal = 1;
-            else retVal = (((float)value / 32767) - 1);
-            if (invert) retVal *= -1;
-            if (mappingRange == "High")
+            if (value == 65535)
             {
-                retVal /= 2;
-                retVal += 0.5f;
+                retVal = 1;
             }
-            else if (mappingRange == "Low")
+            else
             {
-                retVal /= 2;
-                retVal -= 0.5f;
+                retVal = (((float)value / 32767) - 1);
             }
-            return retVal;
+            if (invert)
+            {
+                retVal *= -1;
+            }
+            switch (mappingRange)
+            {
+                case MappingRange.Low:
+                    retVal /= 2;
+                    retVal -= 0.5f;
+                    break;
+                case MappingRange.High:
+                    retVal /= 2;
+                    retVal += 0.5f;
+                    break;
+                case MappingRange.Full:
+                default:
+                    break;
+            }
+            return (float)Math.Round(retVal, 2);
         }
     }
 }

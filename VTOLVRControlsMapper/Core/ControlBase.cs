@@ -22,21 +22,29 @@ namespace VTOLVRControlsMapper.Core
                 {
                     throw new Exception("Hands not found. Pas de bras, pas de chocolat.");
                 }
-                VRHandController leftHand = VRHandController.controllers[1];
-                VRHandController rightHand = VRHandController.controllers[0];
 
                 Vector3 controlPosition = UnityControl.transform.position;
-                float distanceFromLeftHand = Vector3.Distance(controlPosition, leftHand.transform.position);
-                float distanceFromRightHand = Vector3.Distance(controlPosition, rightHand.transform.position);
+                float distanceFromLeftHand = Vector3.Distance(controlPosition, LeftHand.transform.position);
+                float distanceFromRightHand = Vector3.Distance(controlPosition, RightHand.transform.position);
                 if (distanceFromLeftHand < distanceFromRightHand)
                 {
-                    return leftHand;
+                    return LeftHand;
                 }
                 else
                 {
-                    return rightHand;
+                    return RightHand;
                 }
             }
+        }
+        public VRHandController LeftHand
+        {
+            get;
+            protected set;
+        }
+        public VRHandController RightHand
+        {
+            get;
+            protected set;
         }
         public T UnityControl { get; protected set; }
         public string ControlName { get => UnityControl.name; }
@@ -49,6 +57,8 @@ namespace VTOLVRControlsMapper.Core
             {
                 throw new NullReferenceException(string.Format("Unity control {0} of type {1} not found", unityControlName, typeof(T).Name));
             }
+            LeftHand = VRHandController.controllers.Find(h => h.isLeft);
+            RightHand = VRHandController.controllers.Find(h => !h.isLeft);
         }
         public IEnumerator WaitForDefaultTime()
         {
