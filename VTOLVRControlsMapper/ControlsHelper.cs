@@ -24,7 +24,6 @@ namespace VTOLVRControlsMapper
         static Dictionary<string, object> _customControlCache;
         static List<ControlMapping> _mappings;
         static List<UnityEngine.Object> _unityObjects = new List<UnityEngine.Object>();
-        public static List<Device> Devices { get => _devices; }
         public static bool MappingsLoaded
         {
             get
@@ -190,68 +189,77 @@ namespace VTOLVRControlsMapper
                     _joystickState = (device as Joystick).GetCurrentState();
                 }
             }
+
             //Send controller data to game control
             foreach (ControlMapping controlMapping in _mappings)
             {
-                if (controlMapping != null && controlMapping.KeyboardActions != null)
+                if (controlMapping != null && controlMapping.GameActions != null)
                 {
-                    yield return UpdateKeyboard(controlMapping, controlMapping.KeyboardActions);
-                }
-                if (controlMapping != null && controlMapping.JoystickActions != null)
-                {
-                    yield return UpdateJoystick(controlMapping, controlMapping.JoystickActions);
-                }
-            }
-            yield return null;
-        }
-        private static IEnumerator UpdateKeyboard(ControlMapping mapping, List<KeyboardAction> actions)
-        {
-            foreach (KeyboardAction action in actions)
-            {
-                if (!(action is null) && !(_keyboardUpdates is null))
-                {
-                    Keyboard device = _devices.Find(d => d.Information.InstanceGuid == action.ControllerInstanceGuid) as Keyboard;
-                    KeyboardUpdate update = _keyboardUpdates.FirstOrDefault(k => k.Key.ToString() == action.ControllerButtonName);
-                    if (update.Key != Key.Unknown && update.Key.ToString() == action.ControllerButtonName && update.IsPressed)
+                    foreach (GameAction action in controlMapping.GameActions)
                     {
-                        bool keyIsReleased = _keyboardState.PressedKeys.Where(k => k == update.Key).Count() == 0;
-                        yield return ExecuteButton(mapping.GameControlName, action.ControllerActionBehavior, keyIsReleased);
-                    }
-                }
-            }
-            yield return null;
-        }
-        private static IEnumerator UpdateJoystick(ControlMapping mapping, List<JoystickAction> actions)
-        {
-            foreach (JoystickAction action in actions)
-            {
-                if (!(action is null) && !(_joystickUpdates is null))
-                {
-                    Joystick device = _devices.Find(d => d.Information.InstanceGuid == action.ControllerInstanceGuid) as Joystick;
-                    foreach (JoystickUpdate joystickUpdate in _joystickUpdates)
-                    {
-                        if (action.ControllerActionBehavior == ControllerActionBehavior.Axis)
+                        if (action is GenericGameAction)
                         {
-                            foreach (JoystickAxis axis in action.ControllerAxis)
-                            {
-                                if (axis.Name == joystickUpdate.Offset.ToString())
-                                {
-                                    object instance = _customControlCache[mapping.GameControlName];
-                                    MethodInfo methodInfo = GetExecuteMethod(instance, mapping.GameControlName, action.ControllerActionBehavior);
-                                    float axisValue = ConvertAxisValue(joystickUpdate.Value, axis.Invert, axis.MappingRange);
-                                    yield return methodInfo.Invoke(instance, new object[] { axisValue });
-                                }
-                            }
+                            yield return UpdateGeneric(controlMapping, action as GenericGameAction);
                         }
-                        else if (joystickUpdate.Offset.ToString() == action.ControllerButtonName)
+                        else if (action is ThrottleAction)
                         {
-                            ExecuteButton(mapping.GameControlName, action.ControllerActionBehavior);
+                            yield return UpdateThrottle(controlMapping, action as ThrottleAction);
+                        }
+                        else if (action is StickAction)
+                        {
+                            yield return UpdateStick(controlMapping, action as StickAction);
                         }
                     }
                 }
             }
             yield return null;
         }
+        private static IEnumerator UpdateGeneric(ControlMapping mapping, GenericGameAction action)
+        {
+            if (!(action is null) && !(_keyboardUpdates is null))
+            {
+                KeyboardUpdate update = _keyboardUpdates.FirstOrDefault(k => k.Key.ToString() == action.ControllerButtonName);
+                if (update.Key != Key.Unknown && update.Key.ToString() == action.ControllerButtonName && update.IsPressed)
+                {
+                    bool keyIsReleased = _keyboardState.PressedKeys.Where(k => k == update.Key).Count() == 0;
+                    yield return ExecuteButton(mapping.GameControlName, action.ControllerActionBehavior, keyIsReleased);
+                }
+            }
+            yield return null;
+        }
+        private static IEnumerator UpdateThrottle(ControlMapping mapping, ThrottleAction throttleAction)
+        {
+            if (!(throttleAction is null) && !(_joystickUpdates is null))
+            {
+                foreach (JoystickUpdate joystickUpdate in _joystickUpdates)
+                {
+                    if (throttleAction.PowerAxis.Name == joystickUpdate.Offset.ToString())
+                    {
+                        ExecuteAxis(throttleAction.PowerAxis, mapping, joystickUpdate);
+                    }
+                    if (throttleAction.TriggerAxis.Name == joystickUpdate.Offset.ToString())
+                    {
+                        ExecuteAxis(throttleAction.TriggerAxis, mapping, joystickUpdate);
+                    }
+                    if (throttleAction.Menu == joystickUpdate.Offset.ToString())
+                    {
+                        yield return ExecuteButton(throttleAction.Menu, ControllerActionBehavior.Toggle);
+                    }
+                }
+            }
+        }
+        private static IEnumerator UpdateStick(ControlMapping mapping, StickAction throttleAction)
+        {
+            yield return null;
+        }
+        private static void ExecuteAxis(Axis axis, ControlMapping mapping, JoystickUpdate joystickUpdate)
+        {
+            object instance = _customControlCache[mapping.GameControlName];
+            MethodInfo methodInfo = GetExecuteMethod(instance, mapping.GameControlName, ControllerActionBehavior.Axis);
+            float axisValue = ConvertAxisValue(joystickUpdate.Value, axis.Invert, axis.MappingRange);
+            methodInfo.Invoke(instance, new object[] { axisValue });
+        }
+
         private static IEnumerator ExecuteButton(string gameControlName, ControllerActionBehavior behavior, bool buttonIsReleased = false)
         {
             //Get custom control instance
@@ -292,32 +300,44 @@ namespace VTOLVRControlsMapper
             ).ToList();
             yield return null;
         }
-        public static void LoadControllers<T>()
+        public static void LoadControllers()
         {
-            foreach (ControlMapping mapping in _mappings)
+            IEnumerable<Guid> instanceGuids = _mappings
+                .Where(mapping => mapping.GameActions != null && mapping.GameActions.Count != 0)
+                .SelectMany(mapping => mapping.GameActions)
+                .Select(gameAction => gameAction.ControllerInstanceGuid)
+                .Distinct();
+
+            foreach (Guid instanceGuid in instanceGuids)
             {
-                IEnumerable<GameAction> actions = typeof(T) == typeof(Joystick) ? mapping.JoystickActions as IEnumerable<GameAction> : mapping.KeyboardActions;
-                if (actions != null && actions.Count() > 0)
+                if (_devices.Find(d => d.Information.InstanceGuid == instanceGuid) == null)
                 {
-                    foreach (GameAction action in actions)
+                    DeviceInstance instance = _deviceInstances.Find(d => d.InstanceGuid == instanceGuid);
+                    Device device = null;
+                    switch (instance.Type)
                     {
-                        Guid instanceGuid = action.ControllerInstanceGuid;
-                        if (_devices.Find(d => d.Information.InstanceGuid == instanceGuid) == null)
-                        {
-                            DeviceInstance instance = _deviceInstances.Find(d => d.InstanceGuid == instanceGuid);
-                            Device device = null;
-                            if (typeof(T) == typeof(Keyboard))
-                            {
-                                device = new Keyboard(_directInput);
-                            }
-                            else
-                            {
-                                device = new Joystick(_directInput, instanceGuid);
-                            }
-                            AcquireController(device);
-                            _devices.Add(device);
-                        }
+                        case DeviceType.Keyboard:
+                            device = new Keyboard(_directInput);
+                            break;
+                        case DeviceType.Joystick:
+                        case DeviceType.Gamepad:
+                        case DeviceType.Driving:
+                        case DeviceType.Flight:
+                        case DeviceType.FirstPerson:
+                        case DeviceType.Supplemental:
+                            device = new Joystick(_directInput, instanceGuid);
+                            break;
+                        case DeviceType.Device:
+                        case DeviceType.Mouse:
+                        case DeviceType.ControlDevice:
+                        case DeviceType.ScreenPointer:
+                        case DeviceType.Remote:
+                        default:
+                            //Not supported device types
+                            break;
                     }
+                    AcquireController(device);
+                    _devices.Add(device);
                 }
             }
         }

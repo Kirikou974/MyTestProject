@@ -89,10 +89,8 @@ namespace VTOLVRControlsMapper
             Log("Mapping loaded for " + vehicle);
 
             //Load controllers
-            Log("Loading keyboard");
-            ControlsHelper.LoadControllers<Keyboard>();
-            Log("Loading joysticks");
-            ControlsHelper.LoadControllers<Joystick>();
+            Log("Loading controllers");
+            ControlsHelper.LoadControllers();
             Log("Controllers loaded");
 
             //Load VRHands to have interactions

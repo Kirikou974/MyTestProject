@@ -5,7 +5,7 @@ using VTOLVRControlsMapper.Core;
 namespace VTOLVRControlsMapper.Controls
 {
     [ControlClass(UnityTypes = new Type[] { typeof(VRInteractable), typeof(VRJoystick) })]
-    public class Stick : ControlAxis<VRJoystick>
+    public class Stick : ControlJoystick<VRJoystick>
     {
         public Stick(string unityControlName) : base(unityControlName) { }
 
@@ -17,7 +17,7 @@ namespace VTOLVRControlsMapper.Controls
         {
             throw new NotImplementedException();
         }
-        public override IEnumerator Update(float value)
+        public override void UpdateAxis(float value)
         {
             throw new NotImplementedException();
         }

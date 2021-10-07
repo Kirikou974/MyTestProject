@@ -69,7 +69,7 @@
     <Compile Include="Controls\Handle.cs" />
     <Compile Include="Controls\Stick.cs" />
     <Compile Include="Controls\Throttle.cs" />
-    <Compile Include="Core\ControlAxis.cs" />
+    <Compile Include="Core\ControlJoystick.cs" />
     <Compile Include="Core\ControlButtonBase.cs" />
     <Compile Include="Core\ControlAttribute.cs" />
     <Compile Include="Core\ControlLeverBase.cs" />

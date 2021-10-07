@@ -6,7 +6,7 @@ using VTOLVRControlsMapper.Core;
 namespace VTOLVRControlsMapper.Controls
 {
     [ControlClass(UnityTypes = new Type[] { typeof(VRInteractable), typeof(VRThrottle) })]
-    public class Throttle : ControlAxis<VRThrottle>
+    public class Throttle : ControlJoystick<VRThrottle>
     {
         public Throttle(string unityControlName) : base(unityControlName)
         {
@@ -15,12 +15,11 @@ namespace VTOLVRControlsMapper.Controls
             FieldInfo hapticFactorField = handType.GetField("hapticFactor", BindingFlags.Instance | BindingFlags.NonPublic);
             hapticFactorField.SetValue(UnityControl, 0.0f);
         }
-        public override IEnumerator Update(float value)
+        public override void UpdateAxis(float value)
         {
             StartControlInteraction(LeftHand);
             UnityControl.OnSetThrottle.Invoke(value);
             UnityControl.UpdateThrottleAnim(value);
-            yield return null;
         }
         public override void StartControlInteraction(VRHandController hand)
         {
@@ -41,9 +40,6 @@ namespace VTOLVRControlsMapper.Controls
             Type unityControlType = UnityControl.GetType();
             FieldInfo grabbedField = unityControlType.GetField("grabbed", BindingFlags.Instance | BindingFlags.NonPublic);
             grabbedField.SetValue(UnityControl, false);
-        }
-        public override void StopControlInteraction(VRHandController hand)
-        {
         }
     }
 }

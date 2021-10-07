@@ -12,26 +12,33 @@ namespace VTOLVRControlsMapper.Core
     }
     public abstract class GameAction
     {
-        public ControllerActionBehavior ControllerActionBehavior { get; set; }
-        public string ControllerButtonName { get; set; }
         public Guid ControllerInstanceGuid { get; set; }
     }
-    public class JoystickAxis
+    public class GenericGameAction : GameAction
+    {
+        public string ControllerButtonName { get; set; }
+        public ControllerActionBehavior ControllerActionBehavior { get; set; }
+    }
+    public class Axis
     {
         public string Name { get; set; }
         public bool Invert { get; set; }
         public MappingRange MappingRange { get; set; }
     }
-    public class KeyboardAction : GameAction { }
-    public class JoystickAction : GameAction
+    public class ThrottleAction: GameAction
     {
-        public List<JoystickAxis> ControllerAxis { get; set; }
+        public Axis PowerAxis { get; set; }
+        public Axis TriggerAxis { get; set; }
+        //public Axis ThumbstickAxis { get; set; }
+        public string Menu { get; set; }
+    }
+    public class StickAction: GameAction
+    {
     }
     public class ControlMapping
     {
         public string GameControlName { get; set; }
-        public List<KeyboardAction> KeyboardActions { get; set; }
-        public List<JoystickAction> JoystickActions { get; set; }
+        public List<GameAction> GameActions { get; set; }
         public List<Type> Types { get; set; }
         [JsonConstructor]
         public ControlMapping(string gameControlName, List<Type> types)
