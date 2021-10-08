@@ -10,7 +10,7 @@ namespace VTOLVRControlsMapper.Core
         High = 1,
         Full = 2
     }
-    public abstract class GameAction
+    public class GameAction
     {
         public Guid ControllerInstanceGuid { get; set; }
     }
@@ -45,26 +45,6 @@ namespace VTOLVRControlsMapper.Core
         {
             GameControlName = gameControlName;
             Types = types;
-            //List<JoystickAction> actions = new List<JoystickAction>();
-            //SharpDX.DirectInput.DirectInput di = new SharpDX.DirectInput.DirectInput();
-            //SharpDX.DirectInput.Joystick kb = new SharpDX.DirectInput.Joystick(di, new Guid("8e0fdc40-f559-11ea-8002-444553540000"));
-            //actions.Add(new JoystickAction()
-            //{
-            //    Axis = new List<JoystickAxis>()
-            //    {
-            //        new JoystickAxis()
-            //        {
-            //            ControllerAxisName="Y",
-            //            Invert=true,
-            //            MappingRange=MappingRange.Full
-            //        }
-            //    },
-            //    ControllerActionBehavior = ControllerActionBehavior.Axis,
-            //    //ControllerButtonName = "",
-            //    ControllerInstanceGuid = new Guid("8e0fdc40-f559-11ea-8002-444553540000")
-            //});
-            //JoystickActions = actions;
-            //}
         }
     }
 }

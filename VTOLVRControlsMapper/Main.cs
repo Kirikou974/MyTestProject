@@ -9,12 +9,16 @@ namespace VTOLVRControlsMapper
     {
         static readonly string _settingsFileFolder = @"VTOLVR_ModLoader\Mods\";
         static bool _updateControllers = true;
-        public static Action<string> LogFunction { get; protected set; }
+        private static VTOLMOD _instance;
+        public static VTOLMOD instance { get => _instance; }
         public override void ModLoaded()
         {
             Log("Mod Loaded");
-            LogFunction = Log;
-            StartCoroutine(ControlsHelper.LoadDeviceInstances());
+            if(_instance == null)
+            {
+                _instance = this;
+            }
+            StartCoroutine(LoadDeviceInstances());
             if (VTOLAPI.SceneLoaded == null)
             {
                 VTOLAPI.SceneLoaded += Sceneloaded;
@@ -24,6 +28,11 @@ namespace VTOLVRControlsMapper
                 VTOLAPI.MissionReloaded += MissionReloaded;
             }
             base.ModLoaded();
+        }
+        private IEnumerator LoadDeviceInstances()
+        {
+            ControlsHelper.LoadDeviceInstances();
+            yield return null;
         }
         private void Sceneloaded(VTOLScenes scene)
         {
