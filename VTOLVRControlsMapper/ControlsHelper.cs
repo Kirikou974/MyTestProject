@@ -17,13 +17,8 @@ namespace VTOLVRControlsMapper
         static DirectInput _directInput;
         static List<DeviceInstance> _deviceInstances;
         static List<Device> _devices = new List<Device>();
-        static KeyboardUpdate[] _keyboardUpdates;
-        static KeyboardState _keyboardState;
-        static JoystickUpdate[] _joystickUpdates;
-        static JoystickState _joystickState;
         static Dictionary<string, object> _customControlCache;
         static List<ControlMapping> _mappings;
-        public static List<ControlMapping> Mappings { get => _mappings; }
         static List<UnityEngine.Object> _unityObjects = new List<UnityEngine.Object>();
         public static bool MappingsLoaded
         {
@@ -191,24 +186,8 @@ namespace VTOLVRControlsMapper
         }
         #endregion
         #region Controllers
-        public static IEnumerator UpdateGameControls()
+        public static void StartGameControlsRoutines()
         {
-            //Get controllers update
-            foreach (Device device in _devices)
-            {
-                if (device is Keyboard)
-                {
-                    _keyboardUpdates = (device as Keyboard).GetBufferedData();
-                    _keyboardState = (device as Keyboard).GetCurrentState();
-                }
-                if (device is Joystick)
-                {
-                    //TODO: this is a bug, need to handle multiple joysticks
-                    _joystickUpdates = (device as Joystick).GetBufferedData();
-                    _joystickState = (device as Joystick).GetCurrentState();
-                }
-            }
-
             //Send controller data to game control
             foreach (ControlMapping controlMapping in _mappings)
             {
@@ -216,80 +195,101 @@ namespace VTOLVRControlsMapper
                 {
                     foreach (GameAction action in controlMapping.GameActions)
                     {
-                        if (action is GenericGameAction)
+                        if (action != null)
                         {
-                            yield return UpdateGeneric(controlMapping, action as GenericGameAction);
-                        }
-                        else if (action is ThrottleAction)
-                        {
-                            yield return UpdateThrottle(controlMapping, action as ThrottleAction);
-                        }
-                        else if (action is StickAction)
-                        {
-                            yield return UpdateStick(controlMapping, action as StickAction);
+                            Guid controllerGuid = action.ControllerInstanceGuid;
+                            if ((action is GenericGameAction) && (action as GenericGameAction) != null)
+                            {
+                                GenericGameAction genericAction = action as GenericGameAction;
+                                Keyboard keyboard = _devices.Find(d => d.Information.InstanceGuid == controllerGuid) as Keyboard;
+                                Main.instance.StopCoroutine(GenericRoutine(keyboard, controlMapping, genericAction));
+                                Main.instance.StartCoroutine(GenericRoutine(keyboard, controlMapping, genericAction));
+                            }
+                            else if ((action is ThrottleAction) && (action as ThrottleAction) != null)
+                            {
+                                ThrottleAction throttleAction = action as ThrottleAction;
+                                Joystick joystick = _devices.Find(d => d.Information.InstanceGuid == controllerGuid) as Joystick;
+                                StartAxisRoutine(joystick, throttleAction.PowerAxis, controlMapping);
+                                StartAxisRoutine(joystick, throttleAction.TriggerAxis, controlMapping);
+                                //TODO handle Menu and Thumbstick axis
+                                //yield return ExecuteButton(throttleAction.Menu, joystickUpdate.Offset.ToString(), ControllerActionBehavior.Toggle);
+                            }
+                            else if (action is StickAction)
+                            {
+                                //TODO implement this
+                                //StickRoutine(controlMapping, action as StickAction);
+                            }
                         }
                     }
                 }
             }
-            yield return null;
         }
-        private static IEnumerator UpdateGeneric(ControlMapping mapping, GenericGameAction action)
+
+        private static void StartAxisRoutine(Joystick joystick, Axis axis, ControlMapping controlMapping)
         {
-            if (!(action is null) && !(_keyboardUpdates is null))
+            IEnumerator axisRoutine = AxisRoutine(joystick, axis, controlMapping);
+            Main.instance.StopCoroutine(axisRoutine);
+            Main.instance.StartCoroutine(axisRoutine);
+        }
+        private static void StickRoutine(ControlMapping controlMapping, StickAction stickAction)
+        {
+        }
+        private static IEnumerator GenericRoutine(Keyboard keyboard, ControlMapping mapping, GenericGameAction action)
+        {
+            while (true)
             {
+                //Get custom control instance and methods
+                object instance = _customControlCache[mapping.GameControlName];
+                MethodInfo methodInfo = GetExecuteMethod(instance, mapping.GameControlName, action.ControllerActionBehavior);
+                MethodInfo offMethodInfo = GetExecuteMethod(instance, mapping.GameControlName, ControllerActionBehavior.HoldOff);
+
                 //TODO handle other update types
-                KeyboardUpdate update = _keyboardUpdates.FirstOrDefault(k => k.Key.ToString() == action.ControllerButtonName);
-                if (update.Key != Key.Unknown && update.Key.ToString() == action.ControllerButtonName && update.IsPressed)
+                KeyboardUpdate[] updates = keyboard.GetBufferedData();
+                KeyboardState keyboardState = keyboard.GetCurrentState();
+                if (updates != null && updates.Where(u => u.Key.ToString() == action.ControllerButtonName).Count() > 0)
                 {
-                    bool keyIsReleased = _keyboardState.PressedKeys.Where(k => k == update.Key).Count() == 0;
-                    yield return ExecuteButton(mapping.GameControlName, update.Key.ToString(), action.ControllerActionBehavior, keyIsReleased);
+                    KeyboardUpdate update = updates.First(u => u.Key.ToString() == action.ControllerButtonName);
+                    if (update.Key != Key.Unknown && update.Key.ToString() == action.ControllerButtonName && update.IsPressed)
+                    {
+                        bool keyIsReleased = keyboardState.PressedKeys.Where(k => k == update.Key).Count() == 0;
+                        yield return methodInfo.Invoke(instance, null);
+                        if (action.ControllerActionBehavior == ControllerActionBehavior.HoldOn)
+                        {
+                            yield return new WaitUntil(() => keyIsReleased);
+                            offMethodInfo.Invoke(instance, null);
+                        }
+                    }
                 }
+                yield return null;
             }
-            yield return null;
         }
-        private static IEnumerator UpdateThrottle(ControlMapping mapping, ThrottleAction throttleAction)
+        private static IEnumerator AxisRoutine(Joystick joystick, Axis axis, ControlMapping mapping)
         {
-            if (!(throttleAction is null) && !(_joystickUpdates is null))
+            while (true)
             {
-                foreach (JoystickUpdate joystickUpdate in _joystickUpdates)
+                if (axis != null)
                 {
-                    ExecuteAxis(throttleAction.PowerAxis, mapping, joystickUpdate);
-                    ExecuteAxis(throttleAction.TriggerAxis, mapping, joystickUpdate);
-                    //TODO handle Menu and Thumbstick axis
-                    //yield return ExecuteButton(throttleAction.Menu, joystickUpdate.Offset.ToString(), ControllerActionBehavior.Toggle);
+                    //Get custom control instance and methods
+                    object instance = _customControlCache[mapping.GameControlName];
+                    MethodInfo methodInfo = GetExecuteMethod(instance, mapping.GameControlName, ControllerActionBehavior.Axis);
+                    //Get controller update
+                    JoystickUpdate[] updates = joystick.GetBufferedData();
+                    Func<JoystickUpdate, bool> predicate = delegate (JoystickUpdate j)
+                    {
+                        return j.Offset.ToString() == axis.Name;
+                    };
+                    if (updates != null && updates.Where(predicate).Count() > 0)
+                    {
+                        JoystickUpdate update = updates.First(predicate);
+                        float axisValue = ConvertAxisValue(update.Value, axis.Invert, axis.MappingRange);
+                        methodInfo.Invoke(instance, new object[] { axisValue });
+                    }
                 }
+                yield return null;
             }
-            yield return null;
         }
         private static IEnumerator UpdateStick(ControlMapping mapping, StickAction throttleAction)
         {
-            yield return null;
-        }
-        private static void ExecuteAxis(Axis axis, ControlMapping mapping, JoystickUpdate joystickUpdate)
-        {
-            if (axis != null && axis.Name == joystickUpdate.Offset.ToString())
-            {
-                object instance = _customControlCache[mapping.GameControlName];
-                MethodInfo methodInfo = GetExecuteMethod(instance, mapping.GameControlName, ControllerActionBehavior.Axis);
-                float axisValue = ConvertAxisValue(joystickUpdate.Value, axis.Invert, axis.MappingRange);
-                methodInfo.Invoke(instance, new object[] { axisValue });
-            }
-        }
-
-        private static IEnumerator ExecuteButton(string gameControlName, string controllerButtonName, ControllerActionBehavior behavior, bool buttonIsReleased = false)
-        {
-            //Get custom control instance
-            object instance = _customControlCache[gameControlName];
-
-            //Get methods for related behavior
-            MethodInfo methodInfo = GetExecuteMethod(instance, gameControlName, behavior);
-            yield return methodInfo.Invoke(instance, null);
-            if (behavior == ControllerActionBehavior.HoldOn)
-            {
-                MethodInfo offMethodInfo = GetExecuteMethod(instance, gameControlName, ControllerActionBehavior.HoldOff);
-                yield return new WaitUntil(() => buttonIsReleased);
-                offMethodInfo.Invoke(instance, null);
-            }
             yield return null;
         }
         private static MethodInfo GetExecuteMethod(object instance, string gameControlName, ControllerActionBehavior behavior)
@@ -367,6 +367,7 @@ namespace VTOLVRControlsMapper
                     derivedType.IsAssignableFrom(t)
                     ).ToList();
         }
+        //Got this from VTOLVRPhysicalInput mod : https://github.com/solidshadow1126/VTOLVRPhysicalInput
         public static float ConvertAxisValue(int value, bool invert, MappingRange mappingRange = MappingRange.Full)
         {
             float retVal;

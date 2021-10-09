@@ -8,13 +8,12 @@ namespace VTOLVRControlsMapper
     public class Main : VTOLMOD
     {
         static readonly string _settingsFileFolder = @"VTOLVR_ModLoader\Mods\";
-        static bool _updateControllers = true;
-        private static VTOLMOD _instance;
-        public static VTOLMOD instance { get => _instance; }
+        private static Main _instance;
+        public static Main instance { get => _instance; }
         public override void ModLoaded()
         {
             Log("Mod Loaded");
-            if(_instance == null)
+            if (_instance == null)
             {
                 _instance = this;
             }
@@ -43,7 +42,7 @@ namespace VTOLVRControlsMapper
                 case VTOLScenes.Akutan:
                 case VTOLScenes.CustomMapBase:
                     Log("Scene Loaded");
-                    StartCoroutine(LoadModObjects());
+                    StartCoroutine(StartMod());
                     break;
                 case VTOLScenes.LoadingScene:
                     break;
@@ -51,12 +50,7 @@ namespace VTOLVRControlsMapper
         }
         private void MissionReloaded()
         {
-            StartCoroutine(LoadModObjects());
-        }
-        public void OnApplicationFocus(bool hasFocus)
-        {
-            //Log("Game focus is : " + hasFocus);
-            //_updateControllers = hasFocus;
+            StartCoroutine(StartMod());
         }
         /// <summary>
         /// Called by Unity each frame
@@ -73,20 +67,17 @@ namespace VTOLVRControlsMapper
             if (Input.GetKeyDown(KeyCode.F5))
             {
                 Log("Reloading mappings");
-                StartCoroutine(LoadModObjects());
-            }
-            if (ControlsHelper.MappingsLoaded && _updateControllers)
-            {
-                StartCoroutine(ControlsHelper.UpdateGameControls());
+                StartCoroutine(StartMod());
             }
         }
-        private IEnumerator LoadModObjects()
+        private IEnumerator StartMod()
         {
             VTOLVehicles vehicle = VTOLAPI.GetPlayersVehicleEnum();
             Log("Controls loading for " + vehicle);
             while (!ControlsHelper.UnityObjectsLoaded(vehicle))
             {
                 //Load unity objects (buttons, levers, covers...) to access later
+                Log("Waiting for controls loading...");
                 ControlsHelper.LoadUnityObjects();
                 yield return new WaitForSeconds(2);
             }
@@ -113,6 +104,11 @@ namespace VTOLVRControlsMapper
             Log("Loading custom control instances");
             ControlsHelper.LoadMappingInstances();
             Log("Custom control instances loaded");
+
+            Log("Start game controls update routines");
+            //Start game controls update routines
+            ControlsHelper.StartGameControlsRoutines();
+            Log("Game controls update routines started");
             yield return null;
         }
     }
