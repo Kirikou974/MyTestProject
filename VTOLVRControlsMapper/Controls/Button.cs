@@ -1,7 +1,10 @@
-﻿using VTOLVRControlsMapper.Core;
+﻿using System;
+using System.Collections;
+using VTOLVRControlsMapper.Core;
 
 namespace VTOLVRControlsMapper.Controls
 {
+    [ControlClass(UnityTypes = new Type[] { typeof(VRInteractable), typeof(VRButton) })]
     public class Button : ControlButtonBase<VRButton>
     {
         public Interactable InteractableControl { get; protected set; }
@@ -9,13 +12,17 @@ namespace VTOLVRControlsMapper.Controls
         {
             InteractableControl = new Interactable(ControlName);
         }
-        public override void StartInteract()
+        [ControlMethod(SupportedBehavior = ControllerActionBehavior.HoldOn)]
+        public override void StartControlInteraction(VRHandController hand)
         {
-            InteractableControl.StartInteract();
+            hand.gloveAnimation.PressButton(UnityControl.transform, true);
+            InteractableControl.StartControlInteraction(hand);
         }
-        public override void StopInteract()
+        [ControlMethod(SupportedBehavior = ControllerActionBehavior.HoldOff)]
+        public override void StopControlInteraction(VRHandController hand)
         {
-            InteractableControl.StopInteract();
+            InteractableControl.StopControlInteraction(hand);
+            ClosestHand.gloveAnimation.UnPressButton();
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 namespace VTOLVRControlsMapper.Core
 {
     public enum ControllerActionBehavior
@@ -11,11 +10,16 @@ namespace VTOLVRControlsMapper.Core
         Decrease = 4,
         On = 5,
         Off = 6,
-        Continuous = 7
+        Axis = 7
     }
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = true)]
-    public class ControlAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Method, Inherited = true)]
+    public class ControlMethodAttribute : Attribute
     {
         public ControllerActionBehavior SupportedBehavior { get; set; }
+    }
+    [AttributeUsage(AttributeTargets.Class, Inherited = true)]
+    public class ControlClassAttribute : Attribute
+    {
+        public Type[] UnityTypes { get; set; }
     }
 }

@@ -12,9 +12,7 @@
   "unlisted": true,
   "preview_image": "",
   "web_preview_image": "",
-  "dependencies": [
-    "System.Text.Json.dll"
-  ],
+  "dependencies": null,
   "mod_dependencies": null,
   "ContentType": 3
 }

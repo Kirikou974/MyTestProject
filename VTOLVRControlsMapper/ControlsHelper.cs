@@ -16,18 +16,23 @@ namespace VTOLVRControlsMapper
     {
         static DirectInput _directInput;
         static List<DeviceInstance> _deviceInstances;
-        static List<Device> _devices;
+        static List<Device> _devices = new List<Device>();
         static KeyboardUpdate[] _keyboardUpdates;
         static KeyboardState _keyboardState;
         static JoystickUpdate[] _joystickUpdates;
         static JoystickState _joystickState;
         static Dictionary<string, object> _customControlCache;
         static List<ControlMapping> _mappings;
+        public static List<ControlMapping> Mappings { get => _mappings; }
         static List<UnityEngine.Object> _unityObjects = new List<UnityEngine.Object>();
-        //public static VRJoystick _vrJoystick;
-        //public static VRThrottle _vrThrottle;
-        public static List<Device> Devices { get => _devices; }
-        public static bool MappingsLoaded { get => _mappings != null && _mappings.Count > 0; }
+        public static bool MappingsLoaded
+        {
+            get
+            {
+                return _mappings != null && _mappings.Count > 0 &&
+                    _customControlCache != null && _customControlCache.Count > 0;
+            }
+        }
         #region Unity objects
         public static bool UnityObjectsLoaded(VTOLVehicles vehicle)
         {
@@ -46,9 +51,12 @@ namespace VTOLVRControlsMapper
         public static void LoadUnityObjects()
         {
             _unityObjects = new List<UnityEngine.Object>();
+
+            //Get IControl derived class to deduce which unity control to go fetch
             List<Type> controlTypes = GetDerivedTypes<IControl>();
             foreach (Type controlType in controlTypes)
             {
+                //FindObjectsOfType<T> where T is the type deduced from the classes that implement IControl interface
                 Type unityObjectType = controlType.BaseType.GenericTypeArguments[0];
                 MethodInfo[] vtolModMethods = typeof(UnityEngine.Object).GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy);
                 MethodInfo findObjectsOfTypeMethod = vtolModMethods.Single(m => m.IsGenericMethod && m.Name == nameof(UnityEngine.Object.FindObjectsOfType));
@@ -93,10 +101,23 @@ namespace VTOLVRControlsMapper
                             ControlMapping controlMapping = BuildControlMapping(vrInteractable.name, linkedObjects);
                             mappings.Add(controlMapping);
                         }
-                        writer.WriteRaw(JsonConvert.SerializeObject(mappings.ToArray(), Formatting.Indented));
+
+                        JsonSerializerSettings settings = new JsonSerializerSettings()
+                        {
+                            TypeNameHandling = TypeNameHandling.All
+                        };
+                        writer.WriteRaw(JsonConvert.SerializeObject(mappings.ToArray(), Formatting.Indented, GetJSONSerializerSettings()));
                     }
                 }
             }
+        }
+        private static JsonSerializerSettings GetJSONSerializerSettings()
+        {
+            JsonSerializerSettings settings = new JsonSerializerSettings()
+            {
+                TypeNameHandling = TypeNameHandling.All
+            };
+            return settings;
         }
         public static string GetMappingFilePath(string settingsFileFolder, string modName, string vehicleName, string forceMappingFilePath = "")
         {
@@ -117,8 +138,8 @@ namespace VTOLVRControlsMapper
                     jsonContent = sr.ReadToEnd();
                 }
             }
-            List<ControlMapping> mappings = JsonConvert.DeserializeObject<List<ControlMapping>>(jsonContent);
-            return mappings;
+            ControlMapping[] mappings = JsonConvert.DeserializeObject<ControlMapping[]>(jsonContent, GetJSONSerializerSettings());
+            return mappings.ToList();
         }
         private static ControlMapping BuildControlMapping(string vrInteractableName, IEnumerable<UnityEngine.Object> linkedObjects)
         {
@@ -132,48 +153,47 @@ namespace VTOLVRControlsMapper
         public static void LoadMappings(string settingsFileFolder, string modName, string vehicleName, string forceMappingFilePath = "")
         {
             string mappingFilePath = GetMappingFilePath(settingsFileFolder, modName, vehicleName, forceMappingFilePath);
+            LoadMappings(mappingFilePath);
+        }
+        public static void LoadMappings(string mappingFilePath)
+        {
+            //Create JSON file if it does not exist
             if (!File.Exists(mappingFilePath))
             {
                 CreateMappingFile(mappingFilePath);
             }
+            //Generate mappings from JSON file parsing
             _mappings = GetMappingsFromFile(mappingFilePath);
-            _devices = new List<Device>();
+        }
+
+        public static void LoadMappingInstances()
+        {
             _customControlCache = new Dictionary<string, object>();
             foreach (ControlMapping mapping in _mappings)
             {
-                CreateMappingInstances(mapping);
-            }
-        }
-        private static void CreateMappingInstances(ControlMapping mapping)
-        {
-            //Create custom control instance
-            Type customControlType = GetMappingType(mapping.Types);
-            object instance = Activator.CreateInstance(customControlType, mapping.GameControlName);
-            _customControlCache.Add(mapping.GameControlName, instance);
-        }
-        private static Type GetMappingType(List<Type> types)
-        {
-            IEnumerable<Type> controlTypes = GetDerivedTypes<IControl>();
-            Type returnType = null;
-            foreach (Type type in controlTypes)
-            {
-                Type genericType = GetBaseTypeGeneric(type.BaseType);
-                if (types.Contains(genericType))
+                //Determine custom control type from class attributes
+                IEnumerable<Type> controlTypes = GetDerivedTypes<IControl>();
+                Type customControlType = controlTypes.FirstOrDefault(t =>
+                    t.GetCustomAttribute<ControlClassAttribute>() != null &&
+                    t.GetCustomAttribute<ControlClassAttribute>().UnityTypes.SequenceEqual(mapping.Types)
+                );
+                //Create custom control instance
+                if (customControlType != null)
                 {
-                    returnType = type;
+                    object instance = Activator.CreateInstance(customControlType, mapping.GameControlName);
+                    _customControlCache.Add(mapping.GameControlName, instance);
+                }
+                else
+                {
+                    Main.instance.Log("Cannot create a custom control isntance for : " + mapping.GameControlName);
                 }
             }
-            return returnType;
-        }
-        private static object GetMappingInstance(ControlMapping mapping)
-        {
-            return _customControlCache[mapping.GameControlName];
         }
         #endregion
         #region Controllers
-        public static IEnumerator UpdateControllers()
+        public static IEnumerator UpdateGameControls()
         {
-            //Get controller data
+            //Get controllers update
             foreach (Device device in _devices)
             {
                 if (device is Keyboard)
@@ -183,6 +203,7 @@ namespace VTOLVRControlsMapper
                 }
                 if (device is Joystick)
                 {
+                    //TODO: this is a bug, need to handle multiple joysticks
                     _joystickUpdates = (device as Joystick).GetBufferedData();
                     _joystickState = (device as Joystick).GetCurrentState();
                 }
@@ -191,129 +212,139 @@ namespace VTOLVRControlsMapper
             //Send controller data to game control
             foreach (ControlMapping controlMapping in _mappings)
             {
-                if (controlMapping != null && controlMapping.KeyboardActions != null)
+                if (controlMapping != null && controlMapping.GameActions != null)
                 {
-                    yield return UpdateKeyboard(controlMapping, controlMapping.KeyboardActions);
-                }
-                if (controlMapping != null && controlMapping.JoystickActions != null)
-                {
-                    UpdateJoystick(controlMapping, controlMapping.JoystickActions);
+                    foreach (GameAction action in controlMapping.GameActions)
+                    {
+                        if (action is GenericGameAction)
+                        {
+                            yield return UpdateGeneric(controlMapping, action as GenericGameAction);
+                        }
+                        else if (action is ThrottleAction)
+                        {
+                            yield return UpdateThrottle(controlMapping, action as ThrottleAction);
+                        }
+                        else if (action is StickAction)
+                        {
+                            yield return UpdateStick(controlMapping, action as StickAction);
+                        }
+                    }
                 }
             }
             yield return null;
         }
-        private static IEnumerator UpdateKeyboard(ControlMapping mapping, List<GameAction> actions)
+        private static IEnumerator UpdateGeneric(ControlMapping mapping, GenericGameAction action)
         {
-            foreach (GameAction action in actions)
+            if (!(action is null) && !(_keyboardUpdates is null))
             {
-                if (!(action is null))
+                //TODO handle other update types
+                KeyboardUpdate update = _keyboardUpdates.FirstOrDefault(k => k.Key.ToString() == action.ControllerButtonName);
+                if (update.Key != Key.Unknown && update.Key.ToString() == action.ControllerButtonName && update.IsPressed)
                 {
-                    Keyboard device = _devices.Find(d => d.Information.InstanceGuid == action.ControllerInstanceGuid) as Keyboard;
-                    KeyboardUpdate update = _keyboardUpdates.Single(k => k.Key.ToString() == action.ControllerActionName);
-                    if (update.Key != Key.Unknown)
-                    {
-                        yield return ExecuteKeyboard(update, mapping, action);
-                    }
+                    bool keyIsReleased = _keyboardState.PressedKeys.Where(k => k == update.Key).Count() == 0;
+                    yield return ExecuteButton(mapping.GameControlName, update.Key.ToString(), action.ControllerActionBehavior, keyIsReleased);
                 }
             }
+            yield return null;
         }
-        private static void UpdateJoystick(ControlMapping mapping, List<GameAction> actions)
+        private static IEnumerator UpdateThrottle(ControlMapping mapping, ThrottleAction throttleAction)
         {
-            foreach (GameAction action in actions)
+            if (!(throttleAction is null) && !(_joystickUpdates is null))
             {
-                if (!(action is null))
+                foreach (JoystickUpdate joystickUpdate in _joystickUpdates)
                 {
-                    Joystick device = _devices.Find(d => d.Information.InstanceGuid == action.ControllerInstanceGuid) as Joystick;
-                    foreach (JoystickUpdate joystickUpdate in _joystickUpdates)
-                    {
-                        ExecuteJoystick(joystickUpdate, mapping, action);
-                    }
+                    ExecuteAxis(throttleAction.PowerAxis, mapping, joystickUpdate);
+                    ExecuteAxis(throttleAction.TriggerAxis, mapping, joystickUpdate);
+                    //TODO handle Menu and Thumbstick axis
+                    //yield return ExecuteButton(throttleAction.Menu, joystickUpdate.Offset.ToString(), ControllerActionBehavior.Toggle);
                 }
             }
+            yield return null;
         }
-        private static void ExecuteJoystick(JoystickUpdate update, ControlMapping mapping, GameAction action)
+        private static IEnumerator UpdateStick(ControlMapping mapping, StickAction throttleAction)
         {
-            //TODO
+            yield return null;
         }
-        private static IEnumerator ExecuteKeyboard(KeyboardUpdate update, ControlMapping mapping, GameAction action)
+        private static void ExecuteAxis(Axis axis, ControlMapping mapping, JoystickUpdate joystickUpdate)
         {
-            if (update.Key.ToString() == action.ControllerActionName)
+            if (axis != null && axis.Name == joystickUpdate.Offset.ToString())
             {
-                if (update.IsPressed)
-                {
-                    //Get custom control instance
-                    object instance = GetMappingInstance(mapping);
+                object instance = _customControlCache[mapping.GameControlName];
+                MethodInfo methodInfo = GetExecuteMethod(instance, mapping.GameControlName, ControllerActionBehavior.Axis);
+                float axisValue = ConvertAxisValue(joystickUpdate.Value, axis.Invert, axis.MappingRange);
+                methodInfo.Invoke(instance, new object[] { axisValue });
+            }
+        }
 
-                    //Get methods for related behavior
-                    List<MethodInfo> methodsInfo = instance.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance).ToList();
-                    MethodInfo methodInfo = methodsInfo.Find(m =>
-                        m.GetCustomAttribute<ControlAttribute>() != null &&
-                        m.GetCustomAttribute<ControlAttribute>().SupportedBehavior == action.ControllerActionBehavior
-                    );
-                    methodInfo.Invoke(instance, null);
-                    if (action.ControllerActionBehavior == ControllerActionBehavior.HoldOn)
-                    {
-                        MethodInfo offMethodInfo = methodsInfo.Find(m =>
-                            m.GetCustomAttribute<ControlAttribute>().SupportedBehavior == ControllerActionBehavior.HoldOff
-                        );
-                        yield return new WaitUntil(() => _keyboardState.PressedKeys.Where(k => k == update.Key).Count() == 0);
-                        offMethodInfo.Invoke(instance, null);
-                    }
-                }
+        private static IEnumerator ExecuteButton(string gameControlName, string controllerButtonName, ControllerActionBehavior behavior, bool buttonIsReleased = false)
+        {
+            //Get custom control instance
+            object instance = _customControlCache[gameControlName];
+
+            //Get methods for related behavior
+            MethodInfo methodInfo = GetExecuteMethod(instance, gameControlName, behavior);
+            yield return methodInfo.Invoke(instance, null);
+            if (behavior == ControllerActionBehavior.HoldOn)
+            {
+                MethodInfo offMethodInfo = GetExecuteMethod(instance, gameControlName, ControllerActionBehavior.HoldOff);
+                yield return new WaitUntil(() => buttonIsReleased);
+                offMethodInfo.Invoke(instance, null);
             }
             yield return null;
         }
-        public static IEnumerator LoadDeviceInstances()
+        private static MethodInfo GetExecuteMethod(object instance, string gameControlName, ControllerActionBehavior behavior)
+        {
+            List<MethodInfo> methodsInfo = instance.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance).ToList();
+            MethodInfo methodInfo = methodsInfo.Find(m =>
+                m.GetCustomAttribute<ControlMethodAttribute>() != null &&
+                m.GetCustomAttribute<ControlMethodAttribute>().SupportedBehavior == behavior
+            );
+            return methodInfo;
+        }
+        public static void LoadDeviceInstances()
         {
             _directInput = new DirectInput();
             IList<DeviceInstance> devices = _directInput.GetDevices();
-            _deviceInstances = devices.Where(
-                d =>
-                d.Type == DeviceType.Joystick ||
-                d.Type == DeviceType.Gamepad ||
-                d.Type == DeviceType.FirstPerson ||
-                d.Type == DeviceType.Flight ||
-                d.Type == DeviceType.Driving ||
-                d.Type == DeviceType.Supplemental
-            ).ToList();
-            yield return null;
+            _deviceInstances = devices.ToList();
         }
-        public static void LoadControllers<T>()
+        public static void LoadControllers()
         {
-            foreach (ControlMapping mapping in _mappings)
+            IEnumerable<Guid> instanceGuids = _mappings
+                .Where(mapping => mapping.GameActions != null && mapping.GameActions.Count != 0)
+                .SelectMany(mapping => mapping.GameActions)
+                .Select(gameAction => gameAction.ControllerInstanceGuid)
+                .Distinct();
+
+            foreach (Guid instanceGuid in instanceGuids)
             {
-                List<GameAction> actions = new List<GameAction>();
-                bool isKeyboard = false;
-                if (typeof(T) == typeof(Joystick))
+                if (_devices.Find(d => d.Information.InstanceGuid == instanceGuid) == null)
                 {
-                    actions = mapping.JoystickActions;
-                }
-                else if (typeof(Keyboard) == typeof(Keyboard))
-                {
-                    actions = mapping.KeyboardActions;
-                    isKeyboard = true;
-                }
-                if (actions != null)
-                {
-                    foreach (GameAction action in actions)
+                    DeviceInstance instance = _deviceInstances.Find(d => d.InstanceGuid == instanceGuid);
+                    Device device = null;
+                    switch (instance.Type)
                     {
-                        Guid instanceGuid = action.ControllerInstanceGuid;
-                        if (_devices.Find(d => d.Information.InstanceGuid == instanceGuid) == null)
-                        {
-                            DeviceInstance instance = _deviceInstances.Find(d => d.InstanceGuid == instanceGuid);
-                            Device device = null;
-                            if (isKeyboard)
-                            {
-                                device = new Keyboard(_directInput);
-                            }
-                            else
-                            {
-                                device = new Joystick(_directInput, instanceGuid);
-                            }
-                            AcquireController(device);
-                            _devices.Add(device);
-                        }
+                        case DeviceType.Keyboard:
+                            device = new Keyboard(_directInput);
+                            break;
+                        case DeviceType.Joystick:
+                        case DeviceType.Gamepad:
+                        case DeviceType.Driving:
+                        case DeviceType.Flight:
+                        case DeviceType.FirstPerson:
+                        case DeviceType.Supplemental:
+                            device = new Joystick(_directInput, instanceGuid);
+                            break;
+                        case DeviceType.Device:
+                        case DeviceType.Mouse:
+                        case DeviceType.ControlDevice:
+                        case DeviceType.ScreenPointer:
+                        case DeviceType.Remote:
+                        default:
+                            //Not supported device types
+                            break;
                     }
+                    AcquireController(device);
+                    _devices.Add(device);
                 }
             }
         }
@@ -323,23 +354,9 @@ namespace VTOLVRControlsMapper
             device.Acquire();
         }
         #endregion
-        public static Type GetBaseTypeGeneric(Type baseType)
-        {
-            if (!baseType.IsGenericType)
-            {
-                return GetBaseTypeGeneric(baseType.BaseType);
-            }
-            else
-            {
-                return baseType.GenericTypeArguments[0];
-            }
-        }
         public static List<Type> GetDerivedTypes<T>()
         {
-            return GetDerivedTypes<T>(Assembly.GetAssembly(typeof(T)));
-        }
-        private static List<Type> GetDerivedTypes<T>(Assembly assembly)
-        {
+            Assembly assembly = Assembly.GetAssembly(typeof(T));
             var derivedType = typeof(T);
             return assembly
                 .GetTypes()
@@ -349,6 +366,37 @@ namespace VTOLVRControlsMapper
                     !t.IsAbstract &&
                     derivedType.IsAssignableFrom(t)
                     ).ToList();
+        }
+        public static float ConvertAxisValue(int value, bool invert, MappingRange mappingRange = MappingRange.Full)
+        {
+            float retVal;
+            if (value == 65535)
+            {
+                retVal = 1;
+            }
+            else
+            {
+                retVal = (((float)value / 32767) - 1);
+            }
+            if (invert)
+            {
+                retVal *= -1;
+            }
+            switch (mappingRange)
+            {
+                case MappingRange.Low:
+                    retVal /= 2;
+                    retVal -= 0.5f;
+                    break;
+                case MappingRange.High:
+                    retVal /= 2;
+                    retVal += 0.5f;
+                    break;
+                case MappingRange.Full:
+                default:
+                    break;
+            }
+            return (float)Math.Round(retVal, 2);
         }
     }
 }

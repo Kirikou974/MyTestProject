@@ -1,7 +1,6 @@
 using SharpDX.DirectInput;
+using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace VTOLVRControlsMapper
@@ -9,11 +8,17 @@ namespace VTOLVRControlsMapper
     public class Main : VTOLMOD
     {
         static readonly string _settingsFileFolder = @"VTOLVR_ModLoader\Mods\";
-        static bool _updateControllers;
+        static bool _updateControllers = true;
+        private static VTOLMOD _instance;
+        public static VTOLMOD instance { get => _instance; }
         public override void ModLoaded()
         {
             Log("Mod Loaded");
-            StartCoroutine(ControlsHelper.LoadDeviceInstances());
+            if(_instance == null)
+            {
+                _instance = this;
+            }
+            StartCoroutine(LoadDeviceInstances());
             if (VTOLAPI.SceneLoaded == null)
             {
                 VTOLAPI.SceneLoaded += Sceneloaded;
@@ -24,6 +29,11 @@ namespace VTOLVRControlsMapper
             }
             base.ModLoaded();
         }
+        private IEnumerator LoadDeviceInstances()
+        {
+            ControlsHelper.LoadDeviceInstances();
+            yield return null;
+        }
         private void Sceneloaded(VTOLScenes scene)
         {
             switch (scene)
@@ -33,7 +43,7 @@ namespace VTOLVRControlsMapper
                 case VTOLScenes.Akutan:
                 case VTOLScenes.CustomMapBase:
                     Log("Scene Loaded");
-                    StartCoroutine(LoadControlsMapping());
+                    StartCoroutine(LoadModObjects());
                     break;
                 case VTOLScenes.LoadingScene:
                     break;
@@ -41,12 +51,12 @@ namespace VTOLVRControlsMapper
         }
         private void MissionReloaded()
         {
-            StartCoroutine(LoadControlsMapping());
+            StartCoroutine(LoadModObjects());
         }
         public void OnApplicationFocus(bool hasFocus)
         {
-            Log("Game focus is : " + hasFocus);
-            _updateControllers = hasFocus;
+            //Log("Game focus is : " + hasFocus);
+            //_updateControllers = hasFocus;
         }
         /// <summary>
         /// Called by Unity each frame
@@ -63,34 +73,46 @@ namespace VTOLVRControlsMapper
             if (Input.GetKeyDown(KeyCode.F5))
             {
                 Log("Reloading mappings");
-                StartCoroutine(LoadControlsMapping());
+                StartCoroutine(LoadModObjects());
             }
             if (ControlsHelper.MappingsLoaded && _updateControllers)
             {
-                StartCoroutine(ControlsHelper.UpdateControllers());
+                StartCoroutine(ControlsHelper.UpdateGameControls());
             }
         }
-        private IEnumerator LoadControlsMapping()
+        private IEnumerator LoadModObjects()
         {
             VTOLVehicles vehicle = VTOLAPI.GetPlayersVehicleEnum();
             Log("Controls loading for " + vehicle);
             while (!ControlsHelper.UnityObjectsLoaded(vehicle))
             {
+                //Load unity objects (buttons, levers, covers...) to access later
                 ControlsHelper.LoadUnityObjects();
                 yield return new WaitForSeconds(2);
             }
             Log("Controls loaded for " + vehicle);
 
+            //Load mappings from json file
             Log("Mapping loading for " + vehicle);
             ControlsHelper.LoadMappings(_settingsFileFolder, name, vehicle.ToString());
             Log("Mapping loaded for " + vehicle);
 
-            Log("Loading keyboard");
-            ControlsHelper.LoadControllers<Keyboard>();
-            Log("Loading joysticks");
-            ControlsHelper.LoadControllers<Joystick>();
+            //Load controllers
+            Log("Loading controllers");
+            ControlsHelper.LoadControllers();
             Log("Controllers loaded");
 
+            //Load VRHands to have interactions
+            while (VRHandController.controllers.Count != 2)
+            {
+                Log("Waiting for hands...");
+                yield return new WaitForSeconds(2);
+            }
+
+            //Load custom control instances
+            Log("Loading custom control instances");
+            ControlsHelper.LoadMappingInstances();
+            Log("Custom control instances loaded");
             yield return null;
         }
     }

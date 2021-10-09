@@ -1,19 +1,19 @@
-﻿using VTOLVRControlsMapper.Core;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace VTOLVRControlsMapper.Core
 {
-    public abstract class ControlButtonBase<T> : ControlBase<T> where T : UnityEngine.Object
+    public abstract class ControlButtonBase<T> : ControlBase<T> where T : MonoBehaviour
     {
         public ControlButtonBase(string interactableName) : base(interactableName) { }
-        [Control(SupportedBehavior = ControllerActionBehavior.Toggle)]
-        public void Invoke()
+        [ControlMethod(SupportedBehavior = ControllerActionBehavior.Toggle)]
+        public IEnumerator InteractWithControl()
         {
-            StartInteract();
-            StopInteract();
+            VRHandController hand = ClosestHand;
+            hand.gloveAnimation.ClearInteractPose();
+            StartControlInteraction(hand);
+            yield return WaitForDefaultTime();
+            StopControlInteraction(hand);
         }
-        [Control(SupportedBehavior = ControllerActionBehavior.HoldOn)]
-        public abstract void StartInteract();
-        [Control(SupportedBehavior = ControllerActionBehavior.HoldOff)]
-        public abstract void StopInteract();
     }
 }
