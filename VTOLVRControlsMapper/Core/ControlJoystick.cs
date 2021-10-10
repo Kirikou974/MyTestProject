@@ -7,6 +7,7 @@ namespace VTOLVRControlsMapper.Core
         public ControlJoystick(string unityControlName) : base(unityControlName) { }
         [ControlMethod(SupportedBehavior = ControllerActionBehavior.Axis)]
         public abstract void UpdateAxis(float value);
-        public override void StopControlInteraction(VRHandController hand) { }
+        [ControlMethod(SupportedBehavior = ControllerActionBehavior.Toggle)]
+        public abstract void ClickMenu();
     }
 }

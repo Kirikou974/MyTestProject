@@ -29,7 +29,7 @@ namespace VTOLVRControlsMapper.Core
     {
         public Axis PowerAxis { get; set; }
         public Axis TriggerAxis { get; set; }
-        //public Axis ThumbstickAxis { get; set; }
+        public Axis ThumbstickAxis { get; set; }
         public string Menu { get; set; }
     }
     public class StickAction: GameAction

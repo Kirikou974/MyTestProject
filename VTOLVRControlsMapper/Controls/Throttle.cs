@@ -44,5 +44,12 @@ namespace VTOLVRControlsMapper.Controls
             //Set grabbed to false so that animation is only updated by the mod
             _grabbedField.SetValue(UnityControl, false);
         }
+
+        public override void ClickMenu()
+        {
+            StartControlInteraction(LeftHand);
+            UnityControl.OnMenuButtonDown.Invoke();
+            UnityControl.OnMenuButtonUp.Invoke();
+        }
     }
 }

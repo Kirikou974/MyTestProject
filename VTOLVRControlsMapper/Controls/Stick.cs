@@ -9,11 +9,12 @@ namespace VTOLVRControlsMapper.Controls
     {
         public Stick(string unityControlName) : base(unityControlName) { }
 
-        public override void StartControlInteraction(VRHandController hand)
+        public override void ClickMenu()
         {
             throw new NotImplementedException();
         }
-        public override void StopControlInteraction(VRHandController hand)
+
+        public override void StartControlInteraction(VRHandController hand)
         {
             throw new NotImplementedException();
         }

@@ -16,7 +16,18 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            TestJoystick();
+            ControlsHelper.LoadMappings("F:\\Steam\\SteamApps\\common\\VTOL VR\\VTOLVR_ModLoader\\mods\\VTOLVRControlsMapper\\mapping.FA26B.json");
+            ControlsHelper.LoadControllers();
+            Joystick joystick = ControlsHelper.GetDevice<Joystick>(new Guid("8e0fdc40-f559-11ea-8002-444553540000"));
+            Keyboard kb = ControlsHelper.GetDevice<Keyboard>(new Guid("6f1d2b61-d5a0-11cf-bfc7-444553540000"));
+            var test = ControlsHelper.GetGameActions<GenericGameAction>();
+            ControlsHelper.StartGenericGameActionRoutines();
+            foreach (var item in test)
+            {
+                Console.WriteLine(item);
+            }
+            Console.ReadLine();
+            //TestJoystick();
         }
         static void TestJoystick()
         {
@@ -27,24 +38,25 @@ namespace TestConsole
             {
                 if (item.InstanceGuid == new Guid("8e0fdc40-f559-11ea-8002-444553540000") && item.Type == SharpDX.DirectInput.DeviceType.FirstPerson)
                 {
-                    using (joystick = new Joystick(di, item.InstanceGuid))
-                    {
-                        joystick.Properties.BufferSize = 128;
-                        joystick.Acquire();
-                    }
+                    joystick = new Joystick(di, item.InstanceGuid);
+                    joystick.Properties.BufferSize = 128;
+                    joystick.Acquire();
                 }
             }
-            Console.WriteLine("default(JoystickUpdate)");
-            Console.WriteLine(default(JoystickOffset));
-            string controlName = "Y";
+            string controlName = "Buttons4";
             while (true)
             {
                 JoystickUpdate[] updates = joystick.GetBufferedData();
 
+                //foreach (var item in updates)
+                //{
+                //    Console.WriteLine(item.RawOffset);
+                //}
                 if (updates.Where(u => u.Offset.ToString() == controlName).Count() > 0)
                 {
                     JoystickUpdate update = updates.First(u => u.Offset.ToString() == controlName);
-                    Console.Write("\r{0}: {1}           ", update.Offset, ControlsHelper.ConvertAxisValue(update.Value, true, MappingRange.High));
+                    //Console.Write("\r{0}: {1}           ", update.Offset, ControlsHelper.ConvertAxisValue(update.Value, true, MappingRange.High));
+                    Console.Write("\r{0}: {1}           ", update.Offset, update.Value);
                 }
             }
         }

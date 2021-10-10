@@ -17,7 +17,6 @@ namespace VTOLVRControlsMapper
             {
                 _instance = this;
             }
-            StartCoroutine(LoadDeviceInstances());
             if (VTOLAPI.SceneLoaded == null)
             {
                 VTOLAPI.SceneLoaded += Sceneloaded;
@@ -27,11 +26,6 @@ namespace VTOLVRControlsMapper
                 VTOLAPI.MissionReloaded += MissionReloaded;
             }
             base.ModLoaded();
-        }
-        private IEnumerator LoadDeviceInstances()
-        {
-            ControlsHelper.LoadDeviceInstances();
-            yield return null;
         }
         private void Sceneloaded(VTOLScenes scene)
         {
@@ -72,7 +66,10 @@ namespace VTOLVRControlsMapper
         }
         private IEnumerator StartMod()
         {
+            ControlsHelper.Reset();
+
             VTOLVehicles vehicle = VTOLAPI.GetPlayersVehicleEnum();
+
             Log("Controls loading for " + vehicle);
             while (!ControlsHelper.UnityObjectsLoaded(vehicle))
             {

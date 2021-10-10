@@ -18,9 +18,5 @@ namespace VTOLVRControlsMapper.Controls
         {
             throw new NotImplementedException();
         }
-        public override void StopControlInteraction(VRHandController hand)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
