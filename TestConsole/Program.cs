@@ -16,18 +16,17 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            //ControlsHelper.LoadMappings("F:\\Steam\\SteamApps\\common\\VTOL VR\\VTOLVR_ModLoader\\mods\\VTOLVRControlsMapper\\mapping.FA26B.json");
-            //ControlsHelper.LoadControllers();
+            ControlsHelper.LoadMappings("F:\\Steam\\SteamApps\\common\\VTOL VR\\VTOLVR_ModLoader\\mods\\VTOLVRControlsMapper\\mapping.FA26B.json");
+            ControlsHelper.LoadControllers();
             //Joystick joystick = ControlsHelper.GetDevice<Joystick>(new Guid("8e0fdc40-f559-11ea-8002-444553540000"));
             //Keyboard kb = ControlsHelper.GetDevice<Keyboard>(new Guid("6f1d2b61-d5a0-11cf-bfc7-444553540000"));
             //var test = ControlsHelper.GetGameActions<ThrottleAction>();
-            //ControlsHelper.StartThrottleActionRoutines();
-            //foreach (var item in test)
-            //{
-            //    Console.WriteLine(item);
-            //}
-            //Console.ReadLine();
-            TestJoystick();
+            foreach (var item in ControlsHelper.Mappings)
+            {
+                Console.WriteLine(item);
+            }
+            Console.ReadLine();
+            //TestJoystick();
         }
         static void TestJoystick()
         {
@@ -36,7 +35,12 @@ namespace TestConsole
             Joystick joystick = null;
             foreach (var item in devices)
             {
-                if (item.InstanceGuid == new Guid("8e0fdc40-f559-11ea-8002-444553540000") && item.Type == SharpDX.DirectInput.DeviceType.FirstPerson)
+                if (item.Type == SharpDX.DirectInput.DeviceType.FirstPerson)
+                {
+                    Console.WriteLine(item.InstanceName);
+                    Console.WriteLine(item.InstanceGuid);
+                }
+                if (item.InstanceGuid == new Guid("ccb75030-fce8-11eb-8001-444553540000") && item.Type == SharpDX.DirectInput.DeviceType.FirstPerson)
                 {
                     joystick = new Joystick(di, item.InstanceGuid);
                     joystick.Properties.BufferSize = 128;
@@ -44,16 +48,23 @@ namespace TestConsole
                 }
             }
             string previousOffset = string.Empty;
+            Type joystickStateType = typeof(JoystickState);
+
             while (true)
             {
                 JoystickUpdate[] updates = joystick.GetBufferedData();
+                JoystickState state = joystick.GetCurrentState();
+
                 foreach (var item in updates)
                 {
-                    if(previousOffset != item.Offset.ToString())
+                    //if (previousOffset != item.Offset.ToString())
+                    //{
+                    //    previousOffset = item.Offset.ToString();
+                    //}
+                    if (item.Offset.ToString() == "Y")
                     {
-                        previousOffset = item.Offset.ToString();
+                        Console.Write("\r{0}: {1}       | {2} : {3}           ", item.Offset, item.Value, "X", joystickStateType.GetProperty("X").GetValue(state));
                     }
-                    Console.Write("\r{0}: {1}           ", item.Offset, item.Value);
                 }
             }
         }

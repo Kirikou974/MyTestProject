@@ -25,15 +25,26 @@ namespace VTOLVRControlsMapper.Core
         public bool Invert { get; set; }
         public MappingRange MappingRange { get; set; }
     }
-    public class ThrottleAction: GameAction
+    public class ThrottleAction: JoystickAction
     {
-        public Axis PowerAxis { get; set; }
-        public Axis TriggerAxis { get; set; }
-        public Axis ThumbstickAxis { get; set; }
-        public string Menu { get; set; }
+        public Axis Power { get; set; }
     }
-    public class StickAction: GameAction
+    public class Thumbstick
     {
+        public Axis X { get; set; }
+        public Axis Y { get; set; }
+    }
+    public class StickAction: JoystickAction
+    {
+        public Axis Pitch { get; set; }
+        public Axis Yaw { get; set; }
+        public Axis Roll { get; set; }
+    }
+    public class JoystickAction : GameAction
+    {
+        public Thumbstick Thumbstick { get; set; }
+        public Axis Trigger { get; set; }
+        public string Menu { get; set; }
     }
     public class ControlMapping
     {

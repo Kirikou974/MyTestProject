@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VTOLVRControlsMapper", "VTO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{EF599F3A-A5E0-4ABC-BE58-55CCD3B6C69F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VTOLVRControlsMapperUI", "VTOLVRControlsMapperUI\VTOLVRControlsMapperUI.csproj", "{6E7245C1-ECE8-4155-B04D-47BD6B8F0572}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{EF599F3A-A5E0-4ABC-BE58-55CCD3B6C69F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF599F3A-A5E0-4ABC-BE58-55CCD3B6C69F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF599F3A-A5E0-4ABC-BE58-55CCD3B6C69F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E7245C1-ECE8-4155-B04D-47BD6B8F0572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E7245C1-ECE8-4155-B04D-47BD6B8F0572}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E7245C1-ECE8-4155-B04D-47BD6B8F0572}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E7245C1-ECE8-4155-B04D-47BD6B8F0572}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

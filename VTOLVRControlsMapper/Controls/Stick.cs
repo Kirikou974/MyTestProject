@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.Events;
 using VTOLVRControlsMapper.Core;
 
 namespace VTOLVRControlsMapper.Controls
@@ -7,20 +9,20 @@ namespace VTOLVRControlsMapper.Controls
     [ControlClass(UnityTypes = new Type[] { typeof(VRInteractable), typeof(VRJoystick) })]
     public class Stick : ControlJoystick<VRJoystick>
     {
-        public Stick(string unityControlName) : base(unityControlName) { }
-
-        public override void ClickMenu()
+        private VRInteractable _vrInteractable;
+        public Stick(string unityControlName) : base(unityControlName)
         {
-            throw new NotImplementedException();
+            _vrInteractable = ControlsHelper.GetGameControl<VRInteractable>(unityControlName);
         }
-
-        public override void StartControlInteraction(VRHandController hand)
+        public override UnityEvent OnMenuButtonDown => UnityControl.OnMenuButtonDown;
+        public override UnityEvent OnMenuButtonUp => UnityControl.OnMenuButtonUp;
+        public override VRHandController MainHand => RightHand;
+        public override Vector3Event OnSetThumbstick => UnityControl.OnSetThumbstick;
+        public override VRInteractable VRInteractable => _vrInteractable;
+        public override void UpdateControl()
         {
-            throw new NotImplementedException();
-        }
-        public override void UpdateAxis(float value)
-        {
-            throw new NotImplementedException();
+            UnityControl.OnSetStick.Invoke(VectorUpdate);
+            //UnityControl.SetStickAnimation();
         }
     }
 }

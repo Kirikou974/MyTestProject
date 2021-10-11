@@ -9,8 +9,7 @@ namespace VTOLVRControlsMapper.Core
         Increase = 3,
         Decrease = 4,
         On = 5,
-        Off = 6,
-        Axis = 7
+        Off = 6
     }
     [AttributeUsage(AttributeTargets.Method, Inherited = true)]
     public class ControlMethodAttribute : Attribute
