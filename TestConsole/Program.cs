@@ -21,7 +21,6 @@ namespace TestConsole
             Joystick joystick = ControlsHelper.GetDevice<Joystick>(new Guid("8e0fdc40-f559-11ea-8002-444553540000"));
             Keyboard kb = ControlsHelper.GetDevice<Keyboard>(new Guid("6f1d2b61-d5a0-11cf-bfc7-444553540000"));
             var test = ControlsHelper.GetGameActions<GenericGameAction>();
-            ControlsHelper.StartGenericGameActionRoutines();
             foreach (var item in test)
             {
                 Console.WriteLine(item);

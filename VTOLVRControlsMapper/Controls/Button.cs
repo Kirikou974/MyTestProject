@@ -12,17 +12,28 @@ namespace VTOLVRControlsMapper.Controls
         {
             InteractableControl = new Interactable(ControlName);
         }
-        [ControlMethod(SupportedBehavior = ControllerActionBehavior.HoldOn)]
         public override void StartControlInteraction(VRHandController hand)
         {
             hand.gloveAnimation.PressButton(UnityControl.transform, true);
-            InteractableControl.StartControlInteraction(hand);
+            InteractableControl.UnityControl.OnInteract.Invoke();
         }
-        [ControlMethod(SupportedBehavior = ControllerActionBehavior.HoldOff)]
         public override void StopControlInteraction(VRHandController hand)
         {
-            InteractableControl.StopControlInteraction(hand);
+            Main.instance.Log("StopControlInteraction");
+            InteractableControl.UnityControl.OnStopInteract.Invoke();
             ClosestHand.gloveAnimation.UnPressButton();
+        }
+        [ControlMethod(SupportedBehavior = ControllerActionBehavior.HoldOff)]
+        public IEnumerator HoldOff()
+        {
+            StopControlInteraction(ClosestHand);
+            yield return null;
+        }
+        [ControlMethod(SupportedBehavior = ControllerActionBehavior.HoldOn)]
+        public IEnumerator HoldOn()
+        {
+            StartControlInteraction(ClosestHand);
+            yield return null;
         }
     }
 }

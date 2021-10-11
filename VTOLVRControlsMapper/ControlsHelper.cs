@@ -264,6 +264,7 @@ namespace VTOLVRControlsMapper
             foreach (var mapping in mappings)
             {
                 Guid controllerInstanceGuid = mapping.Action.ControllerInstanceGuid;
+                string controllerButtonName = mapping.Action.ControllerButtonName;
                 SimpleDeviceType deviceType = GetDeviceType(controllerInstanceGuid);
                 switch (deviceType)
                 {
@@ -271,37 +272,29 @@ namespace VTOLVRControlsMapper
                         Func<KeyboardUpdate, bool> kbUpdatePredicate = (update) =>
                         {
                             return update.Key != Key.Unknown &&
-                                update.Key.ToString() == mapping.Action.ControllerButtonName &&
+                                update.Key.ToString() == controllerButtonName &&
                                 update.IsPressed;
                         };
-                        Func<KeyboardState, bool> kbStatePredicate = (state) =>
+                        Func<bool> kbReleaseStatePredicate = () =>
                         {
-                            return state.PressedKeys.Where(k => k.ToString() == mapping.Action.ControllerButtonName).Count() == 0;
+                            return !_keyboardStates[controllerInstanceGuid].IsPressed((Key)Enum.Parse(typeof(Key), controllerButtonName, true));
                         };
-                        IEnumerator kbRoutine = GenericRoutine(
-                            _keyboardUpdates, _keyboardStates, 
-                            mapping.GameControlName, mapping.Action,
-                            kbUpdatePredicate, kbStatePredicate
-                        );
-                        Main.instance.StartCoroutine(kbRoutine);
+                        Main.instance.StartCoroutine(GenericRoutine(_keyboardUpdates, mapping.GameControlName, mapping.Action,
+                            kbUpdatePredicate, kbReleaseStatePredicate));
                         break;
                     case SimpleDeviceType.Joystick:
                         Predicate<JoystickUpdate> joyUpdatePredicate = (update) =>
                         {
                             return update.Offset.ToString() == mapping.Action.ControllerButtonName && update.Value == 128;
                         };
-                        Predicate<JoystickState> joyStatePredicate = (state) =>
+                        Func<bool> joyReleaseStatePredicate = () =>
                         {
                             //TODO implement
                             //return state.PressedKeys.Where(k => k.ToString() == mapping.Action.ControllerButtonName).Count() == 0;
                             return false;
                         };
-                        IEnumerator joyRoutine = GenericRoutine(
-                            _keyboardUpdates, _keyboardStates,
-                            mapping.GameControlName, mapping.Action,
-                            joyUpdatePredicate, joyStatePredicate
-                        );
-                        Main.instance.StartCoroutine(joyRoutine);
+                        Main.instance.StartCoroutine(GenericRoutine(_keyboardUpdates, mapping.GameControlName, mapping.Action,
+                            joyUpdatePredicate, joyReleaseStatePredicate));
                         break;
                     case SimpleDeviceType.None:
                     default:
@@ -345,13 +338,12 @@ namespace VTOLVRControlsMapper
                 yield return null;
             }
         }
-        private static IEnumerator GenericRoutine<Update, State>(
+        private static IEnumerator GenericRoutine<Update>(
             Dictionary<Guid, Update[]> updates,
-            Dictionary<Guid, State> states,
             string gameControlName,
             GenericGameAction action,
             Func<Update, bool> updatePredicate,
-            Func<State, bool> statePredicate)
+            Func<bool> releasePredicate)
             where Update : IStateUpdate
         {
             while (true)
@@ -369,10 +361,11 @@ namespace VTOLVRControlsMapper
 
                     if (action.ControllerActionBehavior == ControllerActionBehavior.HoldOn)
                     {
-                        bool isReleased = statePredicate(states[action.ControllerInstanceGuid]);
+                        Main.instance.Log("HoldOn/off in progress");
                         MethodInfo offMethodInfo = GetExecuteMethod(instance, gameControlName, ControllerActionBehavior.HoldOff);
-                        yield return new WaitUntil(() => isReleased);
-                        offMethodInfo.Invoke(instance, null);
+                        yield return new WaitUntil(releasePredicate);
+                        yield return offMethodInfo.Invoke(instance, null);
+                        Main.instance.Log("HoldOn/off is done");
                     }
                 }
                 yield return null;
@@ -448,35 +441,41 @@ namespace VTOLVRControlsMapper
                     default:
                         break;
                 }
-                AcquireController(device);
-                _devices.Add(device, deviceType);
+                if(device != null)
+                {
+                    AcquireController(device);
+                    _devices.Add(device, deviceType);
+                }
             }
         }
         private static SimpleDeviceType GetDeviceType(Guid guid)
         {
             DeviceInstance instance = _deviceInstances.Find(d => d.InstanceGuid == guid);
             SimpleDeviceType devType = SimpleDeviceType.None;
-            switch (instance.Type)
+            if (instance != null)
             {
-                case DeviceType.Keyboard:
-                    devType = SimpleDeviceType.Keyboard;
-                    break;
-                case DeviceType.Joystick:
-                case DeviceType.Gamepad:
-                case DeviceType.Driving:
-                case DeviceType.Flight:
-                case DeviceType.FirstPerson:
-                case DeviceType.Supplemental:
-                    devType = SimpleDeviceType.Joystick;
-                    break;
-                case DeviceType.Device:
-                case DeviceType.Mouse:
-                case DeviceType.ControlDevice:
-                case DeviceType.ScreenPointer:
-                case DeviceType.Remote:
-                default:
-                    break;
-                    //Not supported device types
+                switch (instance.Type)
+                {
+                    case DeviceType.Keyboard:
+                        devType = SimpleDeviceType.Keyboard;
+                        break;
+                    case DeviceType.Joystick:
+                    case DeviceType.Gamepad:
+                    case DeviceType.Driving:
+                    case DeviceType.Flight:
+                    case DeviceType.FirstPerson:
+                    case DeviceType.Supplemental:
+                        devType = SimpleDeviceType.Joystick;
+                        break;
+                    case DeviceType.Device:
+                    case DeviceType.Mouse:
+                    case DeviceType.ControlDevice:
+                    case DeviceType.ScreenPointer:
+                    case DeviceType.Remote:
+                    default:
+                        break;
+                        //Not supported device types
+                }
             }
             return devType;
         }
@@ -497,7 +496,7 @@ namespace VTOLVRControlsMapper
             device.Properties.BufferSize = 128;
             device.Acquire();
         }
-        #endregion
+#endregion
         public static List<Type> GetDerivedTypes<T>()
         {
             Assembly assembly = Assembly.GetAssembly(typeof(T));
