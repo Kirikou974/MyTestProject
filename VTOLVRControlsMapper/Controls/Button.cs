@@ -19,7 +19,6 @@ namespace VTOLVRControlsMapper.Controls
         }
         public override void StopControlInteraction(VRHandController hand)
         {
-            Main.instance.Log("StopControlInteraction");
             InteractableControl.UnityControl.OnStopInteract.Invoke();
             ClosestHand.gloveAnimation.UnPressButton();
         }
