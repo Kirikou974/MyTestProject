@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Valve.Newtonsoft.Json;
 
 namespace VTOLVRControlsMapper.Core
@@ -13,17 +14,31 @@ namespace VTOLVRControlsMapper.Core
     public class GameAction
     {
         public Guid ControllerInstanceGuid { get; set; }
-    }
-    public class GenericGameAction : GameAction
-    {
-        public string ControllerButtonName { get; set; }
-        public ControllerActionBehavior ControllerActionBehavior { get; set; }
+        public override string ToString()
+        {
+            return ControllerInstanceGuid.ToString();
+        }
     }
     public class Axis
     {
         public string Name { get; set; }
         public bool Invert { get; set; }
         public MappingRange MappingRange { get; set; }
+        public override string ToString()
+        {
+            return Name;
+        }
+    }
+    public class JoystickAction : GameAction
+    {
+        public Thumbstick Thumbstick { get; set; }
+        public Axis Trigger { get; set; }
+        public string Menu { get; set; }
+    }
+    public class GenericGameAction : GameAction
+    {
+        public string ControllerButtonName { get; set; }
+        public ControllerActionBehavior ControllerActionBehavior { get; set; }
     }
     public class ThrottleAction: JoystickAction
     {
@@ -40,15 +55,10 @@ namespace VTOLVRControlsMapper.Core
         public Axis Yaw { get; set; }
         public Axis Roll { get; set; }
     }
-    public class JoystickAction : GameAction
-    {
-        public Thumbstick Thumbstick { get; set; }
-        public Axis Trigger { get; set; }
-        public string Menu { get; set; }
-    }
     public class ControlMapping
     {
         public string GameControlName { get; set; }
+        public string Description { get; set; }
         public List<GameAction> GameActions { get; set; }
         public List<Type> Types { get; set; }
         [JsonConstructor]
@@ -56,6 +66,10 @@ namespace VTOLVRControlsMapper.Core
         {
             GameControlName = gameControlName;
             Types = types;
+        }
+        public override string ToString()
+        {
+            return GameControlName;
         }
     }
 }

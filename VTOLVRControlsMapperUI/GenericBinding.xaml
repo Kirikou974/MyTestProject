@@ -1,0 +1,146 @@
+﻿<Window x:Class="VTOLVRControlsMapperUI.GenericBinding"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VTOLVRControlsMapperUI"
+        mc:Ignorable="d"
+        Title="Binding" Height="Auto" Width="600" 
+        WindowStartupLocation="CenterScreen" 
+        ResizeMode="NoResize"
+        SizeToContent="Height">
+    <Window.InputBindings>
+        <KeyBinding Command="ApplicationCommands.Close" Key=""/>
+    </Window.InputBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <Rectangle Panel.ZIndex="1" 
+                   Name="WaitMessageRectangle"
+                   Visibility="Hidden"
+                   Fill="LightYellow"
+                   Opacity=".9">
+        </Rectangle>
+        <TextBlock FontSize="20"
+                   FontWeight="Bold"
+                   Text="Waiting for input"
+                   Panel.ZIndex="2"
+                   Visibility="Hidden"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Name="WaitMessage"/>
+        <TabControl Name="DevicesTab">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Device.Name}"/>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <DataGrid Background="AntiqueWhite"
+                              Name="ActionsGrid"
+                              CanUserAddRows="False"
+                              CanUserReorderColumns="False"
+                              CanUserResizeColumns="False"
+                              CanUserResizeRows="False"
+                              AutoGenerateColumns="False"
+                              GridLinesVisibility="Horizontal"
+                              ItemsSource="{Binding Actions}">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Width="0.3*">
+                                <DataGridTemplateColumn.Header>
+                                    <TextBlock Text="Action"/>
+                                </DataGridTemplateColumn.Header>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Behavior}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <!--<DataGridTemplateColumn Header="Device"
+                                        Width="1*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox ItemsSource="{Binding AvailableDevices}"
+                                      DisplayMemberPath="Name"
+                                      x:Name="DeviceComboBox"
+                                      SelectedValuePath="ID"
+                                      SelectionChanged="DeviceComboBox_SelectionChanged"
+                                      Text="{Binding SelectedDevice.Name}">
+                                    </ComboBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>-->
+                            <DataGridTemplateColumn Width="0.5*">
+                                <DataGridTemplateColumn.Header>
+                                    <TextBlock Text="Control"
+                                   Margin="2"/>
+                                </DataGridTemplateColumn.Header>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding ControlName}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="0.1*" 
+                                        Header="Edit">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Name="Edit" 
+                                                Click="EditButton_Click"
+                                                Background="Transparent"
+                                                BorderThickness="0"
+                                                HorizontalAlignment="Center">
+                                            <Image Source="/Icons/Edit_grey_16x.png" Width="16" Height="16" />
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="0.1*" Header="Clear">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Name="Clear" 
+                                                Click="ClearButton_Click"
+                                                Background="Transparent"
+                                                BorderThickness="0"
+                                                HorizontalAlignment="Center">
+                                            <Image Source="/Icons/Close_16x.png" Width="16" Height="16" />
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0"
+                    Content="Save"
+                    Margin="2"
+                    Click="SaveButton_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Column="1"
+                    Content="Discard"
+                    Margin="2"
+                    Click="CloseButton_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

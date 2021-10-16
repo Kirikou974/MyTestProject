@@ -4,6 +4,35 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Icons\ColumnDetails_16x.png" />
+    <None Remove="Icons\Edit_grey_16x.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VTOLVRControlsMapper\VTOLVRControlsMapper.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SharpDX">
+      <HintPath>..\..\..\..\..\source\repos\VTOLVRPhysicalInput\packages\SharpDX.4.2.0\lib\net45\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DirectInput">
+      <HintPath>..\..\..\..\..\source\repos\VTOLVRPhysicalInput\packages\SharpDX.DirectInput.4.2.0\lib\net45\SharpDX.DirectInput.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\Close_16x.png">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\ColumnDetails_16x.png" />
+    <Resource Include="Icons\Edit_grey_16x.png">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
 
 </Project>

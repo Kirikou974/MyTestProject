@@ -5,8 +5,84 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VTOLVRControlsMapperUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="VTOLVR Controls Mapper" 
+        Height="700" 
+        Width="700" 
+        WindowStartupLocation="CenterScreen" 
+        ResizeMode="NoResize"
+        Background="#181735">
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Background="#0F0F2D" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.50*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Select plane"
+                       Foreground="White"
+                       Grid.Column="0"
+                       FontSize="20"
+                       Grid.Row="0"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center" FontWeight="Bold" />
+            <ComboBox Grid.Row="0"
+                      Grid.Column="1"
+                      Margin="8"
+                      VerticalAlignment="Stretch"
+                      HorizontalAlignment="Stretch"
+                      Name="PlaneComboBox"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBox MaxLength="255"
+                     MaxLines="1"
+                     Text="Search control"
+                     Foreground="LightGray"
+                     Margin="8"
+                     Name="SearchBox">
+            </TextBox>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <DataGrid Margin="5,0,5,5" 
+                      Background="AntiqueWhite"
+                      Name="MappingDataGrid"
+                      VerticalScrollBarVisibility="Visible"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      CanUserReorderColumns="False"
+                      CanUserResizeRows="False"
+                      CanUserResizeColumns="False"
+                      IsReadOnly="True" 
+                      GridLinesVisibility="Horizontal">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Control" Binding="{Binding GameControlName}" Width="0.7*"/>
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="1*"/>
+                    <DataGridTextColumn Header="Bindings"
+                                        Binding="{Binding GameActions.Count}" 
+                                        Width="0.2*"/>
+                    <DataGridTemplateColumn Width="0.2*" Header="View">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="View" 
+                                        Click="ViewButton_Click"
+                                        Background="Transparent"
+                                        BorderThickness="0">
+                                    <Image Source="/Icons/ColumnDetails_16x.png" Width="16" Height="16"/>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </Window>

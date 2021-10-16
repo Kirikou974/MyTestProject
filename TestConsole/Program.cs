@@ -17,13 +17,14 @@ namespace TestConsole
         static void Main(string[] args)
         {
             ControlsHelper.LoadMappings("F:\\Steam\\SteamApps\\common\\VTOL VR\\VTOLVR_ModLoader\\mods\\VTOLVRControlsMapper\\mapping.FA26B.json");
-            ControlsHelper.LoadControllers();
+            //ControlsHelper.LoadControllers();
             //Joystick joystick = ControlsHelper.GetDevice<Joystick>(new Guid("8e0fdc40-f559-11ea-8002-444553540000"));
             //Keyboard kb = ControlsHelper.GetDevice<Keyboard>(new Guid("6f1d2b61-d5a0-11cf-bfc7-444553540000"));
             //var test = ControlsHelper.GetGameActions<ThrottleAction>();
             foreach (var item in ControlsHelper.Mappings)
             {
-                Console.WriteLine(item);
+                if (item.GameActions != null)
+                    Console.WriteLine(item.GameActions.ToString());
             }
             Console.ReadLine();
             //TestJoystick();

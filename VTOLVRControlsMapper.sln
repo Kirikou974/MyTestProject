@@ -6,26 +6,40 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VTOLVRControlsMapper", "VTO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{EF599F3A-A5E0-4ABC-BE58-55CCD3B6C69F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VTOLVRControlsMapperUI", "VTOLVRControlsMapperUI\VTOLVRControlsMapperUI.csproj", "{6E7245C1-ECE8-4155-B04D-47BD6B8F0572}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VTOLVRControlsMapperUI", "VTOLVRControlsMapperUI\VTOLVRControlsMapperUI.csproj", "{6E7245C1-ECE8-4155-B04D-47BD6B8F0572}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{7BB21F11-6675-4E25-AB78-E420A6B129C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7BB21F11-6675-4E25-AB78-E420A6B129C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BB21F11-6675-4E25-AB78-E420A6B129C2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7BB21F11-6675-4E25-AB78-E420A6B129C2}.Debug|x64.Build.0 = Debug|Any CPU
 		{7BB21F11-6675-4E25-AB78-E420A6B129C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BB21F11-6675-4E25-AB78-E420A6B129C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BB21F11-6675-4E25-AB78-E420A6B129C2}.Release|x64.ActiveCfg = Release|Any CPU
+		{7BB21F11-6675-4E25-AB78-E420A6B129C2}.Release|x64.Build.0 = Release|Any CPU
 		{EF599F3A-A5E0-4ABC-BE58-55CCD3B6C69F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EF599F3A-A5E0-4ABC-BE58-55CCD3B6C69F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF599F3A-A5E0-4ABC-BE58-55CCD3B6C69F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EF599F3A-A5E0-4ABC-BE58-55CCD3B6C69F}.Debug|x64.Build.0 = Debug|Any CPU
 		{EF599F3A-A5E0-4ABC-BE58-55CCD3B6C69F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF599F3A-A5E0-4ABC-BE58-55CCD3B6C69F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF599F3A-A5E0-4ABC-BE58-55CCD3B6C69F}.Release|x64.ActiveCfg = Release|Any CPU
+		{EF599F3A-A5E0-4ABC-BE58-55CCD3B6C69F}.Release|x64.Build.0 = Release|Any CPU
 		{6E7245C1-ECE8-4155-B04D-47BD6B8F0572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6E7245C1-ECE8-4155-B04D-47BD6B8F0572}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E7245C1-ECE8-4155-B04D-47BD6B8F0572}.Debug|x64.ActiveCfg = Debug|x64
+		{6E7245C1-ECE8-4155-B04D-47BD6B8F0572}.Debug|x64.Build.0 = Debug|x64
 		{6E7245C1-ECE8-4155-B04D-47BD6B8F0572}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E7245C1-ECE8-4155-B04D-47BD6B8F0572}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E7245C1-ECE8-4155-B04D-47BD6B8F0572}.Release|x64.ActiveCfg = Release|x64
+		{6E7245C1-ECE8-4155-B04D-47BD6B8F0572}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

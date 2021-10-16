@@ -61,7 +61,7 @@ namespace VTOLVRControlsMapper
             if (Input.GetKeyDown(KeyCode.F5))
             {
                 Log("Reloading mappings");
-                StartCoroutine(StartMod());
+                _ = StartCoroutine(StartMod());
             }
         }
         private IEnumerator StartMod()
@@ -87,7 +87,7 @@ namespace VTOLVRControlsMapper
 
             //Load controllers
             Log("Loading controllers");
-            ControlsHelper.LoadControllers();
+            ControlsHelper.LoadDevices();
             Log("Controllers loaded");
 
             //Load VRHands to have interactions

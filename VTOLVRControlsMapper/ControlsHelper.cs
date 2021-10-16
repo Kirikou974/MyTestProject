@@ -33,6 +33,7 @@ namespace VTOLVRControlsMapper
         static Dictionary<Guid, JoystickState> _joystickStates;
         static Type _joystickStateType = typeof(JoystickState);
         public static List<ControlMapping> Mappings => _mappings;
+        public static Dictionary<Device, SimpleDeviceType> Devices => _devices;
 
         public static bool MappingsLoaded
         {
@@ -114,10 +115,14 @@ namespace VTOLVRControlsMapper
                         foreach (VRInteractable vrInteractable in vrInteractables)
                         {
                             IEnumerable<UnityEngine.Object> linkedObjects = GetGameControls<UnityEngine.Object>(vrInteractable.name);
-                            ControlMapping controlMapping = BuildControlMapping(vrInteractable.name, linkedObjects);
+                            List<Type> types = new List<Type>();
+                            foreach (UnityEngine.Object unityObject in linkedObjects)
+                            {
+                                types.Add(unityObject.GetType());
+                            }
+                            ControlMapping controlMapping = new ControlMapping(vrInteractable.name, types);
                             mappings.Add(controlMapping);
                         }
-
                         JsonSerializerSettings settings = new JsonSerializerSettings()
                         {
                             TypeNameHandling = TypeNameHandling.All
@@ -127,6 +132,10 @@ namespace VTOLVRControlsMapper
                 }
             }
         }
+        public static void CreateMappingFileFromMappings(string mappingFilePath)
+        {
+            //TODO implement
+        }
         private static JsonSerializerSettings GetJSONSerializerSettings()
         {
             JsonSerializerSettings settings = new JsonSerializerSettings()
@@ -135,14 +144,16 @@ namespace VTOLVRControlsMapper
             };
             return settings;
         }
-        public static string GetMappingFilePath(string settingsFileFolder, string modName, string vehicleName, string forceMappingFilePath = "")
+        public static string GetMappingFilePath(string settingsFileFolder, string modName, string vehicleName)
         {
             string mappingFilePath = Path.Combine(Directory.GetCurrentDirectory(), settingsFileFolder, modName, string.Format(@"mapping.{0}.json", vehicleName));
-            if (!string.IsNullOrEmpty(forceMappingFilePath))
-            {
-                mappingFilePath = forceMappingFilePath;
-            }
             return mappingFilePath;
+        }
+        public static string[] GetMappingFiles(string settingsFileFolder, string modName)
+        {
+            string modFolder = Path.Combine(Directory.GetCurrentDirectory(), settingsFileFolder, modName);
+            string[] files = Directory.GetFiles(modFolder, "mapping.*.json");
+            return files;
         }
         private static List<ControlMapping> GetMappingsFromFile(string mappingFilePath)
         {
@@ -157,18 +168,9 @@ namespace VTOLVRControlsMapper
             ControlMapping[] mappings = JsonConvert.DeserializeObject<ControlMapping[]>(jsonContent, GetJSONSerializerSettings());
             return mappings.ToList();
         }
-        private static ControlMapping BuildControlMapping(string vrInteractableName, IEnumerable<UnityEngine.Object> linkedObjects)
+        public static void LoadMappings(string settingsFileFolder, string modName, string vehicleName)
         {
-            List<Type> types = new List<Type>();
-            foreach (UnityEngine.Object unityObject in linkedObjects)
-            {
-                types.Add(unityObject.GetType());
-            }
-            return new ControlMapping(vrInteractableName, types);
-        }
-        public static void LoadMappings(string settingsFileFolder, string modName, string vehicleName, string forceMappingFilePath = "")
-        {
-            string mappingFilePath = GetMappingFilePath(settingsFileFolder, modName, vehicleName, forceMappingFilePath);
+            string mappingFilePath = GetMappingFilePath(settingsFileFolder, modName, vehicleName);
             LoadMappings(mappingFilePath);
         }
         public static void LoadMappings(string mappingFilePath)
@@ -187,11 +189,8 @@ namespace VTOLVRControlsMapper
             foreach (ControlMapping mapping in _mappings)
             {
                 //Determine custom control type from class attributes
-                IEnumerable<Type> controlTypes = GetDerivedTypes<IControl>();
-                Type customControlType = controlTypes.FirstOrDefault(t =>
-                    t.GetCustomAttribute<ControlClassAttribute>() != null &&
-                    t.GetCustomAttribute<ControlClassAttribute>().UnityTypes.SequenceEqual(mapping.Types)
-                );
+                Type customControlType = GetCustomControlType(mapping.Types);
+
                 //Create custom control instance
                 if (customControlType != null)
                 {
@@ -203,6 +202,15 @@ namespace VTOLVRControlsMapper
                     Main.instance.Log("Cannot create a custom control isntance for : " + mapping.GameControlName);
                 }
             }
+        }
+        public static Type GetCustomControlType(List<Type> types)
+        {
+            IEnumerable<Type> controlTypes = GetDerivedTypes<IControl>();
+            Type customControlType = controlTypes.FirstOrDefault(t =>
+                t.GetCustomAttribute<ControlClassAttribute>() != null &&
+                t.GetCustomAttribute<ControlClassAttribute>().UnityTypes.SequenceEqual(types)
+            );
+            return customControlType;
         }
         #endregion
         #region Controllers
@@ -251,8 +259,9 @@ namespace VTOLVRControlsMapper
             {
                 GenericGameAction action = mapping.Action;
                 Guid controllerInstanceGuid = action.ControllerInstanceGuid;
+                DeviceInstance instance = GetDeviceInstance(controllerInstanceGuid);
                 string controllerButtonName = action.ControllerButtonName;
-                SimpleDeviceType deviceType = GetDeviceType(controllerInstanceGuid);
+                SimpleDeviceType deviceType = GetDeviceType(instance);
                 switch (deviceType)
                 {
                     case SimpleDeviceType.Keyboard:
@@ -291,6 +300,13 @@ namespace VTOLVRControlsMapper
                 }
             }
         }
+
+        private static DeviceInstance GetDeviceInstance(Guid controllerInstanceGuid)
+        {
+            DeviceInstance instance = _deviceInstances.Find(d => d.InstanceGuid == controllerInstanceGuid);
+            return instance;
+        }
+
         public static dynamic GetGameActions<T>() where T : GameAction
         {
             var retValue = _mappings
@@ -303,7 +319,8 @@ namespace VTOLVRControlsMapper
         {
             while (true)
             {
-                SimpleDeviceType devType = GetDeviceType(controllerGuid);
+                DeviceInstance instance = GetDeviceInstance(controllerGuid);
+                SimpleDeviceType devType = GetDeviceType(instance);
                 switch (devType)
                 {
                     case SimpleDeviceType.Keyboard:
@@ -343,11 +360,11 @@ namespace VTOLVRControlsMapper
                 {
                     Update update = updates[action.ControllerInstanceGuid].First(updatePredicate);
                     object instance = _customControlCache[gameControlName];
-                    MethodInfo methodInfo = GetExecuteMethod(instance, action.ControllerActionBehavior);
+                    MethodInfo methodInfo = GetExecuteMethod(instance.GetType(), action.ControllerActionBehavior);
                     yield return methodInfo.Invoke(instance, null);
                     if (action.ControllerActionBehavior == ControllerActionBehavior.HoldOn)
                     {
-                        MethodInfo offMethodInfo = GetExecuteMethod(instance, ControllerActionBehavior.HoldOff);
+                        MethodInfo offMethodInfo = GetExecuteMethod(instance.GetType(), ControllerActionBehavior.HoldOff);
                         yield return new WaitUntil(releasePredicate);
                         yield return offMethodInfo.Invoke(instance, null);
                     }
@@ -380,7 +397,7 @@ namespace VTOLVRControlsMapper
                         //If axis values didn't change do not update
                         Vector3 vector = new Vector3(xValue, yValue, zValue);
                         Vector3 currentVector = (Vector3)vectorProperty.GetValue(instance);
-                        if(currentVector != vector)
+                        if (currentVector != vector)
                         {
                             methodInfo.Invoke(instance, new object[] { vector });
                         }
@@ -455,21 +472,29 @@ namespace VTOLVRControlsMapper
         {
             return _joystickUpdates != null && _joystickUpdates[controllerInstanceGuid].Where(predicate).Count() > 0;
         }
-        private static MethodInfo GetExecuteMethod(object instance, ControllerActionBehavior behavior)
+        public static MethodInfo GetExecuteMethod(Type type, ControllerActionBehavior behavior)
         {
-            List<MethodInfo> methodsInfo = instance.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance).ToList();
+            List<MethodInfo> methodsInfo = type.GetMethods(BindingFlags.Public | BindingFlags.Instance).ToList();
             MethodInfo methodInfo = methodsInfo.Find(m =>
                 m.GetCustomAttribute<ControlMethodAttribute>() != null &&
                 m.GetCustomAttribute<ControlMethodAttribute>().SupportedBehavior == behavior
             );
             return methodInfo;
         }
+        public static MethodInfo[] GetExecuteMethods(Type type)
+        {
+            IEnumerable<MethodInfo> methodsInfo = type
+                .GetMethods(BindingFlags.Public | BindingFlags.Instance) 
+                .Where(m => m.GetCustomAttribute<ControlMethodAttribute>() != null
+            );
+            return methodsInfo.ToArray();
+        }
         private static MethodInfo GetExecuteMethod(object instance, string methodName)
         {
             MethodInfo methodInfo = instance.GetType().GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance);
             return methodInfo;
         }
-        public static void LoadControllers()
+        public static void LoadDevices()
         {
             _directInput = new DirectInput();
             IList<DeviceInstance> devices = _directInput.GetDevices();
@@ -484,7 +509,8 @@ namespace VTOLVRControlsMapper
             foreach (Guid controllerGuid in controllerGuids)
             {
                 Device device = null;
-                SimpleDeviceType deviceType = GetDeviceType(controllerGuid);
+                DeviceInstance instance = GetDeviceInstance(controllerGuid);
+                SimpleDeviceType deviceType = GetDeviceType(instance);
                 switch (deviceType)
                 {
                     case SimpleDeviceType.Keyboard:
@@ -503,14 +529,13 @@ namespace VTOLVRControlsMapper
                 }
                 if (device != null)
                 {
-                    AcquireController(device);
+                    AcquireDevice(device);
                     _devices.Add(device, deviceType);
                 }
             }
         }
-        private static SimpleDeviceType GetDeviceType(Guid guid)
+        public static SimpleDeviceType GetDeviceType(DeviceInstance instance)
         {
-            DeviceInstance instance = _deviceInstances.Find(d => d.InstanceGuid == guid);
             SimpleDeviceType devType = SimpleDeviceType.None;
             if (instance != null)
             {
@@ -549,12 +574,23 @@ namespace VTOLVRControlsMapper
         }
         public static T GetDevice<T>(Guid guid) where T : Device
         {
-            return _devices.Single(d => d.Key is T && d.Key.Information.InstanceGuid == guid).Key as T;
+            try
+            {
+                return _devices.Single(d => d.Key is T && d.Key.Information.InstanceGuid == guid).Key as T;
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }
         }
-        private static void AcquireController(Device device)
+        public static void AcquireDevice(Device device)
         {
             device.Properties.BufferSize = 128;
             device.Acquire();
+        }
+        public static void UnacquireDevice(Device device)
+        {
+            device.Unacquire();
         }
         #endregion
         private static List<Type> GetDerivedTypes<T>()
