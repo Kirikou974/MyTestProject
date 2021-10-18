@@ -153,10 +153,9 @@ namespace VTOLVRControlsMapperUI
         }
         private void SaveMappings(string jsonFilePath)
         {
-            using FileStream fs = File.OpenWrite(jsonFilePath);
+            using FileStream fs = File.Create(jsonFilePath);
             using StreamWriter sw = new StreamWriter(fs);
             using JsonTextWriter writer = new JsonTextWriter(sw);
-            writer.WriteRawValue("");
             writer.WriteRaw(JsonConvert.SerializeObject(ControlsHelper.Mappings.ToArray(), Formatting.Indented, ControlsHelper.GetJSONSerializerSettings()));
         }
         private List<ControllerActionBehavior> GetSupportedBehaviors(ControlMapping mapping)

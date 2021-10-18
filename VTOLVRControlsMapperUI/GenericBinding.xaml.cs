@@ -89,7 +89,7 @@ namespace VTOLVRControlsMapperUI
                 BindingItem bindingItemToModify = BindingItems[BindingItems.FindIndex(b => b.Device == bindingItem.Device)];
                 ActionItem actionItemToClear = bindingItemToModify.Actions.Find(a => a.Behavior == actionItem.Behavior);
                 actionItemToClear.ControlName = string.Empty;
-                if(actionItem.Behavior == ControllerActionBehavior.HoldOn)
+                if (actionItem.Behavior == ControllerActionBehavior.HoldOn)
                 {
                     ActionItem actionItemToClearOff = bindingItemToModify.Actions.Find(a => a.Behavior == ControllerActionBehavior.HoldOff);
                     actionItemToClearOff.ControlName = string.Empty;
@@ -146,12 +146,13 @@ namespace VTOLVRControlsMapperUI
                         Type updateType = update.GetType();
                         if (update is KeyboardUpdate)
                         {
-                            returnValue = (update as KeyboardUpdate?).Value.Key.ToString();
+                            KeyboardUpdate? kbUpdate = update as KeyboardUpdate?;
+                            returnValue = kbUpdate.Value.Key.ToString();
                         }
                         else if (update is JoystickUpdate)
                         {
                             JoystickUpdate? joystickUpdate = update as JoystickUpdate?;
-                            if(joystickUpdate.Value.Offset.ToString().StartsWith("Buttons"))
+                            if (joystickUpdate.Value.Offset.ToString().StartsWith("Buttons"))
                             {
                                 returnValue = joystickUpdate.Value.Offset.ToString();
                             }

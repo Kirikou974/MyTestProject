@@ -51,17 +51,9 @@ namespace VTOLVRControlsMapper.Core
                 StopControlInteraction(hand);
             }
         }
-
         public override IEnumerator Toggle()
         {
-            if (IsOff)
-            {
-                yield return On();
-            }
-            else
-            {
-                yield return Off();
-            }
+            yield return IsOff ? On() : Off();
         }
     }
 }
