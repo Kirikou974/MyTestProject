@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using VTOLVRControlsMapper.Core;
 
-namespace VTOLVRControlsMapperUI
+namespace VTOLVRControlsMapperUI.CustomItem
 {
     public class DeviceItem
     {

@@ -1,4 +1,4 @@
-﻿namespace VTOLVRControlsMapperUI
+﻿namespace VTOLVRControlsMapperUI.CustomItem
 {
     public class PlaneItem
     {

@@ -21,25 +21,22 @@ namespace VTOLVRControlsMapper
     }
     public class ControlsHelper
     {
-        static DirectInput _directInput;
-        static List<DeviceInstance> _deviceInstances;
-        static Dictionary<Device, SimpleDeviceType> _devices;
-        static Dictionary<string, object> _customControlCache;
-        static List<ControlMapping> _mappings;
-        static List<UnityEngine.Object> _unityObjects = new List<UnityEngine.Object>();
-        static Dictionary<Guid, KeyboardUpdate[]> _keyboardUpdates;
-        static Dictionary<Guid, KeyboardState> _keyboardStates;
-        static Dictionary<Guid, JoystickUpdate[]> _joystickUpdates;
-        static Dictionary<Guid, JoystickState> _joystickStates;
-        static Type _joystickStateType = typeof(JoystickState);
-        public static List<ControlMapping> Mappings => _mappings;
-        public static Dictionary<Device, SimpleDeviceType> Devices => _devices;
+        private static DirectInput _directInput;
+        private static List<DeviceInstance> _deviceInstances;
+        private static Dictionary<string, object> _customControlCache;
+        private static List<UnityEngine.Object> _unityObjects = new List<UnityEngine.Object>();
+        private static Dictionary<Guid, KeyboardUpdate[]> _keyboardUpdates;
+        private static Dictionary<Guid, JoystickUpdate[]> _joystickUpdates;
+        private static Dictionary<Guid, JoystickState> _joystickStates;
+        private static Dictionary<Guid, KeyboardState> _keyboardStates;
+        public static List<ControlMapping> Mappings { get; private set; }
+        public static Dictionary<Device, SimpleDeviceType> Devices { get; private set; }
 
         public static bool MappingsLoaded
         {
             get
             {
-                return _mappings != null && _mappings.Count > 0 &&
+                return Mappings != null && Mappings.Count > 0 &&
                     _customControlCache != null && _customControlCache.Count > 0;
             }
         }
@@ -102,7 +99,7 @@ namespace VTOLVRControlsMapper
             string directoryName = Path.GetDirectoryName(mappingFilePath);
             if (!Directory.Exists(directoryName))
             {
-                Directory.CreateDirectory(directoryName);
+                _ = Directory.CreateDirectory(directoryName);
             }
             using (FileStream fs = File.Create(mappingFilePath))
             {
@@ -132,11 +129,7 @@ namespace VTOLVRControlsMapper
                 }
             }
         }
-        public static void CreateMappingFileFromMappings(string mappingFilePath)
-        {
-            //TODO implement
-        }
-        private static JsonSerializerSettings GetJSONSerializerSettings()
+        public static JsonSerializerSettings GetJSONSerializerSettings()
         {
             JsonSerializerSettings settings = new JsonSerializerSettings()
             {
@@ -146,21 +139,25 @@ namespace VTOLVRControlsMapper
         }
         public static string GetMappingFilePath(string settingsFileFolder, string modName, string vehicleName)
         {
-            string mappingFilePath = Path.Combine(Directory.GetCurrentDirectory(), settingsFileFolder, modName, string.Format(@"mapping.{0}.json", vehicleName));
+            string mappingFilePath = Path.Combine(GetModFilePath(settingsFileFolder, modName), string.Format(@"mapping.{0}.json", vehicleName));
             return mappingFilePath;
         }
         public static string[] GetMappingFiles(string settingsFileFolder, string modName)
         {
-            string modFolder = Path.Combine(Directory.GetCurrentDirectory(), settingsFileFolder, modName);
+            string modFolder = GetModFilePath(settingsFileFolder, modName);
             string[] files = Directory.GetFiles(modFolder, "mapping.*.json");
             return files;
+        }
+        public static string GetModFilePath(string folder, string modName)
+        {
+            return Path.Combine(Directory.GetCurrentDirectory(), folder, modName);
         }
         private static List<ControlMapping> GetMappingsFromFile(string mappingFilePath)
         {
             string jsonContent;
             using (FileStream fs = File.OpenRead(mappingFilePath))
             {
-                using (var sr = new StreamReader(fs))
+                using (StreamReader sr = new StreamReader(fs))
                 {
                     jsonContent = sr.ReadToEnd();
                 }
@@ -181,12 +178,12 @@ namespace VTOLVRControlsMapper
                 CreateMappingFile(mappingFilePath);
             }
             //Generate mappings from JSON file parsing
-            _mappings = GetMappingsFromFile(mappingFilePath);
+            Mappings = GetMappingsFromFile(mappingFilePath);
         }
         public static void LoadMappingInstances()
         {
             _customControlCache = new Dictionary<string, object>();
-            foreach (ControlMapping mapping in _mappings)
+            foreach (ControlMapping mapping in Mappings)
             {
                 //Determine custom control type from class attributes
                 Type customControlType = GetCustomControlType(mapping.Types);
@@ -229,8 +226,8 @@ namespace VTOLVRControlsMapper
         }
         private static void StartJoystickActionRoutines()
         {
-            var mappings = GetGameActions<JoystickAction>();
-            foreach (var mapping in mappings)
+            dynamic mappings = GetGameActions<JoystickAction>();
+            foreach (dynamic mapping in mappings)
             {
                 JoystickAction action = mapping.Action as JoystickAction;
                 Guid controllerGuid = action.ControllerInstanceGuid;
@@ -254,8 +251,8 @@ namespace VTOLVRControlsMapper
         }
         private static void StartGenericGameActionRoutines()
         {
-            var mappings = GetGameActions<GenericGameAction>();
-            foreach (var mapping in mappings)
+            dynamic mappings = GetGameActions<GenericGameAction>();
+            foreach (dynamic mapping in mappings)
             {
                 GenericGameAction action = mapping.Action;
                 Guid controllerInstanceGuid = action.ControllerInstanceGuid;
@@ -300,16 +297,14 @@ namespace VTOLVRControlsMapper
                 }
             }
         }
-
         private static DeviceInstance GetDeviceInstance(Guid controllerInstanceGuid)
         {
             DeviceInstance instance = _deviceInstances.Find(d => d.InstanceGuid == controllerInstanceGuid);
             return instance;
         }
-
         public static dynamic GetGameActions<T>() where T : GameAction
         {
-            var retValue = _mappings
+            var retValue = Mappings
                 .Where(g => g.GameActions != null)
                 .SelectMany(m => m.GameActions, (mapping, Action) => new { mapping.GameControlName, Action })
                 .Where(a => a.Action != null && a.Action is T);
@@ -399,7 +394,7 @@ namespace VTOLVRControlsMapper
                         Vector3 currentVector = (Vector3)vectorProperty.GetValue(instance);
                         if (currentVector != vector)
                         {
-                            methodInfo.Invoke(instance, new object[] { vector });
+                            _ = methodInfo.Invoke(instance, new object[] { vector });
                         }
                     }
                     yield return null;
@@ -422,7 +417,8 @@ namespace VTOLVRControlsMapper
                 }
                 else
                 {
-                    return ConvertAxisValue((int)_joystickStateType.GetProperty(axis.Name).GetValue(currentState), axis.Invert, axis.MappingRange);
+                    Type joystickStateType = typeof(JoystickState);
+                    return ConvertAxisValue((int)joystickStateType.GetProperty(axis.Name).GetValue(currentState), axis.Invert, axis.MappingRange);
                 }
             }
             else
@@ -462,7 +458,7 @@ namespace VTOLVRControlsMapper
                     if (ShouldExecuteJoystick(predicate, controllerInstanceGuid))
                     {
                         JoystickUpdate update = _joystickUpdates[controllerInstanceGuid].First(predicate);
-                        methodInfo.Invoke(instance, null);
+                        _ = methodInfo.Invoke(instance, null);
                     }
                     yield return null;
                 }
@@ -498,8 +494,9 @@ namespace VTOLVRControlsMapper
         {
             _directInput = new DirectInput();
             IList<DeviceInstance> devices = _directInput.GetDevices();
+            Devices = new Dictionary<Device, SimpleDeviceType>();
+
             _deviceInstances = devices.ToList();
-            _devices = new Dictionary<Device, SimpleDeviceType>();
             _keyboardUpdates = new Dictionary<Guid, KeyboardUpdate[]>();
             _keyboardStates = new Dictionary<Guid, KeyboardState>();
             _joystickUpdates = new Dictionary<Guid, JoystickUpdate[]>();
@@ -530,7 +527,7 @@ namespace VTOLVRControlsMapper
                 if (device != null)
                 {
                     AcquireDevice(device);
-                    _devices.Add(device, deviceType);
+                    Devices.Add(device, deviceType);
                 }
             }
         }
@@ -566,7 +563,7 @@ namespace VTOLVRControlsMapper
         }
         private static IEnumerable<Guid> GetUniqueDeviceGuids()
         {
-            return _mappings
+            return Mappings
                .Where(mapping => mapping.GameActions != null && mapping.GameActions.Count != 0)
                .SelectMany(mapping => mapping.GameActions)
                .Select(gameAction => gameAction.ControllerInstanceGuid)
@@ -576,7 +573,7 @@ namespace VTOLVRControlsMapper
         {
             try
             {
-                return _devices.Single(d => d.Key is T && d.Key.Information.InstanceGuid == guid).Key as T;
+                return Devices.Single(d => d.Key is T && d.Key.Information.InstanceGuid == guid).Key as T;
             }
             catch (InvalidOperationException)
             {
@@ -596,7 +593,7 @@ namespace VTOLVRControlsMapper
         private static List<Type> GetDerivedTypes<T>()
         {
             Assembly assembly = Assembly.GetAssembly(typeof(T));
-            var derivedType = typeof(T);
+            Type derivedType = typeof(T);
             return assembly
                 .GetTypes()
                 .Where(t =>
@@ -609,15 +606,7 @@ namespace VTOLVRControlsMapper
         //Got this from VTOLVRPhysicalInput mod : https://github.com/solidshadow1126/VTOLVRPhysicalInput
         private static float ConvertAxisValue(int value, bool invert, MappingRange mappingRange = MappingRange.Full)
         {
-            float retVal;
-            if (value == 65535)
-            {
-                retVal = 1;
-            }
-            else
-            {
-                retVal = (((float)value / 32767) - 1);
-            }
+            float retVal = value == 65535 ? 1 : ((float)value / 32767) - 1;
             if (invert)
             {
                 retVal *= -1;

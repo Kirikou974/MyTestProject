@@ -23,6 +23,9 @@
     <Reference Include="SharpDX.DirectInput">
       <HintPath>..\..\..\..\..\source\repos\VTOLVRPhysicalInput\packages\SharpDX.DirectInput.4.2.0\lib\net45\SharpDX.DirectInput.dll</HintPath>
     </Reference>
+    <Reference Include="Valve.Newtonsoft.Json">
+      <HintPath>F:\Steam\SteamApps\common\VTOL VR\VTOLVR_Data\Managed\Valve.Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

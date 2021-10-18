@@ -1,12 +1,9 @@
 ﻿using SharpDX.DirectInput;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using VTOLVRControlsMapper;
 using VTOLVRControlsMapper.Core;
 using VTOLVRControlsMapperUI.CustomItem;
@@ -29,7 +26,6 @@ namespace VTOLVRControlsMapperUI
             Title = controlName;
 
             LoadDevicesTab(mapping, availableDevices, supportedBehaviors);
-            //LoadActionsGrid();
         }
         private void LoadDevicesTab(ControlMapping mapping, List<DeviceItem> availableDevices, List<ControllerActionBehavior> supportedBehaviors)
         {
@@ -39,24 +35,28 @@ namespace VTOLVRControlsMapperUI
                 List<ActionItem> actionItems = new List<ActionItem>();
                 foreach (ControllerActionBehavior behavior in supportedBehaviors)
                 {
+                    ControllerActionBehavior currentBehavior = behavior;
                     ActionItem actionItem = new ActionItem(behavior);
-                    actionItem.DeviceID = deviceItem.ID;
-                    if (mapping.GameActions != null)
+                    actionItem.Enabled = true;
+                    if (behavior == ControllerActionBehavior.HoldOff)
                     {
-                        if (mapping.GameActions.Find(g =>
+                        actionItem.Enabled = false;
+                        currentBehavior = ControllerActionBehavior.HoldOn;
+                    }
+                    if (mapping.GameActions != null &&
+                        mapping.GameActions.Find(g =>
                             g != null &&
                             g is GenericGameAction &&
-                            (g as GenericGameAction).ControllerActionBehavior == behavior &&
+                            (g as GenericGameAction).ControllerActionBehavior == currentBehavior &&
                             g.ControllerInstanceGuid == deviceItem.ID) is GenericGameAction gameAction)
-                        {
-                            actionItem.ControlName = gameAction.ControllerButtonName;
-                        }
+                    {
+                        actionItem.ControlName = gameAction.ControllerButtonName;
                     }
                     actionItems.Add(actionItem);
                 }
-                BindingItems.Add(new BindingItem { Actions = actionItems.Where(a => a.DeviceID == deviceItem.ID).ToList(), Device = deviceItem });
+                BindingItems.Add(new BindingItem { Actions = actionItems, Device = deviceItem });
+                DevicesTab.ItemsSource = BindingItems;
             }
-            DevicesTab.ItemsSource = BindingItems;
         }
         private async void EditButton_Click(object sender, RoutedEventArgs e)
         {
@@ -69,8 +69,13 @@ namespace VTOLVRControlsMapperUI
                 string newControlName = await StartAsyncListening(bindingItem.Device.ID);
                 BindingItem bindingItemToModify = BindingItems[BindingItems.FindIndex(b => b.Device == bindingItem.Device)];
                 ActionItem actionItemToModify = bindingItemToModify.Actions.Find(a => a.Behavior == actionItem.Behavior);
+                if (actionItem.Behavior == ControllerActionBehavior.HoldOn)
+                {
+                    ActionItem actionItemToModifyOff = bindingItemToModify.Actions.Find(a => a.Behavior == ControllerActionBehavior.HoldOff);
+                    actionItemToModifyOff.ControlName = newControlName;
+                }
                 actionItemToModify.ControlName = newControlName;
-                actionItemToModify.DeviceID = bindingItem.Device.ID;
+
                 DevicesTab.Items.Refresh();
             }
 
@@ -84,6 +89,11 @@ namespace VTOLVRControlsMapperUI
                 BindingItem bindingItemToModify = BindingItems[BindingItems.FindIndex(b => b.Device == bindingItem.Device)];
                 ActionItem actionItemToClear = bindingItemToModify.Actions.Find(a => a.Behavior == actionItem.Behavior);
                 actionItemToClear.ControlName = string.Empty;
+                if(actionItem.Behavior == ControllerActionBehavior.HoldOn)
+                {
+                    ActionItem actionItemToClearOff = bindingItemToModify.Actions.Find(a => a.Behavior == ControllerActionBehavior.HoldOff);
+                    actionItemToClearOff.ControlName = string.Empty;
+                }
                 DevicesTab.Items.Refresh();
             }
         }
@@ -126,7 +136,7 @@ namespace VTOLVRControlsMapperUI
                 return u != null && u.Count() > 0;
             }
             string returnValue = string.Empty;
-            while (!loopPredicate(updates))
+            while (!loopPredicate(updates) || string.IsNullOrEmpty(returnValue))
             {
                 updates = device.GetBufferedData();
                 if (loopPredicate(updates))
@@ -136,11 +146,15 @@ namespace VTOLVRControlsMapperUI
                         Type updateType = update.GetType();
                         if (update is KeyboardUpdate)
                         {
-                            returnValue = updateType.GetProperty("Key").GetValue(update).ToString();
+                            returnValue = (update as KeyboardUpdate?).Value.Key.ToString();
                         }
                         else if (update is JoystickUpdate)
                         {
-                            returnValue = updateType.GetProperty("Offset").GetValue(update).ToString();
+                            JoystickUpdate? joystickUpdate = update as JoystickUpdate?;
+                            if(joystickUpdate.Value.Offset.ToString().StartsWith("Buttons"))
+                            {
+                                returnValue = joystickUpdate.Value.Offset.ToString();
+                            }
                         }
                     }
                 }

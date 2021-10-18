@@ -40,7 +40,7 @@
             <TabControl.ContentTemplate>
                 <DataTemplate>
                     <DataGrid Background="AntiqueWhite"
-                              Name="ActionsGrid"
+                              x:Name="ActionsGrid"
                               CanUserAddRows="False"
                               CanUserReorderColumns="False"
                               CanUserResizeColumns="False"
@@ -48,6 +48,15 @@
                               AutoGenerateColumns="False"
                               GridLinesVisibility="Horizontal"
                               ItemsSource="{Binding Actions}">
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Enabled}" Value="false">
+                                        <Setter Property="Background" Value="LightGray"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.RowStyle>
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Width="0.3*">
                                 <DataGridTemplateColumn.Header>
@@ -59,24 +68,10 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <!--<DataGridTemplateColumn Header="Device"
-                                        Width="1*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <ComboBox ItemsSource="{Binding AvailableDevices}"
-                                      DisplayMemberPath="Name"
-                                      x:Name="DeviceComboBox"
-                                      SelectedValuePath="ID"
-                                      SelectionChanged="DeviceComboBox_SelectionChanged"
-                                      Text="{Binding SelectedDevice.Name}">
-                                    </ComboBox>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>-->
                             <DataGridTemplateColumn Width="0.5*">
                                 <DataGridTemplateColumn.Header>
                                     <TextBlock Text="Control"
-                                   Margin="2"/>
+                                               Margin="2"/>
                                 </DataGridTemplateColumn.Header>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -84,29 +79,34 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Width="0.1*" 
-                                        Header="Edit">
+                            <DataGridTemplateColumn Width="0.1*"
+                                                    Header="Edit">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Name="Edit" 
+                                        <Button IsEnabled="{Binding Enabled}"
                                                 Click="EditButton_Click"
                                                 Background="Transparent"
                                                 BorderThickness="0"
                                                 HorizontalAlignment="Center">
-                                            <Image Source="/Icons/Edit_grey_16x.png" Width="16" Height="16" />
+                                            <Image Source="/Icons/Edit_grey_16x.png" 
+                                                   Width="16" 
+                                                   Height="16"/>
                                         </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Width="0.1*" Header="Clear">
+                            <DataGridTemplateColumn Width="0.1*" 
+                                                    Header="Clear">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Name="Clear" 
+                                        <Button IsEnabled="{Binding Enabled}"
                                                 Click="ClearButton_Click"
                                                 Background="Transparent"
                                                 BorderThickness="0"
                                                 HorizontalAlignment="Center">
-                                            <Image Source="/Icons/Close_16x.png" Width="16" Height="16" />
+                                            <Image Source="/Icons/Close_16x.png" 
+                                                   Width="16" 
+                                                   Height="16" />
                                         </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
