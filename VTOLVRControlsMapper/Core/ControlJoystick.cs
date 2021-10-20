@@ -9,18 +9,12 @@ namespace VTOLVRControlsMapper.Core
 {
     public abstract class ControlJoystick<T> : ControlBase<T> where T : MonoBehaviour
     {
-        private FieldInfo _grabbedField;
-        private PropertyInfo _activeControllerProperty;
+        private readonly FieldInfo _grabbedField;
+        private readonly PropertyInfo _activeControllerProperty;
         public bool Grabbed
         {
-            get
-            {
-                return (bool)_grabbedField.GetValue(UnityControl);
-            }
-            set
-            {
-                _grabbedField.SetValue(UnityControl, value);
-            }
+            get => (bool)_grabbedField.GetValue(UnityControl);
+            set => _grabbedField.SetValue(UnityControl, value);
         }
         public abstract VRInteractable VRInteractable { get; }
         public abstract UnityEvent OnMenuButtonDown { get; }
@@ -46,12 +40,12 @@ namespace VTOLVRControlsMapper.Core
             StartControlInteraction(MainHand);
             OnSetThumbstick.Invoke(vector);
         }
-        public abstract void UpdateControl();
+        public abstract void UpdateUnityControl();
         public virtual void UpdateMainAxis(Vector3 vector)
         {
             StartControlInteraction(MainHand);
             VectorUpdate = vector;
-            UpdateControl();
+            UpdateUnityControl();
         }
         public void ClickMenu()
         {

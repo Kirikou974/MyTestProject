@@ -302,6 +302,30 @@ namespace VTOLVRControlsMapper
             DeviceInstance instance = _deviceInstances.Find(d => d.InstanceGuid == controllerInstanceGuid);
             return instance;
         }
+        public static Dictionary<Guid, string> GetAvailableDevices()
+        {
+            Dictionary<Guid, string> availableDevices = new Dictionary<Guid, string>();
+            //Get list of available devices
+            using (DirectInput di = new DirectInput())
+            {
+                IList<DeviceInstance> deviceInstances = di.GetDevices();
+
+                foreach (DeviceInstance deviceInstance in deviceInstances)
+                {
+                    switch (GetDeviceType(deviceInstance))
+                    {
+                        case SimpleDeviceType.Keyboard:
+                        case SimpleDeviceType.Joystick:
+                            availableDevices.Add(deviceInstance.InstanceGuid, deviceInstance.InstanceName);
+                            break;
+                        case SimpleDeviceType.None:
+                        default:
+                            break;
+                    }
+                }
+            }
+            return availableDevices;
+        }
         public static dynamic GetGameActions<T>() where T : GameAction
         {
             var retValue = Mappings
@@ -357,7 +381,7 @@ namespace VTOLVRControlsMapper
                     object instance = _customControlCache[gameControlName];
                     MethodInfo methodInfo = GetExecuteMethod(instance.GetType(), action.ControllerActionBehavior);
                     yield return methodInfo.Invoke(instance, null);
-                    if (action.ControllerActionBehavior == ControllerActionBehavior.HoldOn)
+                    if (action.ControllerActionBehavior == ControllerActionBehavior.Hold)
                     {
                         MethodInfo offMethodInfo = GetExecuteMethod(instance.GetType(), ControllerActionBehavior.HoldOff);
                         yield return new WaitUntil(releasePredicate);
@@ -480,7 +504,7 @@ namespace VTOLVRControlsMapper
         public static MethodInfo[] GetExecuteMethods(Type type)
         {
             IEnumerable<MethodInfo> methodsInfo = type
-                .GetMethods(BindingFlags.Public | BindingFlags.Instance) 
+                .GetMethods(BindingFlags.Public | BindingFlags.Instance)
                 .Where(m => m.GetCustomAttribute<ControlMethodAttribute>() != null
             );
             return methodsInfo.ToArray();

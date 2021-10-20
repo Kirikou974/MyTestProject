@@ -17,7 +17,7 @@ namespace VTOLVRControlsMapper.Controls
         public override VRHandController MainHand => RightHand;
         public override Vector3Event OnSetThumbstick => UnityControl.OnSetThumbstick;
         public override VRInteractable VRInteractable => _vrInteractable;
-        public override void UpdateControl()
+        public override void UpdateUnityControl()
         {
             UnityControl.OnSetStick.Invoke(VectorUpdate);
             //UnityControl.SetStickAnimation();

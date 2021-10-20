@@ -1,16 +1,16 @@
-﻿using SharpDX.DirectInput;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Valve.Newtonsoft.Json;
 using VTOLVRControlsMapper;
 using VTOLVRControlsMapper.Core;
-using VTOLVRControlsMapperUI.CustomItem;
+using VTOLVRControlsMapperUI.BindingItem;
+using VTOLVRControlsMapperUI.BindingWindows;
+using VTOLVRControlsMapperUI.GridItem;
 
 namespace VTOLVRControlsMapperUI
 {
@@ -119,36 +119,39 @@ namespace VTOLVRControlsMapperUI
         private void ViewButton_Click(object sender, RoutedEventArgs e)
         {
             ControlMapping mapping = MappingDataGrid.SelectedItem as ControlMapping;
-            List<DeviceItem> availabeDevices = GetAvailableDevices();
-            List<ControllerActionBehavior> supportedBehaviors = GetSupportedBehaviors(mapping);
-            GenericBinding bindingWindow = new GenericBinding(this, mapping, availabeDevices, supportedBehaviors);
+            bool? dialogResult = false;
 
-            bool? dialogResult = bindingWindow.ShowDialog();
-            if (dialogResult.HasValue && dialogResult.Value)
+            switch (mapping.GameControlName)
             {
-                List<GameAction> actions = new List<GameAction>();
-                List<BindingItem> bindingItems = bindingWindow.BindingItems.Where(b => b.Device != null && b.Actions != null).ToList();
-
-                //TODO handle Throttle and Joystick
-                foreach (BindingItem bindingItem in bindingItems)
-                {
-                    foreach (ActionItem actionItem in bindingItem.Actions)
+                case "centerJoyInteractable":
+                    break;
+                case "throttleInteractable":
+                    ThrottleBinding throttleWindow = new ThrottleBinding(this, mapping);
+                    dialogResult = throttleWindow.ShowDialog();
+                    break;
+                default:
+                    GenericBinding GenericBinding = new GenericBinding(this, mapping);
+                    dialogResult = GenericBinding.ShowDialog();
+                    if (dialogResult.HasValue && dialogResult.Value)
                     {
-                        if (!string.IsNullOrEmpty(actionItem.ControlName) && actionItem.Behavior != ControllerActionBehavior.HoldOff)
+                        List<GameAction> actions = new List<GameAction>();
+                        List<GenericBindingItem> filteredBindingItems = GenericBinding.BindingItems.Cast<GenericBindingItem>().Where(b => b.Device != null && b.Actions != null).ToList();
+                        foreach (GenericBindingItem bindingItem in filteredBindingItems)
                         {
-                            GenericGameAction genericAction = new GenericGameAction()
+                            foreach (ActionItem actionItem in bindingItem.Actions)
                             {
-                                ControllerActionBehavior = actionItem.Behavior,
-                                ControllerButtonName = actionItem.ControlName,
-                                ControllerInstanceGuid = bindingItem.Device.ID
-                            };
-                            actions.Add(genericAction);
+                                if (!string.IsNullOrEmpty(actionItem.Action.ControllerButtonName) &&
+                                    actionItem.Action.ControllerActionBehavior != ControllerActionBehavior.HoldOff)
+                                {
+                                    actions.Add(actionItem.Action);
+                                }
+                            }
                         }
+                        ControlsHelper.Mappings.Find(m => m.GameControlName == mapping.GameControlName).GameActions = actions;
+                        SaveMappings((PlaneComboBox.SelectedValue as PlaneItem).Value);
+                        UpdateDataSource(SearchBox.Text);
                     }
-                }
-                ControlsHelper.Mappings.Find(m => m.GameControlName == mapping.GameControlName).GameActions = actions;
-                SaveMappings((PlaneComboBox.SelectedValue as PlaneItem).Value);
-                UpdateDataSource(SearchBox.Text);
+                    break;
             }
         }
         private void SaveMappings(string jsonFilePath)
@@ -157,41 +160,6 @@ namespace VTOLVRControlsMapperUI
             using StreamWriter sw = new StreamWriter(fs);
             using JsonTextWriter writer = new JsonTextWriter(sw);
             writer.WriteRaw(JsonConvert.SerializeObject(ControlsHelper.Mappings.ToArray(), Formatting.Indented, ControlsHelper.GetJSONSerializerSettings()));
-        }
-        private List<ControllerActionBehavior> GetSupportedBehaviors(ControlMapping mapping)
-        {
-            //Get the list of possible actions (On, Off etc...)
-            Type customControlType = ControlsHelper.GetCustomControlType(mapping.Types);
-            MethodInfo[] methodsInfo = ControlsHelper.GetExecuteMethods(customControlType);
-            List<ControllerActionBehavior> returnList = new List<ControllerActionBehavior>();
-            foreach (MethodInfo methodInfo in methodsInfo)
-            {
-                ControlMethodAttribute attribute = methodInfo.GetCustomAttribute<ControlMethodAttribute>();
-                returnList.Add(attribute.SupportedBehavior);
-            }
-            return returnList;
-        }
-        private List<DeviceItem> GetAvailableDevices()
-        {
-            //Get list of available devices
-            using DirectInput di = new DirectInput();
-            IList<DeviceInstance> deviceInstances = di.GetDevices();
-            List<DeviceItem> availableDevices = new List<DeviceItem>();
-
-            foreach (DeviceInstance deviceInstance in deviceInstances)
-            {
-                switch (ControlsHelper.GetDeviceType(deviceInstance))
-                {
-                    case SimpleDeviceType.Keyboard:
-                    case SimpleDeviceType.Joystick:
-                        availableDevices.Add(new DeviceItem(deviceInstance.InstanceGuid, deviceInstance.InstanceName));
-                        break;
-                    case SimpleDeviceType.None:
-                    default:
-                        break;
-                }
-            }
-            return availableDevices;
         }
     }
 }

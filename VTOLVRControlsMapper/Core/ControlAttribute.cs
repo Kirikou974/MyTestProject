@@ -3,7 +3,7 @@ namespace VTOLVRControlsMapper.Core
 {
     public enum ControllerActionBehavior
     {
-        HoldOn = 0,
+        Hold = 0,
         HoldOff = 1,
         Toggle = 2,
         Increase = 3,

@@ -13,7 +13,7 @@ namespace VTOLVRControlsMapper.Controls
         public override Vector3Event OnSetThumbstick => UnityControl.OnSetThumbstick;
         public override VRInteractable VRInteractable => UnityControl.interactable;
         public Throttle(string unityControlName) : base(unityControlName) { }
-        public override void UpdateControl()
+        public override void UpdateUnityControl()
         {
             UnityControl.OnSetThrottle.Invoke(VectorUpdate.x);
             UnityControl.UpdateThrottleAnim(VectorUpdate.x);

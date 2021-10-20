@@ -1,14 +1,15 @@
-﻿<Window x:Class="VTOLVRControlsMapperUI.GenericBinding"
+﻿<Window x:Class="VTOLVRControlsMapperUI.BindingWindows.GenericBinding"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VTOLVRControlsMapperUI"
         mc:Ignorable="d"
-        Title="Binding" Height="Auto" Width="600" 
+        Title="Binding" Height="Auto" Width="400" 
         WindowStartupLocation="CenterScreen" 
         ResizeMode="NoResize"
-        SizeToContent="Height">
+        SizeToContent="Height"
+        Icon="/Icons/ryanlerch-Airplane-Roadsign-2.ico">
     <Window.InputBindings>
         <KeyBinding Command="ApplicationCommands.Close" Key=""/>
     </Window.InputBindings>
@@ -45,14 +46,15 @@
                               CanUserReorderColumns="False"
                               CanUserResizeColumns="False"
                               CanUserResizeRows="False"
-                              AutoGenerateColumns="False"
                               GridLinesVisibility="Horizontal"
-                              ItemsSource="{Binding Actions}">
+                              ItemsSource="{Binding Actions}"
+                              IsReadOnly="True"
+                              AutoGenerateColumns="False">
                         <DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Enabled}" Value="false">
-                                        <Setter Property="Background" Value="LightGray"></Setter>
+                                    <DataTrigger Binding="{Binding Visible}" Value="false">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -64,7 +66,7 @@
                                 </DataGridTemplateColumn.Header>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Behavior}"/>
+                                        <TextBlock Text="{Binding Name}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -75,39 +77,35 @@
                                 </DataGridTemplateColumn.Header>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding ControlName}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Width="0.1*"
-                                                    Header="Edit">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button IsEnabled="{Binding Enabled}"
-                                                Click="EditButton_Click"
-                                                Background="Transparent"
-                                                BorderThickness="0"
-                                                HorizontalAlignment="Center">
-                                            <Image Source="/Icons/Edit_grey_16x.png" 
-                                                   Width="16" 
-                                                   Height="16"/>
-                                        </Button>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Width="0.1*" 
-                                                    Header="Clear">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button IsEnabled="{Binding Enabled}"
-                                                Click="ClearButton_Click"
-                                                Background="Transparent"
-                                                BorderThickness="0"
-                                                HorizontalAlignment="Center">
-                                            <Image Source="/Icons/Close_16x.png" 
-                                                   Width="16" 
-                                                   Height="16" />
-                                        </Button>
+                                        <StackPanel>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition Width="0.15*"/>
+                                                    <ColumnDefinition Width="0.15*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="{Binding Action.ControllerButtonName}"
+                                                           Grid.Column="0"/>
+                                                <Button Click="EditButton_Click"
+                                                        Background="Transparent"
+                                                        BorderThickness="0"
+                                                        HorizontalAlignment="Center"
+                                                        Grid.Column="1">
+                                                    <Image Source="/Icons/Edit_grey_16x.png" 
+                                                           Width="16" 
+                                                           Height="16"/>
+                                                </Button>
+                                                <Button Click="ClearButton_Click"
+                                                        Background="Transparent"
+                                                        BorderThickness="0"
+                                                        HorizontalAlignment="Center"
+                                                        Grid.Column="2">
+                                                    <Image Source="/Icons/Close_16x.png" 
+                                                           Width="16" 
+                                                           Height="16"/>
+                                                </Button>
+                                            </Grid>
+                                        </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

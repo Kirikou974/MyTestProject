@@ -23,10 +23,6 @@ namespace VTOLVRControlsMapper.Core
         public string Name { get; set; }
         public bool Invert { get; set; }
         public MappingRange MappingRange { get; set; }
-        public override string ToString()
-        {
-            return Name;
-        }
     }
     public class JoystickAction : GameAction
     {
@@ -39,7 +35,7 @@ namespace VTOLVRControlsMapper.Core
         public string ControllerButtonName { get; set; }
         public ControllerActionBehavior ControllerActionBehavior { get; set; }
     }
-    public class ThrottleAction: JoystickAction
+    public class ThrottleAction : JoystickAction
     {
         public Axis Power { get; set; }
     }
@@ -48,7 +44,7 @@ namespace VTOLVRControlsMapper.Core
         public Axis X { get; set; }
         public Axis Y { get; set; }
     }
-    public class StickAction: JoystickAction
+    public class StickAction : JoystickAction
     {
         public Axis Pitch { get; set; }
         public Axis Yaw { get; set; }

@@ -16,18 +16,7 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            ControlsHelper.LoadMappings("F:\\Steam\\SteamApps\\common\\VTOL VR\\VTOLVR_ModLoader\\mods\\VTOLVRControlsMapper\\mapping.FA26B.json");
-            //ControlsHelper.LoadControllers();
-            //Joystick joystick = ControlsHelper.GetDevice<Joystick>(new Guid("8e0fdc40-f559-11ea-8002-444553540000"));
-            //Keyboard kb = ControlsHelper.GetDevice<Keyboard>(new Guid("6f1d2b61-d5a0-11cf-bfc7-444553540000"));
-            //var test = ControlsHelper.GetGameActions<ThrottleAction>();
-            foreach (var item in ControlsHelper.Mappings)
-            {
-                if (item.GameActions != null)
-                    Console.WriteLine(item.GameActions.ToString());
-            }
-            Console.ReadLine();
-            //TestJoystick();
+            TestJoystick();
         }
         static void TestJoystick()
         {
@@ -58,14 +47,11 @@ namespace TestConsole
 
                 foreach (var item in updates)
                 {
-                    //if (previousOffset != item.Offset.ToString())
-                    //{
-                    //    previousOffset = item.Offset.ToString();
-                    //}
-                    if (item.Offset.ToString() == "Y")
+                    if (previousOffset != item.Offset.ToString())
                     {
-                        Console.Write("\r{0}: {1}       | {2} : {3}           ", item.Offset, item.Value, "X", joystickStateType.GetProperty("X").GetValue(state));
+                        previousOffset = item.Offset.ToString();
                     }
+                    Console.Write("\r{0}: {1}       | {2} : {3}           ", item.Offset, item.Value, "X", joystickStateType.GetProperty("X").GetValue(state));
                 }
             }
         }

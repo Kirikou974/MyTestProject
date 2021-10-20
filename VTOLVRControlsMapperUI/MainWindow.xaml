@@ -10,7 +10,8 @@
         Width="700" 
         WindowStartupLocation="CenterScreen" 
         ResizeMode="NoResize"
-        Background="#181735">
+        Background="#181735"
+        Icon="/Icons/ryanlerch-Airplane-Roadsign-2.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>

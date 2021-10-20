@@ -28,7 +28,7 @@ namespace VTOLVRControlsMapper.Controls
             StopControlInteraction(ClosestHand);
             yield return null;
         }
-        [ControlMethod(SupportedBehavior = ControllerActionBehavior.HoldOn)]
+        [ControlMethod(SupportedBehavior = ControllerActionBehavior.Hold)]
         public IEnumerator HoldOn()
         {
             StartControlInteraction(ClosestHand);

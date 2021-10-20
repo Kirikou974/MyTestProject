@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VTOLVRControlsMapperUI.CustomItem
+namespace VTOLVRControlsMapperUI.GridItem
 {
     public class DeviceItem
     {
