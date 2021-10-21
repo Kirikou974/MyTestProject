@@ -12,33 +12,35 @@ namespace VTOLVRControlsMapperUI.BindingWindows
     /// <summary>
     /// Interaction logic for ThrottleBinding.xaml
     /// </summary>
-    public partial class ThrottleBinding : Window
+    public partial class JoystickBinding : Window
     {
         public List<IBindingItem> BindingItems;
-        public ThrottleBinding(Window sender, ControlMapping mapping)
+        public JoystickBinding(Window sender, ControlMapping mapping)
         {
             InitializeComponent();
             Owner = sender;
             Title = mapping.GameControlName;
-            LoadDevicesTab(mapping);
+            //LoadDevicesTab(mapping);
         }
-        private void LoadDevicesTab(ControlMapping mapping)
+        public void LoadDevicesTab<BindingType, ActionType>(ControlMapping mapping) 
+            where BindingType : JoystickBindingItem
+            where ActionType : JoystickAction
         {
             Dictionary<Guid, string> availableDevices = ControlsHelper.GetAvailableDevices();
             BindingItems = new List<IBindingItem>();
             foreach (Guid deviceID in availableDevices.Keys)
             {
                 DeviceItem device = new DeviceItem(deviceID, availableDevices[deviceID]);
-                ThrottleBindingItem throttleBindingItem = new ThrottleBindingItem(device);
+                BindingType bindingItem = (BindingType)Activator.CreateInstance(typeof(BindingType), device);
                 if (mapping.GameActions != null &&
                     mapping.GameActions.Find(g =>
                         g != null &&
-                        g is ThrottleAction &&
-                        g.ControllerInstanceGuid == deviceID) is ThrottleAction throttleAction)
+                        g is ActionType &&
+                        g.ControllerInstanceGuid == deviceID) is ActionType action)
                 {
-                    throttleBindingItem.MappingAction = throttleAction;
+                    bindingItem.GameAction = action;
                 }
-                BindingItems.Add(throttleBindingItem);
+                BindingItems.Add(bindingItem);
             }
             DevicesTab.ItemsSource = BindingItems;
         }

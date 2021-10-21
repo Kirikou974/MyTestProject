@@ -284,7 +284,7 @@ namespace VTOLVRControlsMapper
                         };
                         Func<bool> joyReleaseStatePredicate = () =>
                         {
-                            //TODO implement
+                            //TODO implement released state for joystick
                             //return state.PressedKeys.Where(k => k.ToString() == mapping.Action.ControllerButtonName).Count() == 0;
                             return false;
                         };

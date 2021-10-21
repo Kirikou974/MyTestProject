@@ -121,48 +121,43 @@ namespace VTOLVRControlsMapperUI
             ControlMapping mapping = MappingDataGrid.SelectedItem as ControlMapping;
             List<GameAction> actions = new List<GameAction>();
             bool? dialogResult = false;
-
-            switch (mapping.GameControlName)
+            string stickGameControl = "centerJoyInteractable";
+            string throttleGameControl = "throttleInteractable";
+            if (mapping.GameControlName == stickGameControl || mapping.GameControlName == throttleGameControl)
             {
-                case "centerJoyInteractable":
-                    break;
-                case "throttleInteractable":
-                    ThrottleBinding throttleWindow = new ThrottleBinding(this, mapping);
-                    dialogResult = throttleWindow.ShowDialog();
-                    if (dialogResult.HasValue && dialogResult.Value)
-                    {
-                        List<ThrottleBindingItem> filteredBindingItems = throttleWindow.BindingItems
-                            .Cast<ThrottleBindingItem>()
-                            .Where(b => b.Device != null && b.Actions != null)
-                            .ToList();
-                        foreach (ThrottleBindingItem bindingItem in filteredBindingItems)
-                        {
-                            if (bindingItem.MappingAction.IsValid())
-                            {
-                                actions.Add(bindingItem.MappingAction);
-                            }
-                        }
-                    }
-                    break;
-                default:
-                    GenericBinding GenericBinding = new GenericBinding(this, mapping);
-                    dialogResult = GenericBinding.ShowDialog();
-                    if (dialogResult.HasValue && dialogResult.Value)
-                    {
-                        List<ActionItem> actionItems = GenericBinding.BindingItems
-                            .Cast<GenericBindingItem>()
-                            .Where(b => b.Device != null && b.Actions != null)
-                            .SelectMany(b => b.Actions)
-                            .ToList();
-                        foreach (ActionItem actionItem in actionItems)
-                        {
-                            if (actionItem.Action.IsValid())
-                            {
-                                actions.Add(actionItem.Action);
-                            }
-                        }
-                    }
-                    break;
+                JoystickBinding joystickBinding = new JoystickBinding(this, mapping);
+                if (mapping.GameControlName == stickGameControl)
+                {
+                    joystickBinding.LoadDevicesTab<StickBindingItem, StickAction>(mapping);
+                }
+                else if (mapping.GameControlName == throttleGameControl)
+                {
+                    joystickBinding.LoadDevicesTab<ThrottleBindingItem, ThrottleAction>(mapping);
+                }
+                dialogResult = joystickBinding.ShowDialog();
+                if (dialogResult.HasValue && dialogResult.Value)
+                {
+                    joystickBinding.BindingItems
+                        .Cast<JoystickBindingItem>()
+                        .Where(j => j.IsValid())
+                        .ToList()
+                        .ForEach(j => actions.Add(j.GameAction));
+                }
+            }
+            else
+            {
+                GenericBinding GenericBinding = new GenericBinding(this, mapping);
+                dialogResult = GenericBinding.ShowDialog();
+                if (dialogResult.HasValue && dialogResult.Value)
+                {
+                    GenericBinding.BindingItems
+                        .Cast<GenericBindingItem>()
+                        .Where(b => b.Device != null && b.Actions != null)
+                        .SelectMany(b => b.Actions)
+                        .Where(a => a.Action.IsValid())
+                        .ToList()
+                        .ForEach(a => actions.Add(a.Action));
+                }
             }
 
             ControlsHelper.Mappings.Find(m => m.GameControlName == mapping.GameControlName).GameActions = actions;

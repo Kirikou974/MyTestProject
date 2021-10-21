@@ -4,7 +4,7 @@ using VTOLVRControlsMapperUI.GridItem;
 
 namespace VTOLVRControlsMapperUI.BindingItem
 {
-    public abstract class JoystickBindingItem<T> : BaseBindingItem where T : JoystickAction, new()
+    public abstract class JoystickBindingItem : BaseBindingItem
     {
         public List<BaseItem> Actions { get; set; }
         public AxisItem ThumbstickX { get; set; }
@@ -12,9 +12,38 @@ namespace VTOLVRControlsMapperUI.BindingItem
         //TODO implement thumbstickclick
         public MenuItem ThumbstickClick { get; set; }
         public AxisItem Trigger { get; set; }
-        public abstract string TriggerName { get; }
+        public virtual string TriggerName { get; }
         public MenuItem Menu { get; set; }
-        public abstract string MenuName { get; }
+        public virtual string MenuName { get; }
+        public abstract GameAction GameAction { get; set; }
+        public JoystickBindingItem(DeviceItem device)
+        {
+            Device = device;
+            ThumbstickX = new AxisItem("Thumbstick X Axis");
+            ThumbstickY = new AxisItem("Thumbstick Y Axis");
+            string triggerName = TriggerName;
+            string menuName = MenuName;
+            if (string.IsNullOrEmpty(triggerName)) triggerName = "Trigger";
+            if (string.IsNullOrEmpty(menuName)) menuName = "Menu";
+            Trigger = new AxisItem(triggerName);
+            Menu = new MenuItem(menuName);
+            Actions = new List<BaseItem>
+            {
+                Trigger,
+                ThumbstickX,
+                ThumbstickY,
+                Menu
+            };
+        }
+        public abstract bool IsValid();
+    }
+    public class JoystickBindingItem<T> : JoystickBindingItem where T : JoystickAction, new()
+    {
+        public override GameAction GameAction
+        {
+            get => MappingAction;
+            set => MappingAction = (T)value;
+        }
         public virtual T MappingAction
         {
             get
@@ -82,20 +111,10 @@ namespace VTOLVRControlsMapperUI.BindingItem
                 Menu.ControlName = value.Menu;
             }
         }
-        public JoystickBindingItem(DeviceItem device)
+        public JoystickBindingItem(DeviceItem device) : base(device) { }
+        public override bool IsValid()
         {
-            Device = device;
-            ThumbstickX = new AxisItem("Thumbstick X Axis");
-            ThumbstickY = new AxisItem("Thumbstick Y Axis");
-            Trigger = new AxisItem(TriggerName);
-            Menu = new MenuItem(MenuName);
-            Actions = new List<BaseItem>
-            {
-                Trigger,
-                ThumbstickX,
-                ThumbstickY,
-                Menu
-            };
+            return MappingAction.IsValid();
         }
     }
 }
