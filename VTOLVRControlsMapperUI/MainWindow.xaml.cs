@@ -119,6 +119,7 @@ namespace VTOLVRControlsMapperUI
         private void ViewButton_Click(object sender, RoutedEventArgs e)
         {
             ControlMapping mapping = MappingDataGrid.SelectedItem as ControlMapping;
+            List<GameAction> actions = new List<GameAction>();
             bool? dialogResult = false;
 
             switch (mapping.GameControlName)
@@ -128,31 +129,45 @@ namespace VTOLVRControlsMapperUI
                 case "throttleInteractable":
                     ThrottleBinding throttleWindow = new ThrottleBinding(this, mapping);
                     dialogResult = throttleWindow.ShowDialog();
+                    if (dialogResult.HasValue && dialogResult.Value)
+                    {
+                        List<ThrottleBindingItem> filteredBindingItems = throttleWindow.BindingItems
+                            .Cast<ThrottleBindingItem>()
+                            .Where(b => b.Device != null && b.Actions != null)
+                            .ToList();
+                        foreach (ThrottleBindingItem bindingItem in filteredBindingItems)
+                        {
+                            if (bindingItem.MappingAction.IsValid())
+                            {
+                                actions.Add(bindingItem.MappingAction);
+                            }
+                        }
+                    }
                     break;
                 default:
                     GenericBinding GenericBinding = new GenericBinding(this, mapping);
                     dialogResult = GenericBinding.ShowDialog();
                     if (dialogResult.HasValue && dialogResult.Value)
                     {
-                        List<GameAction> actions = new List<GameAction>();
-                        List<GenericBindingItem> filteredBindingItems = GenericBinding.BindingItems.Cast<GenericBindingItem>().Where(b => b.Device != null && b.Actions != null).ToList();
-                        foreach (GenericBindingItem bindingItem in filteredBindingItems)
+                        List<ActionItem> actionItems = GenericBinding.BindingItems
+                            .Cast<GenericBindingItem>()
+                            .Where(b => b.Device != null && b.Actions != null)
+                            .SelectMany(b => b.Actions)
+                            .ToList();
+                        foreach (ActionItem actionItem in actionItems)
                         {
-                            foreach (ActionItem actionItem in bindingItem.Actions)
+                            if (actionItem.Action.IsValid())
                             {
-                                if (!string.IsNullOrEmpty(actionItem.Action.ControllerButtonName) &&
-                                    actionItem.Action.ControllerActionBehavior != ControllerActionBehavior.HoldOff)
-                                {
-                                    actions.Add(actionItem.Action);
-                                }
+                                actions.Add(actionItem.Action);
                             }
                         }
-                        ControlsHelper.Mappings.Find(m => m.GameControlName == mapping.GameControlName).GameActions = actions;
-                        SaveMappings((PlaneComboBox.SelectedValue as PlaneItem).Value);
-                        UpdateDataSource(SearchBox.Text);
                     }
                     break;
             }
+
+            ControlsHelper.Mappings.Find(m => m.GameControlName == mapping.GameControlName).GameActions = actions;
+            SaveMappings((PlaneComboBox.SelectedValue as PlaneItem).Value);
+            UpdateDataSource(SearchBox.Text);
         }
         private void SaveMappings(string jsonFilePath)
         {

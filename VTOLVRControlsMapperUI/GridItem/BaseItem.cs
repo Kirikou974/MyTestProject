@@ -1,16 +1,17 @@
-﻿using VTOLVRControlsMapper.Core;
+﻿using System;
+using VTOLVRControlsMapper.Core;
 
 namespace VTOLVRControlsMapperUI.GridItem
 {
     public abstract class BaseItem
     {
-        private readonly string _name;
         public virtual bool Visible { get; set; }
-        public virtual string Name { get => _name; }
+        public virtual string Name { get; set; }
+        public abstract string ControlName { get; set; }
         public BaseItem() : this(string.Empty) { }
         public BaseItem(string name)
         {
-            _name = name;
+            Name = name;
             Visible = true;
         }
     }

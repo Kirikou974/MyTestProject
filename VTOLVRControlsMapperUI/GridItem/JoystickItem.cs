@@ -6,8 +6,8 @@ namespace VTOLVRControlsMapperUI.GridItem
 {
     public class JoystickItem : BaseItem
     {
-        public string ControlName { get; set; }
+        public override string ControlName { get; set; }
+        public virtual bool IsAxis => true;
         public JoystickItem(string name) : base(name) { }
-
     }
 }

@@ -63,12 +63,12 @@ namespace VTOLVRControlsMapperUI.BindingWindows
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             BaseItem item = ((FrameworkElement)sender).DataContext as BaseItem;
-            Helper.EditBinding(DevicesTab, BindingItems, item, WaitMessage, WaitMessageRectangle);
+            Helper.EditBinding(DevicesTab, item, WaitMessage, WaitMessageRectangle);
         }
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
             BaseItem item = ((FrameworkElement)sender).DataContext as BaseItem;
-            Helper.ClearBinding(DevicesTab, BindingItems, item);
+            Helper.ClearBinding(DevicesTab, item);
         }
         private List<ControllerActionBehavior> GetSupportedBehaviors(ControlMapping mapping)
         {

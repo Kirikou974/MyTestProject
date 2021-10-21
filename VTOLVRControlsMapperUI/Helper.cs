@@ -41,7 +41,7 @@ namespace VTOLVRControlsMapperUI
                 return result;
             });
         }
-        public async static void EditBinding(TabControl devicesTab, List<IBindingItem> bindingItems, BaseItem item, TextBlock waitMessage, Rectangle waitMessageRectangle)
+        public static async void EditBinding(TabControl devicesTab, BaseItem item, TextBlock waitMessage, Rectangle waitMessageRectangle)
         {
             //Listen to device
             waitMessage.Visibility = Visibility.Visible;
@@ -49,39 +49,28 @@ namespace VTOLVRControlsMapperUI
 
             if (devicesTab.SelectedItem is GenericBindingItem genericBindingItem && item is ActionItem actionItem)
             {
-                GenericBindingItem bindingItemToModify = GetBindingToModify(bindingItems, genericBindingItem);
                 string newControlName = await StartAsyncListening(genericBindingItem.Device.ID);
-                ActionItem actionItemToModify = bindingItemToModify.Actions.Find(a => a.Action.ControllerActionBehavior == actionItem.Action.ControllerActionBehavior);
-                actionItemToModify.Action.ControllerButtonName = newControlName;
-                actionItemToModify.Action.ControllerInstanceGuid = genericBindingItem.Device.ID;
+                actionItem.Action.ControllerButtonName = newControlName;
+                actionItem.Action.ControllerInstanceGuid = genericBindingItem.Device.ID;
             }
-            else if (devicesTab.SelectedItem is ThrottleBindingItem throttleBindingItem)
+            else if (devicesTab.SelectedItem is ThrottleBindingItem throttleBindingItem && item is JoystickItem joystickItem)
             {
-                ThrottleBindingItem throttleBindingToModify = GetBindingToModify(bindingItems, throttleBindingItem);
-                bool isAxis = item is AxisItem;
-                JoystickItem itemToModify = throttleBindingToModify.Actions.Find(a => a.Name == item.Name) as JoystickItem;
+                bool isAxis = joystickItem is AxisItem;
                 string newControlName = await StartAsyncListening(throttleBindingItem.Device.ID, isAxis);
-                itemToModify.ControlName = newControlName;
+                joystickItem.ControlName = newControlName;
             }
             devicesTab.Items.Refresh();
 
             waitMessage.Visibility = Visibility.Hidden;
             waitMessageRectangle.Visibility = Visibility.Hidden;
         }
-        public static void ClearBinding(TabControl devicesTab, List<IBindingItem> bindingItems, BaseItem item)
+        public static void ClearBinding(TabControl devicesTab, BaseItem item)
         {
-            if (devicesTab.SelectedItem as GenericBindingItem is GenericBindingItem genericBindingItem && item is ActionItem actionItem)
+            if (item is BaseItem actionItem)
             {
-                GenericBindingItem bindingItemToModify = GetBindingToModify(bindingItems, genericBindingItem);
-                ActionItem actionItemToClear = bindingItemToModify.Actions.Find(a => a.Action.ControllerActionBehavior == actionItem.Action.ControllerActionBehavior);
-                actionItemToClear.Action.ControllerButtonName = string.Empty;
+                actionItem.ControlName = string.Empty;
                 devicesTab.Items.Refresh();
             }
-        }
-        private static T GetBindingToModify<T>(List<IBindingItem> bindingItems, T genericBindingItem) where T : IBindingItem
-        {
-            int index = bindingItems.FindIndex(b => b.Device == genericBindingItem.Device);
-            return (T)bindingItems[index];
         }
         private static string GetDeviceInput<DevType, StateType, RawStateType, UpdateType>(DevType device, bool isAxis = false)
             where DevType : CustomDevice<StateType, RawStateType, UpdateType>

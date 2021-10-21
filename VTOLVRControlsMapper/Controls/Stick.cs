@@ -19,6 +19,7 @@ namespace VTOLVRControlsMapper.Controls
         public override VRInteractable VRInteractable => _vrInteractable;
         public override void UpdateUnityControl()
         {
+            //TODO test stick animation
             UnityControl.OnSetStick.Invoke(VectorUpdate);
             //UnityControl.SetStickAnimation();
         }
