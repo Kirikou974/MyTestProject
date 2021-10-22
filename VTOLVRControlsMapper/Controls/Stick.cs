@@ -17,6 +17,10 @@ namespace VTOLVRControlsMapper.Controls
         public override VRHandController MainHand => RightHand;
         public override Vector3Event OnSetThumbstick => UnityControl.OnSetThumbstick;
         public override VRInteractable VRInteractable => _vrInteractable;
+        public override FloatEvent OnTriggerAxis => UnityControl.OnTriggerAxis;
+        public override UnityEvent OnTriggerButtonDown => UnityControl.OnTriggerDown;
+        public override UnityEvent OnTriggerButtonUp => UnityControl.OnTriggerUp;
+
         public override void UpdateUnityControl()
         {
             //TODO test stick animation

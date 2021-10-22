@@ -75,7 +75,7 @@ namespace VTOLVRControlsMapperUI.BindingItem
             Roll = new AxisItem("Roll Axis");
             Pitch = new AxisItem("Pitch Axis");
             Yaw = new AxisItem("Yaw Axis");
-            Trigger.IsAxis = false;
+            TriggerAxis.Visible = false;
             Actions.Insert(0, Roll);
             Actions.Insert(1, Pitch);
             Actions.Insert(2, Yaw);

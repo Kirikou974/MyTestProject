@@ -1,4 +1,5 @@
-﻿using SharpDX.DirectInput;
+﻿using Microsoft.CSharp.RuntimeBinder;
+using SharpDX.DirectInput;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -75,9 +76,9 @@ namespace VTOLVRControlsMapper
         public static void Reset()
         {
             _unityObjects = new List<UnityEngine.Object>();
-            Main.instance.StopCoroutine(nameof(GenericRoutine));
-            Main.instance.StopCoroutine(nameof(AxisRoutine));
-            Main.instance.StopCoroutine(nameof(MenuRoutine));
+            Main.Instance.StopCoroutine(nameof(GenericRoutine));
+            Main.Instance.StopCoroutine(nameof(AxisRoutine));
+            Main.Instance.StopCoroutine(nameof(MenuRoutine));
         }
         public static T GetGameControl<T>(string controlName) where T : UnityEngine.Object
         {
@@ -196,7 +197,7 @@ namespace VTOLVRControlsMapper
                 }
                 else
                 {
-                    Main.instance.Log("Cannot create a custom control isntance for : " + mapping.GameControlName);
+                    Main.Instance.Log("Cannot create a custom control isntance for : " + mapping.GameControlName);
                 }
             }
         }
@@ -219,7 +220,7 @@ namespace VTOLVRControlsMapper
             _joystickUpdates = new Dictionary<Guid, JoystickUpdate[]>();
             foreach (Guid controllerGuid in controllersToPoll)
             {
-                Main.instance.StartCoroutine(PollRoutine(controllerGuid));
+                Main.Instance.StartCoroutine(PollRoutine(controllerGuid));
             }
             StartGenericGameActionRoutines();
             StartJoystickActionRoutines();
@@ -229,24 +230,49 @@ namespace VTOLVRControlsMapper
             dynamic mappings = GetGameActions<JoystickAction>();
             foreach (dynamic mapping in mappings)
             {
+                //Get custom control instance and methods
+                object instance = _customControlCache[mapping.GameControlName];
+                MethodInfo mainAxisMethodInfo = GetExecuteMethod(instance, nameof(ControlJoystick<MonoBehaviour>.UpdateMainAxis));
+                MethodInfo thumbstickAxisMethodInfo = GetExecuteMethod(instance, nameof(ControlJoystick<MonoBehaviour>.UpdateThumbstickAxis));
+                MethodInfo triggerAxisMethodInfo = GetExecuteMethod(instance, nameof(ControlJoystick<MonoBehaviour>.UpdateTriggerAxis));
+                MethodInfo menuMethodInfo = GetExecuteMethod(instance, nameof(ControlJoystick<MonoBehaviour>.ClickMenu));
+                MethodInfo triggerButtonMethodInfo = GetExecuteMethod(instance, nameof(ControlJoystick<MonoBehaviour>.ClickTriggerButton));
+
                 JoystickAction action = mapping.Action as JoystickAction;
                 Guid controllerGuid = action.ControllerInstanceGuid;
+
+                //Start routine for each axis : Roll, pitch, yaw, thumbstick
                 if (mapping.Action is StickAction)
                 {
                     StickAction stickAction = mapping.Action;
-                    Main.instance.StartCoroutine(AxisRoutine(controllerGuid, nameof(Stick.UpdateMainAxis), mapping.GameControlName, stickAction.Pitch, stickAction.Roll, stickAction.Yaw));
+                    Main.Instance.StartCoroutine(AxisRoutine(controllerGuid, instance, mainAxisMethodInfo, stickAction.Pitch, stickAction.Yaw, stickAction.Roll));
                 }
                 else if (mapping.Action is ThrottleAction)
                 {
                     ThrottleAction throttleAction = mapping.Action;
-                    Main.instance.StartCoroutine(AxisRoutine(controllerGuid, nameof(Throttle.UpdateMainAxis), mapping.GameControlName, throttleAction.Power));
+                    Main.Instance.StartCoroutine(AxisRoutine(controllerGuid, instance, mainAxisMethodInfo, throttleAction.Power));
                 }
                 if (action.Thumbstick != null)
                 {
-                    Main.instance.StartCoroutine(AxisRoutine(controllerGuid, nameof(Stick.UpdateThumbstickAxis), mapping.GameControlName, action.Thumbstick.X, action.Thumbstick.Y));
+                    Main.Instance.StartCoroutine(AxisRoutine(controllerGuid, instance, thumbstickAxisMethodInfo, mapping.GameControlName, action.Thumbstick.X, action.Thumbstick.Y));
                 }
-                Main.instance.StartCoroutine(MenuRoutine(controllerGuid, mapping.GameControlName, action.Menu));
-                Main.instance.StartCoroutine(AxisRoutine(controllerGuid, nameof(Stick.UpdateTriggerAxis), mapping.GameControlName, action.Trigger));
+
+                //Start a routine for menu button
+                bool menuPredicate(JoystickUpdate update)
+                {
+                    //128 = button pressed
+                    return update.Offset.ToString() == action.Menu && update.Value == 128;
+                }
+                Main.Instance.StartCoroutine(MenuRoutine(controllerGuid, instance, menuMethodInfo, menuPredicate, action.Menu));
+
+                //Start a routine for trigger axis (brake) and trigger button (fire)
+                bool triggerButtonPredicate(JoystickUpdate update)
+                {
+                    //128 = button pressed
+                    return update.Offset.ToString() == action.TriggerButton && update.Value == 128;
+                }
+                Main.Instance.StartCoroutine(MenuRoutine(controllerGuid, instance, triggerButtonMethodInfo, triggerButtonPredicate, action.TriggerButton));
+                Main.Instance.StartCoroutine(AxisRoutine(controllerGuid, instance, triggerAxisMethodInfo, action.TriggerAxis));
             }
         }
         private static void StartGenericGameActionRoutines()
@@ -256,9 +282,12 @@ namespace VTOLVRControlsMapper
             {
                 GenericGameAction action = mapping.Action;
                 Guid controllerInstanceGuid = action.ControllerInstanceGuid;
-                DeviceInstance instance = GetDeviceInstance(controllerInstanceGuid);
+                DeviceInstance deviceInstance = GetDeviceInstance(controllerInstanceGuid);
                 string controllerButtonName = action.ControllerButtonName;
-                SimpleDeviceType deviceType = GetDeviceType(instance);
+                SimpleDeviceType deviceType = GetDeviceType(deviceInstance);
+                object instance = _customControlCache[mapping.GameControlName];
+                MethodInfo methodInfo = GetExecuteMethod(instance.GetType(), action.ControllerActionBehavior);
+
                 switch (deviceType)
                 {
                     case SimpleDeviceType.Keyboard:
@@ -274,7 +303,7 @@ namespace VTOLVRControlsMapper
                         {
                             return !_keyboardStates[controllerInstanceGuid].IsPressed((Key)Enum.Parse(typeof(Key), controllerButtonName, true));
                         };
-                        Main.instance.StartCoroutine(GenericRoutine(_keyboardUpdates, mapping.GameControlName, action,
+                        Main.Instance.StartCoroutine(GenericRoutine(_keyboardUpdates, instance, methodInfo, action,
                             kbUpdatePredicate, kbReleaseStatePredicate));
                         break;
                     case SimpleDeviceType.Joystick:
@@ -288,7 +317,7 @@ namespace VTOLVRControlsMapper
                             //return state.PressedKeys.Where(k => k.ToString() == mapping.Action.ControllerButtonName).Count() == 0;
                             return false;
                         };
-                        Main.instance.StartCoroutine(GenericRoutine(_joystickUpdates, mapping.GameControlName, mapping.Action,
+                        Main.Instance.StartCoroutine(GenericRoutine(_joystickUpdates, instance, methodInfo, mapping.Action,
                             joyUpdatePredicate, joyReleaseStatePredicate));
                         break;
                     case SimpleDeviceType.None:
@@ -365,7 +394,8 @@ namespace VTOLVRControlsMapper
         }
         private static IEnumerator GenericRoutine<Update>(
             Dictionary<Guid, Update[]> updates,
-            string gameControlName,
+            object instance,
+            MethodInfo methodInfo,
             GenericGameAction action,
             Func<Update, bool> updatePredicate,
             Func<bool> releasePredicate)
@@ -378,8 +408,6 @@ namespace VTOLVRControlsMapper
                     updates[action.ControllerInstanceGuid].Where(updatePredicate).Count() > 0)
                 {
                     Update update = updates[action.ControllerInstanceGuid].First(updatePredicate);
-                    object instance = _customControlCache[gameControlName];
-                    MethodInfo methodInfo = GetExecuteMethod(instance.GetType(), action.ControllerActionBehavior);
                     yield return methodInfo.Invoke(instance, null);
                     if (action.ControllerActionBehavior == ControllerActionBehavior.Hold)
                     {
@@ -391,7 +419,7 @@ namespace VTOLVRControlsMapper
                 yield return null;
             }
         }
-        private static IEnumerator AxisRoutine(Guid controllerGuid, string methodName, string gameControlName, Axis X, Axis Y = null, Axis Z = null)
+        private static IEnumerator AxisRoutine(Guid controllerGuid, object instance, MethodInfo methodInfo, Axis X, Axis Y = null, Axis Z = null)
         {
             //If first axis is null don't start the routine
             if (X != null)
@@ -403,22 +431,33 @@ namespace VTOLVRControlsMapper
                         _joystickStates != null &&
                         _joystickStates[controllerGuid] != null)
                     {
-                        //Get custom control instance and methods
-                        object instance = _customControlCache[gameControlName];
-                        MethodInfo methodInfo = GetExecuteMethod(instance, methodName);
-                        PropertyInfo vectorProperty = instance.GetType().GetProperty(nameof(ControlJoystick<MonoBehaviour>.VectorUpdate));
-
                         //Get axis values from update or state
                         float xValue = GetAxisValue(controllerGuid, X);
                         float yValue = GetAxisValue(controllerGuid, Y);
                         float zValue = GetAxisValue(controllerGuid, Z);
 
-                        //If axis values didn't change do not update
                         Vector3 vector = new Vector3(xValue, yValue, zValue);
-                        Vector3 currentVector = (Vector3)vectorProperty.GetValue(instance);
-                        if (currentVector != vector)
+                        try
                         {
                             _ = methodInfo.Invoke(instance, new object[] { vector });
+                        }
+                        catch (TargetParameterCountException)
+                        {
+                            Main.Instance.Log("TargetParameterCountException");
+                            Main.Instance.Log(instance);
+                            Main.Instance.Log(methodInfo);
+                            Main.Instance.Log(X);
+                            Main.Instance.Log(Y);
+                            Main.Instance.Log(Z);
+                        }
+                        catch (RuntimeBinderException)
+                        {
+                            Main.Instance.Log("RuntimeBinderException");
+                            Main.Instance.Log(instance);
+                            Main.Instance.Log(methodInfo);
+                            Main.Instance.Log(X);
+                            Main.Instance.Log(Y);
+                            Main.Instance.Log(Z);
                         }
                     }
                     yield return null;
@@ -427,7 +466,7 @@ namespace VTOLVRControlsMapper
         }
         private static float GetAxisValue(Guid controllerGuid, Axis axis)
         {
-            if (axis != null)
+            if (axis != null && _joystickStates != null && _joystickUpdates != null)
             {
                 bool predicate(JoystickUpdate update)
                 {
@@ -439,16 +478,30 @@ namespace VTOLVRControlsMapper
                     JoystickUpdate update = _joystickUpdates[controllerGuid].First(predicate);
                     return ConvertAxisValue(update.Value, axis.Invert, axis.MappingRange);
                 }
-                else
+                else if (currentState != null)
                 {
                     Type joystickStateType = typeof(JoystickState);
-                    return ConvertAxisValue((int)joystickStateType.GetProperty(axis.Name).GetValue(currentState), axis.Invert, axis.MappingRange);
+                    int offsetValue = GetOffsetValue(axis.Name, currentState);
+                    return ConvertAxisValue(offsetValue, axis.Invert, axis.MappingRange);
                 }
+            }
+            return 0.0f;
+        }
+        public static int GetOffsetValue(string offsetName, object state)
+        {
+            string lastChar = offsetName.Last().ToString();
+            int currentOffsetValue;
+            if (int.TryParse(lastChar, out int index))
+            {
+                string arrayOffsetName = offsetName.Substring(0, offsetName.Length - 1);
+                int[] offsetArray = state.GetType().GetProperty(arrayOffsetName).GetValue(state) as int[];
+                currentOffsetValue = offsetArray[index];
             }
             else
             {
-                return 0.0f;
+                currentOffsetValue = (int)state.GetType().GetProperty(offsetName).GetValue(state);
             }
+            return currentOffsetValue;
         }
         private static bool TryGetPredicate(Axis axis, out Func<JoystickUpdate, bool> predicate)
         {
@@ -464,21 +517,21 @@ namespace VTOLVRControlsMapper
             predicate = null;
             return false;
         }
-        private static IEnumerator MenuRoutine(Guid controllerInstanceGuid, string gameControlName, string menu)
+        private static IEnumerator MenuRoutine(Guid controllerInstanceGuid, object instance, MethodInfo methodInfo, Func<JoystickUpdate, bool> predicate, string menu)
         {
             if (!string.IsNullOrEmpty(menu))
             {
                 while (true)
                 {
                     //Get custom control instance and methods
-                    object instance = _customControlCache[gameControlName];
-                    MethodInfo methodInfo = GetExecuteMethod(instance, nameof(ControlJoystick<MonoBehaviour>.ClickMenu));
+                    //object instance = _customControlCache[gameControlName];
+                    //MethodInfo methodInfo = GetExecuteMethod(instance, nameof(ControlJoystick<MonoBehaviour>.ClickMenu));
 
-                    bool predicate(JoystickUpdate update)
-                    {
-                        //128 = button pressed
-                        return update.Offset.ToString() == menu && update.Value == 128;
-                    }
+                    //bool predicate(JoystickUpdate update)
+                    //{
+                    //    //128 = button pressed
+                    //    return update.Offset.ToString() == menu && update.Value == 128;
+                    //}
                     if (ShouldExecuteJoystick(predicate, controllerInstanceGuid))
                     {
                         JoystickUpdate update = _joystickUpdates[controllerInstanceGuid].First(predicate);
@@ -633,7 +686,7 @@ namespace VTOLVRControlsMapper
             {
                 foreach (Exception inner in ex.LoaderExceptions)
                 {
-                    Main.instance.Log(inner);
+                    Main.Instance.Log(inner);
                 }
                 throw ex;
             }

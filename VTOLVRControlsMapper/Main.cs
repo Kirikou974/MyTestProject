@@ -5,15 +5,14 @@ namespace VTOLVRControlsMapper
 {
     public class Main : VTOLMOD
     {
-        static readonly string _settingsFileFolder = @"VTOLVR_ModLoader\Mods\";
-        private static Main _instance;
-        public static Main instance { get => _instance; }
+        private const string SETTINGS_FOLDER = @"VTOLVR_ModLoader\Mods\";
+        public static Main Instance { get; private set; }
         public override void ModLoaded()
         {
             Log("Mod Loaded");
-            if (_instance == null)
+            if (Instance == null)
             {
-                _instance = this;
+                Instance = this;
             }
             if (VTOLAPI.SceneLoaded == null)
             {
@@ -29,20 +28,31 @@ namespace VTOLVRControlsMapper
         {
             switch (scene)
             {
-                case VTOLScenes.ReadyRoom:
-                    break;
                 case VTOLScenes.Akutan:
                 case VTOLScenes.CustomMapBase:
                     Log("Scene Loaded");
-                    StartCoroutine(StartMod());
+                    _ = StartCoroutine(StartMod());
                     break;
+                case VTOLScenes.ReadyRoom:
                 case VTOLScenes.LoadingScene:
+                case VTOLScenes.SplashScene:
+                case VTOLScenes.SamplerScene:
+                case VTOLScenes.VehicleConfiguration:
+                case VTOLScenes.MeshTerrain:
+                case VTOLScenes.OpenWater:
+                case VTOLScenes.VTEditMenu:
+                case VTOLScenes.VTEditLoadingScene:
+                case VTOLScenes.VTMapEditMenu:
+                case VTOLScenes.CommRadioTest:
+                case VTOLScenes.ShaderVariantsScene:
+                case VTOLScenes.CustomMapBase_OverCloud:
+                default:
                     break;
             }
         }
         private void MissionReloaded()
         {
-            StartCoroutine(StartMod());
+            _ = StartCoroutine(StartMod());
         }
         /// <summary>
         /// Called by Unity each frame
@@ -53,7 +63,7 @@ namespace VTOLVRControlsMapper
             if (Input.GetKeyDown(KeyCode.F8))
             {
                 Log("Recreating mappings file");
-                string filePath = ControlsHelper.GetMappingFilePath(_settingsFileFolder, name, currentVehicle.ToString());
+                string filePath = ControlsHelper.GetMappingFilePath(SETTINGS_FOLDER, name, currentVehicle.ToString());
                 ControlsHelper.CreateMappingFile(filePath);
             }
             if (Input.GetKeyDown(KeyCode.F5))
@@ -80,7 +90,7 @@ namespace VTOLVRControlsMapper
 
             //Load mappings from json file
             Log("Mapping loading for " + vehicle);
-            ControlsHelper.LoadMappings(_settingsFileFolder, name, vehicle.ToString());
+            ControlsHelper.LoadMappings(SETTINGS_FOLDER, name, vehicle.ToString());
             Log("Mapping loaded for " + vehicle);
 
             //Load controllers

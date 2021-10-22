@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using VTOLVRControlsMapper.Core;
+﻿using VTOLVRControlsMapper.Core;
 using VTOLVRControlsMapperUI.GridItem;
 
 namespace VTOLVRControlsMapperUI.BindingItem
@@ -35,7 +34,7 @@ namespace VTOLVRControlsMapperUI.BindingItem
             }
         }
         public AxisItem Throttle { get; set; }
-        public override string TriggerName => "Brake axis";
+        public override string TriggerName => "Brake";
         public override string MenuName => "Chaff/Flare";
         public ThrottleBindingItem(DeviceItem device) : base(device)
         {

@@ -7,10 +7,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 using VTOLVRControlsMapper;
-using VTOLVRControlsMapper.Core;
 using VTOLVRControlsMapperUI.BindingItem;
 using VTOLVRControlsMapperUI.GridItem;
-using MenuItem = VTOLVRControlsMapperUI.GridItem.MenuItem;
 
 namespace VTOLVRControlsMapperUI
 {
@@ -122,19 +120,8 @@ namespace VTOLVRControlsMapperUI
                                 }
 
                                 string offsetName = joystickUpdate.Value.Offset.ToString();
-                                string lastChar = offsetName.Last().ToString();
                                 int updatedOffsetValue = joystickUpdate.Value.Value;
-                                int currentOffsetValue = 0;
-                                if (int.TryParse(lastChar, out int index))
-                                {
-                                    string arrayOffsetName = offsetName[0..^1];
-                                    int[] offsetArray = state.GetType().GetProperty(arrayOffsetName).GetValue(state) as int[];
-                                    currentOffsetValue = offsetArray[index];
-                                }
-                                else
-                                {
-                                    currentOffsetValue = (int)state.GetType().GetProperty(offsetName).GetValue(state);
-                                }
+                                int currentOffsetValue = ControlsHelper.GetOffsetValue(offsetName, state);
                                 if (currentOffsetValue - axisListeningRange > updatedOffsetValue || currentOffsetValue + axisListeningRange < updatedOffsetValue)
                                 {
                                     returnValue = joystickUpdate.Value.Offset.ToString();

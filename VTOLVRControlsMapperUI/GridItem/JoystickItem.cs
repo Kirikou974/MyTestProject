@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace VTOLVRControlsMapperUI.GridItem
+﻿namespace VTOLVRControlsMapperUI.GridItem
 {
     public class JoystickItem : BaseItem
     {

@@ -11,7 +11,8 @@ namespace VTOLVRControlsMapperUI.BindingItem
         public AxisItem ThumbstickY { get; set; }
         //TODO implement thumbstickclick
         public MenuItem ThumbstickClick { get; set; }
-        public AxisItem Trigger { get; set; }
+        public AxisItem TriggerAxis { get; set; }
+        public MenuItem TriggerButton { get; set; }
         public virtual string TriggerName { get; }
         public MenuItem Menu { get; set; }
         public virtual string MenuName { get; }
@@ -25,11 +26,13 @@ namespace VTOLVRControlsMapperUI.BindingItem
             string menuName = MenuName;
             if (string.IsNullOrEmpty(triggerName)) triggerName = "Trigger";
             if (string.IsNullOrEmpty(menuName)) menuName = "Menu";
-            Trigger = new AxisItem(triggerName);
+            TriggerAxis = new AxisItem(triggerName + " axis");
+            TriggerButton = new MenuItem(triggerName + " button");
             Menu = new MenuItem(menuName);
             Actions = new List<BaseItem>
             {
-                Trigger,
+                TriggerAxis,
+                TriggerButton,
                 ThumbstickX,
                 ThumbstickY,
                 Menu
@@ -56,13 +59,22 @@ namespace VTOLVRControlsMapperUI.BindingItem
                 {
                     action.Menu = Menu.ControlName;
                 }
+                if (TriggerButton != null)
+                {
+                    action.TriggerButton = TriggerButton.ControlName;
+                }
                 if (ThumbstickX != null && ThumbstickX.IsValid())
                 {
                     if (action.Thumbstick == null)
                     {
                         action.Thumbstick = new Thumbstick();
                     }
-                    action.Thumbstick.X = new Axis(ThumbstickX.ControlName, ThumbstickX.Invert, ThumbstickX.Range.Value);
+                    action.Thumbstick.X = new Axis
+                    {
+                        Name = ThumbstickX.ControlName,
+                        Invert = ThumbstickX.Invert,
+                        MappingRange = ThumbstickX.Range.Value
+                    };
                 }
                 if (ThumbstickY != null && ThumbstickY.IsValid())
                 {
@@ -70,18 +82,24 @@ namespace VTOLVRControlsMapperUI.BindingItem
                     {
                         action.Thumbstick = new Thumbstick();
                     }
-                    action.Thumbstick.Y = new Axis(ThumbstickY.ControlName, ThumbstickY.Invert, ThumbstickY.Range.Value);
-                }
-                if (Trigger != null && Trigger.IsValid())
-                {
-                    if (action.Trigger == null)
+                    action.Thumbstick.Y = new Axis
                     {
-                        action.Trigger = new Axis();
-                    }
-                    action.Trigger.Invert = Trigger.Invert;
-                    action.Trigger.MappingRange = Trigger.Range.Value;
-                    action.Trigger.Name = Trigger.ControlName;
+                        Name = ThumbstickY.ControlName,
+                        Invert = ThumbstickY.Invert,
+                        MappingRange = ThumbstickY.Range.Value
+                    };
                 }
+                if (TriggerAxis != null && TriggerAxis.IsValid())
+                {
+                    if (action.TriggerAxis == null)
+                    {
+                        action.TriggerAxis = new Axis();
+                    }
+                    action.TriggerAxis.Invert = TriggerAxis.Invert;
+                    action.TriggerAxis.MappingRange = TriggerAxis.Range.Value;
+                    action.TriggerAxis.Name = TriggerAxis.ControlName;
+                }
+
                 return action;
             }
             set
@@ -101,14 +119,15 @@ namespace VTOLVRControlsMapperUI.BindingItem
                         ThumbstickY.Range = value.Thumbstick.Y.MappingRange;
                     }
                 }
-                if (value.Trigger != null)
+                if (value.TriggerAxis != null)
                 {
-                    Trigger.ControlName = value.Trigger.Name;
-                    Trigger.Invert = value.Trigger.Invert;
-                    Trigger.Range = value.Trigger.MappingRange;
+                    TriggerAxis.ControlName = value.TriggerAxis.Name;
+                    TriggerAxis.Invert = value.TriggerAxis.Invert;
+                    TriggerAxis.Range = value.TriggerAxis.MappingRange;
                 }
 
                 Menu.ControlName = value.Menu;
+                TriggerButton.ControlName = value.TriggerButton;
             }
         }
         public JoystickBindingItem(DeviceItem device) : base(device) { }

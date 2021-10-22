@@ -24,13 +24,6 @@ namespace VTOLVRControlsMapper.Core
         public string Name { get; set; }
         public bool Invert { get; set; }
         public MappingRange MappingRange { get; set; }
-        public Axis() { }
-        public Axis(string name, bool invert, MappingRange range)
-        {
-            Name = name;
-            Invert = invert;
-            MappingRange = range;
-        }
         public bool IsValid()
         {
             return !string.IsNullOrEmpty(Name);
@@ -39,12 +32,14 @@ namespace VTOLVRControlsMapper.Core
     public class JoystickAction : GameAction
     {
         public Thumbstick Thumbstick { get; set; }
-        public Axis Trigger { get; set; }
+        public Axis TriggerAxis { get; set; }
+        public string TriggerButton { get; set; }
         public string Menu { get; set; }
         public override bool IsValid()
         {
             return base.IsValid() && (!string.IsNullOrEmpty(Menu) ||
-                (Trigger != null && Trigger.IsValid()) ||
+                (!string.IsNullOrEmpty(TriggerButton)) ||
+                (TriggerAxis != null && TriggerAxis.IsValid()) ||
                 (Thumbstick != null && Thumbstick.IsValid()));
         }
     }

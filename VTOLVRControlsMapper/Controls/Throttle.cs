@@ -12,6 +12,9 @@ namespace VTOLVRControlsMapper.Controls
         public override VRHandController MainHand => LeftHand;
         public override Vector3Event OnSetThumbstick => UnityControl.OnSetThumbstick;
         public override VRInteractable VRInteractable => UnityControl.interactable;
+        public override FloatEvent OnTriggerAxis => UnityControl.OnTriggerAxis;
+        public override UnityEvent OnTriggerButtonDown => UnityControl.OnTriggerDown;
+        public override UnityEvent OnTriggerButtonUp => UnityControl.OnTriggerUp;
         public Throttle(string unityControlName) : base(unityControlName) { }
         public override void UpdateUnityControl()
         {

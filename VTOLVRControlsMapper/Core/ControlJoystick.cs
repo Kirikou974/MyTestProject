@@ -19,6 +19,9 @@ namespace VTOLVRControlsMapper.Core
         public abstract VRInteractable VRInteractable { get; }
         public abstract UnityEvent OnMenuButtonDown { get; }
         public abstract UnityEvent OnMenuButtonUp { get; }
+        public abstract FloatEvent OnTriggerAxis { get; }
+        public abstract UnityEvent OnTriggerButtonDown { get; }
+        public abstract UnityEvent OnTriggerButtonUp { get; }
         public abstract Vector3Event OnSetThumbstick { get; }
         public abstract VRHandController MainHand { get; }
         public Vector3 VectorUpdate { get; protected set; }
@@ -53,11 +56,16 @@ namespace VTOLVRControlsMapper.Core
             OnMenuButtonDown.Invoke();
             OnMenuButtonUp.Invoke();
         }
-        public void UpdateTriggerAxis()
+        public void UpdateTriggerAxis(Vector3 vector)
         {
             StartControlInteraction(MainHand);
-            OnMenuButtonDown.Invoke();
-            OnMenuButtonUp.Invoke();
+            OnTriggerAxis.Invoke(vector.x);
+        }
+        public void ClickTriggerButton()
+        {
+            StartControlInteraction(MainHand);
+            OnTriggerButtonDown.Invoke();
+            OnTriggerButtonUp.Invoke();
         }
         public override void StartControlInteraction(VRHandController hand)
         {
