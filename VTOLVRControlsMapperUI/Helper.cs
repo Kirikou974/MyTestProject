@@ -50,13 +50,12 @@ namespace VTOLVRControlsMapperUI
             if (devicesTab.SelectedItem is GenericBindingItem genericBindingItem && item is ActionItem actionItem)
             {
                 string newControlName = await StartAsyncListening(genericBindingItem.Device.ID);
-                actionItem.Action.ControllerButtonName = newControlName;
-                actionItem.Action.ControllerInstanceGuid = genericBindingItem.Device.ID;
+                actionItem.GameAction.ControllerButtonName = newControlName;
+                actionItem.GameAction.ControllerInstanceGuid = genericBindingItem.Device.ID;
             }
-            else if (devicesTab.SelectedItem is ThrottleBindingItem throttleBindingItem && item is JoystickItem joystickItem)
+            else if (devicesTab.SelectedItem is JoystickBindingItem bindingItem && item is JoystickItem joystickItem)
             {
-                bool isAxis = joystickItem is AxisItem;
-                string newControlName = await StartAsyncListening(throttleBindingItem.Device.ID, isAxis);
+                string newControlName = await StartAsyncListening(bindingItem.Device.ID, joystickItem.IsAxis);
                 joystickItem.ControlName = newControlName;
             }
             devicesTab.Items.Refresh();

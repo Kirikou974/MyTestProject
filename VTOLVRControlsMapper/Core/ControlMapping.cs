@@ -10,7 +10,8 @@ namespace VTOLVRControlsMapper.Core
         High = 1,
         Full = 2
     }
-    public class GameAction
+    public interface IGameAction { }
+    public class GameAction: IGameAction
     {
         public Guid ControllerInstanceGuid { get; set; }
         public virtual bool IsValid()

@@ -84,7 +84,7 @@
                                                     <ColumnDefinition Width="0.15*"/>
                                                     <ColumnDefinition Width="0.15*"/>
                                                 </Grid.ColumnDefinitions>
-                                                <TextBlock Text="{Binding Action.ControllerButtonName}"
+                                                <TextBlock Text="{Binding GameAction.ControllerButtonName}"
                                                            Grid.Column="0"/>
                                                 <Button Click="EditButton_Click"
                                                         Background="Transparent"

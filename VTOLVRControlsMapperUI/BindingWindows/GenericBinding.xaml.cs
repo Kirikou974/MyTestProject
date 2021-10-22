@@ -56,7 +56,7 @@ namespace VTOLVRControlsMapperUI.BindingWindows
                 (g as GenericGameAction).ControllerActionBehavior == behavior &&
                 g.ControllerInstanceGuid == deviceID) is GenericGameAction gameAction)
             {
-                actionItem.Action = gameAction;
+                actionItem.GameAction = gameAction;
             }
             return actionItem;
         }

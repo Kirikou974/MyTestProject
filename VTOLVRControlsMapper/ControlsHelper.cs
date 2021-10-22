@@ -616,16 +616,27 @@ namespace VTOLVRControlsMapper
         #endregion
         private static List<Type> GetDerivedTypes<T>()
         {
-            Assembly assembly = Assembly.GetAssembly(typeof(T));
-            Type derivedType = typeof(T);
-            return assembly
-                .GetTypes()
-                .Where(t =>
-                    t != derivedType &&
-                    t.IsClass &&
-                    !t.IsAbstract &&
-                    derivedType.IsAssignableFrom(t)
-                    ).ToList();
+            try
+            {
+                Assembly assembly = Assembly.GetAssembly(typeof(T));
+                Type derivedType = typeof(T);
+                return assembly
+                    .GetTypes()
+                    .Where(t =>
+                        t != derivedType &&
+                        t.IsClass &&
+                        !t.IsAbstract &&
+                        derivedType.IsAssignableFrom(t))
+                    .ToList();
+            }
+            catch (ReflectionTypeLoadException ex)
+            {
+                foreach (Exception inner in ex.LoaderExceptions)
+                {
+                    Main.instance.Log(inner);
+                }
+                throw ex;
+            }
         }
         //Got this from VTOLVRPhysicalInput mod : https://github.com/solidshadow1126/VTOLVRPhysicalInput
         private static float ConvertAxisValue(int value, bool invert, MappingRange mappingRange = MappingRange.Full)

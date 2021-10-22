@@ -135,41 +135,39 @@ namespace VTOLVRControlsMapperUI
                     joystickBinding.LoadDevicesTab<ThrottleBindingItem, ThrottleAction>(mapping);
                 }
                 dialogResult = joystickBinding.ShowDialog();
-                if (dialogResult.HasValue && dialogResult.Value)
-                {
-                    joystickBinding.BindingItems
-                        .Cast<JoystickBindingItem>()
-                        .Where(j => j.IsValid())
-                        .ToList()
-                        .ForEach(j => actions.Add(j.GameAction));
-                }
+                actions = joystickBinding.BindingItems
+                    .Cast<JoystickBindingItem>()
+                    .Select(b => b.GameAction)
+                    .ToList();
             }
             else
             {
                 GenericBinding GenericBinding = new GenericBinding(this, mapping);
                 dialogResult = GenericBinding.ShowDialog();
-                if (dialogResult.HasValue && dialogResult.Value)
-                {
-                    GenericBinding.BindingItems
-                        .Cast<GenericBindingItem>()
-                        .Where(b => b.Device != null && b.Actions != null)
-                        .SelectMany(b => b.Actions)
-                        .Where(a => a.Action.IsValid())
-                        .ToList()
-                        .ForEach(a => actions.Add(a.Action));
-                }
+                actions = GenericBinding.BindingItems
+                    .Cast<GenericBindingItem>()
+                    .Where(b => b.Device != null && b.Actions != null)
+                    .SelectMany(b => b.Actions)
+                    .Select(a => a.GameAction)
+                    .Cast<GameAction>()
+                    .ToList();
             }
-
-            ControlsHelper.Mappings.Find(m => m.GameControlName == mapping.GameControlName).GameActions = actions;
-            SaveMappings((PlaneComboBox.SelectedValue as PlaneItem).Value);
-            UpdateDataSource(SearchBox.Text);
+            if (dialogResult.HasValue && dialogResult.Value)
+            {
+                ControlsHelper.Mappings.Find(m => m.GameControlName == mapping.GameControlName).GameActions = actions.Where(a => a.IsValid()).ToList();
+                SaveMappings((PlaneComboBox.SelectedValue as PlaneItem).Value);
+                UpdateDataSource(SearchBox.Text);
+            }
         }
         private void SaveMappings(string jsonFilePath)
         {
             using FileStream fs = File.Create(jsonFilePath);
             using StreamWriter sw = new StreamWriter(fs);
             using JsonTextWriter writer = new JsonTextWriter(sw);
-            writer.WriteRaw(JsonConvert.SerializeObject(ControlsHelper.Mappings.ToArray(), Formatting.Indented, ControlsHelper.GetJSONSerializerSettings()));
+            JsonSerializerSettings settings = ControlsHelper.GetJSONSerializerSettings();
+            string serializedMappings = JsonConvert.SerializeObject(ControlsHelper.Mappings.ToArray(), Formatting.Indented, settings);
+            serializedMappings = serializedMappings.Replace("System.Private.CoreLib", "mscorlib");
+            writer.WriteRaw(serializedMappings);
         }
     }
 }

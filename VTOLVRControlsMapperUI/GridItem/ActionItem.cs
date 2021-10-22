@@ -5,16 +5,16 @@ namespace VTOLVRControlsMapperUI.GridItem
 {
     public class ActionItem : BaseItem
     {
-        public GenericGameAction Action { get; set; }
-        public override string Name => Action.ControllerActionBehavior.ToString();
+        public GenericGameAction GameAction { get; set; }
+        public override string Name => GameAction.ControllerActionBehavior.ToString();
         public override string ControlName
         {
-            get => Action.ControllerButtonName;
-            set => Action.ControllerButtonName = value;
+            get => GameAction.ControllerButtonName;
+            set => GameAction.ControllerButtonName = value;
         }
         public ActionItem(ControllerActionBehavior behavior) : base()
         {
-            Action = new GenericGameAction
+            GameAction = new GenericGameAction
             {
                 ControllerActionBehavior = behavior
             };

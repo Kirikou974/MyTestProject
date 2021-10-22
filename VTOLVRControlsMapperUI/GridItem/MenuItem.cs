@@ -2,7 +2,8 @@
 {
     public class MenuItem : JoystickItem
     {
-        public override bool IsAxis => false;
-        public MenuItem(string name): base(name) { }
+        public MenuItem(string name): base(name) {
+            IsAxis = false;
+        }
     }
 }
