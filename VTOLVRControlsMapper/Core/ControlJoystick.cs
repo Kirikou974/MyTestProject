@@ -64,7 +64,7 @@ namespace VTOLVRControlsMapper.Core
             StartControlInteraction(MainHand);
             OnTriggerAxis.Invoke(vector.x);
         }
-        public void PressTriggerButton()
+        public virtual void PressTriggerButton()
         {
             StartControlInteraction(MainHand);
             OnTriggerButtonDown.Invoke();

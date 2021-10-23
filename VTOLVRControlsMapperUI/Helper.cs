@@ -106,12 +106,12 @@ namespace VTOLVRControlsMapperUI
                             JoystickUpdate? joystickUpdate = update as JoystickUpdate?;
 
                             //When it's a button and value is equal 0 it means a button was pushed (value goes up do 128) and released (values comes back down to 0)
-                            if (!isAxis && joystickUpdate.Value.Offset.ToString().StartsWith("Buttons") && joystickUpdate.Value.Value == 0)
+                            if (!isAxis && joystickUpdate.Value.Offset.ToString().StartsWith(nameof(JoystickState.Buttons)) && joystickUpdate.Value.Value == 0)
                             {
                                 returnValue = joystickUpdate.Value.Offset.ToString();
                             }
                             //When dealing with an axis and value is -1000 or +1000 around the previous of the state device catch the offset name
-                            if (isAxis && !joystickUpdate.Value.Offset.ToString().StartsWith("Buttons"))
+                            if (isAxis && !joystickUpdate.Value.Offset.ToString().StartsWith(nameof(JoystickState.Buttons)))
                             {
                                 if (updateCurrentState)
                                 {
@@ -121,7 +121,7 @@ namespace VTOLVRControlsMapperUI
 
                                 string offsetName = joystickUpdate.Value.Offset.ToString();
                                 int updatedOffsetValue = joystickUpdate.Value.Value;
-                                int currentOffsetValue = ControlsHelper.GetOffsetValue(offsetName, state);
+                                int currentOffsetValue = ControlsHelper.GetOffsetValue(offsetName, state as JoystickState);
                                 if (currentOffsetValue - axisListeningRange > updatedOffsetValue || currentOffsetValue + axisListeningRange < updatedOffsetValue)
                                 {
                                     returnValue = joystickUpdate.Value.Offset.ToString();

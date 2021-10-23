@@ -20,12 +20,24 @@ namespace VTOLVRControlsMapper.Controls
         public override FloatEvent OnTriggerAxis => UnityControl.OnTriggerAxis;
         public override UnityEvent OnTriggerButtonDown => UnityControl.OnTriggerDown;
         public override UnityEvent OnTriggerButtonUp => UnityControl.OnTriggerUp;
-
         public override void UpdateUnityControl()
         {
             //TODO test stick animation
             UnityControl.OnSetStick.Invoke(VectorUpdate);
             //UnityControl.SetStickAnimation();
+        }
+        public override void PressTriggerButton()
+        {
+            // use single fire if an AMRAMM
+            if (VTOLAPI.GetPlayersVehicleGameObject().GetComponent<WeaponManager>().currentEquip is HPEquipRadarML)
+            {
+                StartControlInteraction(MainHand);
+                VTOLAPI.GetPlayersVehicleGameObject().GetComponent<WeaponManager>().SingleFire();
+            }
+            else
+            {
+                base.PressTriggerButton();
+            }
         }
     }
 }

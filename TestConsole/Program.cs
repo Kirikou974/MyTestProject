@@ -33,7 +33,7 @@ namespace TestConsole
                 if (item.InstanceGuid == new Guid("ccb75030-fce8-11eb-8001-444553540000") && item.Type == SharpDX.DirectInput.DeviceType.FirstPerson)
                 {
                     joystick = new Joystick(di, item.InstanceGuid);
-                    joystick.Properties.BufferSize = 128;
+                    joystick.Properties.BufferSize = ControlsHelper.BUFFER_SIZE;
                     joystick.Acquire();
                 }
             }
@@ -51,7 +51,36 @@ namespace TestConsole
                     {
                         previousOffset = item.Offset.ToString();
                     }
-                    Console.Write("\r{0}: {1}       | {2} : {3}           ", item.Offset, item.Value, "X", joystickStateType.GetProperty("X").GetValue(state));
+                    string offsetName = item.Offset.ToString();
+                    int currentOffsetValue;
+
+                    //detect if it is an array of values 
+                    if (int.TryParse(offsetName.Last().ToString(), out _))
+                    {
+                        string offsetArrayName = offsetName;
+                        while (int.TryParse(offsetArrayName.Last().ToString(), out _))
+                        {
+                            offsetArrayName = offsetArrayName.Substring(0, offsetArrayName.Length - 1);
+                        }
+                        int offsetIndex = int.Parse(offsetName.Substring(offsetArrayName.Length, offsetName.Length - offsetArrayName.Length));
+                        //string arrayOffsetName = offsetName.Substring(0, offsetName.Length - 1);
+
+                        if (offsetArrayName == nameof(JoystickState.Buttons))
+                        {
+                            bool[] offsetArray = state.GetType().GetProperty(offsetArrayName).GetValue(state) as bool[];
+                            currentOffsetValue = offsetArray[offsetIndex] ? ControlsHelper.BUFFER_SIZE : default;
+                        }
+                        else
+                        {
+                            int[] offsetArray = state.GetType().GetProperty(offsetArrayName).GetValue(state) as int[];
+                            currentOffsetValue = offsetArray[offsetIndex];
+                        }
+                    }
+                    else
+                    {
+                        currentOffsetValue = (int)state.GetType().GetProperty(offsetName).GetValue(state);
+                    }
+                    Console.Write("\rOffset {0}: {1}    | State {2} : {3}           ", item.Offset, item.Value, item.Offset, currentOffsetValue);
                 }
             }
         }
