@@ -50,10 +50,13 @@ namespace VTOLVRControlsMapper.Core
             VectorUpdate = vector;
             UpdateUnityControl();
         }
-        public void ClickMenu()
+        public void PressMenu()
         {
             StartControlInteraction(MainHand);
             OnMenuButtonDown.Invoke();
+        }
+        public void ReleaseMenu()
+        {
             OnMenuButtonUp.Invoke();
         }
         public void UpdateTriggerAxis(Vector3 vector)
@@ -61,10 +64,13 @@ namespace VTOLVRControlsMapper.Core
             StartControlInteraction(MainHand);
             OnTriggerAxis.Invoke(vector.x);
         }
-        public void ClickTriggerButton()
+        public void PressTriggerButton()
         {
             StartControlInteraction(MainHand);
             OnTriggerButtonDown.Invoke();
+        }
+        public void ReleaseTriggerButton()
+        {
             OnTriggerButtonUp.Invoke();
         }
         public override void StartControlInteraction(VRHandController hand)
