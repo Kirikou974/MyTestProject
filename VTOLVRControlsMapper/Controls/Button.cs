@@ -20,19 +20,17 @@ namespace VTOLVRControlsMapper.Controls
         public override void StopControlInteraction(VRHandController hand)
         {
             InteractableControl.UnityControl.OnStopInteract.Invoke();
-            ClosestHand.gloveAnimation.UnPressButton();
+            hand.gloveAnimation.UnPressButton();
         }
         [ControlMethod(SupportedBehavior = ControllerActionBehavior.HoldOff)]
-        public IEnumerator HoldOff()
+        public void HoldOff()
         {
             StopControlInteraction(ClosestHand);
-            yield return null;
         }
         [ControlMethod(SupportedBehavior = ControllerActionBehavior.Hold)]
-        public IEnumerator HoldOn()
+        public void HoldOn()
         {
             StartControlInteraction(ClosestHand);
-            yield return null;
         }
     }
 }

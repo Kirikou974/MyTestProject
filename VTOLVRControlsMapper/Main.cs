@@ -1,5 +1,10 @@
+using SharpDX.DirectInput;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
+using VTOLVRControlsMapper.Core;
 
 namespace VTOLVRControlsMapper
 {
@@ -71,11 +76,20 @@ namespace VTOLVRControlsMapper
                 Log("Reloading mappings");
                 _ = StartCoroutine(StartMod());
             }
+
+            //Poll state and update from devices
+            foreach (Action pollingAction in ControlsHelper.PollingActions)
+            {
+                pollingAction();
+            }
+            //Execute controls
+            foreach (Action registeredAction in ControlsHelper.RegisteredActions)
+            {
+                registeredAction();
+            }
         }
         private IEnumerator StartMod()
         {
-            ControlsHelper.Reset();
-
             VTOLVehicles vehicle = VTOLAPI.GetPlayersVehicleEnum();
 
             Log("Controls loading for " + vehicle);

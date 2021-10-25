@@ -16,6 +16,7 @@ namespace VTOLVRControlsMapper.Core
             get => (bool)_grabbedField.GetValue(UnityControl);
             set => _grabbedField.SetValue(UnityControl, value);
         }
+        public bool InteractionStarted { get; set; }
         public abstract VRInteractable VRInteractable { get; }
         public abstract UnityEvent OnMenuButtonDown { get; }
         public abstract UnityEvent OnMenuButtonUp { get; }
@@ -34,6 +35,7 @@ namespace VTOLVRControlsMapper.Core
 
             Type interactableType = typeof(VRInteractable);
             _activeControllerProperty = interactableType.GetProperty("activeController");
+            InteractionStarted = false;
 
             Type unityControlType = UnityControl.GetType();
             _grabbedField = unityControlType.GetField("grabbed", BindingFlags.Instance | BindingFlags.NonPublic);
@@ -46,7 +48,7 @@ namespace VTOLVRControlsMapper.Core
         public abstract void UpdateUnityControl();
         public virtual void UpdateMainAxis(Vector3 vector)
         {
-            StartControlInteraction(MainHand);
+            //StartControlInteraction(MainHand);
             VectorUpdate = vector;
             UpdateUnityControl();
         }
@@ -75,14 +77,28 @@ namespace VTOLVRControlsMapper.Core
         }
         public override void StartControlInteraction(VRHandController hand)
         {
+            if (InteractionStarted)
+            {
+                return;
+            }
+
             //Set active controller on the interactable
             _activeControllerProperty.SetValue(VRInteractable, hand);
             //Set active interactable on the controller
             hand.activeInteractable = VRInteractable;
             //Start throttle interaction
             VRInteractable.StartInteraction();
+            InteractionStarted = true;
             //Set grabbed to false so that animation is only updated by the mod
             Grabbed = false;
+        }
+        public override void StopControlInteraction(VRHandController hand)
+        {
+            if (InteractionStarted)
+            {
+                base.StopControlInteraction(hand);
+                InteractionStarted = false;
+            }
         }
     }
 }

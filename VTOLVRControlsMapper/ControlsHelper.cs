@@ -29,9 +29,10 @@ namespace VTOLVRControlsMapper
         private static Dictionary<Guid, JoystickUpdate[]> _joystickUpdates;
         private static Dictionary<Guid, JoystickState> _joystickStates;
         private static Dictionary<Guid, KeyboardState> _keyboardStates;
+        public static List<Action> RegisteredActions { get; set; }
+        public static List<Action> PollingActions { get; set; }
         public static List<ControlMapping> Mappings { get; private set; }
         public static Dictionary<Device, SimpleDeviceType> Devices { get; private set; }
-
         public static bool MappingsLoaded
         {
             get
@@ -71,13 +72,6 @@ namespace VTOLVRControlsMapper
                 UnityEngine.Object[] objects = findObjectsOfTypeMethodGeneric.Invoke(typeof(UnityEngine.Object), null) as UnityEngine.Object[];
                 _unityObjects.AddRange(objects);
             }
-        }
-        public static void Reset()
-        {
-            _unityObjects = new List<UnityEngine.Object>();
-            Main.Instance.StopCoroutine(nameof(GenericRoutine));
-            Main.Instance.StopCoroutine(nameof(AxisRoutine));
-            Main.Instance.StopCoroutine(nameof(MenuRoutine));
         }
         public static T GetGameControl<T>(string controlName) where T : UnityEngine.Object
         {
@@ -217,9 +211,11 @@ namespace VTOLVRControlsMapper
             IEnumerable<Guid> controllersToPoll = GetUniqueDeviceGuids();
             _keyboardUpdates = new Dictionary<Guid, KeyboardUpdate[]>();
             _joystickUpdates = new Dictionary<Guid, JoystickUpdate[]>();
+            PollingActions = new List<Action>();
+            RegisteredActions = new List<Action>();
             foreach (Guid controllerGuid in controllersToPoll)
             {
-                Main.Instance.StartCoroutine(PollRoutine(controllerGuid));
+                PollingActions.Add(() => PollRoutine(controllerGuid));
             }
             StartGenericGameActionRoutines();
             StartJoystickActionRoutines();
@@ -241,35 +237,32 @@ namespace VTOLVRControlsMapper
 
                 JoystickAction action = mapping.Action as JoystickAction;
                 Guid controllerGuid = action.ControllerInstanceGuid;
-
                 //Start routine for each axis : Roll, pitch, yaw, thumbstick
                 if (mapping.Action is StickAction)
                 {
                     StickAction stickAction = mapping.Action;
-                    _ = Main.Instance.StartCoroutine(AxisRoutine(controllerGuid, instance, mainAxisMethodInfo, stickAction.Pitch, stickAction.Yaw, stickAction.Roll));
+                    RegisteredActions.Add(() => AxisRoutine(controllerGuid, instance, mainAxisMethodInfo, stickAction.Pitch, stickAction.Yaw, stickAction.Roll));
                 }
                 else if (mapping.Action is ThrottleAction)
                 {
                     ThrottleAction throttleAction = mapping.Action;
-                    _ = Main.Instance.StartCoroutine(AxisRoutine(controllerGuid, instance, mainAxisMethodInfo, throttleAction.Power));
+                    RegisteredActions.Add(() => AxisRoutine(controllerGuid, instance, mainAxisMethodInfo, throttleAction.Power));
                 }
                 if (action.Thumbstick != null)
                 {
-                    _ = Main.Instance.StartCoroutine(AxisRoutine(controllerGuid, instance, thumbstickAxisMethodInfo, mapping.GameControlName, action.Thumbstick.X, action.Thumbstick.Y));
+                    RegisteredActions.Add(() => AxisRoutine(controllerGuid, instance, thumbstickAxisMethodInfo, mapping.GameControlName, action.Thumbstick.X, action.Thumbstick.Y));
                 }
 
                 //Start a routine for menu button
                 Func<JoystickUpdate, bool> menuPressedPredicate = GetJoystickPressedPredicate(action.Menu);
                 Func<Guid, bool> menuReleasedPredicate = GetJoystickReleasedPredicate(action.Menu);
-                _ = Main.Instance.StartCoroutine(
-                    MenuRoutine(controllerGuid, instance, menuPressedMethodInfo, menuReleasedMethodInfo, menuPressedPredicate, menuReleasedPredicate, action.Menu));
+                RegisteredActions.Add(() => MenuRoutine(controllerGuid, instance, menuPressedMethodInfo, menuReleasedMethodInfo, menuPressedPredicate, menuReleasedPredicate, action.Menu));
 
                 //Start a routine for trigger axis (brake) and trigger button (fire)
                 Func<JoystickUpdate, bool> triggerPressedPredicate = GetJoystickPressedPredicate(action.TriggerButton);
                 Func<Guid, bool> triggerReleasedPredicate = GetJoystickReleasedPredicate(action.TriggerButton);
-                _ = Main.Instance.StartCoroutine(
-                    MenuRoutine(controllerGuid, instance, triggerPressedMethodInfo, triggerReleasedMethodInfo, triggerPressedPredicate, triggerReleasedPredicate, action.TriggerButton));
-                _ = Main.Instance.StartCoroutine(AxisRoutine(controllerGuid, instance, triggerAxisMethodInfo, action.TriggerAxis));
+                RegisteredActions.Add(() => MenuRoutine(controllerGuid, instance, triggerPressedMethodInfo, triggerReleasedMethodInfo, triggerPressedPredicate, triggerReleasedPredicate, action.TriggerButton));
+                RegisteredActions.Add(() => AxisRoutine(controllerGuid, instance, triggerAxisMethodInfo, action.TriggerAxis));
             }
         }
         private static void StartGenericGameActionRoutines()
@@ -301,14 +294,13 @@ namespace VTOLVRControlsMapper
                             KeyboardState state = _keyboardStates[deviceID];
                             return !state.IsPressed((Key)Enum.Parse(typeof(Key), controllerButtonName, true));
                         };
-                        _ = Main.Instance.StartCoroutine(GenericRoutine(_keyboardUpdates, instance, methodInfo, action, kbUpdatePredicate, kbReleaseStatePredicate));
+                        RegisteredActions.Add(() => GenericRoutine(_keyboardUpdates, instance, methodInfo, action, kbUpdatePredicate, kbReleaseStatePredicate));
                         break;
                     case SimpleDeviceType.Joystick:
-                        //Detect when button is pressed
+                        //Detect when button is pressed and released
                         Func<JoystickUpdate, bool> joyUpdatePredicate = GetJoystickPressedPredicate(controllerButtonName);
-                        //Detect when button is released
                         Func<Guid, bool> joyReleaseStatePredicate = GetJoystickReleasedPredicate(controllerButtonName);
-                        _ = Main.Instance.StartCoroutine(GenericRoutine(_joystickUpdates, instance, methodInfo, mapping.Action, joyUpdatePredicate, joyReleaseStatePredicate));
+                        RegisteredActions.Add(() => GenericRoutine(_joystickUpdates, instance, methodInfo, mapping.Action, joyUpdatePredicate, joyReleaseStatePredicate));
                         break;
                     case SimpleDeviceType.None:
                     default:
@@ -371,36 +363,32 @@ namespace VTOLVRControlsMapper
                 .Where(a => a.Action != null && a.Action is T);
             return retValue;
         }
-        private static IEnumerator PollRoutine(Guid controllerGuid)
+        private static void PollRoutine(Guid controllerGuid)
         {
-            while (true)
+            DeviceInstance instance = GetDeviceInstance(controllerGuid);
+            SimpleDeviceType devType = GetDeviceType(instance);
+            switch (devType)
             {
-                DeviceInstance instance = GetDeviceInstance(controllerGuid);
-                SimpleDeviceType devType = GetDeviceType(instance);
-                switch (devType)
-                {
-                    case SimpleDeviceType.Keyboard:
-                        Keyboard keyboard = GetDevice<Keyboard>(controllerGuid);
-                        KeyboardUpdate[] kbUpdates = keyboard.GetBufferedData();
-                        KeyboardState kbState = keyboard.GetCurrentState();
-                        _keyboardUpdates[controllerGuid] = kbUpdates;
-                        _keyboardStates[controllerGuid] = kbState;
-                        break;
-                    case SimpleDeviceType.Joystick:
-                        Joystick joystick = GetDevice<Joystick>(controllerGuid);
-                        JoystickUpdate[] joystickUpdates = joystick.GetBufferedData();
-                        JoystickState joystickState = joystick.GetCurrentState();
-                        _joystickUpdates[controllerGuid] = joystickUpdates;
-                        _joystickStates[controllerGuid] = joystickState;
-                        break;
-                    case SimpleDeviceType.None:
-                    default:
-                        break;
-                }
-                yield return null;
+                case SimpleDeviceType.Keyboard:
+                    Keyboard keyboard = GetDevice<Keyboard>(controllerGuid);
+                    KeyboardUpdate[] kbUpdates = keyboard.GetBufferedData();
+                    KeyboardState kbState = keyboard.GetCurrentState();
+                    _keyboardUpdates[controllerGuid] = kbUpdates;
+                    _keyboardStates[controllerGuid] = kbState;
+                    break;
+                case SimpleDeviceType.Joystick:
+                    Joystick joystick = GetDevice<Joystick>(controllerGuid);
+                    JoystickUpdate[] joystickUpdates = joystick.GetBufferedData();
+                    JoystickState joystickState = joystick.GetCurrentState();
+                    _joystickUpdates[controllerGuid] = joystickUpdates;
+                    _joystickStates[controllerGuid] = joystickState;
+                    break;
+                case SimpleDeviceType.None:
+                default:
+                    break;
             }
         }
-        private static IEnumerator GenericRoutine<UpdateType>(
+        private static void GenericRoutine<UpdateType>(
             Dictionary<Guid, UpdateType[]> updates,
             object instance,
             MethodInfo methodInfo,
@@ -409,48 +397,40 @@ namespace VTOLVRControlsMapper
             Func<Guid, bool> releasedPredicate)
             where UpdateType : struct, IStateUpdate
         {
-            while (true)
+            if (updates != null &&
+                updates[action.ControllerInstanceGuid] != null &&
+                updates[action.ControllerInstanceGuid].Where(pressedPredicate).Count() > 0)
             {
-                if (updates != null &&
-                    updates[action.ControllerInstanceGuid] != null &&
-                    updates[action.ControllerInstanceGuid].Where(pressedPredicate).Count() > 0)
+                _ = Main.Instance.StartCoroutine(methodInfo.Invoke(instance, null) as IEnumerator);
+                if (action.ControllerActionBehavior == ControllerActionBehavior.Hold)
                 {
-                    yield return methodInfo.Invoke(instance, null);
-                    if (action.ControllerActionBehavior == ControllerActionBehavior.Hold)
-                    {
-                        MethodInfo offMethodInfo = GetExecuteMethod(instance.GetType(), ControllerActionBehavior.HoldOff);
-                        yield return new WaitUntil(() => releasedPredicate(action.ControllerInstanceGuid));
-                        yield return offMethodInfo.Invoke(instance, null);
-                    }
+                    MethodInfo offMethodInfo = GetExecuteMethod(instance.GetType(), ControllerActionBehavior.HoldOff);
+                    _ = Main.Instance.StartCoroutine(new WaitUntil(() => releasedPredicate(action.ControllerInstanceGuid)));
+                    _ = offMethodInfo.Invoke(instance, null);
                 }
-                yield return null;
             }
         }
-        private static IEnumerator AxisRoutine(Guid controllerGuid, object instance, MethodInfo methodInfo, Axis X, Axis Y = null, Axis Z = null)
+        private static void AxisRoutine(Guid controllerGuid, object instance, MethodInfo methodInfo, Axis X, Axis Y = null, Axis Z = null)
         {
             //If first axis is null don't start the routine
             if (X != null)
             {
-                while (true)
+                if (_joystickUpdates != null &&
+                    _joystickUpdates[controllerGuid] != null &&
+                    _joystickStates != null &&
+                    _joystickStates[controllerGuid] != null)
                 {
-                    if (_joystickUpdates != null &&
-                        _joystickUpdates[controllerGuid] != null &&
-                        _joystickStates != null &&
-                        _joystickStates[controllerGuid] != null)
-                    {
-                        //Get axis values from update or state
-                        float xValue = GetAxisValue(controllerGuid, X);
-                        float yValue = GetAxisValue(controllerGuid, Y);
-                        float zValue = GetAxisValue(controllerGuid, Z);
+                    //Get axis values from update or state
+                    float xValue = GetAxisValue(controllerGuid, X);
+                    float yValue = GetAxisValue(controllerGuid, Y);
+                    float zValue = GetAxisValue(controllerGuid, Z);
 
-                        Vector3 vector = new Vector3(xValue, yValue, zValue);
-                        _ = methodInfo.Invoke(instance, new object[] { vector });
-                    }
-                    yield return null;
+                    Vector3 vector = new Vector3(xValue, yValue, zValue);
+                    _ = methodInfo.Invoke(instance, new object[] { vector });
                 }
             }
         }
-        private static IEnumerator MenuRoutine(
+        private static void MenuRoutine(
             Guid controllerInstanceGuid,
             object instance,
             MethodInfo pressedMethodInfo,
@@ -461,16 +441,12 @@ namespace VTOLVRControlsMapper
         {
             if (!string.IsNullOrEmpty(menu))
             {
-                while (true)
+                //TODO handle keyboard too
+                if (ShouldExecuteJoystick(pressedPredicate, controllerInstanceGuid))
                 {
-                    //TODO handle keyboard too
-                    if (ShouldExecuteJoystick(pressedPredicate, controllerInstanceGuid))
-                    {
-                        _ = pressedMethodInfo.Invoke(instance, null);
-                        yield return new WaitUntil(() => releasedPredicate(controllerInstanceGuid));
-                        _ = releaseMethodInfo.Invoke(instance, null);
-                    }
-                    yield return null;
+                    _ = pressedMethodInfo.Invoke(instance, null);
+                    _ = Main.Instance.StartCoroutine(new WaitUntil(() => releasedPredicate(controllerInstanceGuid)));
+                    _ = releaseMethodInfo.Invoke(instance, null);
                 }
             }
         }

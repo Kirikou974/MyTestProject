@@ -19,7 +19,7 @@ namespace VTOLVRControlsMapper.Controls
         public override void UpdateUnityControl()
         {
             UnityControl.OnSetThrottle.Invoke(VectorUpdate.x);
-            UnityControl.UpdateThrottleAnim(VectorUpdate.x);
+            //UnityControl.UpdateThrottleAnim(VectorUpdate.x);
         }
     }
 }
